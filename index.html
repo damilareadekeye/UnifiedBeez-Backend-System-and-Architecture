@@ -545,6 +545,17 @@
                                     <li>Account activation</li>
                                 </ul>
                             </div>
+
+                            <div class="step-box">
+                                <h3>5. Password Reset (Forgot Password)</h3>
+                                <ul>
+                                    <li>Click "Forgot Password" link</li>
+                                    <li>Enter email address</li>
+                                    <li>Receive reset link via email</li>
+                                    <li>Click link → New password form</li>
+                                    <li>Set new password</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -585,7 +596,7 @@
                                     <div class="section-title">Features:</div>
                                     <div class="section-content">
                                         • OTP generation (6-digit)<br>
-                                        • Email dispatch (SendGrid/SES)<br>
+                                        • Email dispatch via Sendy + AWS SES<br>
                                         • Template: verification-email<br>
                                         • Expiry: 10 minutes
                                     </div>
@@ -593,7 +604,7 @@
                                 <div class="section">
                                     <div class="section-title">Integration:</div>
                                     <div class="section-content">
-                                        • AWS SES or SendGrid<br>
+                                        • Sendy (self-hosted) + AWS SES<br>
                                         • Rate limit: 10 emails/minute per user
                                     </div>
                                 </div>
@@ -618,6 +629,45 @@
                                 <div class="section">
                                     <div class="section-title">Rate Limit:</div>
                                     <div class="section-content">100 SMS/sec</div>
+                                </div>
+                            </div>
+
+                            <div class="service-card">
+                                <h3><span class="service-icon">🔑</span> Password Reset Service</h3>
+                                <div class="section">
+                                    <div class="section-title">API Endpoints:</div>
+                                    <div class="section-content">
+                                        • POST /auth/forgot-password<br>
+                                        • POST /auth/reset-password<br>
+                                        • POST /auth/verify-reset-token
+                                    </div>
+                                </div>
+                                <div class="section">
+                                    <div class="section-title">Features:</div>
+                                    <div class="section-content">
+                                        • Generate secure reset tokens (UUID)<br>
+                                        • Send reset link via Sendy + AWS SES<br>
+                                        • Token expiry (1 hour)<br>
+                                        • One-time use tokens<br>
+                                        • Rate limiting (5 requests/hour per email)
+                                    </div>
+                                </div>
+                                <div class="section">
+                                    <div class="section-title">Security:</div>
+                                    <div class="section-content">
+                                        • Token hashing (SHA-256)<br>
+                                        • IP address logging<br>
+                                        • Email verification before reset<br>
+                                        • Automatic token cleanup after use
+                                    </div>
+                                </div>
+                                <div class="section">
+                                    <div class="section-title">Email Template:</div>
+                                    <div class="section-content">
+                                        • Subject: "Reset Your UnifiedBeez Password"<br>
+                                        • Reset link: {FRONTEND_URL}/reset-password?token={TOKEN}<br>
+                                        • Expiry warning: "This link expires in 1 hour"
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -658,7 +708,7 @@
                                     <strong>Configuration:</strong><br>
                                     • Multi-AZ<br>
                                     • db.t4g.medium<br>
-                                    • 20GB storage<br><br>
+                                    • 100GB storage<br><br>
                                     <strong>Table:</strong><br>
                                     • users<br><br>
                                     <strong>Port:</strong> 5432
@@ -677,7 +727,7 @@
                                     • Rate limiting<br><br>
                                     <strong>Type:</strong><br>
                                     • cache.t4g.micro<br>
-                                    • Single node<br><br>
+                                    • Multi-AZ (2 nodes: Primary + Replica)<br><br>
                                     <strong>Port:</strong> 6379
                                 </div>
                             </div>
@@ -691,7 +741,7 @@
                                     <strong>Stored:</strong><br>
                                     • OAuth secrets<br>
                                     • Twilio creds<br>
-                                    • SendGrid key<br>
+                                    • Sendy + AWS SES credentials<br>
                                     • JWT secret<br><br>
                                     <strong>Encryption:</strong><br>
                                     • KMS encrypted
@@ -809,7 +859,90 @@
                             <div class="section-content">
                                 • email: AES-256 (at rest via RDS encryption)<br>
                                 • phone: AES-256 (at rest via RDS encryption)<br>
-                                • passwordHash: bcrypt with salt rounds = 12
+                                • passwordHash: bcrypt with salt rounds = 10
+                            </div>
+                        </div>
+
+                        <div class="db-table" style="margin-top: 20px;">
+                            <div class="table-header">TABLE: password_reset_tokens</div>
+                            <div class="table-body">
+                                <div class="table-row header-row">
+                                    <div>Column Name</div>
+                                    <div>Type</div>
+                                    <div>Constraints</div>
+                                    <div>Purpose</div>
+                                </div>
+                                <div class="table-row">
+                                    <div class="pk">id</div>
+                                    <div>SERIAL</div>
+                                    <div>PRIMARY KEY</div>
+                                    <div>Token record identifier</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>userId</div>
+                                    <div>INTEGER</div>
+                                    <div>FK → users(id)</div>
+                                    <div>User requesting password reset</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>token</div>
+                                    <div>VARCHAR(255)</div>
+                                    <div>UNIQUE, NOT NULL</div>
+                                    <div>SHA-256 hashed reset token</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>expiresAt</div>
+                                    <div>TIMESTAMP</div>
+                                    <div>NOT NULL</div>
+                                    <div>1 hour from creation</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>used</div>
+                                    <div>BOOLEAN</div>
+                                    <div>DEFAULT false</div>
+                                    <div>One-time use flag</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>usedAt</div>
+                                    <div>TIMESTAMP</div>
+                                    <div>NULLABLE</div>
+                                    <div>When token was consumed</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>ipAddress</div>
+                                    <div>VARCHAR(45)</div>
+                                    <div>NOT NULL</div>
+                                    <div>Request origin (security audit)</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>userAgent</div>
+                                    <div>TEXT</div>
+                                    <div>NULLABLE</div>
+                                    <div>Browser/device info</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>createdAt</div>
+                                    <div>TIMESTAMP</div>
+                                    <div>DEFAULT NOW()</div>
+                                    <div>Token generation time</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 20px; padding: 20px; background: white; border-radius: 8px; border: 2px solid #1A4D2E;">
+                            <h4 style="color: #1A4D2E; margin-bottom: 15px;">🔑 Password Reset Token Features</h4>
+                            <div class="section-content">
+                                <strong>Security Measures:</strong><br>
+                                • Tokens are hashed with SHA-256 before storage<br>
+                                • 1-hour expiration window<br>
+                                • One-time use only (marked as used after consumption)<br>
+                                • Rate limiting: 5 reset requests per hour per email<br>
+                                • IP address logging for security audits<br><br>
+
+                                <strong>Cleanup Strategy:</strong><br>
+                                • Expired tokens deleted daily via Lambda cron job<br>
+                                • Used tokens deleted after 7 days<br>
+                                • Prevents table bloat
                             </div>
                         </div>
                     </div>
@@ -963,13 +1096,28 @@
                                 </ul>
                             </div>
                             <div class="step-box">
-                                <h3>2. Add-Ons Selection</h3>
+                                <h3>2. Add-Ons Selection (Optional)</h3>
                                 <ul>
-                                    <li>Additional seats</li>
-                                    <li>Extra AI Assistants</li>
-                                    <li>Additional channels</li>
-                                    <li>Premium features</li>
+                                    <li>Click "Add-on available" on plan card</li>
+                                    <li>Browse add-on marketplace</li>
+                                    <li>Select add-ons with quantity</li>
+                                    <li>View add-on checkout summary</li>
+                                    <li>Add to cart or skip</li>
                                 </ul>
+                                <div style="margin-top: 10px; font-size: 0.85em; color: #555;">
+                                    <strong>Available Add-ons:</strong><br>
+                                    • Seats (£7/month each, up to 50)<br>
+                                    • AI Assistant (£25/month, unlimited)<br>
+                                    • Twilio WhatsApp Channel (£25/month, 3 per 5k msgs)<br>
+                                    • Twilio Message Pack (£20/month, 1k msgs)<br>
+                                    • Twilio Voice Call (£20/month, 2 numbers)<br>
+                                    • Multi-language AI (£10/month, 5 languages)<br>
+                                    • Priority Support (£25/month)<br>
+                                    • White-Label Portal (£99/month, 5 portals)<br>
+                                    • Reseller/Agency Portal (£149/month)<br>
+                                    • CRM/Calendar Sync (£20/month)<br>
+                                    • Ecommerce Pack (£25/month, 50/period)
+                                </div>
                             </div>
                             <div class="step-box">
                                 <h3>3. Billing Cycle</h3>
@@ -1062,6 +1210,61 @@
                                         • Tokenized payment methods<br>
                                         • HTTPS only<br>
                                         • Webhook signing secret
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="service-card">
+                                <h3><span class="service-icon">🛒</span> Add-on Marketplace Service</h3>
+                                <div class="section">
+                                    <div class="section-title">API Endpoints:</div>
+                                    <div class="section-content">
+                                        • GET /addons - List all available add-ons<br>
+                                        • GET /addons/:id - Get add-on details<br>
+                                        • POST /addons/purchase - Purchase add-ons<br>
+                                        • GET /addons/my-addons - User's active add-ons<br>
+                                        • DELETE /addons/:id - Cancel add-on<br>
+                                        • PATCH /addons/:id/quantity - Update quantity
+                                    </div>
+                                </div>
+                                <div class="section">
+                                    <div class="section-title">Features:</div>
+                                    <div class="section-content">
+                                        • Add-on catalog management<br>
+                                        • Plan-specific add-on availability<br>
+                                        • Quantity validation (min/max limits)<br>
+                                        • Real-time price calculation<br>
+                                        • Add-on checkout summary<br>
+                                        • Stripe subscription item creation<br>
+                                        • Usage tracking and limits enforcement
+                                    </div>
+                                </div>
+                                <div class="section">
+                                    <div class="section-title">Add-on Types:</div>
+                                    <div class="section-content">
+                                        <strong>Seats:</strong> £7/month each (max 50)<br>
+                                        <strong>AI Assistant:</strong> £25/month (unlimited)<br>
+                                        <strong>WhatsApp Channel:</strong> £25/month (3 per 5k msgs)<br>
+                                        <strong>Message Pack:</strong> £20/month (1k msgs)<br>
+                                        <strong>Voice Call:</strong> £20/month (2 numbers)<br>
+                                        <strong>Multi-language AI:</strong> £10/month (5 languages)<br>
+                                        <strong>Priority Support:</strong> £25/month<br>
+                                        <strong>White-Label Portal:</strong> £99/month (5 portals)<br>
+                                        <strong>Reseller Portal:</strong> £149/month<br>
+                                        <strong>CRM Sync:</strong> £20/month<br>
+                                        <strong>Ecommerce Pack:</strong> £25/month (50/period)
+                                    </div>
+                                </div>
+                                <div class="section">
+                                    <div class="section-title">Business Logic:</div>
+                                    <div class="section-content">
+                                        • Validate add-on compatibility with plan<br>
+                                        • Enforce quantity limits per add-on<br>
+                                        • Calculate prorated charges<br>
+                                        • Apply VAT (if applicable)<br>
+                                        • Create Stripe subscription items<br>
+                                        • Update organization feature flags<br>
+                                        • Send confirmation emails
                                     </div>
                                 </div>
                             </div>
@@ -1209,7 +1412,7 @@
                                     <div>planTier</div>
                                     <div>VARCHAR(50)</div>
                                     <div>NOT NULL</div>
-                                    <div>individual|business|premium|org</div>
+                                    <div>individual|business|premium|organisation</div>
                                 </div>
                                 <div class="table-row">
                                     <div>billingCycle</div>
@@ -1360,6 +1563,258 @@
                                     <div>BOOLEAN</div>
                                     <div>DEFAULT false</div>
                                     <div>Default payment method flag</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="db-table" style="margin-top: 20px;">
+                            <div class="table-header">TABLE: addon_definitions</div>
+                            <div class="table-body">
+                                <div class="table-row header-row">
+                                    <div>Column Name</div>
+                                    <div>Type</div>
+                                    <div>Constraints</div>
+                                    <div>Purpose</div>
+                                </div>
+                                <div class="table-row">
+                                    <div class="pk">id</div>
+                                    <div>SERIAL</div>
+                                    <div>PRIMARY KEY</div>
+                                    <div>Add-on catalog identifier</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>name</div>
+                                    <div>VARCHAR(100)</div>
+                                    <div>NOT NULL, UNIQUE</div>
+                                    <div>Add-on name (e.g., "Seats")</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>slug</div>
+                                    <div>VARCHAR(100)</div>
+                                    <div>NOT NULL, UNIQUE</div>
+                                    <div>URL-friendly identifier</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>description</div>
+                                    <div>TEXT</div>
+                                    <div>NOT NULL</div>
+                                    <div>Add-on description text</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>category</div>
+                                    <div>VARCHAR(50)</div>
+                                    <div>NOT NULL</div>
+                                    <div>capacity|feature|channel|support</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>pricePerUnit</div>
+                                    <div>DECIMAL(10,2)</div>
+                                    <div>NOT NULL</div>
+                                    <div>Price in GBP (e.g., 7.00)</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>stripePriceId</div>
+                                    <div>VARCHAR(255)</div>
+                                    <div>NOT NULL</div>
+                                    <div>Stripe Price ID for billing</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>billingInterval</div>
+                                    <div>VARCHAR(20)</div>
+                                    <div>NOT NULL</div>
+                                    <div>month|year</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>minQuantity</div>
+                                    <div>INTEGER</div>
+                                    <div>DEFAULT 1</div>
+                                    <div>Minimum purchase quantity</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>maxQuantity</div>
+                                    <div>INTEGER</div>
+                                    <div>NULLABLE</div>
+                                    <div>Maximum allowed (NULL=unlimited)</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>usageLimit</div>
+                                    <div>INTEGER</div>
+                                    <div>NULLABLE</div>
+                                    <div>Per-period usage limit</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>usageLimitType</div>
+                                    <div>VARCHAR(50)</div>
+                                    <div>NULLABLE</div>
+                                    <div>messages|calls|seats|languages</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>availableForPlans</div>
+                                    <div>VARCHAR[]</div>
+                                    <div>NOT NULL</div>
+                                    <div>['business','premium','organisation']</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>isActive</div>
+                                    <div>BOOLEAN</div>
+                                    <div>DEFAULT true</div>
+                                    <div>Availability status</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>displayOrder</div>
+                                    <div>INTEGER</div>
+                                    <div>DEFAULT 0</div>
+                                    <div>Sort order in marketplace</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>iconUrl</div>
+                                    <div>VARCHAR(255)</div>
+                                    <div>NULLABLE</div>
+                                    <div>Add-on icon/image URL</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>createdAt</div>
+                                    <div>TIMESTAMP</div>
+                                    <div>DEFAULT NOW()</div>
+                                    <div>Catalog entry creation time</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>updatedAt</div>
+                                    <div>TIMESTAMP</div>
+                                    <div>DEFAULT NOW()</div>
+                                    <div>Last updated timestamp</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="db-table" style="margin-top: 20px;">
+                            <div class="table-header">TABLE: organization_addons</div>
+                            <div class="table-body">
+                                <div class="table-row header-row">
+                                    <div>Column Name</div>
+                                    <div>Type</div>
+                                    <div>Constraints</div>
+                                    <div>Purpose</div>
+                                </div>
+                                <div class="table-row">
+                                    <div class="pk">id</div>
+                                    <div>SERIAL</div>
+                                    <div>PRIMARY KEY</div>
+                                    <div>Organization add-on record ID</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>organizationId</div>
+                                    <div>INTEGER</div>
+                                    <div>FK → organizations(id)</div>
+                                    <div>Owning organization</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>addonId</div>
+                                    <div>INTEGER</div>
+                                    <div>FK → addon_definitions(id)</div>
+                                    <div>Purchased add-on type</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>quantity</div>
+                                    <div>INTEGER</div>
+                                    <div>NOT NULL, DEFAULT 1</div>
+                                    <div>Number of units purchased</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>stripeSubscriptionItemId</div>
+                                    <div>VARCHAR(255)</div>
+                                    <div>NOT NULL</div>
+                                    <div>Stripe subscription item ID</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>status</div>
+                                    <div>VARCHAR(50)</div>
+                                    <div>NOT NULL</div>
+                                    <div>active|cancelled|paused</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>currentPeriodStart</div>
+                                    <div>TIMESTAMP</div>
+                                    <div>NOT NULL</div>
+                                    <div>Billing period start</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>currentPeriodEnd</div>
+                                    <div>TIMESTAMP</div>
+                                    <div>NOT NULL</div>
+                                    <div>Billing period end</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>usageCount</div>
+                                    <div>INTEGER</div>
+                                    <div>DEFAULT 0</div>
+                                    <div>Current period usage tracker</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>purchasedAt</div>
+                                    <div>TIMESTAMP</div>
+                                    <div>DEFAULT NOW()</div>
+                                    <div>Initial purchase timestamp</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>cancelledAt</div>
+                                    <div>TIMESTAMP</div>
+                                    <div>NULLABLE</div>
+                                    <div>Cancellation timestamp</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>updatedAt</div>
+                                    <div>TIMESTAMP</div>
+                                    <div>DEFAULT NOW()</div>
+                                    <div>Last modification time</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="db-table" style="margin-top: 20px;">
+                            <div class="table-header">TABLE: addon_usage_logs</div>
+                            <div class="table-body">
+                                <div class="table-row header-row">
+                                    <div>Column Name</div>
+                                    <div>Type</div>
+                                    <div>Constraints</div>
+                                    <div>Purpose</div>
+                                </div>
+                                <div class="table-row">
+                                    <div class="pk">id</div>
+                                    <div>SERIAL</div>
+                                    <div>PRIMARY KEY</div>
+                                    <div>Usage log entry ID</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>organizationAddonId</div>
+                                    <div>INTEGER</div>
+                                    <div>FK → organization_addons(id)</div>
+                                    <div>Related add-on subscription</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>usageType</div>
+                                    <div>VARCHAR(50)</div>
+                                    <div>NOT NULL</div>
+                                    <div>message|call|seat|language</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>usageAmount</div>
+                                    <div>INTEGER</div>
+                                    <div>NOT NULL, DEFAULT 1</div>
+                                    <div>Units consumed</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>metadata</div>
+                                    <div>JSONB</div>
+                                    <div>NULLABLE</div>
+                                    <div>Additional usage context</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>timestamp</div>
+                                    <div>TIMESTAMP</div>
+                                    <div>DEFAULT NOW()</div>
+                                    <div>Usage occurrence time</div>
                                 </div>
                             </div>
                         </div>
@@ -1693,7 +2148,7 @@
 
                             <div class="aws-box">
                                 <h4>
-                                    <img src="https://icon.icepanel.io/AWS/svg/Application-Integration/Simple-Queue-Service.svg" alt="SQS" class="aws-icon">
+                                    <img src="https://icon.icepanel.io/AWS/svg/App-Integration/Simple-Queue-Service.svg" alt="SQS" class="aws-icon">
                                     SQS Queue
                                 </h4>
                                 <div class="section-content">
@@ -2012,7 +2467,7 @@
                                 <div class="section">
                                     <div class="section-title">Features:</div>
                                     <div class="section-content">
-                                        • Send invitation emails (AWS SES)<br>
+                                        • Send invitation emails (Sendy + AWS SES)<br>
                                         • Invitation acceptance tracking<br>
                                         • Reminder emails (if not accepted)<br>
                                         • Email templates with branding
@@ -2109,8 +2564,8 @@
 
                             <div class="aws-box">
                                 <h4>
-                                    <img src="https://icon.icepanel.io/AWS/svg/Customer-Engagement/Simple-Email-Service.svg" alt="SES" class="aws-icon">
-                                    SES (Email)
+                                    <img src="https://icon.icepanel.io/AWS/svg/App-Integration/Simple-Notification-Service.svg" alt="SES" class="aws-icon">
+                                    Sendy + AWS SES
                                 </h4>
                                 <div class="section-content">
                                     <strong>Purpose:</strong><br>
@@ -2716,7 +3171,7 @@
                     STEP 5: CHANNEL INTEGRATION
                 </div>
                 <div class="frame-subtitle">
-                    Multi-Channel Connection Service + WhatsApp + Instagram + Facebook + Twilio + SMS
+                    Multi-Channel Connection Service + WhatsApp + Instagram + Facebook + Email + Telegram + LinkedIn + Shopify + PayPal + Calendly + Zoom + Stripe + SMS
                 </div>
 
                 <!-- LEGEND -->
@@ -2753,19 +3208,22 @@
                             <div class="step-box">
                                 <h3>1. Select Channels</h3>
                                 <ul>
-                                    <li>WhatsApp Business API</li>
-                                    <li>Instagram Direct Messages</li>
-                                    <li>Facebook Messenger</li>
-                                    <li>SMS (via Twilio)</li>
+                                    <li><strong>Messaging:</strong> WhatsApp, Telegram, SMS</li>
+                                    <li><strong>Social:</strong> Instagram, Facebook, LinkedIn</li>
+                                    <li><strong>Email:</strong> Gmail, Outlook, SMTP</li>
+                                    <li><strong>E-commerce:</strong> Shopify, PayPal, Stripe</li>
+                                    <li><strong>Productivity:</strong> Calendly, Zoom</li>
+                                    <li><strong>Web:</strong> Web Chat Widget</li>
                                 </ul>
                             </div>
                             <div class="step-box">
                                 <h3>2. Authenticate Channel</h3>
                                 <ul>
-                                    <li>OAuth for Facebook/Instagram</li>
-                                    <li>API credentials for WhatsApp</li>
-                                    <li>Twilio Account SID & Token</li>
-                                    <li>Grant permissions</li>
+                                    <li>OAuth: Facebook, Instagram, LinkedIn, Google, Outlook, Shopify, Zoom, Calendly</li>
+                                    <li>API Keys: WhatsApp, Telegram, Stripe, PayPal</li>
+                                    <li>SMTP/IMAP: Generic Email</li>
+                                    <li>Twilio: Account SID & Auth Token</li>
+                                    <li>Grant required permissions</li>
                                 </ul>
                             </div>
                             <div class="step-box">
@@ -2887,6 +3345,260 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="service-card">
+                                <h3><span class="service-icon">📧</span> Email Integration Service</h3>
+                                <div class="section">
+                                    <div class="section-title">Integrations:</div>
+                                    <div class="section-content">
+                                        • Google Workspace (Gmail) - OAuth 2.0<br>
+                                        • Microsoft Outlook/365 - OAuth 2.0<br>
+                                        • Generic Email - SMTP/IMAP<br>
+                                        • Bi-directional sync (send & receive)
+                                    </div>
+                                </div>
+                                <div class="section">
+                                    <div class="section-title">Features:</div>
+                                    <div class="section-content">
+                                        • Email thread management<br>
+                                        • Auto-reply detection<br>
+                                        • Attachment handling<br>
+                                        • HTML email parsing<br>
+                                        • Spam filtering integration
+                                    </div>
+                                </div>
+                                <div class="section">
+                                    <div class="section-title">API Endpoints:</div>
+                                    <div class="section-content">
+                                        • POST /channels/email/google/connect<br>
+                                        • POST /channels/email/outlook/connect<br>
+                                        • POST /channels/email/smtp/connect<br>
+                                        • GET /channels/email/:id/inbox<br>
+                                        • POST /channels/email/:id/send
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="service-card">
+                                <h3><span class="service-icon">✈️</span> Telegram Bot Service</h3>
+                                <div class="section">
+                                    <div class="section-title">Integration:</div>
+                                    <div class="section-content">
+                                        • Telegram Bot API<br>
+                                        • Bot token authentication<br>
+                                        • Send/Receive messages<br>
+                                        • Media support (photos, docs, voice)<br>
+                                        • Inline keyboards & commands
+                                    </div>
+                                </div>
+                                <div class="section">
+                                    <div class="section-title">Webhooks:</div>
+                                    <div class="section-content">
+                                        • POST /webhooks/telegram<br>
+                                        • Message updates<br>
+                                        • Callback query events<br>
+                                        • File uploads
+                                    </div>
+                                </div>
+                                <div class="section">
+                                    <div class="section-title">API Endpoints:</div>
+                                    <div class="section-content">
+                                        • POST /channels/telegram/connect<br>
+                                        • POST /channels/telegram/:id/send<br>
+                                        • GET /channels/telegram/:id/info
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="service-card">
+                                <h3><span class="service-icon">💼</span> LinkedIn Messaging Service</h3>
+                                <div class="section">
+                                    <div class="section-title">Integration:</div>
+                                    <div class="section-content">
+                                        • LinkedIn Messaging API<br>
+                                        • OAuth 2.0 authentication<br>
+                                        • Direct message handling<br>
+                                        • Company page messaging<br>
+                                        • Connection request management
+                                    </div>
+                                </div>
+                                <div class="section">
+                                    <div class="section-title">Features:</div>
+                                    <div class="section-content">
+                                        • Send/Receive InMail<br>
+                                        • Conversation threading<br>
+                                        • Profile data enrichment<br>
+                                        • Rate limiting (API quotas)
+                                    </div>
+                                </div>
+                                <div class="section">
+                                    <div class="section-title">API Endpoints:</div>
+                                    <div class="section-content">
+                                        • POST /channels/linkedin/connect<br>
+                                        • GET /channels/linkedin/:id/conversations<br>
+                                        • POST /channels/linkedin/:id/send
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="service-card">
+                                <h3><span class="service-icon">🛍️</span> Shopify Integration Service</h3>
+                                <div class="section">
+                                    <div class="section-title">Integration:</div>
+                                    <div class="section-content">
+                                        • Shopify Admin API<br>
+                                        • OAuth 2.0 authentication<br>
+                                        • Order notifications<br>
+                                        • Customer message handling<br>
+                                        • Product inquiry automation
+                                    </div>
+                                </div>
+                                <div class="section">
+                                    <div class="section-title">Features:</div>
+                                    <div class="section-content">
+                                        • Order status updates<br>
+                                        • Abandoned cart notifications<br>
+                                        • Customer support messaging<br>
+                                        • Shipping tracking updates<br>
+                                        • Refund/return handling
+                                    </div>
+                                </div>
+                                <div class="section">
+                                    <div class="section-title">Webhooks:</div>
+                                    <div class="section-content">
+                                        • POST /webhooks/shopify<br>
+                                        • orders/create<br>
+                                        • orders/updated<br>
+                                        • customers/create
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="service-card">
+                                <h3><span class="service-icon">💳</span> Stripe Integration Service</h3>
+                                <div class="section">
+                                    <div class="section-title">Integration:</div>
+                                    <div class="section-content">
+                                        • Stripe API<br>
+                                        • Payment event notifications<br>
+                                        • Customer communication channel<br>
+                                        • Dispute management messaging
+                                    </div>
+                                </div>
+                                <div class="section">
+                                    <div class="section-title">Features:</div>
+                                    <div class="section-content">
+                                        • Payment confirmation messages<br>
+                                        • Failed payment alerts<br>
+                                        • Subscription renewal reminders<br>
+                                        • Invoice notifications
+                                    </div>
+                                </div>
+                                <div class="section">
+                                    <div class="section-title">Webhooks:</div>
+                                    <div class="section-content">
+                                        • POST /webhooks/stripe<br>
+                                        • payment_intent.succeeded<br>
+                                        • payment_intent.failed<br>
+                                        • invoice.paid
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="service-card">
+                                <h3><span class="service-icon">💰</span> PayPal Integration Service</h3>
+                                <div class="section">
+                                    <div class="section-title">Integration:</div>
+                                    <div class="section-content">
+                                        • PayPal REST API<br>
+                                        • OAuth 2.0 authentication<br>
+                                        • Payment notifications<br>
+                                        • Dispute messaging automation
+                                    </div>
+                                </div>
+                                <div class="section">
+                                    <div class="section-title">Features:</div>
+                                    <div class="section-content">
+                                        • Payment received notifications<br>
+                                        • Refund status updates<br>
+                                        • Chargeback alerts<br>
+                                        • Customer payment inquiries
+                                    </div>
+                                </div>
+                                <div class="section">
+                                    <div class="section-title">Webhooks:</div>
+                                    <div class="section-content">
+                                        • POST /webhooks/paypal<br>
+                                        • PAYMENT.SALE.COMPLETED<br>
+                                        • PAYMENT.SALE.REFUNDED<br>
+                                        • CUSTOMER.DISPUTE.CREATED
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="service-card">
+                                <h3><span class="service-icon">📅</span> Calendly Integration Service</h3>
+                                <div class="section">
+                                    <div class="section-title">Integration:</div>
+                                    <div class="section-content">
+                                        • Calendly API v2<br>
+                                        • OAuth 2.0 authentication<br>
+                                        • Appointment booking notifications<br>
+                                        • Calendar event messaging
+                                    </div>
+                                </div>
+                                <div class="section">
+                                    <div class="section-title">Features:</div>
+                                    <div class="section-content">
+                                        • Booking confirmation messages<br>
+                                        • Reminder notifications<br>
+                                        • Cancellation/reschedule alerts<br>
+                                        • Pre-meeting instructions<br>
+                                        • Follow-up automation
+                                    </div>
+                                </div>
+                                <div class="section">
+                                    <div class="section-title">Webhooks:</div>
+                                    <div class="section-content">
+                                        • POST /webhooks/calendly<br>
+                                        • invitee.created<br>
+                                        • invitee.canceled<br>
+                                        • event_type.activated
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="service-card">
+                                <h3><span class="service-icon">🎥</span> Zoom Integration Service</h3>
+                                <div class="section">
+                                    <div class="section-title">Integration:</div>
+                                    <div class="section-content">
+                                        • Zoom API<br>
+                                        • OAuth 2.0 authentication<br>
+                                        • Meeting notifications<br>
+                                        • Webinar messaging automation
+                                    </div>
+                                </div>
+                                <div class="section">
+                                    <div class="section-title">Features:</div>
+                                    <div class="section-content">
+                                        • Meeting scheduled notifications<br>
+                                        • Join link distribution<br>
+                                        • Meeting reminders<br>
+                                        • Recording available alerts<br>
+                                        • Participant follow-ups
+                                    </div>
+                                </div>
+                                <div class="section">
+                                    <div class="section-title">Webhooks:</div>
+                                    <div class="section-content">
+                                        • POST /webhooks/zoom<br>
+                                        • meeting.started<br>
+                                        • meeting.ended<br>
+                                        • recording.completed
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -2908,9 +3620,13 @@
                                 <div class="section-content">
                                     <strong>Services:</strong><br>
                                     • Channel Connection Service<br>
-                                    • WhatsApp/FB/Twilio Services<br><br>
+                                    • Messaging: WhatsApp, Telegram, SMS<br>
+                                    • Social: Facebook, Instagram, LinkedIn<br>
+                                    • Email: Gmail, Outlook, SMTP<br>
+                                    • E-commerce: Shopify, Stripe, PayPal<br>
+                                    • Productivity: Calendly, Zoom<br><br>
                                     <strong>Configuration:</strong><br>
-                                    • Tasks: 5-20 (auto-scaling)<br>
+                                    • Tasks: 10-30 (auto-scaling)<br>
                                     • CPU: 2 vCPU<br>
                                     • RAM: 4GB
                                 </div>
@@ -2918,7 +3634,7 @@
 
                             <div class="aws-box">
                                 <h4>
-                                    <img src="https://icon.icepanel.io/AWS/svg/Networking-Content-Delivery/API-Gateway.svg" alt="API Gateway" class="aws-icon">
+                                    <img src="https://icon.icepanel.io/AWS/svg/App-Integration/API-Gateway.svg" alt="API Gateway" class="aws-icon">
                                     API Gateway
                                 </h4>
                                 <div class="section-content">
@@ -2929,7 +3645,14 @@
                                     <strong>Endpoints:</strong><br>
                                     • /webhooks/whatsapp<br>
                                     • /webhooks/facebook<br>
-                                    • /webhooks/twilio
+                                    • /webhooks/twilio<br>
+                                    • /webhooks/telegram<br>
+                                    • /webhooks/linkedin<br>
+                                    • /webhooks/shopify<br>
+                                    • /webhooks/stripe<br>
+                                    • /webhooks/paypal<br>
+                                    • /webhooks/calendly<br>
+                                    • /webhooks/zoom
                                 </div>
                             </div>
 
@@ -2964,7 +3687,7 @@
 
                             <div class="aws-box">
                                 <h4>
-                                    <img src="https://icon.icepanel.io/AWS/svg/Application-Integration/Simple-Queue-Service.svg" alt="SQS" class="aws-icon">
+                                    <img src="https://icon.icepanel.io/AWS/svg/App-Integration/Simple-Queue-Service.svg" alt="SQS" class="aws-icon">
                                     SQS Queue
                                 </h4>
                                 <div class="section-content">
@@ -2985,9 +3708,19 @@
                                 <div class="section-content">
                                     <strong>Stored:</strong><br>
                                     • WhatsApp API tokens<br>
-                                    • Facebook App secrets<br>
+                                    • Facebook/Instagram App secrets<br>
                                     • Twilio Auth Token<br>
-                                    • OAuth client secrets
+                                    • Telegram Bot tokens<br>
+                                    • LinkedIn OAuth secrets<br>
+                                    • Google Workspace OAuth credentials<br>
+                                    • Microsoft Outlook OAuth credentials<br>
+                                    • SMTP/IMAP credentials<br>
+                                    • Shopify App credentials<br>
+                                    • Stripe API keys<br>
+                                    • PayPal API credentials<br>
+                                    • Calendly OAuth secrets<br>
+                                    • Zoom OAuth secrets<br>
+                                    • OAuth client secrets (all providers)
                                 </div>
                             </div>
                         </div>
@@ -3027,7 +3760,7 @@
                                     <div>channelType</div>
                                     <div>VARCHAR(50)</div>
                                     <div>NOT NULL</div>
-                                    <div>whatsapp|facebook|instagram|sms|webchat</div>
+                                    <div>whatsapp|facebook|instagram|sms|telegram|linkedin|email_gmail|email_outlook|email_smtp|shopify|stripe|paypal|calendly|zoom|webchat</div>
                                 </div>
                                 <div class="table-row">
                                     <div>channelName</div>
@@ -3039,7 +3772,7 @@
                                     <div>externalId</div>
                                     <div>VARCHAR(255)</div>
                                     <div>NULLABLE</div>
-                                    <div>WhatsApp Business ID, FB Page ID, etc.</div>
+                                    <div>WhatsApp Business ID, FB Page ID, Telegram Bot ID, LinkedIn Profile ID, Shopify Store ID, etc.</div>
                                 </div>
                                 <div class="table-row">
                                     <div>aiAssistantId</div>
@@ -3127,6 +3860,143 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="db-table" style="margin-top: 30px;">
+                            <div class="table-header">📋 CHANNEL CONFIGURATION JSONB SCHEMAS</div>
+                            <div class="table-body" style="padding: 20px; background: #f8f9fa;">
+                                <div style="margin-bottom: 25px;">
+                                    <h4 style="color: #2c5530; margin-bottom: 10px;">📧 Email Channels (Gmail, Outlook, SMTP)</h4>
+                                    <pre style="background: #fff; padding: 15px; border-radius: 5px; font-size: 0.85em; overflow-x: auto;">{
+  "provider": "gmail|outlook|smtp",
+  "emailAddress": "support@company.com",
+  "displayName": "Company Support",
+  "signature": "HTML email signature",
+  "autoReply": {
+    "enabled": true,
+    "template": "Thank you for contacting us...",
+    "businessHoursOnly": true
+  },
+  "threading": {
+    "enabled": true,
+    "maxThreadDepth": 10
+  },
+  "filters": {
+    "spamFiltering": true,
+    "blockedDomains": ["spam.com"],
+    "requiredSubjectKeywords": []
+  },
+  "smtp": {
+    "host": "smtp.gmail.com",
+    "port": 587,
+    "encryption": "tls"
+  }
+}</pre>
+                                </div>
+
+                                <div style="margin-bottom: 25px;">
+                                    <h4 style="color: #2c5530; margin-bottom: 10px;">✈️ Telegram Bot</h4>
+                                    <pre style="background: #fff; padding: 15px; border-radius: 5px; font-size: 0.85em; overflow-x: auto;">{
+  "botUsername": "@companybot",
+  "welcomeMessage": "Welcome! How can I help you?",
+  "commands": [
+    {"command": "/start", "description": "Start conversation"},
+    {"command": "/help", "description": "Get help"}
+  ],
+  "inlineKeyboard": {
+    "enabled": true,
+    "buttons": [
+      {"text": "Contact Support", "callback_data": "support"}
+    ]
+  },
+  "mediaHandling": {
+    "allowPhotos": true,
+    "allowDocuments": true,
+    "maxFileSize": 20971520
+  }
+}</pre>
+                                </div>
+
+                                <div style="margin-bottom: 25px;">
+                                    <h4 style="color: #2c5530; margin-bottom: 10px;">💼 LinkedIn Messaging</h4>
+                                    <pre style="background: #fff; padding: 15px; border-radius: 5px; font-size: 0.85em; overflow-x: auto;">{
+  "profileId": "urn:li:person:xxxxx",
+  "companyPageId": "urn:li:organization:xxxxx",
+  "autoAcceptConnections": false,
+  "welcomeMessage": "Thanks for connecting!",
+  "rateLimits": {
+    "maxMessagesPerDay": 100,
+    "maxConnectionRequestsPerWeek": 100
+  },
+  "profileEnrichment": {
+    "fetchJobTitle": true,
+    "fetchCompany": true
+  }
+}</pre>
+                                </div>
+
+                                <div style="margin-bottom: 25px;">
+                                    <h4 style="color: #2c5530; margin-bottom: 10px;">🛍️ Shopify + 💳 Stripe + 💰 PayPal</h4>
+                                    <pre style="background: #fff; padding: 15px; border-radius: 5px; font-size: 0.85em; overflow-x: auto;">// Shopify
+{
+  "shopDomain": "mystore.myshopify.com",
+  "notifications": {
+    "orderCreated": {"enabled": true, "template": "Order confirmed"},
+    "orderShipped": {"enabled": true, "includeTracking": true},
+    "abandonedCart": {"enabled": true, "delayMinutes": 60}
+  }
+}
+
+// Stripe
+{
+  "accountId": "acct_xxxxx",
+  "notifications": {
+    "paymentSucceeded": {"enabled": true},
+    "paymentFailed": {"enabled": true, "alertTeam": true},
+    "subscriptionRenewal": {"daysBeforeRenewal": 7}
+  }
+}
+
+// PayPal
+{
+  "merchantId": "merchant_xxxxx",
+  "environment": "live|sandbox",
+  "notifications": {
+    "paymentCompleted": {"enabled": true},
+    "disputeCreated": {"alertTeam": true}
+  }
+}</pre>
+                                </div>
+
+                                <div style="margin-bottom: 25px;">
+                                    <h4 style="color: #2c5530; margin-bottom: 10px;">📅 Calendly + 🎥 Zoom</h4>
+                                    <pre style="background: #fff; padding: 15px; border-radius: 5px; font-size: 0.85em; overflow-x: auto;">// Calendly
+{
+  "organizationUri": "https://api.calendly.com/organizations/xxxxx",
+  "notifications": {
+    "bookingConfirmed": {
+      "enabled": true,
+      "sendReminders": true,
+      "reminderMinutesBefore": [1440, 60]
+    }
+  }
+}
+
+// Zoom
+{
+  "accountId": "xxxxx",
+  "notifications": {
+    "meetingScheduled": {"enabled": true, "includeJoinLink": true},
+    "recordingAvailable": {"enabled": true, "expiryDays": 30},
+    "meetingReminder": {"minutesBefore": [60, 15]}
+  },
+  "meetingDefaults": {
+    "autoRecording": "cloud",
+    "waitingRoom": true
+  }
+}</pre>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -3145,11 +4015,20 @@
                                     <strong>Article 28: Data Processing Agreements</strong>
                                     <strong style="color: #333; font-weight: 400;">Processors:</strong><br>
                                     • Meta (WhatsApp, Facebook, Instagram)<br>
-                                    • Twilio (SMS)<br><br>
+                                    • Twilio (SMS)<br>
+                                    • Telegram (Bot API)<br>
+                                    • LinkedIn (Messaging API)<br>
+                                    • Google (Workspace/Gmail)<br>
+                                    • Microsoft (Outlook/365)<br>
+                                    • Shopify (E-commerce)<br>
+                                    • Stripe (Payments)<br>
+                                    • PayPal (Payments)<br>
+                                    • Calendly (Scheduling)<br>
+                                    • Zoom (Meetings)<br><br>
                                     <strong style="color: #333; font-weight: 400;">Requirements:</strong><br>
                                     • DPA signed with each processor<br>
                                     • GDPR-compliant data handling<br>
-                                    • EU data residency options
+                                    • EU data residency options where available
                                 </div>
                                 <div class="reference">
                                     → COMPLETE_GDPR_COMPLIANCE_GUIDE.md<br>
@@ -4303,7 +5182,7 @@
                                     <p><strong>External API Keys</strong></p>
                                     <ul>
                                         <li>automation/openai-api-key (AI execution)</li>
-                                        <li>automation/sendgrid-api-key (email actions)</li>
+                                        <li>automation/sendy-aws-ses-credentials (email actions)</li>
                                         <li>automation/twilio-credentials (SMS actions)</li>
                                         <li>automation/slack-webhook (notification actions)</li>
                                         <li>Auto-rotation: Every 90 days</li>
@@ -4703,7 +5582,7 @@
                                         <strong>Third-Party Integrations</strong>
                                         <strong style="color: #333; font-weight: 400;">Processors Used:</strong><br>
                                         • OpenAI (AI-generated responses in actions)<br>
-                                        • SendGrid (email notification actions)<br>
+                                        • Sendy + AWS SES (email notification actions)<br>
                                         • Twilio (SMS notification actions)<br>
                                         • Slack (webhook notification actions)<br><br>
 
@@ -4824,4 +5703,3 @@
     </script>
 </body>
 </html>
-
