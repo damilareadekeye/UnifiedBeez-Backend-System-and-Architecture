@@ -4075,13 +4075,13 @@
             </div>
             <!-- END FRAME 6: STEP 5 -->
 
-            <!-- FRAME 7: STEP 6 - CHANNEL CONFIGURATION -->
+            <!-- FRAME 7: STEP 6 - PER-CHANNEL AI CONFIGURATION -->
             <div class="frame" id="frame7">
                 <div class="frame-title">
-                    STEP 6: CHANNEL CONFIGURATION
+                    STEP 6: PER-CHANNEL AI CONFIGURATION
                 </div>
                 <div class="frame-subtitle">
-                    Per-Channel AI Settings + Response Templates + Business Hours + Auto-Responses
+                    AI Assistant Selection + Follow-Up Triggers + Escalation Rules + BeeBot Nudges + AI Behavior Settings + Access Permissions
                 </div>
 
                 <!-- LEGEND -->
@@ -4116,39 +4116,56 @@
                     <div class="lane-content lane-user">
                         <div class="step-container">
                             <div class="step-box">
-                                <h3>1. Business Hours Setup</h3>
+                                <h3>1. Select AI Assistant & Industry Type</h3>
                                 <ul>
-                                    <li>Set working hours per channel</li>
-                                    <li>Timezone configuration</li>
-                                    <li>Holiday schedules</li>
-                                    <li>After-hours auto-response</li>
+                                    <li>Choose AI Assistant (SupportBot, Professional, Detailed, Receptionist)</li>
+                                    <li>Select Industry Type (Tech Support/SaaS, E-commerce, etc.)</li>
+                                    <li>Enable Smart Suggestions by BeeBot (AI recommendations)</li>
                                 </ul>
                             </div>
                             <div class="step-box">
-                                <h3>2. Auto-Response Templates</h3>
+                                <h3>2. Configure Escalation Rules</h3>
                                 <ul>
-                                    <li>Greeting messages</li>
-                                    <li>After-hours messages</li>
-                                    <li>FAQ quick replies</li>
-                                    <li>Fallback responses</li>
+                                    <li>Escalate after (5) unanswered messages</li>
+                                    <li>Escalate on keyword (Fire, Emergency, Police)</li>
+                                    <li>Escalate after no reply in (10 minutes)</li>
+                                    <li>Select backup escalation contact (All team members)</li>
                                 </ul>
                             </div>
                             <div class="step-box">
-                                <h3>3. AI Behavior Rules</h3>
+                                <h3>3. Setup Follow-Up Triggers</h3>
                                 <ul>
-                                    <li>Response tone per channel</li>
-                                    <li>Max response length</li>
-                                    <li>Language preferences</li>
-                                    <li>Escalation triggers</li>
+                                    <li>Enable Follow-Up (toggle on/off)</li>
+                                    <li>Delay Before Follow-Up (<10 Sec)</li>
+                                    <li>Follow-Up Content Type (Sales/Support/Custom)</li>
+                                    <li>Smart Suggestions: Use recommended settings</li>
                                 </ul>
                             </div>
                             <div class="step-box">
-                                <h3>4. Save Configuration</h3>
+                                <h3>4. AI Behavior Settings (Timing)</h3>
                                 <ul>
-                                    <li>Review all settings</li>
-                                    <li>Test configurations</li>
-                                    <li>Apply to channel</li>
-                                    <li>Monitor performance</li>
+                                    <li>AI reply delay (5 Mins)</li>
+                                    <li>Working Days (Monday - Friday)</li>
+                                    <li>Select timezone (UTC+1:00)</li>
+                                    <li>Opening Hours (09:00 AM) & Closing Hours (06:00 PM)</li>
+                                </ul>
+                            </div>
+                            <div class="step-box">
+                                <h3>5. Access Permissions</h3>
+                                <ul>
+                                    <li>Select team members with channel access</li>
+                                    <li>Assign roles (Admin, Manager, Agent, Viewer)</li>
+                                    <li>Set "All Team Members" for shared access</li>
+                                    <li>Configure per-channel permissions</li>
+                                </ul>
+                            </div>
+                            <div class="step-box">
+                                <h3>6. Review & Save Configuration</h3>
+                                <ul>
+                                    <li>Review all AI configuration settings</li>
+                                    <li>Test AI behavior per channel</li>
+                                    <li>Apply configuration to selected channels</li>
+                                    <li>Monitor AI performance & adjust settings</li>
                                 </ul>
                             </div>
                         </div>
@@ -4227,6 +4244,140 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="service-card">
+                                <h3><span class="service-icon">🔄</span> Follow-Up Automation Service</h3>
+                                <div class="section">
+                                    <div class="section-title">Features:</div>
+                                    <div class="section-content">
+                                        • Automated follow-up triggers<br>
+                                        • Delay before follow-up (configurable)<br>
+                                        • Follow-up content type (Sales/Support/Custom)<br>
+                                        • Smart Suggestions by BeeBot<br>
+                                        • Multi-step follow-up sequences
+                                    </div>
+                                </div>
+                                <div class="section">
+                                    <div class="section-title">Trigger Conditions:</div>
+                                    <div class="section-content">
+                                        • Customer initiated conversation<br>
+                                        • No response from customer (X hours)<br>
+                                        • Conversation marked as pending<br>
+                                        • Keyword-based triggers<br>
+                                        • Business hours aware
+                                    </div>
+                                </div>
+                                <div class="section">
+                                    <div class="section-title">API Endpoints:</div>
+                                    <div class="section-content">
+                                        • POST /channels/:id/follow-up-rules<br>
+                                        • GET /channels/:id/follow-up-rules<br>
+                                        • PATCH /follow-up-rules/:ruleId<br>
+                                        • POST /follow-up-rules/:ruleId/trigger<br>
+                                        • GET /follow-ups/pending
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="service-card">
+                                <h3><span class="service-icon">⚠️</span> Escalation Rules Service</h3>
+                                <div class="section">
+                                    <div class="section-title">Escalation Triggers:</div>
+                                    <div class="section-content">
+                                        • After X unanswered messages (configurable: 3, 5, 10)<br>
+                                        • After no reply in X time (10min, 30min, 1hr, 24hr)<br>
+                                        • Keyword detection (Fire, Emergency, Police, etc.)<br>
+                                        • Customer sentiment analysis (angry, frustrated)<br>
+                                        • VIP customer detection
+                                    </div>
+                                </div>
+                                <div class="section">
+                                    <div class="section-title">Escalation Actions:</div>
+                                    <div class="section-content">
+                                        • Assign to specific team member<br>
+                                        • Assign to inbox (all team members)<br>
+                                        • Select backup escalation contact<br>
+                                        • Send notification (email/SMS/Slack)<br>
+                                        • Auto-tag conversation as "Escalated"
+                                    </div>
+                                </div>
+                                <div class="section">
+                                    <div class="section-title">API Endpoints:</div>
+                                    <div class="section-content">
+                                        • POST /channels/:id/escalation-rules<br>
+                                        • GET /channels/:id/escalation-rules<br>
+                                        • PATCH /escalation-rules/:ruleId<br>
+                                        • POST /conversations/:id/escalate<br>
+                                        • GET /escalations/active
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="service-card">
+                                <h3><span class="service-icon">💡</span> BeeBot Nudges (Smart Suggestions)</h3>
+                                <div class="section">
+                                    <div class="section-title">Recommendation Engine:</div>
+                                    <div class="section-content">
+                                        • AI-powered settings recommendations<br>
+                                        • Based on My Plan (Individual/Business/Premium/Organisation)<br>
+                                        • Based on Business Type (Tech Support, SaaS, E-commerce)<br>
+                                        • Industry best practices database<br>
+                                        • A/B testing optimization suggestions
+                                    </div>
+                                </div>
+                                <div class="section">
+                                    <div class="section-title">Smart Suggestions:</div>
+                                    <div class="section-content">
+                                        • Optimal AI reply delay (5sec, 10sec, 30sec)<br>
+                                        • Recommended working days/hours<br>
+                                        • Escalation thresholds (unanswered messages count)<br>
+                                        • Follow-up timing (24 hours for support, 48 hours for sales)<br>
+                                        • Tone profile recommendations (Professional, Friendly, Technical)
+                                    </div>
+                                </div>
+                                <div class="section">
+                                    <div class="section-title">API Endpoints:</div>
+                                    <div class="section-content">
+                                        • GET /channels/:id/smart-suggestions<br>
+                                        • POST /channels/:id/apply-suggestion<br>
+                                        • GET /suggestions/templates/:industry<br>
+                                        • POST /feedback/suggestion/:id
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="service-card">
+                                <h3><span class="service-icon">🔐</span> Access Permissions Service</h3>
+                                <div class="section">
+                                    <div class="section-title">Features:</div>
+                                    <div class="section-content">
+                                        • Per-channel access control<br>
+                                        • Role-based permissions (Admin, Manager, Agent, Viewer)<br>
+                                        • Team member assignment to channels<br>
+                                        • "All Team Members" option for shared access<br>
+                                        • Permission inheritance from organization roles
+                                    </div>
+                                </div>
+                                <div class="section">
+                                    <div class="section-title">Permission Levels:</div>
+                                    <div class="section-content">
+                                        • <strong>Admin:</strong> Full config + conversation access<br>
+                                        • <strong>Manager:</strong> View config + manage conversations<br>
+                                        • <strong>Agent:</strong> Respond to conversations only<br>
+                                        • <strong>Viewer:</strong> Read-only access
+                                    </div>
+                                </div>
+                                <div class="section">
+                                    <div class="section-title">API Endpoints:</div>
+                                    <div class="section-content">
+                                        • POST /channels/:id/permissions<br>
+                                        • GET /channels/:id/permissions<br>
+                                        • PATCH /channels/:id/permissions/:userId<br>
+                                        • DELETE /channels/:id/permissions/:userId<br>
+                                        • GET /users/:id/accessible-channels
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -4246,10 +4397,14 @@
                                     ECS Fargate
                                 </h4>
                                 <div class="section-content">
-                                    <strong>Service:</strong><br>
-                                    • Channel Configuration Service<br><br>
+                                    <strong>Services:</strong><br>
+                                    • Channel Configuration Service<br>
+                                    • Follow-Up Automation Service<br>
+                                    • Escalation Rules Service<br>
+                                    • BeeBot Nudges Service<br>
+                                    • Access Permissions Service<br><br>
                                     <strong>Configuration:</strong><br>
-                                    • Tasks: 2-5<br>
+                                    • Tasks: 2-8 (per service)<br>
                                     • CPU: 1 vCPU<br>
                                     • RAM: 2GB
                                 </div>
@@ -4264,7 +4419,10 @@
                                     <strong>Tables:</strong><br>
                                     • channel_configurations<br>
                                     • response_templates<br>
-                                    • business_hours<br><br>
+                                    • business_hours<br>
+                                    • follow_up_rules<br>
+                                    • escalation_rules<br>
+                                    • channel_permissions<br><br>
                                     <strong>Port:</strong> 5432
                                 </div>
                             </div>
@@ -4353,6 +4511,246 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="db-table" style="margin-top: 30px;">
+                            <div class="table-header">TABLE: follow_up_rules</div>
+                            <div class="table-body">
+                                <div class="table-row header-row">
+                                    <div>Column Name</div>
+                                    <div>Type</div>
+                                    <div>Constraints</div>
+                                    <div>Purpose</div>
+                                </div>
+                                <div class="table-row">
+                                    <div class="pk">id</div>
+                                    <div>SERIAL</div>
+                                    <div>PRIMARY KEY</div>
+                                    <div>Follow-up rule identifier</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>channelId</div>
+                                    <div>INTEGER</div>
+                                    <div>FK → channels(id)</div>
+                                    <div>Linked channel</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>organizationId</div>
+                                    <div>INTEGER</div>
+                                    <div>FK → organizations(id)</div>
+                                    <div>Owner organization</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>isEnabled</div>
+                                    <div>BOOLEAN</div>
+                                    <div>DEFAULT false</div>
+                                    <div>Toggle follow-up on/off</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>delayHours</div>
+                                    <div>INTEGER</div>
+                                    <div>DEFAULT 24</div>
+                                    <div>Hours before follow-up (24, 48, 72)</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>contentType</div>
+                                    <div>VARCHAR(50)</div>
+                                    <div>NOT NULL</div>
+                                    <div>sales|support|custom</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>followUpMessage</div>
+                                    <div>TEXT</div>
+                                    <div>NOT NULL</div>
+                                    <div>Follow-up message template</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>triggerConditions</div>
+                                    <div>JSONB</div>
+                                    <div>NOT NULL</div>
+                                    <div>{"noCustomerReply": true, "keywords": []}</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>businessHoursOnly</div>
+                                    <div>BOOLEAN</div>
+                                    <div>DEFAULT true</div>
+                                    <div>Only send during business hours</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>maxFollowUps</div>
+                                    <div>INTEGER</div>
+                                    <div>DEFAULT 2</div>
+                                    <div>Max follow-ups per conversation</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>createdAt</div>
+                                    <div>TIMESTAMP</div>
+                                    <div>DEFAULT NOW()</div>
+                                    <div>Rule creation timestamp</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="db-table" style="margin-top: 30px;">
+                            <div class="table-header">TABLE: escalation_rules</div>
+                            <div class="table-body">
+                                <div class="table-row header-row">
+                                    <div>Column Name</div>
+                                    <div>Type</div>
+                                    <div>Constraints</div>
+                                    <div>Purpose</div>
+                                </div>
+                                <div class="table-row">
+                                    <div class="pk">id</div>
+                                    <div>SERIAL</div>
+                                    <div>PRIMARY KEY</div>
+                                    <div>Escalation rule identifier</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>channelId</div>
+                                    <div>INTEGER</div>
+                                    <div>FK → channels(id)</div>
+                                    <div>Linked channel</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>organizationId</div>
+                                    <div>INTEGER</div>
+                                    <div>FK → organizations(id)</div>
+                                    <div>Owner organization</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>isEnabled</div>
+                                    <div>BOOLEAN</div>
+                                    <div>DEFAULT true</div>
+                                    <div>Toggle escalation on/off</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>unansweredMessageCount</div>
+                                    <div>INTEGER</div>
+                                    <div>DEFAULT 5</div>
+                                    <div>Escalate after X unanswered (3, 5, 10)</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>noReplyMinutes</div>
+                                    <div>INTEGER</div>
+                                    <div>DEFAULT 10</div>
+                                    <div>Escalate after X minutes (10, 30, 60, 1440)</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>keywordTriggers</div>
+                                    <div>TEXT[]</div>
+                                    <div>DEFAULT ARRAY[]::TEXT[]</div>
+                                    <div>["fire", "emergency", "police", "urgent"]</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>sentimentTrigger</div>
+                                    <div>BOOLEAN</div>
+                                    <div>DEFAULT false</div>
+                                    <div>Escalate on negative sentiment</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>assignToUserId</div>
+                                    <div>INTEGER</div>
+                                    <div>FK → users(id), NULLABLE</div>
+                                    <div>Specific team member to assign</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>assignToInbox</div>
+                                    <div>BOOLEAN</div>
+                                    <div>DEFAULT false</div>
+                                    <div>Assign to all team members</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>backupEscalationUserId</div>
+                                    <div>INTEGER</div>
+                                    <div>FK → users(id), NULLABLE</div>
+                                    <div>Backup contact if primary unavailable</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>notificationChannels</div>
+                                    <div>TEXT[]</div>
+                                    <div>DEFAULT ARRAY['email']::TEXT[]</div>
+                                    <div>["email", "sms", "slack"]</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>createdAt</div>
+                                    <div>TIMESTAMP</div>
+                                    <div>DEFAULT NOW()</div>
+                                    <div>Rule creation timestamp</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="db-table" style="margin-top: 30px;">
+                            <div class="table-header">TABLE: channel_permissions</div>
+                            <div class="table-body">
+                                <div class="table-row header-row">
+                                    <div>Column Name</div>
+                                    <div>Type</div>
+                                    <div>Constraints</div>
+                                    <div>Purpose</div>
+                                </div>
+                                <div class="table-row">
+                                    <div class="pk">id</div>
+                                    <div>SERIAL</div>
+                                    <div>PRIMARY KEY</div>
+                                    <div>Permission identifier</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>channelId</div>
+                                    <div>INTEGER</div>
+                                    <div>FK → channels(id)</div>
+                                    <div>Linked channel</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>userId</div>
+                                    <div>INTEGER</div>
+                                    <div>FK → users(id)</div>
+                                    <div>Team member with access</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>permissionLevel</div>
+                                    <div>VARCHAR(20)</div>
+                                    <div>NOT NULL</div>
+                                    <div>admin|manager|agent|viewer</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>canViewConfig</div>
+                                    <div>BOOLEAN</div>
+                                    <div>DEFAULT false</div>
+                                    <div>Can view channel configuration</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>canEditConfig</div>
+                                    <div>BOOLEAN</div>
+                                    <div>DEFAULT false</div>
+                                    <div>Can edit channel configuration</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>canViewConversations</div>
+                                    <div>BOOLEAN</div>
+                                    <div>DEFAULT true</div>
+                                    <div>Can view conversations</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>canReply</div>
+                                    <div>BOOLEAN</div>
+                                    <div>DEFAULT true</div>
+                                    <div>Can reply to conversations</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>grantedAt</div>
+                                    <div>TIMESTAMP</div>
+                                    <div>DEFAULT NOW()</div>
+                                    <div>Permission grant timestamp</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>grantedBy</div>
+                                    <div>INTEGER</div>
+                                    <div>FK → users(id)</div>
+                                    <div>User who granted permission</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -4419,7 +4817,7 @@
                     STEP 7: WEB CHAT SETUP
                 </div>
                 <div class="frame-subtitle">
-                    Widget Configuration + Embed Code Generation + Branding + Chat Customization
+                    Widget Configuration + Embed Code Generation + Branding + Domain Allowlist Security (XSS Protection) + Chat Customization
                 </div>
 
                 <!-- LEGEND -->
@@ -4476,16 +4874,26 @@
                                 <ul>
                                     <li>Copy JavaScript snippet</li>
                                     <li>Installation instructions</li>
-                                    <li>Domain allowlist setup</li>
-                                    <li>Widget ID assignment</li>
+                                    <li>Widget ID assignment (unique UUID)</li>
+                                </ul>
+                            </div>
+                            <div class="step-box" style="border: 2px solid #FF6B6B; background: #FFF5F5;">
+                                <h3>4. Domain Allowlist Security 🔒</h3>
+                                <ul>
+                                    <li><strong>Add authorized domains:</strong> example.com</li>
+                                    <li><strong>Wildcard subdomains:</strong> *.example.com</li>
+                                    <li><strong>Test domain verification</strong> before go-live</li>
+                                    <li><strong>Security:</strong> Blocks XSS attacks & widget hijacking</li>
+                                    <li><strong>Monitor:</strong> View blocked unauthorized attempts</li>
                                 </ul>
                             </div>
                             <div class="step-box">
-                                <h3>4. Install & Test</h3>
+                                <h3>5. Install & Test</h3>
                                 <ul>
-                                    <li>Paste code in website</li>
-                                    <li>Test widget appearance</li>
-                                    <li>Verify AI responses</li>
+                                    <li>Paste code in website <code>&lt;head&gt;</code> or <code>&lt;body&gt;</code></li>
+                                    <li>Test widget appearance on allowed domain</li>
+                                    <li>Verify AI responses work correctly</li>
+                                    <li>Check security: Try loading from unauthorized domain (should block)</li>
                                     <li>Go live</li>
                                 </ul>
                             </div>
@@ -4566,6 +4974,136 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="service-card" style="border: 3px solid #FF6B6B; background: #FFF5F5;">
+                                <h3><span class="service-icon">🔒</span> Domain Allowlist Security Service <span style="color: #FF6B6B; font-weight: bold;">[CRITICAL]</span></h3>
+                                <div class="section">
+                                    <div class="section-title">XSS Protection Features:</div>
+                                    <div class="section-content">
+                                        • Domain whitelist validation (CORS)<br>
+                                        • Referrer header verification<br>
+                                        • Origin header validation<br>
+                                        • Wildcard subdomain support (*.example.com)<br>
+                                        • Real-time domain verification on widget load<br>
+                                        • Automatic blocking of unauthorized domains
+                                    </div>
+                                </div>
+                                <div class="section">
+                                    <div class="section-title">Security Workflow:</div>
+                                    <div class="section-content">
+                                        <strong>1. Widget Load Request:</strong><br>
+                                        &nbsp;&nbsp;→ Extract Origin/Referer header<br>
+                                        &nbsp;&nbsp;→ Query allowlist: SELECT * FROM widget_domains WHERE widgetId = ? AND domain = ?<br>
+                                        &nbsp;&nbsp;→ If NOT FOUND → Return 403 Forbidden + Log attempt<br>
+                                        &nbsp;&nbsp;→ If FOUND → Serve widget.js with CORS headers<br><br>
+                                        <strong>2. WebSocket Connection:</strong><br>
+                                        &nbsp;&nbsp;→ Validate Origin header against allowlist<br>
+                                        &nbsp;&nbsp;→ Reject connection if domain not whitelisted<br><br>
+                                        <strong>3. API Requests:</strong><br>
+                                        &nbsp;&nbsp;→ Verify widgetId + domain combination<br>
+                                        &nbsp;&nbsp;→ Rate limiting per domain (1000 req/min)
+                                    </div>
+                                </div>
+                                <div class="section">
+                                    <div class="section-title">Threat Prevention:</div>
+                                    <div class="section-content">
+                                        • <strong>XSS Attack:</strong> Prevents malicious sites from embedding widget<br>
+                                        • <strong>Widget Hijacking:</strong> Blocks unauthorized domain usage<br>
+                                        • <strong>Data Theft:</strong> Prevents conversation data leakage<br>
+                                        • <strong>Brand Abuse:</strong> Stops widget use on competitor sites<br>
+                                        • <strong>DDoS via Widget:</strong> Rate limits per allowed domain
+                                    </div>
+                                </div>
+                                <div class="section">
+                                    <div class="section-title">API Endpoints:</div>
+                                    <div class="section-content">
+                                        • POST /widgets/:id/domains (Add domain to allowlist)<br>
+                                        • GET /widgets/:id/domains (List allowed domains)<br>
+                                        • DELETE /widgets/:id/domains/:domainId (Remove domain)<br>
+                                        • POST /widgets/:id/domains/verify (Test domain access)<br>
+                                        • GET /widgets/:id/blocked-attempts (Security logs)
+                                    </div>
+                                </div>
+                                <div class="section" style="background: #FFE5E5; padding: 10px; border-radius: 5px; margin-top: 10px;">
+                                    <div class="section-title" style="color: #C92A2A;">⚠️ Security Implementation:</div>
+                                    <div class="section-content" style="color: #5C2020;">
+                                        <strong>Middleware (NestJS Guard):</strong><br>
+                                        <code style="background: white; padding: 2px 6px; border-radius: 3px; font-size: 0.85em;">@UseGuards(DomainAllowlistGuard)</code><br>
+                                        Applied to ALL widget SDK endpoints<br><br>
+                                        <strong>Response Headers:</strong><br>
+                                        • Access-Control-Allow-Origin: https://example.com<br>
+                                        • Content-Security-Policy: frame-ancestors 'self' https://example.com<br>
+                                        • X-Frame-Options: ALLOW-FROM https://example.com
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="service-card" style="border: 2px solid #52B788; background: #F0FFF4;">
+                                <h3><span class="service-icon">🏷️</span> Label Management Service</h3>
+                                <div class="section">
+                                    <div class="section-title">Features:</div>
+                                    <div class="section-content">
+                                        • Create custom labels per organization<br>
+                                        • Apply multiple labels to conversations<br>
+                                        • Filter conversations by labels<br>
+                                        • Label auto-assignment via rules<br>
+                                        • AI-suggested labels based on content<br>
+                                        • Bulk label operations<br>
+                                        • Label analytics (most used, trending)
+                                    </div>
+                                </div>
+                                <div class="section">
+                                    <div class="section-title">Label Categories:</div>
+                                    <div class="section-content">
+                                        • <strong>Sales:</strong> Hot Lead, Follow-up Required, Closed Won, Closed Lost<br>
+                                        • <strong>Support:</strong> Bug, Feature Request, Question, Escalated, Resolved<br>
+                                        • <strong>Priority:</strong> Urgent, High Priority, Normal, Low Priority<br>
+                                        • <strong>Status:</strong> Open, In Progress, Waiting on Customer, Completed<br>
+                                        • <strong>Channel:</strong> WhatsApp, Email, Instagram, Facebook<br>
+                                        • <strong>Custom:</strong> User-defined labels with colors
+                                    </div>
+                                </div>
+                                <div class="section">
+                                    <div class="section-title">API Endpoints:</div>
+                                    <div class="section-content">
+                                        <strong>Label Management:</strong><br>
+                                        • POST /labels - Create new label<br>
+                                        • GET /labels - List all organization labels<br>
+                                        • GET /labels/:id - Get label details<br>
+                                        • PATCH /labels/:id - Update label<br>
+                                        • DELETE /labels/:id - Delete label<br><br>
+                                        <strong>Label Assignment:</strong><br>
+                                        • POST /conversations/:id/labels - Apply label to conversation<br>
+                                        • DELETE /conversations/:id/labels/:labelId - Remove label<br>
+                                        • GET /conversations/:id/labels - Get conversation labels<br>
+                                        • POST /conversations/bulk-label - Apply label to multiple conversations<br><br>
+                                        <strong>Label Filtering:</strong><br>
+                                        • GET /conversations?labelIds=1,2,3 - Filter by labels<br>
+                                        • GET /labels/:id/conversations - Get all conversations with label<br>
+                                        • GET /labels/stats - Label usage statistics
+                                    </div>
+                                </div>
+                                <div class="section">
+                                    <div class="section-title">Auto-Labeling Rules:</div>
+                                    <div class="section-content">
+                                        • <strong>Keyword-based:</strong> "refund" → Apply "Billing" label<br>
+                                        • <strong>Sentiment-based:</strong> Negative sentiment → Apply "Escalated" label<br>
+                                        • <strong>Channel-based:</strong> WhatsApp messages → Apply "WhatsApp" label<br>
+                                        • <strong>AI-powered:</strong> OpenAI categorization → Suggest relevant labels<br>
+                                        • <strong>Time-based:</strong> No response >24hrs → Apply "Stale" label
+                                    </div>
+                                </div>
+                                <div class="section">
+                                    <div class="section-title">Bulk Operations:</div>
+                                    <div class="section-content">
+                                        • Apply label to filtered conversations<br>
+                                        • Remove label from multiple conversations<br>
+                                        • Replace labels (remove old, apply new)<br>
+                                        • Export labeled conversations (CSV, Excel)<br>
+                                        • Scheduled label cleanup (remove unused labels)
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -4618,6 +5156,10 @@
                                 <div class="section-content">
                                     <strong>Tables:</strong><br>
                                     • widgets<br>
+                                    • widget_domains <span style="color: #FF6B6B; font-weight: bold;">[SECURITY]</span><br>
+                                    • widget_blocked_attempts <span style="color: #FF6B6B; font-weight: bold;">[AUDIT]</span><br>
+                                    • conversation_labels <span style="color: #52B788; font-weight: bold;">[NEW]</span><br>
+                                    • conversation_label_assignments <span style="color: #52B788; font-weight: bold;">[NEW]</span><br>
                                     • widget_sessions<br>
                                     • chat_messages<br><br>
                                     <strong>Port:</strong> 5432
@@ -4743,6 +5285,292 @@
                                     <div>DEFAULT NOW()</div>
                                     <div>Creation timestamp</div>
                                 </div>
+                            </div>
+                        </div>
+
+                        <div class="db-table" style="margin-top: 30px; border: 3px solid #FF6B6B;">
+                            <div class="table-header" style="background: #FF6B6B; color: white;">🔒 TABLE: widget_domains (CRITICAL SECURITY)</div>
+                            <div class="table-body">
+                                <div class="table-row header-row">
+                                    <div>Column Name</div>
+                                    <div>Type</div>
+                                    <div>Constraints</div>
+                                    <div>Purpose</div>
+                                </div>
+                                <div class="table-row">
+                                    <div class="pk">id</div>
+                                    <div>SERIAL</div>
+                                    <div>PRIMARY KEY</div>
+                                    <div>Domain entry identifier</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>widgetId</div>
+                                    <div>INTEGER</div>
+                                    <div>FK → widgets(id)</div>
+                                    <div>Linked widget</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>domain</div>
+                                    <div>VARCHAR(255)</div>
+                                    <div>NOT NULL, INDEX</div>
+                                    <div>example.com or *.example.com</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>domainType</div>
+                                    <div>VARCHAR(20)</div>
+                                    <div>NOT NULL</div>
+                                    <div>exact|wildcard</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>isActive</div>
+                                    <div>BOOLEAN</div>
+                                    <div>DEFAULT true</div>
+                                    <div>Enable/disable domain without deleting</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>addedBy</div>
+                                    <div>INTEGER</div>
+                                    <div>FK → users(id)</div>
+                                    <div>User who added this domain</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>addedAt</div>
+                                    <div>TIMESTAMP</div>
+                                    <div>DEFAULT NOW()</div>
+                                    <div>When domain was whitelisted</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>lastVerifiedAt</div>
+                                    <div>TIMESTAMP</div>
+                                    <div>NULLABLE</div>
+                                    <div>Last successful widget load from this domain</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>verificationCount</div>
+                                    <div>INTEGER</div>
+                                    <div>DEFAULT 0</div>
+                                    <div>Total successful loads (usage tracking)</div>
+                                </div>
+                            </div>
+                            <div style="background: #FFE5E5; padding: 15px; margin-top: 10px; border-radius: 5px;">
+                                <strong style="color: #C92A2A;">⚠️ Security Index:</strong><br>
+                                <code style="background: white; padding: 3px 8px; border-radius: 3px; font-family: monospace; font-size: 0.9em;">
+                                CREATE UNIQUE INDEX idx_widget_domain ON widget_domains(widgetId, domain);
+                                </code><br>
+                                <span style="font-size: 0.9em; color: #5C2020;">Ensures fast O(1) domain lookups for every widget load request</span>
+                            </div>
+                        </div>
+
+                        <div class="db-table" style="margin-top: 30px; border: 3px solid #FF6B6B;">
+                            <div class="table-header" style="background: #FF6B6B; color: white;">🚨 TABLE: widget_blocked_attempts (SECURITY AUDIT LOG)</div>
+                            <div class="table-body">
+                                <div class="table-row header-row">
+                                    <div>Column Name</div>
+                                    <div>Type</div>
+                                    <div>Constraints</div>
+                                    <div>Purpose</div>
+                                </div>
+                                <div class="table-row">
+                                    <div class="pk">id</div>
+                                    <div>SERIAL</div>
+                                    <div>PRIMARY KEY</div>
+                                    <div>Log entry identifier</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>widgetId</div>
+                                    <div>INTEGER</div>
+                                    <div>FK → widgets(id)</div>
+                                    <div>Widget that rejected request</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>blockedDomain</div>
+                                    <div>VARCHAR(255)</div>
+                                    <div>NOT NULL, INDEX</div>
+                                    <div>Unauthorized domain that attempted access</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>requestType</div>
+                                    <div>VARCHAR(50)</div>
+                                    <div>NOT NULL</div>
+                                    <div>widget_load|websocket|api_call</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>ipAddress</div>
+                                    <div>VARCHAR(45)</div>
+                                    <div>NOT NULL</div>
+                                    <div>Source IP (IPv4 or IPv6)</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>userAgent</div>
+                                    <div>TEXT</div>
+                                    <div>NULLABLE</div>
+                                    <div>Browser/bot user agent string</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>refererHeader</div>
+                                    <div>TEXT</div>
+                                    <div>NULLABLE</div>
+                                    <div>HTTP Referer header (full URL)</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>blockedAt</div>
+                                    <div>TIMESTAMP</div>
+                                    <div>DEFAULT NOW(), INDEX</div>
+                                    <div>When attempt was blocked</div>
+                                </div>
+                            </div>
+                            <div style="background: #FFE5E5; padding: 15px; margin-top: 10px; border-radius: 5px;">
+                                <strong style="color: #C92A2A;">⚠️ Security Monitoring:</strong><br>
+                                • Alert if same domain blocked >10 times in 1 hour (potential attack)<br>
+                                • Alert if multiple IPs blocked for same widgetId (DDoS attempt)<br>
+                                • Retention: 90 days (GDPR compliant, security incident investigation)<br>
+                                • Dashboard: Show top 10 blocked domains per widget for security awareness
+                            </div>
+                        </div>
+
+                        <div class="db-table" style="margin-top: 30px; border: 2px solid #52B788;">
+                            <div class="table-header" style="background: #52B788; color: white;">🏷️ TABLE: conversation_labels (Conversation Organization)</div>
+                            <div class="table-body">
+                                <div class="table-row header-row">
+                                    <div>Column Name</div>
+                                    <div>Type</div>
+                                    <div>Constraints</div>
+                                    <div>Purpose</div>
+                                </div>
+                                <div class="table-row">
+                                    <div class="pk">id</div>
+                                    <div>SERIAL</div>
+                                    <div>PRIMARY KEY</div>
+                                    <div>Label identifier</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>organizationId</div>
+                                    <div>INTEGER</div>
+                                    <div>FK → organizations(id)</div>
+                                    <div>Owning organization</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>name</div>
+                                    <div>VARCHAR(100)</div>
+                                    <div>NOT NULL</div>
+                                    <div>Label name (e.g., "Sales", "Support", "Bug")</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>color</div>
+                                    <div>VARCHAR(7)</div>
+                                    <div>NOT NULL</div>
+                                    <div>Hex color for UI (e.g., #FF5733)</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>description</div>
+                                    <div>TEXT</div>
+                                    <div>NULLABLE</div>
+                                    <div>Label purpose/description</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>category</div>
+                                    <div>VARCHAR(50)</div>
+                                    <div>DEFAULT 'general'</div>
+                                    <div>sales|support|billing|technical|general|custom</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>isActive</div>
+                                    <div>BOOLEAN</div>
+                                    <div>DEFAULT true</div>
+                                    <div>Enable/disable without deleting</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>displayOrder</div>
+                                    <div>INTEGER</div>
+                                    <div>DEFAULT 0</div>
+                                    <div>Sort order in UI</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>createdBy</div>
+                                    <div>INTEGER</div>
+                                    <div>FK → users(id)</div>
+                                    <div>User who created label</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>createdAt</div>
+                                    <div>TIMESTAMP</div>
+                                    <div>DEFAULT NOW()</div>
+                                    <div>Label creation timestamp</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>updatedAt</div>
+                                    <div>TIMESTAMP</div>
+                                    <div>DEFAULT NOW()</div>
+                                    <div>Last modification timestamp</div>
+                                </div>
+                            </div>
+                            <div style="background: #E8F5E9; padding: 15px; margin-top: 10px; border-radius: 5px;">
+                                <strong style="color: #1A4D2E;">💡 Usage Examples:</strong><br>
+                                • <strong>Sales Labels:</strong> "Hot Lead", "Follow-up Required", "Closed Won", "Closed Lost"<br>
+                                • <strong>Support Labels:</strong> "Bug", "Feature Request", "Question", "Escalated", "Resolved"<br>
+                                • <strong>Priority Labels:</strong> "Urgent", "High Priority", "Normal", "Low Priority"<br>
+                                • <strong>Status Labels:</strong> "Open", "In Progress", "Waiting on Customer", "Completed"<br>
+                                • <strong>Channel Labels:</strong> "WhatsApp", "Email", "Instagram", "Facebook" (channel type tags)
+                            </div>
+                        </div>
+
+                        <div class="db-table" style="margin-top: 30px; border: 2px solid #52B788;">
+                            <div class="table-header" style="background: #52B788; color: white;">🔗 TABLE: conversation_label_assignments (Junction Table)</div>
+                            <div class="table-body">
+                                <div class="table-row header-row">
+                                    <div>Column Name</div>
+                                    <div>Type</div>
+                                    <div>Constraints</div>
+                                    <div>Purpose</div>
+                                </div>
+                                <div class="table-row">
+                                    <div class="pk">id</div>
+                                    <div>SERIAL</div>
+                                    <div>PRIMARY KEY</div>
+                                    <div>Assignment identifier</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>conversationId</div>
+                                    <div>INTEGER</div>
+                                    <div>FK → conversations(id)</div>
+                                    <div>Conversation being labeled</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>labelId</div>
+                                    <div>INTEGER</div>
+                                    <div>FK → conversation_labels(id)</div>
+                                    <div>Applied label</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>assignedBy</div>
+                                    <div>INTEGER</div>
+                                    <div>FK → users(id)</div>
+                                    <div>User who applied label</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>assignedAt</div>
+                                    <div>TIMESTAMP</div>
+                                    <div>DEFAULT NOW()</div>
+                                    <div>When label was applied</div>
+                                </div>
+                                <div class="table-row">
+                                    <div>source</div>
+                                    <div>VARCHAR(50)</div>
+                                    <div>DEFAULT 'manual'</div>
+                                    <div>manual|auto|ai_suggested|rule_based</div>
+                                </div>
+                            </div>
+                            <div style="background: #E8F5E9; padding: 15px; margin-top: 10px; border-radius: 5px;">
+                                <strong style="color: #1A4D2E;">🔍 Unique Constraint:</strong><br>
+                                <code style="background: white; padding: 3px 8px; border-radius: 3px; font-family: monospace; font-size: 0.9em;">
+                                CREATE UNIQUE INDEX idx_conversation_label ON conversation_label_assignments(conversationId, labelId);
+                                </code><br>
+                                <span style="font-size: 0.9em; color: #2C5530;">Prevents duplicate labels on same conversation</span><br><br>
+                                <strong style="color: #1A4D2E;">📊 Performance Index:</strong><br>
+                                <code style="background: white; padding: 3px 8px; border-radius: 3px; font-family: monospace; font-size: 0.9em;">
+                                CREATE INDEX idx_conversation_labels_lookup ON conversation_label_assignments(conversationId);
+                                </code><br>
+                                <span style="font-size: 0.9em; color: #2C5530;">Fast lookup of all labels for a conversation (O(log n))</span>
                             </div>
                         </div>
                     </div>
@@ -4913,7 +5741,9 @@
                                             • GET /automations/templates<br>
                                             • GET /automations/templates/:id<br>
                                             • GET /automations/categories<br>
-                                            • POST /automations/search
+                                            • POST /automations/search<br>
+                                            • GET /automations/templates/by-industry/:industry <span style="color: #52B788; font-weight: bold;">[NEW]</span><br>
+                                            • GET /automations/industries <span style="color: #52B788; font-weight: bold;">[NEW]</span>
                                         </div>
                                     </div>
                                     <div class="section">
@@ -4922,13 +5752,28 @@
                                             • Serve pre-built templates<br>
                                             • Category management<br>
                                             • Template versioning<br>
-                                            • Search & filtering
+                                            • Search & filtering<br>
+                                            • <strong>Industry-specific filtering</strong> <span style="color: #52B788; font-weight: bold;">[NEW]</span><br>
+                                            • Featured/recommended templates per industry <span style="color: #52B788; font-weight: bold;">[NEW]</span>
+                                        </div>
+                                    </div>
+                                    <div class="section">
+                                        <div class="section-title">Industry Categories:</div>
+                                        <div class="section-content" style="background: #F0FFF4; padding: 10px; border-radius: 5px;">
+                                            • <strong>E-commerce:</strong> Abandoned cart recovery, Order confirmation, Shipping updates<br>
+                                            • <strong>Healthcare:</strong> Appointment reminders, Test result notifications, Follow-up care<br>
+                                            • <strong>Education:</strong> Course enrollment, Assignment reminders, Grade notifications<br>
+                                            • <strong>Real Estate:</strong> Property inquiries, Viewing schedules, Offer notifications<br>
+                                            • <strong>SaaS/Tech:</strong> Trial expiry, Feature announcements, Usage alerts<br>
+                                            • <strong>Finance:</strong> Payment reminders, Account alerts, Fraud notifications<br>
+                                            • <strong>Hospitality:</strong> Booking confirmations, Check-in reminders, Guest feedback<br>
+                                            • <strong>General:</strong> Universal templates applicable to any industry
                                         </div>
                                     </div>
                                     <div class="section">
                                         <div class="section-title">Dependencies:</div>
                                         <div class="section-content">
-                                            • PostgreSQL (automation_templates)<br>
+                                            • PostgreSQL (automation_templates, industry_categories, template_industry_mapping) <span style="color: #52B788; font-weight: bold;">[UPDATED]</span><br>
                                             • ElastiCache (template caching)<br>
                                             • S3 (template icons/assets)
                                         </div>
@@ -5280,6 +6125,153 @@
                                             <div>DEFAULT NOW()</div>
                                             <div>Template creation date</div>
                                         </div>
+                                    </div>
+                                </div>
+
+                                <div class="db-table" style="border: 2px solid #52B788; margin-top: 20px;">
+                                    <div class="table-header" style="background: #52B788; color: white;">🏢 TABLE: industry_categories (Industry Classification)</div>
+                                    <div class="table-body">
+                                        <div class="table-row header-row">
+                                            <div>Column Name</div>
+                                            <div>Type</div>
+                                            <div>Constraints</div>
+                                            <div>Purpose</div>
+                                        </div>
+                                        <div class="table-row">
+                                            <div class="pk">id</div>
+                                            <div>SERIAL</div>
+                                            <div>PRIMARY KEY</div>
+                                            <div>Industry identifier</div>
+                                        </div>
+                                        <div class="table-row">
+                                            <div>name</div>
+                                            <div>VARCHAR(100)</div>
+                                            <div>NOT NULL, UNIQUE</div>
+                                            <div>Industry name (e.g., "E-commerce", "Healthcare")</div>
+                                        </div>
+                                        <div class="table-row">
+                                            <div>slug</div>
+                                            <div>VARCHAR(100)</div>
+                                            <div>NOT NULL, UNIQUE</div>
+                                            <div>URL-friendly identifier (e.g., "ecommerce", "healthcare")</div>
+                                        </div>
+                                        <div class="table-row">
+                                            <div>description</div>
+                                            <div>TEXT</div>
+                                            <div>NOT NULL</div>
+                                            <div>Industry description for users</div>
+                                        </div>
+                                        <div class="table-row">
+                                            <div>iconUrl</div>
+                                            <div>VARCHAR(500)</div>
+                                            <div>NULLABLE</div>
+                                            <div>S3 URL for industry icon</div>
+                                        </div>
+                                        <div class="table-row">
+                                            <div>displayOrder</div>
+                                            <div>INTEGER</div>
+                                            <div>DEFAULT 0</div>
+                                            <div>Sort order in UI</div>
+                                        </div>
+                                        <div class="table-row">
+                                            <div>isActive</div>
+                                            <div>BOOLEAN</div>
+                                            <div>DEFAULT true</div>
+                                            <div>Show/hide industry category</div>
+                                        </div>
+                                        <div class="table-row">
+                                            <div>templateCount</div>
+                                            <div>INTEGER</div>
+                                            <div>DEFAULT 0</div>
+                                            <div>Number of templates in this industry (cached)</div>
+                                        </div>
+                                        <div class="table-row">
+                                            <div>createdAt</div>
+                                            <div>TIMESTAMP</div>
+                                            <div>DEFAULT NOW()</div>
+                                            <div>Category creation date</div>
+                                        </div>
+                                        <div class="table-row">
+                                            <div>updatedAt</div>
+                                            <div>TIMESTAMP</div>
+                                            <div>DEFAULT NOW()</div>
+                                            <div>Last modification date</div>
+                                        </div>
+                                    </div>
+                                    <div style="background: #E8F5E9; padding: 15px; margin-top: 10px; border-radius: 5px;">
+                                        <strong style="color: #1A4D2E;">📋 Sample Industries:</strong><br>
+                                        • <strong>E-commerce:</strong> Online retail, marketplace platforms, dropshipping<br>
+                                        • <strong>Healthcare:</strong> Clinics, hospitals, telehealth, pharmacies<br>
+                                        • <strong>Education:</strong> Schools, universities, online courses, tutoring<br>
+                                        • <strong>Real Estate:</strong> Agencies, property management, rentals<br>
+                                        • <strong>SaaS/Tech:</strong> Software companies, tech startups, IT services<br>
+                                        • <strong>Finance:</strong> Banks, fintech, insurance, accounting<br>
+                                        • <strong>Hospitality:</strong> Hotels, restaurants, travel agencies<br>
+                                        • <strong>General:</strong> Applicable to any industry
+                                    </div>
+                                </div>
+
+                                <div class="db-table" style="border: 2px solid #52B788; margin-top: 20px;">
+                                    <div class="table-header" style="background: #52B788; color: white;">🔗 TABLE: template_industry_mapping (Junction Table)</div>
+                                    <div class="table-body">
+                                        <div class="table-row header-row">
+                                            <div>Column Name</div>
+                                            <div>Type</div>
+                                            <div>Constraints</div>
+                                            <div>Purpose</div>
+                                        </div>
+                                        <div class="table-row">
+                                            <div class="pk">id</div>
+                                            <div>SERIAL</div>
+                                            <div>PRIMARY KEY</div>
+                                            <div>Mapping identifier</div>
+                                        </div>
+                                        <div class="table-row">
+                                            <div>templateId</div>
+                                            <div>INTEGER</div>
+                                            <div>FK → automation_templates(id)</div>
+                                            <div>Automation template</div>
+                                        </div>
+                                        <div class="table-row">
+                                            <div>industryId</div>
+                                            <div>INTEGER</div>
+                                            <div>FK → industry_categories(id)</div>
+                                            <div>Industry category</div>
+                                        </div>
+                                        <div class="table-row">
+                                            <div>isFeatured</div>
+                                            <div>BOOLEAN</div>
+                                            <div>DEFAULT false</div>
+                                            <div>Featured/recommended template for this industry</div>
+                                        </div>
+                                        <div class="table-row">
+                                            <div>relevanceScore</div>
+                                            <div>INTEGER</div>
+                                            <div>DEFAULT 50</div>
+                                            <div>Relevance score (0-100) for sorting</div>
+                                        </div>
+                                        <div class="table-row">
+                                            <div>createdAt</div>
+                                            <div>TIMESTAMP</div>
+                                            <div>DEFAULT NOW()</div>
+                                            <div>Mapping creation date</div>
+                                        </div>
+                                    </div>
+                                    <div style="background: #E8F5E9; padding: 15px; margin-top: 10px; border-radius: 5px;">
+                                        <strong style="color: #1A4D2E;">🔍 Unique Constraint:</strong><br>
+                                        <code style="background: white; padding: 3px 8px; border-radius: 3px; font-family: monospace; font-size: 0.9em;">
+                                        CREATE UNIQUE INDEX idx_template_industry ON template_industry_mapping(templateId, industryId);
+                                        </code><br>
+                                        <span style="font-size: 0.9em; color: #2C5530;">Prevents duplicate industry assignments to same template</span><br><br>
+                                        <strong style="color: #1A4D2E;">📊 Performance Index:</strong><br>
+                                        <code style="background: white; padding: 3px 8px; border-radius: 3px; font-family: monospace; font-size: 0.9em;">
+                                        CREATE INDEX idx_industry_templates_lookup ON template_industry_mapping(industryId, relevanceScore DESC);
+                                        </code><br>
+                                        <span style="font-size: 0.9em; color: #2C5530;">Fast lookup of templates by industry with relevance sorting (O(log n))</span><br><br>
+                                        <strong style="color: #1A4D2E;">💡 Example Usage:</strong><br>
+                                        • Template "Abandoned Cart Recovery" → Mapped to "E-commerce" (relevanceScore: 95, isFeatured: true)<br>
+                                        • Template "Appointment Reminder" → Mapped to "Healthcare" (relevanceScore: 90), "Education" (relevanceScore: 70)<br>
+                                        • Template "Welcome Message" → Mapped to "General" (relevanceScore: 80) - applies to all industries
                                     </div>
                                 </div>
 
