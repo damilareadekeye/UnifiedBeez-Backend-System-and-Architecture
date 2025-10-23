@@ -12,74 +12,33 @@
     }
   ],
   "routes": [
-    {
-      "src": "/",
-      "dest": "/index.html"
-    },
-    {
-      "src": "/manual",
-      "dest": "/manual-onboarding.html"
-    },
-    {
-      "src": "/copilot",
-      "dest": "/beezaro-copilot.html"
-    },
-    {
-      "src": "/beezaro",
-      "dest": "/beezaro-copilot.html"
-    },
-    {
-      "src": "/comparison",
-      "dest": "/side-by-side-comparison.html"
-    },
-    {
-      "src": "/side-by-side",
-      "dest": "/side-by-side-comparison.html"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/$1"
-    }
+    { "src": "/", "dest": "/index.html" },
+    { "src": "/manual", "dest": "/manual-onboarding.html" },
+    { "src": "/copilot", "dest": "/beezaro-copilot.html" },
+    { "src": "/beezaro", "dest": "/beezaro-copilot.html" },
+    { "src": "/comparison", "dest": "/side-by-side-comparison.html" },
+    { "src": "/side-by-side", "dest": "/side-by-side-comparison.html" },
+    { "src": "/(.*)", "dest": "/$1" }
   ],
   "headers": [
     {
       "source": "/(.*)",
       "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=3600, s-maxage=86400"
-        }
+        { "key": "Cache-Control", "value": "public, max-age=3600, s-maxage=86400" }
       ]
     },
     {
       "source": "/assets/(.*)",
       "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
       ]
     }
   ],
   "trailingSlash": false,
   "cleanUrls": true,
   "redirects": [
-    {
-      "source": "/home",
-      "destination": "/",
-      "permanent": true
-    },
-    {
-      "source": "/manual-onboarding",
-      "destination": "/manual",
-      "permanent": false
-    },
-    {
-      "source": "/beezaro-copilot",
-      "destination": "/copilot",
-      "permanent": false
-    }
-  ],
-
+    { "source": "/home", "destination": "/", "permanent": true },
+    { "source": "/manual-onboarding", "destination": "/manual", "permanent": false },
+    { "source": "/beezaro-copilot", "destination": "/copilot", "permanent": false }
+  ]
 }
-
