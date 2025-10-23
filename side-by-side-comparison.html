@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual vs Beezaro Comparison - UnifiedBeez</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #FFFBF5;
+            min-height: 100vh;
+        }
+
+        .header-bar {
+            background: linear-gradient(135deg, #1A4D2E 0%, #2D6A4F 50%, #52B788 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .header-bar h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .header-bar p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .intro-section {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .intro-section h2 {
+            color: #1A4D2E;
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+        }
+
+        .intro-section p {
+            color: #2C3E50;
+            line-height: 1.8;
+            font-size: 1.05rem;
+            margin-bottom: 10px;
+        }
+
+        /* KEY DIFFERENCES TABLE */
+        .comparison-table {
+            width: 100%;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+
+        .comparison-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .comparison-table th {
+            background: linear-gradient(135deg, #1A4D2E 0%, #2D6A4F 100%);
+            color: white;
+            padding: 20px;
+            text-align: left;
+            font-size: 1.2rem;
+        }
+
+        .comparison-table td {
+            padding: 20px;
+            border-bottom: 1px solid #e0e0e0;
+            vertical-align: top;
+        }
+
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .comparison-table .aspect {
+            font-weight: 700;
+            color: #1A4D2E;
+            font-size: 1.05rem;
+            width: 200px;
+        }
+
+        .comparison-table .manual {
+            background: #E8F5E9;
+        }
+
+        .comparison-table .copilot {
+            background: #FFF9E6;
+        }
+
+        /* SIDE-BY-SIDE GRID */
+        .side-by-side-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .comparison-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .comparison-card.manual {
+            border: 3px solid #1A4D2E;
+        }
+
+        .comparison-card.copilot {
+            border: 3px solid #FB9C1D;
+        }
+
+        .card-header {
+            padding: 20px;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .card-header.manual {
+            background: linear-gradient(135deg, #1A4D2E 0%, #2D6A4F 100%);
+        }
+
+        .card-header.copilot {
+            background: linear-gradient(135deg, #FB9C1D 0%, #FFA94D 100%);
+        }
+
+        .card-body {
+            padding: 25px;
+        }
+
+        .card-body h3 {
+            color: #1A4D2E;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-body ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .card-body li {
+            padding: 10px 0;
+            color: #2C3E50;
+            font-size: 0.95rem;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .card-body li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #2D6A4F;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        /* STEP MAPPING TABLE */
+        .step-mapping-table {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+
+        .step-mapping-table h2 {
+            background: linear-gradient(135deg, #1A4D2E 0%, #2D6A4F 100%);
+            color: white;
+            padding: 20px;
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        .step-mapping-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .step-mapping-table th {
+            background: #E8F5E9;
+            padding: 15px;
+            text-align: left;
+            font-weight: 700;
+            color: #1A4D2E;
+            font-size: 1rem;
+        }
+
+        .step-mapping-table td {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+            color: #2C3E50;
+        }
+
+        .step-mapping-table tr:hover {
+            background: #F9F9F9;
+        }
+
+        .step-number {
+            font-weight: 700;
+            color: #1A4D2E;
+            font-size: 1.1rem;
+        }
+
+        /* QUICK LINKS */
+        .quick-links {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .quick-link-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 3px solid #1A4D2E;
+        }
+
+        .quick-link-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .quick-link-card h3 {
+            color: #1A4D2E;
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        .quick-link-card p {
+            color: #2C3E50;
+            font-size: 0.95rem;
+        }
+
+        .quick-link-card .icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 1024px) {
+            .side-by-side-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .quick-links {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+    <!-- NAVIGATION BAR -->
+    <nav class="architecture-nav">
+        <a href="index.html">🏠 Home</a>
+        <a href="manual-onboarding.html">📝 Manual Onboarding</a>
+        <a href="beezaro-copilot.html">🤖 Beezaro Copilot</a>
+        <a href="side-by-side-comparison.html" class="active">⚡ Side-by-Side</a>
+    </nav>
+
+    <!-- BREADCRUMB -->
+    <div class="breadcrumb">
+        <a href="index.html">🏠 Home</a> <span>/</span> <span>⚡ Side-by-Side Comparison</span>
+    </div>
+
+    <!-- HEADER -->
+    <div class="header-bar">
+        <h1>⚡ Manual Onboarding vs Beezaro Copilot - Side-by-Side Comparison</h1>
+        <p>Two Paths, Same Goal: Complete User Onboarding</p>
+    </div>
+
+    <div class="container">
+        <!-- INTRODUCTION -->
+        <div class="intro-section">
+            <h2>🎯 Overview</h2>
+            <p><strong>UnifiedBeez offers two distinct onboarding experiences:</strong></p>
+            <p>✅ <strong>Manual Onboarding</strong> - Traditional step-by-step form-based approach (8 screens)</p>
+            <p>✅ <strong>Beezaro Copilot</strong> - Conversational AI-powered chat experience (6 steps)</p>
+            <p><strong>Both paths collect the same data and serve the same purpose</strong>, but offer different user experiences. Users can switch between modes at any time, and data synchronizes automatically.</p>
+        </div>
+
+        <!-- KEY DIFFERENCES TABLE -->
+        <div class="comparison-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Aspect</th>
+                        <th>📝 Manual Onboarding</th>
+                        <th>🤖 Beezaro Copilot</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="aspect">User Experience</td>
+                        <td class="manual">Traditional multi-page forms with clear step progression</td>
+                        <td class="copilot">Conversational chat interface with natural language Q&A</td>
+                    </tr>
+                    <tr>
+                        <td class="aspect">Number of Steps</td>
+                        <td class="manual">8 steps (STEP 0 through STEP 8)</td>
+                        <td class="copilot">6 steps (Business → Team → Channels → Fallback → AI → Automation)</td>
+                    </tr>
+                    <tr>
+                        <td class="aspect">Input Method</td>
+                        <td class="manual">Forms, dropdowns, file uploads, toggles</td>
+                        <td class="copilot">Natural language text, quick response buttons, voice input</td>
+                    </tr>
+                    <tr>
+                        <td class="aspect">Navigation</td>
+                        <td class="manual">Linear progress bar, "Next" and "Back" buttons</td>
+                        <td class="copilot">Guided by Beezaro (AI assistant), can skip or "say No" to redirect</td>
+                    </tr>
+                    <tr>
+                        <td class="aspect">AI Integration</td>
+                        <td class="manual">No AI - user fills forms manually</td>
+                        <td class="copilot">OpenAI GPT-4 powered NLU, intent detection, smart recommendations</td>
+                    </tr>
+                    <tr>
+                        <td class="aspect">Fallback Logic</td>
+                        <td class="manual">N/A - already manual</td>
+                        <td class="copilot">When user says "No", opens corresponding manual screen</td>
+                    </tr>
+                    <tr>
+                        <td class="aspect">Time to Complete</td>
+                        <td class="manual">~10-15 minutes (depends on complexity)</td>
+                        <td class="copilot">~5-8 minutes (faster with AI guidance)</td>
+                    </tr>
+                    <tr>
+                        <td class="aspect">Backend Services</td>
+                        <td class="manual">32 services (Auth, User, Business, Team, Channel, AI, etc.)</td>
+                        <td class="copilot">35 services (Reuses 32 + adds 3 new: Conversational, State Management, AI Response)</td>
+                    </tr>
+                    <tr>
+                        <td class="aspect">Database Tables</td>
+                        <td class="manual">41 tables</td>
+                        <td class="copilot">45 tables (Reuses 41 + adds 4 new: copilot_sessions, conversation_history, onboarding_state, fallback_triggers)</td>
+                    </tr>
+                    <tr>
+                        <td class="aspect">API Endpoints</td>
+                        <td class="manual">~135 endpoints</td>
+                        <td class="copilot">~150+ endpoints (Reuses 135 + adds 15+ new for chat, state, fallback)</td>
+                    </tr>
+                    <tr>
+                        <td class="aspect">Real-Time Communication</td>
+                        <td class="manual">Not required</td>
+                        <td class="copilot">WebSocket (Socket.IO) for live chat, typing indicators, instant responses</td>
+                    </tr>
+                    <tr>
+                        <td class="aspect">Operational Cost (Annual)</td>
+                        <td class="manual">$0 additional (uses existing AWS infrastructure)</td>
+                        <td class="copilot">$338.40/year (OpenAI: $336/year + Lambda cleanup: $2.40/year)</td>
+                    </tr>
+                    <tr>
+                        <td class="aspect">Best For</td>
+                        <td class="manual">Users who prefer structured forms, visual control, detailed configuration</td>
+                        <td class="copilot">Users who prefer quick setup, conversational guidance, smart recommendations</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- SIDE-BY-SIDE CARDS -->
+        <div class="side-by-side-grid">
+            <!-- MANUAL CARD -->
+            <div class="comparison-card manual">
+                <div class="card-header manual">📝 Manual Onboarding</div>
+                <div class="card-body">
+                    <h3>🎯 8-Step Process</h3>
+                    <ul>
+                        <li><strong>STEP 0:</strong> Sign Up & Verification</li>
+                        <li><strong>STEP 1:</strong> Plan Selection</li>
+                        <li><strong>STEP 2:</strong> Business Information</li>
+                        <li><strong>STEP 3:</strong> Team Setup</li>
+                        <li><strong>STEP 4:</strong> AI Assistant Creation</li>
+                        <li><strong>STEP 5:</strong> Channel Integration</li>
+                        <li><strong>STEP 6:</strong> Escalation Rules</li>
+                        <li><strong>STEP 7:</strong> Review & Confirmation</li>
+                        <li><strong>STEP 8:</strong> Template Library (Optional)</li>
+                    </ul>
+
+                    <h3>✅ Advantages</h3>
+                    <ul>
+                        <li>Clear visual structure</li>
+                        <li>Complete control over inputs</li>
+                        <li>No AI dependency</li>
+                        <li>Works offline (after initial load)</li>
+                        <li>Familiar form-based UX</li>
+                    </ul>
+
+                    <h3>⚠️ Considerations</h3>
+                    <ul>
+                        <li>More steps to complete</li>
+                        <li>Can feel lengthy for simple setups</li>
+                        <li>Requires more user attention</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- COPILOT CARD -->
+            <div class="comparison-card copilot">
+                <div class="card-header copilot">🤖 Beezaro Copilot</div>
+                <div class="card-body">
+                    <h3>🎯 6-Step Conversation</h3>
+                    <ul>
+                        <li><strong>Step 1:</strong> Business Identity (Plan, Name, Industry, Logo)</li>
+                        <li><strong>Step 2:</strong> Team Members (Emails, Roles)</li>
+                        <li><strong>Step 3:</strong> Channel Selection (Integration)</li>
+                        <li><strong>Step 4:</strong> Fallback Logic (Escalation)</li>
+                        <li><strong>Step 5:</strong> AI Assistant (Creation)</li>
+                        <li><strong>Step 6:</strong> Automation (Templates)</li>
+                    </ul>
+
+                    <h3>✅ Advantages</h3>
+                    <ul>
+                        <li>Faster completion time</li>
+                        <li>Natural conversational experience</li>
+                        <li>AI-powered recommendations</li>
+                        <li>Can skip/defer steps easily</li>
+                        <li>Fallback to manual if needed</li>
+                    </ul>
+
+                    <h3>⚠️ Considerations</h3>
+                    <ul>
+                        <li>Requires OpenAI API</li>
+                        <li>Needs internet connection</li>
+                        <li>Less visual control</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP MAPPING TABLE -->
+        <div class="step-mapping-table">
+            <h2>📊 Beezaro ↔ Manual Step Mapping</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Beezaro Step</th>
+                        <th>Copilot Questions</th>
+                        <th>Maps to Manual</th>
+                        <th>Fallback Opens</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="step-number">Step 1</span><br>Business Identity</td>
+                        <td>
+                            • Confirm plan selection<br>
+                            • Business name?<br>
+                            • Industry?<br>
+                            • Description?<br>
+                            • Upload logo?<br>
+                            • Upload knowledge base?
+                        </td>
+                        <td><strong>STEP 2</strong><br>Business Information</td>
+                        <td>Business Info form with all fields pre-filled from chat</td>
+                    </tr>
+                    <tr>
+                        <td><span class="step-number">Step 2</span><br>Team Members</td>
+                        <td>
+                            • Add team members?<br>
+                            • How many?<br>
+                            • Email addresses?<br>
+                            • Roles/permissions?
+                        </td>
+                        <td><strong>STEP 3</strong><br>Team Setup</td>
+                        <td>Team Setup form for manual input</td>
+                    </tr>
+                    <tr>
+                        <td><span class="step-number">Step 3</span><br>Channels</td>
+                        <td>
+                            • Which channels?<br>
+                            • Configure now or later?
+                        </td>
+                        <td><strong>STEP 5</strong><br>Channel Integration</td>
+                        <td>Channel Integration screen for detailed setup</td>
+                    </tr>
+                    <tr>
+                        <td><span class="step-number">Step 4</span><br>Fallback Logic</td>
+                        <td>
+                            • What if no reply?<br>
+                            • Escalation rules?
+                        </td>
+                        <td><strong>STEP 6</strong><br>Escalation Rules</td>
+                        <td>Escalation Rules configuration</td>
+                    </tr>
+                    <tr>
+                        <td><span class="step-number">Step 5</span><br>AI Assistant</td>
+                        <td>
+                            • Single or multiple?<br>
+                            • Assistant name?<br>
+                            • Tone/personality?
+                        </td>
+                        <td><strong>STEP 4</strong><br>AI Assistant Creation</td>
+                        <td>AI Assistant Creation form</td>
+                    </tr>
+                    <tr>
+                        <td><span class="step-number">Step 6</span><br>Automation</td>
+                        <td>
+                            • Create automation?<br>
+                            • Category?<br>
+                            • Use template?
+                        </td>
+                        <td><strong>STEP 8</strong><br>Template Library</td>
+                        <td>Template Library with filtering</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- QUICK LINKS -->
+        <div class="quick-links">
+            <a href="manual-onboarding.html" class="quick-link-card">
+                <div class="icon">📝</div>
+                <h3>View Manual Architecture</h3>
+                <p>Complete 8-step form-based onboarding architecture with 41 tables and 135+ API endpoints</p>
+            </a>
+
+            <a href="beezaro-copilot.html" class="quick-link-card">
+                <div class="icon">🤖</div>
+                <h3>View Beezaro Architecture</h3>
+                <p>Conversational AI onboarding with 6 steps, 4 new tables, and OpenAI integration</p>
+            </a>
+        </div>
+    </div>
+
+    <!-- BACK TO TOP -->
+    <a href="#" class="back-to-top">↑</a>
+
+    <!-- NAVIGATION SCRIPT -->
+    <script src="assets/navigation.js"></script>
+</body>
+</html>
