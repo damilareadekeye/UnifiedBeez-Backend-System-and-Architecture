@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Dashboard - Operations & Industry Modules | UnifiedBeez Architecture</title>
+    <link rel="stylesheet" href="assets/live-dashboard-styles.css">
+</head>
+<body>
+    <!-- HEADER -->
+    <div class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="logo">🐝</div>
+                <div>
+                    <h1>UnifiedBeez Backend Architecture</h1>
+                    <p class="subtitle">Live Dashboard - Operations & Industry Modules</p>
+                </div>
+            </div>
+            <a href="index.html" class="back-button">← Back to Index</a>
+        </div>
+    </div>
+
+    <!-- NAVIGATION -->
+    <div class="nav-container">
+        <div class="nav-scroll">
+            <a href="#frame1" class="nav-item">Frame 1: Overview</a>
+            <a href="#frame2" class="nav-item">Frame 2: Tasks & Leads</a>
+            <a href="#frame3" class="nav-item">Frame 3: Reporting System</a>
+            <a href="#frame4" class="nav-item">Frame 4: Industry Modules Framework</a>
+            <a href="#frame5" class="nav-item">Frame 5: Healthcare & Restaurants</a>
+            <a href="#frame6" class="nav-item">Frame 6: Other Industries</a>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="container">
+
+        <!-- FRAME 1: OVERVIEW -->
+        <div id="frame1" class="frame">
+            <h2>🏢 FRAME 1: Operations & Industry Modules Overview</h2>
+
+            <h3>🎯 Purpose</h3>
+            <p>
+                The Operations & Industry Modules section provides internal business operation tools and
+                industry-specific customizations. It includes task management, lead tracking, comprehensive
+                reporting, templates library, and specialized modules for 10+ industries (Healthcare, Restaurants,
+                Trades, Professional Services, E-commerce, Real Estate, Education, Automotive, Beauty, Events,
+                Hospitality, and Non-profits).
+            </p>
+
+            <h3>✨ Core Operations Features</h3>
+            <div class="grid-3">
+                <div class="card">
+                    <h4>✅ Task Management</h4>
+                    <ul>
+                        <li>Create & assign tasks</li>
+                        <li>Due dates & reminders</li>
+                        <li>Task dependencies</li>
+                        <li>Priority levels</li>
+                        <li>Team collaboration</li>
+                        <li>Progress tracking</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>🎯 Lead Management</h4>
+                    <ul>
+                        <li>Lead capture & tracking</li>
+                        <li>Lead scoring</li>
+                        <li>Pipeline management</li>
+                        <li>Conversion tracking</li>
+                        <li>Source attribution</li>
+                        <li>Follow-up automation</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>📊 Reporting & Analytics</h4>
+                    <ul>
+                        <li>Pre-built reports</li>
+                        <li>Custom report builder</li>
+                        <li>Scheduled reports</li>
+                        <li>Export to PDF/Excel</li>
+                        <li>Dashboard widgets</li>
+                        <li>KPI tracking</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>🏭 Industry Modules Supported</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Industry</th>
+                        <th>Key Features</th>
+                        <th>Custom Fields</th>
+                        <th>Automations</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Healthcare & Clinics</strong></td>
+                        <td>Appointment booking, patient records, reminders</td>
+                        <td>Patient history, insurance, allergies</td>
+                        <td>Appointment confirmations, follow-ups</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Restaurants & Food</strong></td>
+                        <td>Reservations, orders, delivery tracking</td>
+                        <td>Dietary preferences, allergies, VIP status</td>
+                        <td>Reservation confirmations, order updates</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Trades & Home Services</strong></td>
+                        <td>Job scheduling, quotes, invoicing</td>
+                        <td>Property details, service history</td>
+                        <td>Quote follow-ups, appointment reminders</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Professional Services</strong></td>
+                        <td>Client management, project tracking</td>
+                        <td>Project status, billable hours</td>
+                        <td>Invoice reminders, project updates</td>
+                    </tr>
+                    <tr>
+                        <td><strong>E-commerce</strong></td>
+                        <td>Order tracking, abandoned carts, inventory</td>
+                        <td>Order history, preferences, loyalty points</td>
+                        <td>Cart recovery, shipping updates, reviews</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Real Estate</strong></td>
+                        <td>Property listings, viewings, offers</td>
+                        <td>Budget, preferences, viewing history</td>
+                        <td>New listings, viewing confirmations</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Education & Training</strong></td>
+                        <td>Course enrollment, progress tracking</td>
+                        <td>Course history, certifications</td>
+                        <td>Course reminders, progress updates</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Automotive</strong></td>
+                        <td>Service appointments, vehicle tracking</td>
+                        <td>Vehicle details, service history</td>
+                        <td>Service reminders, recalls</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="see-also">
+                <h3>🔗 See Also</h3>
+                <p>
+                    <a href="#frame2">→ Frame 2: Tasks & Lead Management</a> |
+                    <a href="#frame4">→ Frame 4: Industry Modules Framework</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- FRAME 2: TASKS & LEADS -->
+        <div id="frame2" class="frame">
+            <h2>✅ FRAME 2: Tasks & Lead Management</h2>
+
+            <h3>🏗️ Service Architecture</h3>
+            <div style="background: linear-gradient(135deg, #E8F5E9 0%, #B7E4C7 100%); border: 3px solid #1A4D2E; border-radius: 12px; padding: 30px; margin: 25px 0;">
+                <h4 style="color: #1A4D2E; text-align: center; margin-bottom: 30px; font-size: 1.3rem;">
+                    ⚙️ Operations Service Architecture - Task & Lead Management
+                </h4>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+                    <!-- TaskService -->
+                    <div style="background: white; border: 2px solid #52B788; border-radius: 10px; padding: 20px; box-shadow: 0 3px 10px rgba(26, 77, 46, 0.15);">
+                        <h5 style="color: #1A4D2E; margin: 0 0 15px 0; font-size: 1.1rem; border-bottom: 2px solid #B7E4C7; padding-bottom: 10px;">
+                            ✅ TaskService
+                        </h5>
+                        <div style="color: #455A64; font-size: 0.9rem; line-height: 1.8;">
+                            • create()<br>
+                            • assign()<br>
+                            • complete()<br>
+                            • remind()
+                        </div>
+                    </div>
+
+                    <!-- LeadService -->
+                    <div style="background: white; border: 2px solid #52B788; border-radius: 10px; padding: 20px; box-shadow: 0 3px 10px rgba(26, 77, 46, 0.15);">
+                        <h5 style="color: #1A4D2E; margin: 0 0 15px 0; font-size: 1.1rem; border-bottom: 2px solid #B7E4C7; padding-bottom: 10px;">
+                            🎯 LeadService
+                        </h5>
+                        <div style="color: #455A64; font-size: 0.9rem; line-height: 1.8;">
+                            • capture()<br>
+                            • score()<br>
+                            • convert()<br>
+                            • track()
+                        </div>
+                    </div>
+
+                    <!-- ReportService -->
+                    <div style="background: white; border: 2px solid #52B788; border-radius: 10px; padding: 20px; box-shadow: 0 3px 10px rgba(26, 77, 46, 0.15);">
+                        <h5 style="color: #1A4D2E; margin: 0 0 15px 0; font-size: 1.1rem; border-bottom: 2px solid #B7E4C7; padding-bottom: 10px;">
+                            📊 ReportService
+                        </h5>
+                        <div style="color: #455A64; font-size: 0.9rem; line-height: 1.8;">
+                            • generate()<br>
+                            • schedule()<br>
+                            • export()
+                        </div>
+                    </div>
+
+                    <!-- TemplateLibrary -->
+                    <div style="background: white; border: 2px solid #52B788; border-radius: 10px; padding: 20px; box-shadow: 0 3px 10px rgba(26, 77, 46, 0.15);">
+                        <h5 style="color: #1A4D2E; margin: 0 0 15px 0; font-size: 1.1rem; border-bottom: 2px solid #B7E4C7; padding-bottom: 10px;">
+                            📚 TemplateLibrary
+                        </h5>
+                        <div style="color: #455A64; font-size: 0.9rem; line-height: 1.8;">
+                            • getTemplates()<br>
+                            • customize()<br>
+                            • activate()
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3>💾 Database Schema</h3>
+
+            <div class="card">
+                <h4>tasks</h4>
+                <div class="code-block">CREATE TABLE tasks (
+  id BIGSERIAL PRIMARY KEY,
+  organization_id BIGINT NOT NULL REFERENCES organizations(id),
+
+  title VARCHAR(500) NOT NULL,
+  description TEXT,
+
+  -- Association
+  contact_id BIGINT REFERENCES contacts(id),
+  lead_id BIGINT REFERENCES leads(id),
+  conversation_id BIGINT REFERENCES conversations(id),
+
+  -- Assignment
+  assigned_to BIGINT REFERENCES users(id),
+  assigned_team_id BIGINT REFERENCES teams(id),
+
+  -- Scheduling
+  due_date TIMESTAMP,
+  due_time TIME,
+  reminder_at TIMESTAMP,
+
+  -- Status
+  status VARCHAR(50) DEFAULT 'pending',
+  -- 'pending', 'in_progress', 'completed', 'cancelled'
+  priority VARCHAR(20) DEFAULT 'normal',
+
+  -- Completion
+  completed_at TIMESTAMP,
+  completed_by BIGINT REFERENCES users(id),
+
+  created_by BIGINT REFERENCES users(id),
+  created_at TIMESTAMP DEFAULT NOW(),
+  updated_at TIMESTAMP DEFAULT NOW(),
+
+  INDEX idx_tasks_org (organization_id),
+  INDEX idx_tasks_assigned (assigned_to),
+  INDEX idx_tasks_due_date (due_date),
+  INDEX idx_tasks_status (status)
+);</div>
+            </div>
+
+            <div class="card">
+                <h4>leads</h4>
+                <div class="code-block">CREATE TABLE leads (
+  id BIGSERIAL PRIMARY KEY,
+  organization_id BIGINT NOT NULL REFERENCES organizations(id),
+  contact_id BIGINT REFERENCES contacts(id),
+
+  -- Lead details
+  title VARCHAR(255),
+  description TEXT,
+  value_cents INT, -- Potential deal value
+
+  -- Source tracking
+  source VARCHAR(100),
+  -- 'website', 'referral', 'campaign', 'manual'
+  source_details JSONB DEFAULT '{}',
+
+  -- Pipeline
+  stage VARCHAR(100),
+  -- 'new', 'contacted', 'qualified', 'proposal', 'negotiation', 'won', 'lost'
+
+  -- Scoring
+  score INT DEFAULT 0,
+
+  -- Assignment
+  assigned_to BIGINT REFERENCES users(id),
+
+  -- Conversion
+  converted_at TIMESTAMP,
+  lost_reason TEXT,
+
+  created_at TIMESTAMP DEFAULT NOW(),
+  updated_at TIMESTAMP DEFAULT NOW(),
+
+  INDEX idx_leads_org (organization_id),
+  INDEX idx_leads_contact (contact_id),
+  INDEX idx_leads_stage (stage),
+  INDEX idx_leads_assigned (assigned_to)
+);</div>
+            </div>
+
+            <h3>📡 API Endpoints</h3>
+
+            <div class="card">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>Endpoint</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/operations/tasks</code></td>
+                            <td>Get all tasks</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/operations/tasks</code></td>
+                            <td>Create new task</td>
+                        </tr>
+                        <tr>
+                            <td>PATCH</td>
+                            <td><code>/api/operations/tasks/:id/complete</code></td>
+                            <td>Mark task as complete</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/operations/leads</code></td>
+                            <td>Get all leads</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/operations/leads</code></td>
+                            <td>Create new lead</td>
+                        </tr>
+                        <tr>
+                            <td>PUT</td>
+                            <td><code>/api/operations/leads/:id/stage</code></td>
+                            <td>Update lead stage</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/operations/leads/:id/convert</code></td>
+                            <td>Convert lead to customer</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="see-also">
+                <h3>🔗 See Also</h3>
+                <p>
+                    <a href="#frame3">→ Frame 3: Reporting System</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- FRAME 3: REPORTING SYSTEM -->
+        <div id="frame3" class="frame">
+            <h2>📊 FRAME 3: Reporting & Analytics System</h2>
+
+            <h3>📈 Report Categories</h3>
+
+            <div class="grid-2">
+                <div class="card">
+                    <h4>Conversation Reports</h4>
+                    <ul>
+                        <li>Total conversations by channel</li>
+                        <li>Response time analysis</li>
+                        <li>Resolution rate</li>
+                        <li>Team performance</li>
+                        <li>Peak hours analysis</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>Contact Reports</h4>
+                    <ul>
+                        <li>Contact growth over time</li>
+                        <li>Segmentation analysis</li>
+                        <li>Tag distribution</li>
+                        <li>Engagement metrics</li>
+                        <li>Lifecycle stage distribution</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>Automation Reports</h4>
+                    <ul>
+                        <li>Execution statistics</li>
+                        <li>Success/failure rates</li>
+                        <li>Performance optimization</li>
+                        <li>ROI analysis</li>
+                        <li>Most used templates</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>Sales & Revenue Reports</h4>
+                    <ul>
+                        <li>Lead conversion funnel</li>
+                        <li>Revenue attribution</li>
+                        <li>Pipeline value</li>
+                        <li>Win/loss analysis</li>
+                        <li>Sales team performance</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>📡 API Endpoints (Reporting)</h3>
+
+            <div class="card">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>Endpoint</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/reports</code></td>
+                            <td>Get available reports</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/reports/generate</code></td>
+                            <td>Generate report</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/reports/:id/export</code></td>
+                            <td>Export report (PDF/Excel)</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/reports/schedule</code></td>
+                            <td>Schedule recurring report</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="see-also">
+                <h3>🔗 See Also</h3>
+                <p>
+                    <a href="#frame4">→ Frame 4: Industry Modules Framework</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- FRAME 4: INDUSTRY MODULES FRAMEWORK -->
+        <div id="frame4" class="frame">
+            <h2>🏭 FRAME 4: Industry Modules Framework</h2>
+
+            <h3>🏗️ Extensibility Architecture</h3>
+
+            <p>
+                Industry modules are built on a flexible, template-based framework that allows customization
+                of fields, workflows, automations, and UI elements specific to each industry vertical.
+            </p>
+
+            <div style="background: linear-gradient(135deg, #E8F5E9 0%, #BBDEFB 100%); border: 3px solid #2D6A4F; border-radius: 12px; padding: 30px; margin: 25px 0;">
+                <h4 style="color: #1A4D2E; text-align: center; margin-bottom: 30px; font-size: 1.3rem;">
+                    🏢 Industry Module Architecture - Layered Framework
+                </h4>
+
+                <!-- Core Platform -->
+                <div style="background: white; border-left: 5px solid #2D6A4F; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(45, 106, 79, 0.15);">
+                    <h5 style="color: #1A4D2E; margin: 0 0 15px 0; font-size: 1.2rem;">
+                        🎯 Core Platform (UnifiedBeez)
+                    </h5>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; padding-left: 20px;">
+                        <div style="background: #E8F5E9; padding: 10px; border-radius: 6px; text-align: center; color: #1A4D2E; font-weight: bold;">
+                            📇 Contacts
+                        </div>
+                        <div style="background: #E8F5E9; padding: 10px; border-radius: 6px; text-align: center; color: #1A4D2E; font-weight: bold;">
+                            📥 Inbox
+                        </div>
+                        <div style="background: #E8F5E9; padding: 10px; border-radius: 6px; text-align: center; color: #1A4D2E; font-weight: bold;">
+                            ⚡ Automations
+                        </div>
+                        <div style="background: #E8F5E9; padding: 10px; border-radius: 6px; text-align: center; color: #1A4D2E; font-weight: bold;">
+                            📊 CRM
+                        </div>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin: 15px 0; font-size: 2rem; color: #2D6A4F;">
+                    ↓
+                </div>
+
+                <!-- Industry Module Layer -->
+                <div style="background: white; border-left: 5px solid #43A047; border-radius: 8px; padding: 20px; box-shadow: 0 2px 8px rgba(67, 160, 71, 0.15);">
+                    <h5 style="color: #2D6A4F; margin: 0 0 20px 0; font-size: 1.2rem;">
+                        🔧 Industry Module Layer
+                    </h5>
+
+                    <!-- Custom Fields Schema -->
+                    <div style="background: #E8F5E9; border-left: 4px solid #66BB6A; padding: 15px; margin: 10px 0 10px 20px; border-radius: 6px;">
+                        <div style="color: #388E3C; font-weight: bold; margin-bottom: 10px; font-size: 1.05rem;">📋 Custom Fields Schema</div>
+                        <div style="padding-left: 20px; color: #455A64; line-height: 1.8;">
+                            • Industry-specific contact fields<br>
+                            • Custom merge fields<br>
+                            • Data validation rules
+                        </div>
+                    </div>
+
+                    <!-- Workflow Templates -->
+                    <div style="background: #E8F5E9; border-left: 4px solid #66BB6A; padding: 15px; margin: 10px 0 10px 20px; border-radius: 6px;">
+                        <div style="color: #388E3C; font-weight: bold; margin-bottom: 10px; font-size: 1.05rem;">⚙️ Workflow Templates</div>
+                        <div style="padding-left: 20px; color: #455A64; line-height: 1.8;">
+                            • Pre-configured automations<br>
+                            • Industry best practices<br>
+                            • Compliance workflows
+                        </div>
+                    </div>
+
+                    <!-- Message Templates -->
+                    <div style="background: #E8F5E9; border-left: 4px solid #66BB6A; padding: 15px; margin: 10px 0 10px 20px; border-radius: 6px;">
+                        <div style="color: #388E3C; font-weight: bold; margin-bottom: 10px; font-size: 1.05rem;">💬 Message Templates</div>
+                        <div style="padding-left: 20px; color: #455A64; line-height: 1.8;">
+                            • WhatsApp templates<br>
+                            • Email templates<br>
+                            • SMS templates
+                        </div>
+                    </div>
+
+                    <!-- UI Customization -->
+                    <div style="background: #E8F5E9; border-left: 4px solid #66BB6A; padding: 15px; margin: 10px 0 10px 20px; border-radius: 6px;">
+                        <div style="color: #388E3C; font-weight: bold; margin-bottom: 10px; font-size: 1.05rem;">🎨 UI Customization</div>
+                        <div style="padding-left: 20px; color: #455A64; line-height: 1.8;">
+                            • Custom dashboard widgets<br>
+                            • Industry-specific views<br>
+                            • Specialized reports
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3>💾 Database Schema</h3>
+
+            <div class="card">
+                <h4>industry_modules</h4>
+                <div class="code-block">CREATE TABLE industry_modules (
+  id BIGSERIAL PRIMARY KEY,
+
+  industry_key VARCHAR(100) NOT NULL UNIQUE,
+  -- 'healthcare', 'restaurant', 'trades', etc.
+
+  name VARCHAR(255) NOT NULL,
+  description TEXT,
+  icon VARCHAR(100),
+
+  -- Module configuration
+  custom_fields JSONB DEFAULT '[]',
+  -- [{ key, label, type, validation }]
+
+  automation_templates JSONB DEFAULT '[]',
+  -- [{ name, trigger, actions }]
+
+  message_templates JSONB DEFAULT '[]',
+  -- [{ type, name, content }]
+
+  ui_config JSONB DEFAULT '{}',
+  -- { dashboardWidgets, customViews, navigation }
+
+  is_active BOOLEAN DEFAULT TRUE,
+
+  created_at TIMESTAMP DEFAULT NOW(),
+  updated_at TIMESTAMP DEFAULT NOW(),
+
+  INDEX idx_industry_modules_key (industry_key)
+);</div>
+            </div>
+
+            <div class="card">
+                <h4>organization_industry_settings</h4>
+                <div class="code-block">CREATE TABLE organization_industry_settings (
+  id BIGSERIAL PRIMARY KEY,
+  organization_id BIGINT NOT NULL REFERENCES organizations(id),
+  industry_module_id BIGINT REFERENCES industry_modules(id),
+
+  -- Activated industry
+  industry_key VARCHAR(100) NOT NULL,
+
+  -- Custom configuration
+  config JSONB DEFAULT '{}',
+  -- Organization-specific customizations
+
+  activated_at TIMESTAMP DEFAULT NOW(),
+
+  INDEX idx_org_industry_org (organization_id)
+);</div>
+            </div>
+
+            <div class="see-also">
+                <h3>🔗 See Also</h3>
+                <p>
+                    <a href="#frame5">→ Frame 5: Healthcare & Restaurants Modules</a> |
+                    <a href="#frame6">→ Frame 6: Other Industry Modules</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- FRAME 5: HEALTHCARE & RESTAURANTS -->
+        <div id="frame5" class="frame">
+            <h2>🏥 FRAME 5: Healthcare & Restaurants Industry Modules</h2>
+
+            <h3>🏥 Healthcare & Clinics Module</h3>
+
+            <div class="card">
+                <h4>Custom Fields</h4>
+                <ul>
+                    <li><strong>Patient ID:</strong> Unique patient identifier</li>
+                    <li><strong>Date of Birth:</strong> For age calculation</li>
+                    <li><strong>Insurance Provider:</strong> Insurance company</li>
+                    <li><strong>Policy Number:</strong> Insurance policy ID</li>
+                    <li><strong>Medical History:</strong> Past conditions, surgeries</li>
+                    <li><strong>Allergies:</strong> Drug allergies, food allergies</li>
+                    <li><strong>Current Medications:</strong> Active prescriptions</li>
+                    <li><strong>Emergency Contact:</strong> Name, phone, relationship</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h4>Automation Templates</h4>
+                <ul>
+                    <li><strong>Appointment Confirmation:</strong> Send reminder 24h before appointment</li>
+                    <li><strong>Post-Visit Follow-up:</strong> Check-in message 3 days after visit</li>
+                    <li><strong>Prescription Refill Reminder:</strong> Alert 7 days before refill due</li>
+                    <li><strong>Annual Checkup:</strong> Remind yearly for routine checkup</li>
+                    <li><strong>Lab Results Ready:</strong> Notify when results available</li>
+                    <li><strong>Vaccination Reminders:</strong> Flu shot, COVID booster alerts</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h4>Compliance Features</h4>
+                <ul>
+                    <li><strong>HIPAA Compliance:</strong> Encrypted data storage, access logs</li>
+                    <li><strong>Data Retention:</strong> 7-year medical record retention</li>
+                    <li><strong>Patient Consent:</strong> Track consent for communications</li>
+                    <li><strong>Audit Trail:</strong> Log all access to patient records</li>
+                </ul>
+            </div>
+
+            <h3>🍽️ Restaurants & Food Service Module</h3>
+
+            <div class="card">
+                <h4>Custom Fields</h4>
+                <ul>
+                    <li><strong>Dietary Preferences:</strong> Vegetarian, vegan, gluten-free</li>
+                    <li><strong>Food Allergies:</strong> Nuts, dairy, shellfish, etc.</li>
+                    <li><strong>Favorite Dishes:</strong> Most ordered items</li>
+                    <li><strong>Seating Preference:</strong> Indoor, outdoor, bar</li>
+                    <li><strong>Occasion Tags:</strong> Birthday, anniversary, date night</li>
+                    <li><strong>VIP Status:</strong> Regular, VIP, influencer</li>
+                    <li><strong>Reservation History:</strong> Booking frequency</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h4>Automation Templates</h4>
+                <ul>
+                    <li><strong>Reservation Confirmation:</strong> Send WhatsApp with booking details</li>
+                    <li><strong>Day-of Reminder:</strong> 2-hour reminder before reservation</li>
+                    <li><strong>Post-Dining Feedback:</strong> Request review 2 days after visit</li>
+                    <li><strong>Birthday Promotion:</strong> Special offer on customer's birthday</li>
+                    <li><strong>Re-engagement:</strong> "We miss you" message after 30 days</li>
+                    <li><strong>Order Ready Notification:</strong> Takeout order ready for pickup</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h4>Special Features</h4>
+                <ul>
+                    <li><strong>Table Management:</strong> Track reservations by table</li>
+                    <li><strong>Waitlist System:</strong> Automated waitlist notifications</li>
+                    <li><strong>Order Tracking:</strong> Real-time delivery/takeout status</li>
+                    <li><strong>Loyalty Program:</strong> Points, rewards, tier management</li>
+                </ul>
+            </div>
+
+            <div class="see-also">
+                <h3>🔗 See Also</h3>
+                <p>
+                    <a href="#frame6">→ Frame 6: Other Industry Modules</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- FRAME 6: OTHER INDUSTRIES -->
+        <div id="frame6" class="frame">
+            <h2>🏗️ FRAME 6: Other Industry Modules</h2>
+
+            <h3>🔧 Trades & Home Services</h3>
+            <div class="card">
+                <p><strong>Industries:</strong> Plumbing, HVAC, Electrical, Landscaping, Cleaning</p>
+                <p><strong>Key Fields:</strong> Property type, service history, equipment details, job value</p>
+                <p><strong>Automations:</strong> Quote follow-up, appointment reminders, post-job feedback, seasonal maintenance</p>
+            </div>
+
+            <h3>💼 Professional Services</h3>
+            <div class="card">
+                <p><strong>Industries:</strong> Consulting, Legal, Accounting, Marketing</p>
+                <p><strong>Key Fields:</strong> Project status, billable hours, retainer, deliverables</p>
+                <p><strong>Automations:</strong> Invoice reminders, project milestones, contract renewals</p>
+            </div>
+
+            <h3>🛒 E-commerce</h3>
+            <div class="card">
+                <p><strong>Key Fields:</strong> Order history, cart items, product preferences, loyalty tier</p>
+                <p><strong>Automations:</strong> Abandoned cart recovery, shipping updates, review requests, product recommendations</p>
+            </div>
+
+            <h3>🏠 Real Estate</h3>
+            <div class="card">
+                <p><strong>Key Fields:</strong> Budget range, location preferences, property type, viewing history</p>
+                <p><strong>Automations:</strong> New listing alerts, viewing confirmations, offer follow-ups</p>
+            </div>
+
+            <h3>🎓 Education & Training</h3>
+            <div class="card">
+                <p><strong>Key Fields:</strong> Course enrollments, completion status, certifications</p>
+                <p><strong>Automations:</strong> Course reminders, progress nudges, certificate delivery</p>
+            </div>
+
+            <h3>🚗 Automotive</h3>
+            <div class="card">
+                <p><strong>Key Fields:</strong> Vehicle make/model/year, service history, mileage</p>
+                <p><strong>Automations:</strong> Service reminders, recall notifications, appointment booking</p>
+            </div>
+
+            <h3>💅 Beauty & Wellness</h3>
+            <div class="card">
+                <p><strong>Key Fields:</strong> Service preferences, stylist, product purchases</p>
+                <p><strong>Automations:</strong> Appointment reminders, rebooking prompts, birthday offers</p>
+            </div>
+
+            <h3>📡 API Endpoints (Industry Modules)</h3>
+
+            <div class="card">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>Endpoint</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/industry-modules</code></td>
+                            <td>Get available industry modules</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/industry-modules/:key</code></td>
+                            <td>Get industry module details</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/industry-modules/:key/activate</code></td>
+                            <td>Activate industry module for organization</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/industry-modules/:key/templates</code></td>
+                            <td>Get industry-specific templates</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>⚙️ AWS Infrastructure</h3>
+
+            <div class="card">
+                <h4>Industry Modules Infrastructure</h4>
+                <ul>
+                    <li><strong>RDS PostgreSQL:</strong> Store industry configurations and org settings</li>
+                    <li><strong>S3:</strong> Store industry template files (PDFs, images)</li>
+                    <li><strong>Lambda:</strong> Industry-specific data processing</li>
+                    <li><strong>CloudFront:</strong> Serve industry template assets</li>
+                    <li><strong>SQS:</strong> Queue industry-specific automation executions</li>
+                </ul>
+            </div>
+
+            <div class="see-also">
+                <h3>🔗 See Also</h3>
+                <p>
+                    <a href="complete-architecture-map.html">→ Complete Architecture Map</a> |
+                    <a href="index.html">→ Back to Home</a>
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- BACK TO TOP -->
+    <a href="#" class="back-to-top">↑</a>
+
+    <!-- NAVIGATION SCRIPT -->
+    <script src="assets/navigation.js"></script>
+</body>
+</html>

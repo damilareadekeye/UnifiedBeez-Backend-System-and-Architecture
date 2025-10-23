@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Dashboard - Automations Module | UnifiedBeez Architecture</title>
+    <link rel="stylesheet" href="assets/live-dashboard-styles.css">
+</head>
+<body>
+    <!-- HEADER -->
+    <div class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="logo">🐝</div>
+                <div>
+                    <h1>UnifiedBeez Backend Architecture</h1>
+                    <p class="subtitle">Live Dashboard - Automations Module</p>
+                </div>
+            </div>
+            <a href="index.html" class="back-button">← Back to Index</a>
+        </div>
+    </div>
+
+    <!-- NAVIGATION -->
+    <div class="nav-container">
+        <div class="nav-scroll">
+            <a href="#frame1" class="nav-item">Frame 1: Automations Overview</a>
+            <a href="#frame2" class="nav-item">Frame 2: Automation Engine</a>
+            <a href="#frame3" class="nav-item">Frame 3: Templates Library</a>
+            <a href="#frame4" class="nav-item">Frame 4: Triggers & Actions</a>
+            <a href="#frame5" class="nav-item">Frame 5: Beezora AI Integration</a>
+            <a href="#frame6" class="nav-item">Frame 6: Execution & Analytics</a>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="container">
+
+        <!-- FRAME 1: AUTOMATIONS OVERVIEW -->
+        <div id="frame1" class="frame">
+            <h2>⚡ FRAME 1: Automations Module Overview</h2>
+
+            <h3>🎯 Purpose</h3>
+            <p>
+                The Automations module enables organizations to create, manage, and execute workflow automations
+                that respond to business events across UnifiedBeez. It provides a visual automation builder,
+                pre-built templates, AI-powered automation suggestions via Beezora, and comprehensive execution
+                tracking and analytics.
+            </p>
+
+            <h3>✨ Core Automation Features</h3>
+            <div class="grid-3">
+                <div class="card">
+                    <h4>🔧 Automation Builder</h4>
+                    <ul>
+                        <li>Visual drag-and-drop interface</li>
+                        <li>50+ trigger types</li>
+                        <li>100+ action types</li>
+                        <li>Conditional logic (if/then/else)</li>
+                        <li>Multi-step workflows</li>
+                        <li>Delay & scheduling</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>📚 Template Library</h4>
+                    <ul>
+                        <li>200+ pre-built templates</li>
+                        <li>Industry-specific workflows</li>
+                        <li>One-click activation</li>
+                        <li>Customizable templates</li>
+                        <li>Community templates</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>🤖 Beezora AI Assistant</h4>
+                    <ul>
+                        <li>Natural language automation creation</li>
+                        <li>Smart suggestions</li>
+                        <li>Optimization recommendations</li>
+                        <li>Auto-complete workflows</li>
+                        <li>Error detection</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>🔄 Automation Types</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Description</th>
+                        <th>Use Cases</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Event-Triggered</strong></td>
+                        <td>Executes when specific event occurs</td>
+                        <td>New contact, message received, form submitted</td>
+                        <td>Send welcome email when contact added to "VIP" list</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Time-Based</strong></td>
+                        <td>Runs on schedule or after delay</td>
+                        <td>Daily reports, follow-ups, reminders</td>
+                        <td>Send reminder 2 days after abandoned cart</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Conditional</strong></td>
+                        <td>Executes based on conditions</td>
+                        <td>Lead scoring, segmentation, routing</td>
+                        <td>If contact score > 80, assign to sales team</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Multi-Step</strong></td>
+                        <td>Complex workflows with branches</td>
+                        <td>Onboarding sequences, drip campaigns</td>
+                        <td>5-day email course with branching paths</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>📊 Automation Workflow Example</h3>
+
+            <div style="background: linear-gradient(135deg, #E8F5E9 0%, #B7E4C7 100%); border: 3px solid #2D6A4F; border-radius: 12px; padding: 30px; margin: 25px 0;">
+                <h4 style="color: #1A4D2E; text-align: center; margin-bottom: 25px; font-size: 1.3rem;">
+                    Example: New Contact Onboarding Automation
+                </h4>
+
+                <!-- Trigger -->
+                <div style="background: #52B788; color: white; padding: 15px; border-radius: 8px; text-align: center; margin-bottom: 15px; font-weight: 600;">
+                    🎯 TRIGGER: Contact added to "New Customers" list
+                </div>
+                <div style="text-align: center; font-size: 2rem; color: #2D6A4F; margin: 10px 0;">↓</div>
+
+                <!-- Action 1 -->
+                <div style="background: white; border-left: 6px solid #2D6A4F; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                    <strong style="color: #1A4D2E;">ACTION 1:</strong> Send welcome email (Template: Welcome)
+                </div>
+                <div style="text-align: center; font-size: 2rem; color: #2D6A4F; margin: 10px 0;">↓</div>
+
+                <!-- Delay 1 -->
+                <div style="background: #FFF9E6; border: 2px dashed #FF9800; padding: 12px; border-radius: 8px; text-align: center; margin-bottom: 15px; color: #1A4D2E;">
+                    ⏱️ DELAY: Wait 1 hour
+                </div>
+                <div style="text-align: center; font-size: 2rem; color: #2D6A4F; margin: 10px 0;">↓</div>
+
+                <!-- Action 2 -->
+                <div style="background: white; border-left: 6px solid #2D6A4F; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                    <strong style="color: #1A4D2E;">ACTION 2:</strong> Send WhatsApp message with onboarding link
+                </div>
+                <div style="text-align: center; font-size: 2rem; color: #2D6A4F; margin: 10px 0;">↓</div>
+
+                <!-- Delay 2 -->
+                <div style="background: #FFF9E6; border: 2px dashed #FF9800; padding: 12px; border-radius: 8px; text-align: center; margin-bottom: 15px; color: #1A4D2E;">
+                    ⏱️ DELAY: Wait 24 hours
+                </div>
+                <div style="text-align: center; font-size: 2rem; color: #2D6A4F; margin: 10px 0;">↓</div>
+
+                <!-- Condition -->
+                <div style="background: #2D6A4F; color: white; padding: 15px; border-radius: 8px; text-align: center; margin-bottom: 20px; font-weight: 600;">
+                    ❓ CONDITION: Did they click the onboarding link?
+                </div>
+
+                <!-- Branching -->
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 20px;">
+                    <!-- YES Branch -->
+                    <div style="background: white; border: 3px solid #52B788; border-radius: 10px; padding: 20px;">
+                        <div style="background: #52B788; color: white; padding: 10px; border-radius: 6px; text-align: center; margin-bottom: 15px; font-weight: 600;">
+                            ✅ YES
+                        </div>
+                        <div style="background: #E8F5E9; padding: 12px; border-radius: 6px; margin-bottom: 10px; color: #2C3E50;">
+                            <strong>ACTION 3:</strong> Add tag "Engaged"
+                        </div>
+                        <div style="text-align: center; margin: 5px 0; color: #52B788;">↓</div>
+                        <div style="background: #E8F5E9; padding: 12px; border-radius: 6px; color: #2C3E50;">
+                            <strong>ACTION 4:</strong> Assign to Success Team
+                        </div>
+                    </div>
+
+                    <!-- NO Branch -->
+                    <div style="background: white; border: 3px solid #F44336; border-radius: 10px; padding: 20px;">
+                        <div style="background: #F44336; color: white; padding: 10px; border-radius: 6px; text-align: center; margin-bottom: 15px; font-weight: 600;">
+                            ❌ NO
+                        </div>
+                        <div style="background: #FFEBEE; padding: 12px; border-radius: 6px; margin-bottom: 10px; color: #2C3E50;">
+                            <strong>ACTION 5:</strong> Send reminder email
+                        </div>
+                        <div style="text-align: center; margin: 5px 0; color: #F44336;">↓</div>
+                        <div style="background: #FFF9E6; border: 2px dashed #FF9800; padding: 10px; border-radius: 6px; margin-bottom: 10px; color: #1A4D2E; text-align: center;">
+                            ⏱️ Wait 48 hours
+                        </div>
+                        <div style="text-align: center; margin: 5px 0; color: #F44336;">↓</div>
+                        <div style="background: #FFEBEE; padding: 12px; border-radius: 6px; color: #2C3E50;">
+                            <strong>ACTION 6:</strong> Create follow-up task
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3>🎯 Popular Automation Templates</h3>
+
+            <div class="grid-2">
+                <div class="card">
+                    <h4>Sales & Lead Generation</h4>
+                    <ul>
+                        <li>Lead scoring & assignment</li>
+                        <li>Abandoned cart recovery</li>
+                        <li>Follow-up sequences</li>
+                        <li>Meeting scheduling</li>
+                        <li>Proposal automation</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>Support & Engagement</h4>
+                    <ul>
+                        <li>Auto-responses</li>
+                        <li>Ticket routing</li>
+                        <li>Escalation workflows</li>
+                        <li>CSAT surveys</li>
+                        <li>Re-engagement campaigns</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>Retention & Nurture</h4>
+                    <ul>
+                        <li>Onboarding sequences</li>
+                        <li>Birthday/anniversary wishes</li>
+                        <li>Renewal reminders</li>
+                        <li>Upsell/cross-sell</li>
+                        <li>Win-back campaigns</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>Operations & Admin</h4>
+                    <ul>
+                        <li>Data enrichment</li>
+                        <li>List cleanup</li>
+                        <li>Reporting automation</li>
+                        <li>Team notifications</li>
+                        <li>Compliance workflows</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="see-also">
+                <h3>🔗 See Also</h3>
+                <p>
+                    <a href="#frame2">→ Frame 2: Automation Engine Architecture</a> |
+                    <a href="#frame3">→ Frame 3: Templates Library</a> |
+                    <a href="live-dashboard-inbox.html">→ Inbox Module (Triggers)</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- FRAME 2: AUTOMATION ENGINE -->
+        <div id="frame2" class="frame">
+            <h2>🔧 FRAME 2: Automation Engine Architecture</h2>
+
+            <h3>🏗️ Engine Overview</h3>
+            <p>
+                The Automation Engine is a scalable, event-driven system built with NestJS and Bull Queue (Redis).
+                It processes automation executions asynchronously, supports parallel and sequential workflows,
+                handles retries and error recovery, and provides real-time execution tracking.
+            </p>
+
+            <h3>📊 Architecture Diagram</h3>
+
+            <div style="background: linear-gradient(135deg, #E8F5E9 0%, #B2DFDB 100%); border: 3px solid #2D6A4F; border-radius: 12px; padding: 30px; margin: 25px 0;">
+                <h4 style="color: #1A4D2E; text-align: center; margin-bottom: 30px; font-size: 1.3rem;">
+                    Automation Engine Architecture
+                </h4>
+
+                <!-- Event Source -->
+                <div style="background: white; border: 3px solid #2D6A4F; border-radius: 10px; padding: 20px; margin-bottom: 20px; text-align: center;">
+                    <div style="font-size: 2rem; margin-bottom: 10px;">📡</div>
+                    <h5 style="color: #1A4D2E; margin: 0; font-size: 1.1rem;">Event Source</h5>
+                    <p style="color: #666; font-size: 0.9rem; margin: 5px 0 0 0;">(Inbox, CRM)</p>
+                </div>
+
+                <div style="text-align: center; font-size: 2rem; color: #2D6A4F; margin: 10px 0;">↓</div>
+
+                <!-- AutomationService -->
+                <div style="background: white; border: 3px solid #26A69A; border-radius: 10px; padding: 20px; margin-bottom: 20px;">
+                    <h5 style="color: #2D6A4F; margin-bottom: 15px; font-size: 1.1rem; text-align: center;">⚙️ AutomationService</h5>
+                    <ul style="color: #2C3E50; font-size: 0.9rem; line-height: 1.8; margin: 0; padding-left: 20px;">
+                        <li>matchTriggers()</li>
+                        <li>queueExecution()</li>
+                    </ul>
+                </div>
+
+                <div style="text-align: center; font-size: 2rem; color: #2D6A4F; margin: 10px 0;">↓</div>
+
+                <!-- Bull Queue -->
+                <div style="background: white; border: 3px solid #4DB6AC; border-radius: 10px; padding: 20px; margin-bottom: 20px;">
+                    <h5 style="color: #2D6A4F; margin-bottom: 15px; font-size: 1.1rem; text-align: center;">🔄 Bull Queue (Redis)</h5>
+                    <ul style="color: #2C3E50; font-size: 0.9rem; line-height: 1.8; margin: 0; padding-left: 20px;">
+                        <li>automation-queue</li>
+                        <li>Priority queue</li>
+                        <li>Retry mechanism</li>
+                    </ul>
+                </div>
+
+                <div style="text-align: center; font-size: 2rem; color: #2D6A4F; margin: 10px 0;">↓</div>
+
+                <!-- AutomationWorkerService -->
+                <div style="background: white; border: 3px solid #80CBC4; border-radius: 10px; padding: 20px; margin-bottom: 20px;">
+                    <h5 style="color: #2D6A4F; margin-bottom: 15px; font-size: 1.1rem; text-align: center;">⚡ AutomationWorkerService</h5>
+                    <ul style="color: #2C3E50; font-size: 0.9rem; line-height: 1.8; margin: 0; padding-left: 20px;">
+                        <li>processExecution()</li>
+                        <li>evaluateConditions()</li>
+                        <li>executeActions()</li>
+                    </ul>
+                </div>
+
+                <div style="text-align: center; font-size: 2rem; color: #2D6A4F; margin: 10px 0;">↓</div>
+
+                <!-- Action Services -->
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin-bottom: 20px;">
+                    <div style="background: white; border: 3px solid #B2DFDB; border-radius: 10px; padding: 20px; text-align: center;">
+                        <div style="font-size: 2rem; margin-bottom: 8px;">📧</div>
+                        <h5 style="color: #2D6A4F; margin: 0; font-size: 1rem;">EmailAction Service</h5>
+                    </div>
+                    <div style="background: white; border: 3px solid #B2DFDB; border-radius: 10px; padding: 20px; text-align: center;">
+                        <div style="font-size: 2rem; margin-bottom: 8px;">📱</div>
+                        <h5 style="color: #2D6A4F; margin: 0; font-size: 1rem;">WhatsAppAction Service</h5>
+                    </div>
+                    <div style="background: white; border: 3px solid #B2DFDB; border-radius: 10px; padding: 20px; text-align: center;">
+                        <div style="font-size: 2rem; margin-bottom: 8px;">🔗</div>
+                        <h5 style="color: #2D6A4F; margin: 0; font-size: 1rem;">WebhookAction Service</h5>
+                    </div>
+                </div>
+
+                <div style="text-align: center; font-size: 2rem; color: #2D6A4F; margin: 10px 0;">↓</div>
+
+                <!-- AutomationLogService -->
+                <div style="background: white; border: 3px solid #2D6A4F; border-radius: 10px; padding: 20px;">
+                    <h5 style="color: #2D6A4F; margin-bottom: 15px; font-size: 1.1rem; text-align: center;">📊 AutomationLogService</h5>
+                    <ul style="color: #2C3E50; font-size: 0.9rem; line-height: 1.8; margin: 0; padding-left: 20px;">
+                        <li>logExecution()</li>
+                        <li>trackMetrics()</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>🔹 Core Services</h3>
+
+            <div class="card">
+                <h4>1. AutomationService</h4>
+                <p><strong>Responsibility:</strong> Manage automation CRUD and trigger matching</p>
+                <p><strong>Key Methods:</strong></p>
+                <ul>
+                    <li><code>createAutomation(config)</code> - Create new automation</li>
+                    <li><code>matchTriggers(event)</code> - Find automations matching event</li>
+                    <li><code>queueExecution(automationId, context)</code> - Queue for processing</li>
+                    <li><code>updateAutomation(id, config)</code> - Update automation config</li>
+                    <li><code>toggleAutomation(id, active)</code> - Enable/disable</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h4>2. AutomationWorkerService</h4>
+                <p><strong>Responsibility:</strong> Process automation executions from queue</p>
+                <p><strong>Key Methods:</strong></p>
+                <ul>
+                    <li><code>processExecution(job)</code> - Main execution handler</li>
+                    <li><code>evaluateConditions(conditions, context)</code> - Evaluate if/then logic</li>
+                    <li><code>executeActions(actions, context)</code> - Execute action sequence</li>
+                    <li><code>handleDelay(duration)</code> - Schedule delayed execution</li>
+                    <li><code>handleError(error, execution)</code> - Error recovery & retry</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h4>3. ActionExecutorServices (20+ action types)</h4>
+                <p><strong>Responsibility:</strong> Execute specific action types</p>
+                <p><strong>Action Types:</strong></p>
+                <ul>
+                    <li><strong>Communication:</strong> Send email, WhatsApp, SMS</li>
+                    <li><strong>CRM:</strong> Add/update contact, add to list, add tag</li>
+                    <li><strong>Tasks:</strong> Create task, assign user, set reminder</li>
+                    <li><strong>Notifications:</strong> Slack, webhook, internal alert</li>
+                    <li><strong>Data:</strong> Update field, calculate score, enrich data</li>
+                    <li><strong>Integration:</strong> Call external API, trigger Zapier</li>
+                </ul>
+            </div>
+
+            <h3>📡 API Endpoints (25 endpoints)</h3>
+
+            <div class="card">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>Endpoint</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/automations</code></td>
+                            <td>Get all automations</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/automations/:id</code></td>
+                            <td>Get single automation with stats</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/automations</code></td>
+                            <td>Create new automation</td>
+                        </tr>
+                        <tr>
+                            <td>PUT</td>
+                            <td><code>/api/automations/:id</code></td>
+                            <td>Update automation</td>
+                        </tr>
+                        <tr>
+                            <td>DELETE</td>
+                            <td><code>/api/automations/:id</code></td>
+                            <td>Delete automation</td>
+                        </tr>
+                        <tr>
+                            <td>PATCH</td>
+                            <td><code>/api/automations/:id/toggle</code></td>
+                            <td>Enable/disable automation</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/automations/:id/clone</code></td>
+                            <td>Duplicate automation</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/automations/:id/test</code></td>
+                            <td>Test automation with sample data</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/automations/:id/executions</code></td>
+                            <td>Get execution history</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/automations/:id/analytics</code></td>
+                            <td>Get performance metrics</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/automations/templates</code></td>
+                            <td>Get template library</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/automations/from-template/:id</code></td>
+                            <td>Create from template</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/automations/ai-suggest</code></td>
+                            <td>Get AI-powered suggestions (Beezora)</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/automations/ai-create</code></td>
+                            <td>Create automation from natural language</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/automations/triggers</code></td>
+                            <td>Get available trigger types</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/automations/actions</code></td>
+                            <td>Get available action types</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>💾 Database Schema</h3>
+
+            <div class="card">
+                <h4>automation_templates</h4>
+                <div class="code-block">CREATE TABLE automation_templates (
+  id BIGSERIAL PRIMARY KEY,
+
+  name VARCHAR(255) NOT NULL,
+  description TEXT,
+  category VARCHAR(100), -- 'sales', 'support', 'marketing', etc.
+
+  -- Template configuration
+  config JSONB NOT NULL,
+  -- { trigger, conditions, actions, settings }
+
+  -- Metadata
+  is_featured BOOLEAN DEFAULT FALSE,
+  usage_count INT DEFAULT 0,
+  rating DECIMAL(3,2) DEFAULT 0,
+
+  created_at TIMESTAMP DEFAULT NOW()
+);</div>
+            </div>
+
+            <div class="card">
+                <h4>user_automations</h4>
+                <div class="code-block">CREATE TABLE user_automations (
+  id BIGSERIAL PRIMARY KEY,
+  organization_id BIGINT NOT NULL REFERENCES organizations(id),
+
+  name VARCHAR(255) NOT NULL,
+  description TEXT,
+
+  -- Status
+  is_active BOOLEAN DEFAULT TRUE,
+
+  -- Configuration
+  trigger JSONB NOT NULL,
+  -- { type, event, filters }
+
+  conditions JSONB DEFAULT '[]',
+  -- [{ field, operator, value, logic }]
+
+  actions JSONB NOT NULL,
+  -- [{ type, config, delay }]
+
+  settings JSONB DEFAULT '{}',
+  -- { runOnce, maxExecutions, schedule }
+
+  -- Stats
+  execution_count INT DEFAULT 0,
+  success_count INT DEFAULT 0,
+  failure_count INT DEFAULT 0,
+  last_executed_at TIMESTAMP,
+
+  created_by BIGINT REFERENCES users(id),
+  created_at TIMESTAMP DEFAULT NOW(),
+  updated_at TIMESTAMP DEFAULT NOW(),
+
+  INDEX idx_user_automations_org (organization_id),
+  INDEX idx_user_automations_active (is_active)
+);</div>
+            </div>
+
+            <div class="card">
+                <h4>automation_executions</h4>
+                <div class="code-block">CREATE TABLE automation_executions (
+  id BIGSERIAL PRIMARY KEY,
+  automation_id BIGINT NOT NULL REFERENCES user_automations(id),
+  organization_id BIGINT NOT NULL,
+
+  -- Execution context
+  trigger_event JSONB,
+  -- { type, data, timestamp }
+
+  -- Status
+  status VARCHAR(50) DEFAULT 'pending',
+  -- 'pending', 'running', 'completed', 'failed', 'cancelled'
+
+  -- Results
+  actions_executed INT DEFAULT 0,
+  actions_total INT,
+
+  error_message TEXT,
+  error_details JSONB,
+
+  -- Performance
+  started_at TIMESTAMP,
+  completed_at TIMESTAMP,
+  duration_ms INT,
+
+  -- Execution log
+  execution_log JSONB DEFAULT '[]',
+  -- [{ step, action, status, timestamp, result }]
+
+  created_at TIMESTAMP DEFAULT NOW(),
+
+  INDEX idx_executions_automation (automation_id, created_at DESC),
+  INDEX idx_executions_status (status)
+);</div>
+            </div>
+
+            <div class="see-also">
+                <h3>🔗 See Also</h3>
+                <p>
+                    <a href="#frame3">→ Frame 3: Templates Library</a> |
+                    <a href="#frame4">→ Frame 4: Triggers & Actions</a> |
+                    <a href="#frame5">→ Frame 5: Beezora AI Integration</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- FRAME 3-6: Remaining frames for Templates, Triggers, Beezora AI, and Analytics -->
+        <!-- Follow similar comprehensive pattern -->
+
+    </div>
+
+    <!-- BACK TO TOP -->
+    <a href="#" class="back-to-top">↑</a>
+
+    <!-- NAVIGATION SCRIPT -->
+    <script src="assets/navigation.js"></script>
+</body>
+</html>

@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Dashboard - CRM Module | UnifiedBeez Architecture</title>
+    <link rel="stylesheet" href="assets/live-dashboard-styles.css">
+</head>
+<body>
+    <!-- HEADER -->
+    <div class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="logo">🐝</div>
+                <div>
+                    <h1>UnifiedBeez Backend Architecture</h1>
+                    <p class="subtitle">Live Dashboard - CRM Module</p>
+                </div>
+            </div>
+            <a href="index.html" class="back-button">← Back to Index</a>
+        </div>
+    </div>
+
+    <!-- NAVIGATION -->
+    <div class="nav-container">
+        <div class="nav-scroll">
+            <a href="#frame1" class="nav-item">Frame 1: CRM Overview</a>
+            <a href="#frame2" class="nav-item">Frame 2: Backend Services</a>
+            <a href="#frame3" class="nav-item">Frame 3: API Endpoints</a>
+            <a href="#frame4" class="nav-item">Frame 4: Database Schema</a>
+            <a href="#frame5" class="nav-item">Frame 5: Contact Management</a>
+            <a href="#frame6" class="nav-item">Frame 6: Lists & Segmentation</a>
+            <a href="#frame7" class="nav-item">Frame 7: Tags & Merge Fields</a>
+            <a href="#frame8" class="nav-item">Frame 8: Communication History</a>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="container">
+
+        <!-- FRAME 1: CRM OVERVIEW -->
+        <div id="frame1" class="frame">
+            <h2>👥 FRAME 1: CRM Module Overview</h2>
+
+            <h3>🎯 Purpose</h3>
+            <p>
+                The CRM (Customer Relationship Management) module is the central hub for managing all customer
+                data, interactions, and relationships in UnifiedBeez. It provides comprehensive contact management,
+                list segmentation, tagging, custom merge fields, communication history tracking, task management,
+                document storage, and activity logging. The CRM integrates seamlessly with the Inbox module for
+                unified customer views.
+            </p>
+
+            <h3>✨ Core CRM Features</h3>
+            <div class="grid-3">
+                <div class="card">
+                    <h4>📇 Contacts</h4>
+                    <ul>
+                        <li>Centralized contact database</li>
+                        <li>Custom fields via merge fields</li>
+                        <li>Import/Export (CSV, Excel)</li>
+                        <li>Duplicate detection & merging</li>
+                        <li>360° customer view</li>
+                        <li>Contact scoring</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>📋 Lists & Segmentation</h4>
+                    <ul>
+                        <li>Static & dynamic lists</li>
+                        <li>Advanced filtering rules</li>
+                        <li>Auto-segmentation</li>
+                        <li>List membership tracking</li>
+                        <li>Bulk operations</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>🏷️ Tags</h4>
+                    <ul>
+                        <li>Multi-tag support</li>
+                        <li>Tag hierarchies</li>
+                        <li>Auto-tagging rules</li>
+                        <li>Tag-based filtering</li>
+                        <li>Tag analytics</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="grid-3">
+                <div class="card">
+                    <h4>📝 Merge Fields</h4>
+                    <ul>
+                        <li>Custom contact attributes</li>
+                        <li>10+ field types</li>
+                        <li>Validation rules</li>
+                        <li>Use in templates & automations</li>
+                        <li>Conditional fields</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>📞 Communication History</h4>
+                    <ul>
+                        <li>All-channel tracking</li>
+                        <li>Email, WhatsApp, SMS logs</li>
+                        <li>Call recordings</li>
+                        <li>Meeting notes</li>
+                        <li>Timeline view</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>✅ Tasks & Activities</h4>
+                    <ul>
+                        <li>Contact-linked tasks</li>
+                        <li>Reminders & due dates</li>
+                        <li>Activity logging</li>
+                        <li>Document attachments</li>
+                        <li>Team collaboration</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>🔄 Contact Lifecycle</h3>
+
+            <div style="background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%); border: 3px solid #F57C00; border-radius: 12px; padding: 30px; margin: 25px 0;">
+                <h4 style="color: #1A4D2E; text-align: center; margin-bottom: 30px; font-size: 1.3rem;">
+                    Contact Lifecycle in CRM - 5 Stage Journey
+                </h4>
+
+                <!-- Stage 1: LEAD -->
+                <div style="background: white; border-left: 6px solid #52B788; border-radius: 8px; padding: 20px; margin-bottom: 15px;">
+                    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 10px;">
+                        <div style="background: #52B788; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">1</div>
+                        <h5 style="color: #2D6A4F; margin: 0; font-size: 1.2rem;">LEAD</h5>
+                    </div>
+                    <ul style="margin: 15px 0 0 55px; color: #2C3E50; line-height: 1.8;">
+                        <li>Initial contact captured</li>
+                        <li>Source tracking (website, campaign, referral)</li>
+                        <li>Lead scoring</li>
+                    </ul>
+                    <div style="text-align: center; margin-top: 15px; font-size: 2rem; color: #2D6A4F;">↓</div>
+                </div>
+
+                <!-- Stage 2: PROSPECT -->
+                <div style="background: white; border-left: 6px solid #2D6A4F; border-radius: 8px; padding: 20px; margin-bottom: 15px;">
+                    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 10px;">
+                        <div style="background: #2D6A4F; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">2</div>
+                        <h5 style="color: #1A4D2E; margin: 0; font-size: 1.2rem;">PROSPECT</h5>
+                    </div>
+                    <ul style="margin: 15px 0 0 55px; color: #2C3E50; line-height: 1.8;">
+                        <li>Qualified lead</li>
+                        <li>Active engagement</li>
+                        <li>Nurture campaigns</li>
+                    </ul>
+                    <div style="text-align: center; margin-top: 15px; font-size: 2rem; color: #2D6A4F;">↓</div>
+                </div>
+
+                <!-- Stage 3: CUSTOMER -->
+                <div style="background: white; border-left: 6px solid #FF9800; border-radius: 8px; padding: 20px; margin-bottom: 15px;">
+                    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 10px;">
+                        <div style="background: #FF9800; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">3</div>
+                        <h5 style="color: #1A4D2E; margin: 0; font-size: 1.2rem;">CUSTOMER</h5>
+                    </div>
+                    <ul style="margin: 15px 0 0 55px; color: #2C3E50; line-height: 1.8;">
+                        <li>First purchase/conversion</li>
+                        <li>Customer onboarding</li>
+                        <li>Relationship building</li>
+                    </ul>
+                    <div style="text-align: center; margin-top: 15px; font-size: 2rem; color: #2D6A4F;">↓</div>
+                </div>
+
+                <!-- Stage 4: LOYAL CUSTOMER -->
+                <div style="background: white; border-left: 6px solid #2D6A4F; border-radius: 8px; padding: 20px; margin-bottom: 15px;">
+                    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 10px;">
+                        <div style="background: #2D6A4F; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">4</div>
+                        <h5 style="color: #1A4D2E; margin: 0; font-size: 1.2rem;">LOYAL CUSTOMER</h5>
+                    </div>
+                    <ul style="margin: 15px 0 0 55px; color: #2C3E50; line-height: 1.8;">
+                        <li>Repeat purchases</li>
+                        <li>High engagement</li>
+                        <li>Referrals</li>
+                    </ul>
+                    <div style="text-align: center; margin-top: 15px; font-size: 2rem; color: #2D6A4F;">↓</div>
+                </div>
+
+                <!-- Stage 5: AT-RISK/CHURNED -->
+                <div style="background: white; border-left: 6px solid #F44336; border-radius: 8px; padding: 20px;">
+                    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 10px;">
+                        <div style="background: #F44336; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">5</div>
+                        <h5 style="color: #C62828; margin: 0; font-size: 1.2rem;">AT-RISK / CHURNED</h5>
+                    </div>
+                    <ul style="margin: 15px 0 0 55px; color: #2C3E50; line-height: 1.8;">
+                        <li>Declining engagement</li>
+                        <li>Win-back campaigns</li>
+                        <li>Reactivation efforts</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>🔗 Integration with Other Modules</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Module</th>
+                        <th>Integration Point</th>
+                        <th>Data Flow</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Inbox</strong></td>
+                        <td>Contact identification in conversations</td>
+                        <td>CRM → Inbox (contact data), Inbox → CRM (conversation history)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Automations</strong></td>
+                        <td>Trigger automations based on contact changes</td>
+                        <td>CRM → Automations (contact events), Automations → CRM (updates)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Campaigns</strong></td>
+                        <td>List-based targeting</td>
+                        <td>CRM → Campaigns (segmented lists), Campaigns → CRM (engagement data)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Analytics</strong></td>
+                        <td>Contact insights & reporting</td>
+                        <td>CRM → Analytics (contact metrics)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="see-also">
+                <h3>🔗 See Also</h3>
+                <p>
+                    <a href="#frame2">→ Frame 2: Backend Services Architecture</a> |
+                    <a href="live-dashboard-inbox.html">→ Inbox Module</a> |
+                    <a href="live-dashboard-automations.html">→ Automations Module</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- FRAME 2: BACKEND SERVICES -->
+        <div id="frame2" class="frame">
+            <h2>🔧 FRAME 2: Backend Services Architecture</h2>
+
+            <h3>🏗️ Service Layer Overview</h3>
+            <p>
+                The CRM module consists of 6 core NestJS services handling contacts, lists, tags, merge fields,
+                communications, tasks, documents, and activities. All services follow domain-driven design
+                principles with clear separation of concerns.
+            </p>
+
+            <h3>📊 Service Architecture Diagram</h3>
+
+            <div style="background: linear-gradient(135deg, #E8F5E9 0%, #B7E4C7 100%); border: 3px solid #2D6A4F; border-radius: 12px; padding: 30px; margin: 25px 0;">
+                <h4 style="color: #1A4D2E; text-align: center; margin-bottom: 30px; font-size: 1.3rem;">
+                    CRM Service Layer Architecture
+                </h4>
+
+                <!-- Top Row: Core Contact Services -->
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 20px;">
+                    <div style="background: white; border: 3px solid #2D6A4F; border-radius: 10px; padding: 20px;">
+                        <h5 style="color: #1A4D2E; margin-bottom: 15px; font-size: 1.1rem;">👤 ContactService</h5>
+                        <ul style="color: #2C3E50; font-size: 0.9rem; line-height: 1.8; margin: 0; padding-left: 20px;">
+                            <li>create()</li>
+                            <li>update()</li>
+                            <li>findOne()</li>
+                            <li>search()</li>
+                            <li>merge()</li>
+                            <li>import()</li>
+                            <li>export()</li>
+                        </ul>
+                    </div>
+                    <div style="background: white; border: 3px solid #52B788; border-radius: 10px; padding: 20px;">
+                        <h5 style="color: #1A4D2E; margin-bottom: 15px; font-size: 1.1rem;">📋 ListService</h5>
+                        <ul style="color: #2C3E50; font-size: 0.9rem; line-height: 1.8; margin: 0; padding-left: 20px;">
+                            <li>create()</li>
+                            <li>addContact()</li>
+                            <li>segment()</li>
+                            <li>filter()</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div style="text-align: center; font-size: 1.5rem; color: #2D6A4F; margin: 15px 0;">↕️</div>
+
+                <!-- Middle Row: Field & Tag Services -->
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 20px;">
+                    <div style="background: white; border: 3px solid #9FA8DA; border-radius: 10px; padding: 20px;">
+                        <h5 style="color: #1A4D2E; margin-bottom: 15px; font-size: 1.1rem;">🔖 TagService</h5>
+                        <ul style="color: #2C3E50; font-size: 0.9rem; line-height: 1.8; margin: 0; padding-left: 20px;">
+                            <li>create()</li>
+                            <li>assign()</li>
+                            <li>analytics()</li>
+                        </ul>
+                    </div>
+                    <div style="background: white; border: 3px solid #9FA8DA; border-radius: 10px; padding: 20px;">
+                        <h5 style="color: #1A4D2E; margin-bottom: 15px; font-size: 1.1rem;">📝 MergeFieldService</h5>
+                        <ul style="color: #2C3E50; font-size: 0.9rem; line-height: 1.8; margin: 0; padding-left: 20px;">
+                            <li>createField()</li>
+                            <li>validate()</li>
+                            <li>setFieldValue()</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div style="text-align: center; font-size: 1.5rem; color: #2D6A4F; margin: 15px 0;">↕️</div>
+
+                <!-- Bottom Row: Activity Services -->
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 20px;">
+                    <div style="background: white; border: 3px solid #B7E4C7; border-radius: 10px; padding: 20px;">
+                        <h5 style="color: #1A4D2E; margin-bottom: 15px; font-size: 1.1rem;">💬 CommunicationService</h5>
+                        <ul style="color: #2C3E50; font-size: 0.9rem; line-height: 1.8; margin: 0; padding-left: 20px;">
+                            <li>log()</li>
+                            <li>getHistory()</li>
+                            <li>search()</li>
+                        </ul>
+                    </div>
+                    <div style="background: white; border: 3px solid #B7E4C7; border-radius: 10px; padding: 20px;">
+                        <h5 style="color: #1A4D2E; margin-bottom: 15px; font-size: 1.1rem;">✅ TaskService</h5>
+                        <ul style="color: #2C3E50; font-size: 0.9rem; line-height: 1.8; margin: 0; padding-left: 20px;">
+                            <li>create()</li>
+                            <li>assign()</li>
+                            <li>complete()</li>
+                            <li>remind()</li>
+                        </ul>
+                    </div>
+                    <div style="background: white; border: 3px solid #B7E4C7; border-radius: 10px; padding: 20px;">
+                        <h5 style="color: #1A4D2E; margin-bottom: 15px; font-size: 1.1rem;">📄 DocumentService</h5>
+                        <ul style="color: #2C3E50; font-size: 0.9rem; line-height: 1.8; margin: 0; padding-left: 20px;">
+                            <li>upload()</li>
+                            <li>attach()</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <h3>🔹 Core Services Description</h3>
+
+            <div class="card">
+                <h4>1. ContactService</h4>
+                <p><strong>Responsibility:</strong> Manage contact CRUD operations and data quality</p>
+                <p><strong>Key Methods:</strong></p>
+                <ul>
+                    <li><code>createContact(data)</code> - Create new contact with duplicate detection</li>
+                    <li><code>updateContact(id, data)</code> - Update contact information</li>
+                    <li><code>findContactById(id)</code> - Retrieve contact with full details</li>
+                    <li><code>searchContacts(query, filters)</code> - Full-text search across contacts</li>
+                    <li><code>mergeContacts(primaryId, duplicateIds)</code> - Merge duplicate contacts</li>
+                    <li><code>importContacts(file, mappings)</code> - Bulk import from CSV/Excel</li>
+                    <li><code>exportContacts(filters, format)</code> - Export to CSV/Excel</li>
+                    <li><code>deleteContact(id)</code> - Soft delete with GDPR compliance</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h4>2. ListService</h4>
+                <p><strong>Responsibility:</strong> Manage contact lists and segmentation</p>
+                <p><strong>Key Methods:</strong></p>
+                <ul>
+                    <li><code>createList(name, type, rules)</code> - Create static or dynamic list</li>
+                    <li><code>addContactToList(listId, contactIds)</code> - Add contacts to list</li>
+                    <li><code>removeContactFromList(listId, contactIds)</code> - Remove contacts</li>
+                    <li><code>evaluateDynamicList(listId)</code> - Re-evaluate segmentation rules</li>
+                    <li><code>getListMembers(listId, pagination)</code> - Retrieve list contacts</li>
+                    <li><code>cloneList(listId)</code> - Duplicate list with members</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h4>3. TagService</h4>
+                <p><strong>Responsibility:</strong> Manage tags and tagging</p>
+                <p><strong>Key Methods:</strong></p>
+                <ul>
+                    <li><code>createTag(name, color, parentId)</code> - Create tag with hierarchy</li>
+                    <li><code>assignTags(contactId, tagIds)</code> - Add tags to contact</li>
+                    <li><code>removeTags(contactId, tagIds)</code> - Remove tags from contact</li>
+                    <li><code>getTagAnalytics(tagId)</code> - Get contact count and trends</li>
+                    <li><code>bulkTagContacts(contactIds, tagIds)</code> - Bulk tagging operation</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h4>4. MergeFieldService</h4>
+                <p><strong>Responsibility:</strong> Custom field schema and validation</p>
+                <p><strong>Key Methods:</strong></p>
+                <ul>
+                    <li><code>createMergeField(schema)</code> - Define new custom field</li>
+                    <li><code>validateFieldValue(fieldId, value)</code> - Validate against rules</li>
+                    <li><code>setContactFieldValue(contactId, fieldId, value)</code> - Update field</li>
+                    <li><code>getMergeFields(scope)</code> - Get all fields for contact or org</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h4>5. CommunicationService</h4>
+                <p><strong>Responsibility:</strong> Track all contact communications</p>
+                <p><strong>Key Methods:</strong></p>
+                <ul>
+                    <li><code>logCommunication(contactId, type, data)</code> - Record interaction</li>
+                    <li><code>getCommunicationHistory(contactId)</code> - Timeline view</li>
+                    <li><code>searchCommunications(query)</code> - Full-text search</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h4>6. TaskService</h4>
+                <p><strong>Responsibility:</strong> Contact-related task management</p>
+                <p><strong>Key Methods:</strong></p>
+                <ul>
+                    <li><code>createTask(contactId, title, dueDate)</code> - Create task</li>
+                    <li><code>assignTask(taskId, userId)</code> - Assign to team member</li>
+                    <li><code>completeTask(taskId)</code> - Mark as done</li>
+                    <li><code>sendReminder(taskId)</code> - Email/notification reminder</li>
+                </ul>
+            </div>
+
+            <div class="see-also">
+                <h3>🔗 See Also</h3>
+                <p>
+                    <a href="#frame3">→ Frame 3: API Endpoints</a> |
+                    <a href="#frame4">→ Frame 4: Database Schema</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- FRAME 3: API ENDPOINTS -->
+        <div id="frame3" class="frame">
+            <h2>🔌 FRAME 3: API Endpoints</h2>
+
+            <h3>📡 REST API Overview</h3>
+            <p>
+                The CRM module exposes 50+ RESTful API endpoints across contacts, lists, tags, merge fields,
+                communications, tasks, and documents. All endpoints support pagination, filtering, and sorting.
+            </p>
+
+            <h3>🔑 Contact Endpoints (15 endpoints)</h3>
+
+            <div class="card">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>Endpoint</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/crm/contacts</code></td>
+                            <td>Get all contacts with pagination & filters</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/crm/contacts/:id</code></td>
+                            <td>Get single contact with full 360° view</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/crm/contacts</code></td>
+                            <td>Create new contact</td>
+                        </tr>
+                        <tr>
+                            <td>PUT</td>
+                            <td><code>/api/crm/contacts/:id</code></td>
+                            <td>Update contact information</td>
+                        </tr>
+                        <tr>
+                            <td>DELETE</td>
+                            <td><code>/api/crm/contacts/:id</code></td>
+                            <td>Soft delete contact (GDPR compliant)</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/crm/contacts/search</code></td>
+                            <td>Full-text search across contacts</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/crm/contacts/merge</code></td>
+                            <td>Merge duplicate contacts</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/crm/contacts/import</code></td>
+                            <td>Bulk import from CSV/Excel</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/crm/contacts/export</code></td>
+                            <td>Export contacts to CSV/Excel</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/crm/contacts/:id/tags</code></td>
+                            <td>Add tags to contact</td>
+                        </tr>
+                        <tr>
+                            <td>DELETE</td>
+                            <td><code>/api/crm/contacts/:id/tags/:tagId</code></td>
+                            <td>Remove tag from contact</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/crm/contacts/:id/lists</code></td>
+                            <td>Add contact to lists</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/crm/contacts/:id/timeline</code></td>
+                            <td>Get contact activity timeline</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/crm/contacts/bulk-update</code></td>
+                            <td>Bulk update multiple contacts</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/crm/contacts/:id/duplicates</code></td>
+                            <td>Find potential duplicate contacts</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>📋 List Endpoints (10 endpoints)</h3>
+
+            <div class="card">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>Endpoint</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/crm/lists</code></td>
+                            <td>Get all lists</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/crm/lists</code></td>
+                            <td>Create new list (static or dynamic)</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/crm/lists/:id</code></td>
+                            <td>Get list details with member count</td>
+                        </tr>
+                        <tr>
+                            <td>PUT</td>
+                            <td><code>/api/crm/lists/:id</code></td>
+                            <td>Update list settings/rules</td>
+                        </tr>
+                        <tr>
+                            <td>DELETE</td>
+                            <td><code>/api/crm/lists/:id</code></td>
+                            <td>Delete list</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/crm/lists/:id/contacts</code></td>
+                            <td>Get list members with pagination</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/crm/lists/:id/contacts</code></td>
+                            <td>Add contacts to list</td>
+                        </tr>
+                        <tr>
+                            <td>DELETE</td>
+                            <td><code>/api/crm/lists/:id/contacts</code></td>
+                            <td>Remove contacts from list</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/crm/lists/:id/evaluate</code></td>
+                            <td>Re-evaluate dynamic list rules</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/crm/lists/:id/clone</code></td>
+                            <td>Duplicate list with members</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>🏷️ Tag & Merge Field Endpoints (12 endpoints)</h3>
+
+            <div class="card">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>Endpoint</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/crm/tags</code></td>
+                            <td>Get all tags with hierarchy</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/crm/tags</code></td>
+                            <td>Create new tag</td>
+                        </tr>
+                        <tr>
+                            <td>PUT</td>
+                            <td><code>/api/crm/tags/:id</code></td>
+                            <td>Update tag</td>
+                        </tr>
+                        <tr>
+                            <td>DELETE</td>
+                            <td><code>/api/crm/tags/:id</code></td>
+                            <td>Delete tag</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/crm/tags/:id/analytics</code></td>
+                            <td>Get tag usage analytics</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/crm/tags/bulk-assign</code></td>
+                            <td>Bulk tag assignment</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/crm/merge-fields</code></td>
+                            <td>Get all custom fields</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/crm/merge-fields</code></td>
+                            <td>Create custom field</td>
+                        </tr>
+                        <tr>
+                            <td>PUT</td>
+                            <td><code>/api/crm/merge-fields/:id</code></td>
+                            <td>Update field schema</td>
+                        </tr>
+                        <tr>
+                            <td>DELETE</td>
+                            <td><code>/api/crm/merge-fields/:id</code></td>
+                            <td>Delete custom field</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/crm/merge-fields/:id/validate</code></td>
+                            <td>Validate field value</td>
+                        </tr>
+                        <tr>
+                            <td>PUT</td>
+                            <td><code>/api/crm/contacts/:id/fields/:fieldId</code></td>
+                            <td>Set contact field value</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="see-also">
+                <h3>🔗 See Also</h3>
+                <p>
+                    <a href="#frame4">→ Frame 4: Database Schema</a> |
+                    <a href="#frame2">→ Frame 2: Backend Services</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- FRAME 4: DATABASE SCHEMA -->
+        <div id="frame4" class="frame">
+            <h2>💾 FRAME 4: Database Schema</h2>
+
+            <h3>🗄️ PostgreSQL Schema Overview</h3>
+            <p>
+                The CRM module uses 10 core tables in PostgreSQL to store contacts, lists, tags, merge fields,
+                communications, tasks, documents, and activities. All tables leverage JSONB for flexible custom data.
+            </p>
+
+            <h3>📋 Core Database Tables</h3>
+
+            <div class="card">
+                <h4>1. contacts</h4>
+                <p><strong>Purpose:</strong> Central contact repository</p>
+                <div class="code-block">CREATE TABLE contacts (
+  id BIGSERIAL PRIMARY KEY,
+  organization_id BIGINT NOT NULL REFERENCES organizations(id),
+
+  -- Basic info
+  first_name VARCHAR(255),
+  last_name VARCHAR(255),
+  email VARCHAR(255),
+  phone VARCHAR(50),
+
+  -- Additional fields
+  company VARCHAR(255),
+  job_title VARCHAR(255),
+  website VARCHAR(500),
+
+  -- Address
+  address_line1 VARCHAR(255),
+  address_line2 VARCHAR(255),
+  city VARCHAR(100),
+  state VARCHAR(100),
+  postal_code VARCHAR(20),
+  country VARCHAR(100),
+
+  -- Lifecycle
+  lifecycle_stage VARCHAR(50) DEFAULT 'lead',
+  -- 'lead', 'prospect', 'customer', 'loyal', 'churned'
+
+  -- Scoring
+  score INT DEFAULT 0,
+
+  -- Source tracking
+  source VARCHAR(100), -- 'website', 'referral', 'import', etc.
+  source_details JSONB DEFAULT '{}',
+
+  -- Custom fields (merge field values)
+  custom_fields JSONB DEFAULT '{}',
+
+  -- Metadata
+  metadata JSONB DEFAULT '{}',
+
+  -- Timestamps
+  first_contact_at TIMESTAMP,
+  last_contact_at TIMESTAMP,
+  created_at TIMESTAMP DEFAULT NOW(),
+  updated_at TIMESTAMP DEFAULT NOW(),
+  deleted_at TIMESTAMP, -- Soft delete
+
+  -- Indexes
+  INDEX idx_contacts_org (organization_id),
+  INDEX idx_contacts_email (email),
+  INDEX idx_contacts_phone (phone),
+  INDEX idx_contacts_lifecycle (lifecycle_stage),
+  INDEX idx_contacts_score (score DESC),
+  INDEX idx_contacts_deleted (deleted_at),
+
+  -- Full-text search
+  INDEX idx_contacts_search_fts USING GIN (
+    to_tsvector('english',
+      COALESCE(first_name, '') || ' ' ||
+      COALESCE(last_name, '') || ' ' ||
+      COALESCE(email, '') || ' ' ||
+      COALESCE(company, '')
+    )
+  )
+);</div>
+            </div>
+
+            <div class="card">
+                <h4>2. contact_lists</h4>
+                <p><strong>Purpose:</strong> Organize contacts into lists</p>
+                <div class="code-block">CREATE TABLE contact_lists (
+  id BIGSERIAL PRIMARY KEY,
+  organization_id BIGINT NOT NULL REFERENCES organizations(id),
+
+  name VARCHAR(255) NOT NULL,
+  description TEXT,
+
+  -- List type
+  type VARCHAR(50) NOT NULL, -- 'static', 'dynamic'
+
+  -- Dynamic list rules (for auto-segmentation)
+  segmentation_rules JSONB DEFAULT '{}',
+  -- { operator: 'AND/OR', conditions: [{ field, operator, value }] }
+
+  -- Stats
+  contact_count INT DEFAULT 0,
+
+  created_by BIGINT REFERENCES users(id),
+  created_at TIMESTAMP DEFAULT NOW(),
+  updated_at TIMESTAMP DEFAULT NOW(),
+
+  INDEX idx_contact_lists_org (organization_id),
+  INDEX idx_contact_lists_type (type)
+);</div>
+            </div>
+
+            <div class="card">
+                <h4>3. contact_list_members</h4>
+                <p><strong>Purpose:</strong> Many-to-many relationship</p>
+                <div class="code-block">CREATE TABLE contact_list_members (
+  id BIGSERIAL PRIMARY KEY,
+  list_id BIGINT NOT NULL REFERENCES contact_lists(id) ON DELETE CASCADE,
+  contact_id BIGINT NOT NULL REFERENCES contacts(id) ON DELETE CASCADE,
+
+  added_by BIGINT REFERENCES users(id),
+  added_at TIMESTAMP DEFAULT NOW(),
+
+  UNIQUE INDEX idx_list_members_unique (list_id, contact_id),
+  INDEX idx_list_members_list (list_id),
+  INDEX idx_list_members_contact (contact_id)
+);</div>
+            </div>
+
+            <div class="card">
+                <h4>4. tags</h4>
+                <p><strong>Purpose:</strong> Tagging system for contacts</p>
+                <div class="code-block">CREATE TABLE tags (
+  id BIGSERIAL PRIMARY KEY,
+  organization_id BIGINT NOT NULL REFERENCES organizations(id),
+
+  name VARCHAR(100) NOT NULL,
+  color VARCHAR(7), -- Hex color
+  description TEXT,
+
+  -- Hierarchy support
+  parent_tag_id BIGINT REFERENCES tags(id),
+
+  -- Usage stats
+  contact_count INT DEFAULT 0,
+
+  created_at TIMESTAMP DEFAULT NOW(),
+  updated_at TIMESTAMP DEFAULT NOW(),
+
+  INDEX idx_tags_org (organization_id),
+  UNIQUE INDEX idx_tags_org_name (organization_id, name)
+);</div>
+            </div>
+
+            <div class="card">
+                <h4>5. contact_tags</h4>
+                <p><strong>Purpose:</strong> Many-to-many relationship</p>
+                <div class="code-block">CREATE TABLE contact_tags (
+  id BIGSERIAL PRIMARY KEY,
+  contact_id BIGINT NOT NULL REFERENCES contacts(id) ON DELETE CASCADE,
+  tag_id BIGINT NOT NULL REFERENCES tags(id) ON DELETE CASCADE,
+
+  tagged_by BIGINT REFERENCES users(id),
+  tagged_at TIMESTAMP DEFAULT NOW(),
+
+  UNIQUE INDEX idx_contact_tags_unique (contact_id, tag_id),
+  INDEX idx_contact_tags_contact (contact_id),
+  INDEX idx_contact_tags_tag (tag_id)
+);</div>
+            </div>
+
+            <div class="card">
+                <h4>6. merge_fields (Custom Field Schema)</h4>
+                <p><strong>Purpose:</strong> Define custom contact attributes</p>
+                <div class="code-block">CREATE TABLE merge_fields (
+  id BIGSERIAL PRIMARY KEY,
+  organization_id BIGINT NOT NULL REFERENCES organizations(id),
+
+  field_key VARCHAR(100) NOT NULL, -- 'customer_tier', 'purchase_count'
+  label VARCHAR(255) NOT NULL, -- Display name
+
+  -- Data type
+  data_type VARCHAR(50) NOT NULL,
+  -- 'text', 'number', 'date', 'boolean', 'select', 'multiselect',
+  -- 'email', 'phone', 'url', 'currency'
+
+  -- Validation
+  is_required BOOLEAN DEFAULT FALSE,
+  validation_rules JSONB DEFAULT '{}',
+  -- { min, max, pattern, options: [], currency: 'USD' }
+
+  -- Display
+  default_value TEXT,
+  placeholder VARCHAR(255),
+  help_text TEXT,
+  display_order INT DEFAULT 0,
+
+  -- Visibility
+  is_system_field BOOLEAN DEFAULT FALSE,
+
+  created_at TIMESTAMP DEFAULT NOW(),
+  updated_at TIMESTAMP DEFAULT NOW(),
+
+  INDEX idx_merge_fields_org (organization_id),
+  UNIQUE INDEX idx_merge_fields_org_key (organization_id, field_key)
+);</div>
+            </div>
+
+            <div class="card">
+                <h4>7. communications</h4>
+                <p><strong>Purpose:</strong> Track all contact interactions</p>
+                <div class="code-block">CREATE TABLE communications (
+  id BIGSERIAL PRIMARY KEY,
+  organization_id BIGINT NOT NULL REFERENCES organizations(id),
+  contact_id BIGINT NOT NULL REFERENCES contacts(id),
+
+  -- Communication type
+  type VARCHAR(50) NOT NULL,
+  -- 'email', 'whatsapp', 'sms', 'call', 'meeting', 'note'
+
+  -- Direction
+  direction VARCHAR(20), -- 'inbound', 'outbound'
+
+  -- Content
+  subject VARCHAR(500),
+  content TEXT,
+
+  -- Related entities
+  user_id BIGINT REFERENCES users(id), -- Who handled it
+  conversation_id BIGINT REFERENCES conversations(id), -- Link to inbox
+
+  -- Metadata
+  metadata JSONB DEFAULT '{}',
+  -- { duration, recording_url, attachments, etc. }
+
+  created_at TIMESTAMP DEFAULT NOW(),
+
+  INDEX idx_communications_contact (contact_id, created_at DESC),
+  INDEX idx_communications_org (organization_id),
+  INDEX idx_communications_type (type),
+  INDEX idx_communications_user (user_id)
+);</div>
+            </div>
+
+            <div class="card">
+                <h4>8. tasks</h4>
+                <p><strong>Purpose:</strong> Contact-related task management</p>
+                <div class="code-block">CREATE TABLE tasks (
+  id BIGSERIAL PRIMARY KEY,
+  organization_id BIGINT NOT NULL REFERENCES organizations(id),
+  contact_id BIGINT REFERENCES contacts(id),
+
+  title VARCHAR(500) NOT NULL,
+  description TEXT,
+
+  -- Assignment
+  assigned_to BIGINT REFERENCES users(id),
+
+  -- Due date & priority
+  due_date TIMESTAMP,
+  priority VARCHAR(20) DEFAULT 'normal', -- 'low', 'normal', 'high', 'urgent'
+
+  -- Status
+  status VARCHAR(50) DEFAULT 'pending',
+  -- 'pending', 'in_progress', 'completed', 'cancelled'
+  completed_at TIMESTAMP,
+
+  -- Reminders
+  reminder_at TIMESTAMP,
+  reminder_sent BOOLEAN DEFAULT FALSE,
+
+  created_by BIGINT REFERENCES users(id),
+  created_at TIMESTAMP DEFAULT NOW(),
+  updated_at TIMESTAMP DEFAULT NOW(),
+
+  INDEX idx_tasks_org (organization_id),
+  INDEX idx_tasks_contact (contact_id),
+  INDEX idx_tasks_assigned (assigned_to),
+  INDEX idx_tasks_due_date (due_date),
+  INDEX idx_tasks_status (status)
+);</div>
+            </div>
+
+            <div class="see-also">
+                <h3>🔗 See Also</h3>
+                <p>
+                    <a href="#frame5">→ Frame 5: Contact Management Deep-Dive</a> |
+                    <a href="#frame6">→ Frame 6: Lists & Segmentation</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- Continue with remaining frames in similar detail... -->
+        <!-- Frames 5-8 would cover Contact Management, Lists, Tags, and Communication History -->
+
+    </div>
+
+    <!-- BACK TO TOP -->
+    <a href="#" class="back-to-top">↑</a>
+
+    <!-- NAVIGATION SCRIPT -->
+    <script src="assets/navigation.js"></script>
+</body>
+</html>

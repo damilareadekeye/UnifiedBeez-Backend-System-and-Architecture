@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beehive Dashboard - Testing Environment | UnifiedBeez Architecture</title>
+    <link rel="stylesheet" href="assets/live-dashboard-styles.css">
+</head>
+<body>
+    <!-- HEADER -->
+    <div class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="logo">🐝</div>
+                <div>
+                    <h1>UnifiedBeez Backend Architecture</h1>
+                    <p class="subtitle">Beehive Dashboard - Testing Environment</p>
+                </div>
+            </div>
+            <a href="index.html" class="back-button">← Back to Index</a>
+        </div>
+    </div>
+
+    <!-- NAVIGATION -->
+    <div class="nav-container">
+        <div class="nav-scroll">
+            <a href="#frame1" class="nav-item">Frame 1: Beehive Overview</a>
+            <a href="#frame2" class="nav-item">Frame 2: Setup Wizard</a>
+            <a href="#frame3" class="nav-item">Frame 3: Testing Features</a>
+            <a href="#frame4" class="nav-item">Frame 4: Data Sync Architecture</a>
+            <a href="#frame5" class="nav-item">Frame 5: Go Live Transition</a>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="container">
+
+        <!-- FRAME 1: BEEHIVE OVERVIEW -->
+        <div id="frame1" class="frame">
+            <h2>🧪 FRAME 1: Beehive Dashboard Overview</h2>
+
+            <h3>🎯 What is Beehive?</h3>
+            <p>
+                Beehive Dashboard is UnifiedBeez's secure testing and setup environment that gives new users
+                **29 days** to configure, test, and familiarize themselves with the platform before going live.
+                It provides a sandboxed environment where users can experiment without affecting live customer
+                data, test automations safely, and complete all setup steps at their own pace.
+            </p>
+
+            <h3>✨ Key Features</h3>
+            <div class="grid-3">
+                <div class="card">
+                    <h4>🔒 Sandbox Environment</h4>
+                    <ul>
+                        <li>Isolated from production</li>
+                        <li>Test data only</li>
+                        <li>No real customer messages</li>
+                        <li>Safe automation testing</li>
+                        <li>No billing during setup</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>⏱️ 29-Day Setup Period</h4>
+                    <ul>
+                        <li>Full platform access</li>
+                        <li>Guided setup wizard</li>
+                        <li>Progress tracking</li>
+                        <li>Can extend if needed</li>
+                        <li>Go live anytime</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>🚀 Seamless Transition</h4>
+                    <ul>
+                        <li>One-click "Go Live"</li>
+                        <li>Data migration</li>
+                        <li>Configuration preserved</li>
+                        <li>No data loss</li>
+                        <li>Rollback option</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>🔄 Beehive Lifecycle</h3>
+            <div style="background: linear-gradient(135deg, #FFF9C4 0%, #FFF59D 100%); border: 3px solid #F9A825; border-radius: 12px; padding: 30px; margin: 25px 0;">
+                <h4 style="color: #F57F17; text-align: center; margin-bottom: 30px; font-size: 1.3rem;">
+                    🐝 Beehive to Live Workflow - 6-Stage Journey
+                </h4>
+
+                <!-- Stage 1 -->
+                <div style="background: white; border-left: 5px solid #4CAF50; border-radius: 8px; padding: 20px; margin-bottom: 15px; box-shadow: 0 2px 8px rgba(76, 175, 80, 0.15);">
+                    <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                        <div style="background: #4CAF50; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; margin-right: 15px;">1</div>
+                        <h5 style="color: #2E7D32; margin: 0; font-size: 1.15rem;">ACCOUNT CREATION</h5>
+                    </div>
+                    <div style="padding-left: 55px; color: #455A64; line-height: 1.8;">
+                        • User signs up for UnifiedBeez<br>
+                        • Beehive environment created automatically<br>
+                        • 29-day countdown starts
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin: 10px 0; font-size: 2rem; color: #F9A825;">↓</div>
+
+                <!-- Stage 2 -->
+                <div style="background: white; border-left: 5px solid #2196F3; border-radius: 8px; padding: 20px; margin-bottom: 15px; box-shadow: 0 2px 8px rgba(33, 150, 243, 0.15);">
+                    <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                        <div style="background: #2196F3; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; margin-right: 15px;">2</div>
+                        <h5 style="color: #1565C0; margin: 0; font-size: 1.15rem;">BEEHIVE SETUP (0-29 days)</h5>
+                    </div>
+                    <div style="padding-left: 55px; color: #455A64; line-height: 1.8;">
+                        • Complete 8-step setup wizard<br>
+                        • Connect test channels<br>
+                        • Configure Beezora AI<br>
+                        • Create automations<br>
+                        • Import test contacts<br>
+                        • Test workflows<br>
+                        • Customize brand kit
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin: 10px 0; font-size: 2rem; color: #F9A825;">↓</div>
+
+                <!-- Stage 3 -->
+                <div style="background: white; border-left: 5px solid #FF9800; border-radius: 8px; padding: 20px; margin-bottom: 15px; box-shadow: 0 2px 8px rgba(255, 152, 0, 0.15);">
+                    <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                        <div style="background: #FF9800; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; margin-right: 15px;">3</div>
+                        <h5 style="color: #E65100; margin: 0; font-size: 1.15rem;">READINESS CHECK</h5>
+                    </div>
+                    <div style="padding-left: 55px; color: #455A64; line-height: 1.8;">
+                        • System validates setup completeness<br>
+                        • Shows readiness score (0-100%)<br>
+                        • Highlights missing required steps
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin: 10px 0; font-size: 2rem; color: #F9A825;">↓</div>
+
+                <!-- Stage 4 -->
+                <div style="background: white; border-left: 5px solid #2D6A4F; border-radius: 8px; padding: 20px; margin-bottom: 15px; box-shadow: 0 2px 8px rgba(45, 106, 79, 0.15);">
+                    <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                        <div style="background: #2D6A4F; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; margin-right: 15px;">4</div>
+                        <h5 style="color: #1A4D2E; margin: 0; font-size: 1.15rem;">GO LIVE DECISION</h5>
+                    </div>
+                    <div style="padding-left: 55px; color: #455A64; line-height: 1.8;">
+                        • User clicks "Go Live" button<br>
+                        • Confirmation modal with checklist<br>
+                        • Accept terms & conditions
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin: 10px 0; font-size: 2rem; color: #F9A825;">↓</div>
+
+                <!-- Stage 5 -->
+                <div style="background: white; border-left: 5px solid #00897B; border-radius: 8px; padding: 20px; margin-bottom: 15px; box-shadow: 0 2px 8px rgba(0, 137, 123, 0.15);">
+                    <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                        <div style="background: #00897B; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; margin-right: 15px;">5</div>
+                        <h5 style="color: #00695C; margin: 0; font-size: 1.15rem;">DATA MIGRATION</h5>
+                    </div>
+                    <div style="padding-left: 55px; color: #455A64; line-height: 1.8;">
+                        • Beehive data copied to production<br>
+                        • Channel connections activated<br>
+                        • Automations enabled<br>
+                        • Billing starts
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin: 10px 0; font-size: 2rem; color: #F9A825;">↓</div>
+
+                <!-- Stage 6 -->
+                <div style="background: white; border-left: 5px solid #1976D2; border-radius: 8px; padding: 20px; box-shadow: 0 2px 8px rgba(25, 118, 210, 0.15);">
+                    <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                        <div style="background: #1976D2; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; margin-right: 15px;">6</div>
+                        <h5 style="color: #0D47A1; margin: 0; font-size: 1.15rem;">LIVE DASHBOARD ACCESS</h5>
+                    </div>
+                    <div style="padding-left: 55px; color: #455A64; line-height: 1.8;">
+                        • User redirected to Live Dashboard<br>
+                        • Real-time operations begin<br>
+                        • Support monitoring activated
+                    </div>
+                </div>
+            </div>
+
+            <h3>🆚 Beehive vs Live Dashboard</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Beehive (Testing)</th>
+                        <th>Live Dashboard (Production)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Environment</strong></td>
+                        <td>Sandboxed, isolated</td>
+                        <td>Production, real-time</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Data</strong></td>
+                        <td>Test data only</td>
+                        <td>Real customer data</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Channel Connections</strong></td>
+                        <td>Test mode, limited</td>
+                        <td>Fully connected, live</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Automations</strong></td>
+                        <td>Test executions only</td>
+                        <td>Live executions with real messages</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Billing</strong></td>
+                        <td>No charges (setup period)</td>
+                        <td>Active subscription billing</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Time Limit</strong></td>
+                        <td>29 days (extendable)</td>
+                        <td>Unlimited (with active subscription)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Support</strong></td>
+                        <td>Setup assistance, tutorials</td>
+                        <td>Full support, monitoring</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="see-also">
+                <h3>🔗 See Also</h3>
+                <p>
+                    <a href="#frame2">→ Frame 2: Setup Wizard Architecture</a> |
+                    <a href="#frame5">→ Frame 5: Go Live Transition Process</a> |
+                    <a href="manual-onboarding.html">→ Manual Onboarding Flow</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- FRAME 2: SETUP WIZARD -->
+        <div id="frame2" class="frame">
+            <h2>🧙 FRAME 2: Setup Wizard Architecture</h2>
+
+            <h3>📋 8-Step Setup Wizard</h3>
+
+            <div class="card">
+                <h4>Setup Progress Tracking</h4>
+                <div style="background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%); border: 3px solid #43A047; border-radius: 12px; padding: 30px; margin: 25px 0;">
+                    <h4 style="color: #2E7D32; text-align: center; margin-bottom: 30px; font-size: 1.3rem;">
+                        🎯 Setup Wizard Steps - 8-Step Configuration Process
+                    </h4>
+
+                    <div style="display: grid; gap: 15px;">
+                        <!-- Step 1 -->
+                        <div style="background: white; border-left: 5px solid #66BB6A; border-radius: 8px; padding: 15px; box-shadow: 0 2px 6px rgba(67, 160, 71, 0.12);">
+                            <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                                <div style="background: #66BB6A; color: white; width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 12px;">1</div>
+                                <div style="color: #2E7D32; font-weight: bold; font-size: 1.05rem;">Plan Selection & Login</div>
+                            </div>
+                            <div style="padding-left: 47px; color: #546E7A; font-size: 0.95rem; line-height: 1.6;">
+                                • Choose subscription plan &nbsp;•&nbsp; Confirm account details &nbsp;•&nbsp; Skip for now (trial)
+                            </div>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div style="background: white; border-left: 5px solid #66BB6A; border-radius: 8px; padding: 15px; box-shadow: 0 2px 6px rgba(67, 160, 71, 0.12);">
+                            <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                                <div style="background: #66BB6A; color: white; width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 12px;">2</div>
+                                <div style="color: #2E7D32; font-weight: bold; font-size: 1.05rem;">User Type Detection & Info</div>
+                            </div>
+                            <div style="padding-left: 47px; color: #546E7A; font-size: 0.95rem; line-height: 1.6;">
+                                • Business type selection &nbsp;•&nbsp; Industry selection &nbsp;•&nbsp; Organization size
+                            </div>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div style="background: white; border-left: 5px solid #66BB6A; border-radius: 8px; padding: 15px; box-shadow: 0 2px 6px rgba(67, 160, 71, 0.12);">
+                            <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                                <div style="background: #66BB6A; color: white; width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 12px;">3</div>
+                                <div style="color: #2E7D32; font-weight: bold; font-size: 1.05rem;">Team & Role Setup</div>
+                            </div>
+                            <div style="padding-left: 47px; color: #546E7A; font-size: 0.95rem; line-height: 1.6;">
+                                • Invite team members &nbsp;•&nbsp; Assign roles &nbsp;•&nbsp; Skip for now (solo user)
+                            </div>
+                        </div>
+
+                        <!-- Step 4 -->
+                        <div style="background: white; border-left: 5px solid #66BB6A; border-radius: 8px; padding: 15px; box-shadow: 0 2px 6px rgba(67, 160, 71, 0.12);">
+                            <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                                <div style="background: #66BB6A; color: white; width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 12px;">4</div>
+                                <div style="color: #2E7D32; font-weight: bold; font-size: 1.05rem;">AI Assistant Creation (Beezora)</div>
+                            </div>
+                            <div style="padding-left: 47px; color: #546E7A; font-size: 0.95rem; line-height: 1.6;">
+                                • Set personality &nbsp;•&nbsp; Add knowledge base &nbsp;•&nbsp; Configure auto-responses
+                            </div>
+                        </div>
+
+                        <!-- Step 5 -->
+                        <div style="background: white; border-left: 5px solid #66BB6A; border-radius: 8px; padding: 15px; box-shadow: 0 2px 6px rgba(67, 160, 71, 0.12);">
+                            <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                                <div style="background: #66BB6A; color: white; width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 12px;">5</div>
+                                <div style="color: #2E7D32; font-weight: bold; font-size: 1.05rem;">Channel Integration</div>
+                            </div>
+                            <div style="padding-left: 47px; color: #546E7A; font-size: 0.95rem; line-height: 1.6;">
+                                • Connect WhatsApp &nbsp;•&nbsp; Connect email &nbsp;•&nbsp; Connect social media (optional)
+                            </div>
+                        </div>
+
+                        <!-- Step 6 -->
+                        <div style="background: white; border-left: 5px solid #66BB6A; border-radius: 8px; padding: 15px; box-shadow: 0 2px 6px rgba(67, 160, 71, 0.12);">
+                            <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                                <div style="background: #66BB6A; color: white; width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 12px;">6</div>
+                                <div style="color: #2E7D32; font-weight: bold; font-size: 1.05rem;">Pre-Channel AI Configuration</div>
+                            </div>
+                            <div style="padding-left: 47px; color: #546E7A; font-size: 0.95rem; line-height: 1.6;">
+                                • Fine-tune Beezora for channels &nbsp;•&nbsp; Test AI responses
+                            </div>
+                        </div>
+
+                        <!-- Step 7 -->
+                        <div style="background: white; border-left: 5px solid #66BB6A; border-radius: 8px; padding: 15px; box-shadow: 0 2px 6px rgba(67, 160, 71, 0.12);">
+                            <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                                <div style="background: #66BB6A; color: white; width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 12px;">7</div>
+                                <div style="color: #2E7D32; font-weight: bold; font-size: 1.05rem;">Web Chat Connection</div>
+                            </div>
+                            <div style="padding-left: 47px; color: #546E7A; font-size: 0.95rem; line-height: 1.6;">
+                                • Install web chat widget &nbsp;•&nbsp; Customize appearance &nbsp;•&nbsp; Test integration
+                            </div>
+                        </div>
+
+                        <!-- Step 8 -->
+                        <div style="background: white; border-left: 5px solid #66BB6A; border-radius: 8px; padding: 15px; box-shadow: 0 2px 6px rgba(67, 160, 71, 0.12);">
+                            <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                                <div style="background: #66BB6A; color: white; width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 12px;">8</div>
+                                <div style="color: #2E7D32; font-weight: bold; font-size: 1.05rem;">Automation Template Library</div>
+                            </div>
+                            <div style="padding-left: 47px; color: #546E7A; font-size: 0.95rem; line-height: 1.6;">
+                                • Browse template library &nbsp;•&nbsp; Activate relevant templates &nbsp;•&nbsp; Customize if needed
+                            </div>
+                        </div>
+
+                        <!-- Final Step -->
+                        <div style="background: linear-gradient(135deg, #FFF59D 0%, #FFEB3B 100%); border: 2px solid #F9A825; border-radius: 8px; padding: 15px; text-align: center; font-weight: bold; color: #F57F17; font-size: 1.1rem; box-shadow: 0 3px 8px rgba(249, 168, 37, 0.25);">
+                            ✨ FINAL: Readiness Check & Go Live Option
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3>💾 Database Schema</h3>
+
+            <div class="card">
+                <h4>beehive_accounts</h4>
+                <div class="code-block">CREATE TABLE beehive_accounts (
+  id BIGSERIAL PRIMARY KEY,
+  organization_id BIGINT NOT NULL UNIQUE REFERENCES organizations(id),
+
+  -- Status
+  status VARCHAR(50) DEFAULT 'active',
+  -- 'active', 'completed', 'expired'
+
+  -- Setup progress (8 steps)
+  setup_progress JSONB DEFAULT '{
+    "step1_plan": false,
+    "step2_usertype": false,
+    "step3_team": false,
+    "step4_beezora": false,
+    "step5_channels": false,
+    "step6_ai_config": false,
+    "step7_webchat": false,
+    "step8_automations": false
+  }',
+
+  -- Readiness score (0-100)
+  readiness_score INT DEFAULT 0,
+
+  -- Dates
+  created_at TIMESTAMP DEFAULT NOW(),
+  expires_at TIMESTAMP, -- 29 days from creation
+  went_live_at TIMESTAMP,
+
+  INDEX idx_beehive_accounts_org (organization_id),
+  INDEX idx_beehive_accounts_status (status)
+);</div>
+            </div>
+
+            <div class="card">
+                <h4>beehive_data_sync</h4>
+                <div class="code-block">CREATE TABLE beehive_data_sync (
+  id BIGSERIAL PRIMARY KEY,
+  beehive_account_id BIGINT NOT NULL REFERENCES beehive_accounts(id),
+
+  -- Sync status
+  sync_status VARCHAR(50) DEFAULT 'pending',
+  -- 'pending', 'in_progress', 'completed', 'failed'
+
+  -- Data counts
+  contacts_synced INT DEFAULT 0,
+  automations_synced INT DEFAULT 0,
+  templates_synced INT DEFAULT 0,
+  settings_synced BOOLEAN DEFAULT FALSE,
+
+  -- Error tracking
+  errors JSONB DEFAULT '[]',
+
+  started_at TIMESTAMP,
+  completed_at TIMESTAMP,
+
+  INDEX idx_beehive_sync_account (beehive_account_id)
+);</div>
+            </div>
+
+            <h3>📡 API Endpoints (Beehive)</h3>
+
+            <div class="card">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>Endpoint</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/beehive/status</code></td>
+                            <td>Get Beehive setup status</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/beehive/progress</code></td>
+                            <td>Get setup wizard progress</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/beehive/step/:stepNumber/complete</code></td>
+                            <td>Mark setup step as complete</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/beehive/readiness</code></td>
+                            <td>Get readiness score & checklist</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/beehive/go-live</code></td>
+                            <td>Initiate go-live process</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/beehive/extend</code></td>
+                            <td>Request setup period extension</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/beehive/days-remaining</code></td>
+                            <td>Get remaining setup days</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="see-also">
+                <h3>🔗 See Also</h3>
+                <p>
+                    <a href="#frame3">→ Frame 3: Testing Features & Limitations</a> |
+                    <a href="#frame4">→ Frame 4: Data Sync Architecture</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- FRAME 3: TESTING FEATURES -->
+        <div id="frame3" class="frame">
+            <h2>🧪 FRAME 3: Testing Features & Limitations</h2>
+
+            <h3>✅ What You CAN Do in Beehive</h3>
+
+            <div class="grid-2">
+                <div class="card">
+                    <h4>Full Access Features</h4>
+                    <ul>
+                        <li>✅ Create unlimited test contacts</li>
+                        <li>✅ Build & test automations</li>
+                        <li>✅ Configure Beezora AI personality</li>
+                        <li>✅ Customize brand kit</li>
+                        <li>✅ Create message templates</li>
+                        <li>✅ Set up team members (test mode)</li>
+                        <li>✅ Configure settings</li>
+                        <li>✅ Test web chat widget</li>
+                        <li>✅ Create custom fields</li>
+                        <li>✅ Import CSV contacts (test data)</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>Limited/Test Features</h4>
+                    <ul>
+                        <li>⚠️ Channel connections (test mode only)</li>
+                        <li>⚠️ Automation executions (simulated)</li>
+                        <li>⚠️ Email sending (sandbox mode)</li>
+                        <li>⚠️ WhatsApp (test number only)</li>
+                        <li>⚠️ Payment processing (disabled)</li>
+                        <li>⚠️ External integrations (limited)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>❌ What You CANNOT Do in Beehive</h3>
+
+            <div class="card">
+                <ul>
+                    <li>❌ Send real messages to customers</li>
+                    <li>❌ Connect live WhatsApp Business account</li>
+                    <li>❌ Process real payments</li>
+                    <li>❌ Access production customer data</li>
+                    <li>❌ Execute live automations with real effects</li>
+                    <li>❌ Receive webhook events from live channels</li>
+                </ul>
+            </div>
+
+            <h3>🔢 Usage Limits in Beehive</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Resource</th>
+                        <th>Beehive Limit</th>
+                        <th>Live Dashboard Limit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Test Contacts</td>
+                        <td>Up to 1,000</td>
+                        <td>Based on plan</td>
+                    </tr>
+                    <tr>
+                        <td>Automations</td>
+                        <td>Unlimited creation, 100 test runs/day</td>
+                        <td>Unlimited</td>
+                    </tr>
+                    <tr>
+                        <td>Templates</td>
+                        <td>Unlimited</td>
+                        <td>Unlimited</td>
+                    </tr>
+                    <tr>
+                        <td>Team Members</td>
+                        <td>Up to 5 test accounts</td>
+                        <td>Based on plan</td>
+                    </tr>
+                    <tr>
+                        <td>Message Sending</td>
+                        <td>50 test messages/day</td>
+                        <td>Based on plan</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="see-also">
+                <h3>🔗 See Also</h3>
+                <p>
+                    <a href="#frame4">→ Frame 4: Data Sync Architecture</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- FRAME 4: DATA SYNC ARCHITECTURE -->
+        <div id="frame4" class="frame">
+            <h2>🔄 FRAME 4: Beehive to Live Data Sync Architecture</h2>
+
+            <h3>🏗️ Data Migration Flow</h3>
+
+            <div style="background: linear-gradient(135deg, #E0F7FA 0%, #B2EBF2 100%); border: 3px solid #00ACC1; border-radius: 12px; padding: 30px; margin: 25px 0;">
+                <h4 style="color: #006064; text-align: center; margin-bottom: 30px; font-size: 1.3rem;">
+                    🔄 Beehive → Live Data Migration - 10-Step Process
+                </h4>
+
+                <div style="display: grid; gap: 12px;">
+                    <!-- Step 1 -->
+                    <div style="background: white; border-left: 5px solid #26C6DA; border-radius: 8px; padding: 15px; box-shadow: 0 2px 6px rgba(0, 172, 193, 0.12);">
+                        <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                            <div style="background: #26C6DA; color: white; width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 12px; font-size: 0.95rem;">1</div>
+                            <div style="color: #00838F; font-weight: bold; font-size: 1.05rem;">USER CLICKS "GO LIVE"</div>
+                        </div>
+                        <div style="padding-left: 47px; color: #546E7A; font-size: 0.9rem; line-height: 1.6;">
+                            • Readiness validation (must be >80%) &nbsp;•&nbsp; Display confirmation modal &nbsp;•&nbsp; User confirms go-live
+                        </div>
+                    </div>
+
+                    <div style="text-align: center; font-size: 1.5rem; color: #00ACC1; margin: 5px 0;">↓</div>
+
+                    <!-- Step 2 -->
+                    <div style="background: white; border-left: 5px solid #26C6DA; border-radius: 8px; padding: 15px; box-shadow: 0 2px 6px rgba(0, 172, 193, 0.12);">
+                        <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                            <div style="background: #26C6DA; color: white; width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 12px; font-size: 0.95rem;">2</div>
+                            <div style="color: #00838F; font-weight: bold; font-size: 1.05rem;">CREATE MIGRATION JOB</div>
+                        </div>
+                        <div style="padding-left: 47px; color: #546E7A; font-size: 0.9rem; line-height: 1.6;">
+                            • Queue migration task in Bull &nbsp;•&nbsp; Set status to 'in_progress' &nbsp;•&nbsp; Notify user (email + in-app)
+                        </div>
+                    </div>
+
+                    <div style="text-align: center; font-size: 1.5rem; color: #00ACC1; margin: 5px 0;">↓</div>
+
+                    <!-- Step 3 -->
+                    <div style="background: white; border-left: 5px solid #26C6DA; border-radius: 8px; padding: 15px; box-shadow: 0 2px 6px rgba(0, 172, 193, 0.12);">
+                        <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                            <div style="background: #26C6DA; color: white; width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 12px; font-size: 0.95rem;">3</div>
+                            <div style="color: #00838F; font-weight: bold; font-size: 1.05rem;">MIGRATE CONFIGURATION</div>
+                        </div>
+                        <div style="padding-left: 47px; color: #546E7A; font-size: 0.9rem; line-height: 1.6;">
+                            • Copy organization settings &nbsp;•&nbsp; Migrate brand kit &nbsp;•&nbsp; Copy Beezora AI config &nbsp;•&nbsp; Preserve custom fields
+                        </div>
+                    </div>
+
+                    <div style="text-align: center; font-size: 1.5rem; color: #00ACC1; margin: 5px 0;">↓</div>
+
+                    <!-- Step 4 -->
+                    <div style="background: white; border-left: 5px solid #26C6DA; border-radius: 8px; padding: 15px; box-shadow: 0 2px 6px rgba(0, 172, 193, 0.12);">
+                        <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                            <div style="background: #26C6DA; color: white; width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 12px; font-size: 0.95rem;">4</div>
+                            <div style="color: #00838F; font-weight: bold; font-size: 1.05rem;">MIGRATE CONTACTS & DATA</div>
+                        </div>
+                        <div style="padding-left: 47px; color: #546E7A; font-size: 0.9rem; line-height: 1.6;">
+                            • Copy contacts (deduplicate) &nbsp;•&nbsp; Migrate tags & lists &nbsp;•&nbsp; Copy custom field values
+                        </div>
+                    </div>
+
+                    <div style="text-align: center; font-size: 1.5rem; color: #00ACC1; margin: 5px 0;">↓</div>
+
+                    <!-- Step 5 -->
+                    <div style="background: white; border-left: 5px solid #26C6DA; border-radius: 8px; padding: 15px; box-shadow: 0 2px 6px rgba(0, 172, 193, 0.12);">
+                        <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                            <div style="background: #26C6DA; color: white; width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 12px; font-size: 0.95rem;">5</div>
+                            <div style="color: #00838F; font-weight: bold; font-size: 1.05rem;">MIGRATE AUTOMATIONS</div>
+                        </div>
+                        <div style="padding-left: 47px; color: #546E7A; font-size: 0.9rem; line-height: 1.6;">
+                            • Copy automation configs &nbsp;•&nbsp; Set status to 'inactive' initially &nbsp;•&nbsp; Preserve trigger & action settings
+                        </div>
+                    </div>
+
+                    <div style="text-align: center; font-size: 1.5rem; color: #00ACC1; margin: 5px 0;">↓</div>
+
+                    <!-- Step 6 -->
+                    <div style="background: white; border-left: 5px solid #26C6DA; border-radius: 8px; padding: 15px; box-shadow: 0 2px 6px rgba(0, 172, 193, 0.12);">
+                        <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                            <div style="background: #26C6DA; color: white; width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 12px; font-size: 0.95rem;">6</div>
+                            <div style="color: #00838F; font-weight: bold; font-size: 1.05rem;">MIGRATE TEMPLATES</div>
+                        </div>
+                        <div style="padding-left: 47px; color: #546E7A; font-size: 0.9rem; line-height: 1.6;">
+                            • Copy message templates &nbsp;•&nbsp; Copy WhatsApp templates (for re-approval) &nbsp;•&nbsp; Copy canned responses
+                        </div>
+                    </div>
+
+                    <div style="text-align: center; font-size: 1.5rem; color: #00ACC1; margin: 5px 0;">↓</div>
+
+                    <!-- Step 7 -->
+                    <div style="background: white; border-left: 5px solid #26C6DA; border-radius: 8px; padding: 15px; box-shadow: 0 2px 6px rgba(0, 172, 193, 0.12);">
+                        <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                            <div style="background: #26C6DA; color: white; width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 12px; font-size: 0.95rem;">7</div>
+                            <div style="color: #00838F; font-weight: bold; font-size: 1.05rem;">ACTIVATE LIVE CHANNELS</div>
+                        </div>
+                        <div style="padding-left: 47px; color: #546E7A; font-size: 0.9rem; line-height: 1.6;">
+                            • Upgrade channel connections to live &nbsp;•&nbsp; Verify webhook endpoints &nbsp;•&nbsp; Test channel health
+                        </div>
+                    </div>
+
+                    <div style="text-align: center; font-size: 1.5rem; color: #00ACC1; margin: 5px 0;">↓</div>
+
+                    <!-- Step 8 -->
+                    <div style="background: white; border-left: 5px solid #26C6DA; border-radius: 8px; padding: 15px; box-shadow: 0 2px 6px rgba(0, 172, 193, 0.12);">
+                        <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                            <div style="background: #26C6DA; color: white; width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 12px; font-size: 0.95rem;">8</div>
+                            <div style="color: #00838F; font-weight: bold; font-size: 1.05rem;">ENABLE BILLING</div>
+                        </div>
+                        <div style="padding-left: 47px; color: #546E7A; font-size: 0.9rem; line-height: 1.6;">
+                            • Activate subscription &nbsp;•&nbsp; Start billing cycle &nbsp;•&nbsp; Send welcome email with invoice
+                        </div>
+                    </div>
+
+                    <div style="text-align: center; font-size: 1.5rem; color: #00ACC1; margin: 5px 0;">↓</div>
+
+                    <!-- Step 9 -->
+                    <div style="background: white; border-left: 5px solid #26C6DA; border-radius: 8px; padding: 15px; box-shadow: 0 2px 6px rgba(0, 172, 193, 0.12);">
+                        <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                            <div style="background: #26C6DA; color: white; width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 12px; font-size: 0.95rem;">9</div>
+                            <div style="color: #00838F; font-weight: bold; font-size: 1.05rem;">FINALIZE MIGRATION</div>
+                        </div>
+                        <div style="padding-left: 47px; color: #546E7A; font-size: 0.9rem; line-height: 1.6;">
+                            • Mark beehive_account as 'completed' &nbsp;•&nbsp; Redirect user to Live Dashboard &nbsp;•&nbsp; Lock Beehive access (read-only 7 days)
+                        </div>
+                    </div>
+
+                    <div style="text-align: center; font-size: 1.5rem; color: #00ACC1; margin: 5px 0;">↓</div>
+
+                    <!-- Step 10 -->
+                    <div style="background: white; border-left: 5px solid #4CAF50; border-radius: 8px; padding: 15px; box-shadow: 0 3px 8px rgba(76, 175, 80, 0.2);">
+                        <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                            <div style="background: #4CAF50; color: white; width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 12px; font-size: 0.9rem;">10</div>
+                            <div style="color: #2E7D32; font-weight: bold; font-size: 1.05rem;">POST-MIGRATION</div>
+                        </div>
+                        <div style="padding-left: 47px; color: #546E7A; font-size: 0.9rem; line-height: 1.6;">
+                            • Monitor for 24 hours &nbsp;•&nbsp; Send success email &nbsp;•&nbsp; Archive Beehive data after 7 days
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3>🔒 Data Integrity & Safety</h3>
+
+            <div class="card">
+                <h4>Safety Mechanisms</h4>
+                <ul>
+                    <li><strong>Pre-Migration Backup:</strong> Full Beehive data snapshot</li>
+                    <li><strong>Rollback Window:</strong> 7-day rollback capability if issues found</li>
+                    <li><strong>Validation Checks:</strong> Data integrity checks before/after migration</li>
+                    <li><strong>Deduplication:</strong> Automatic duplicate detection & merging</li>
+                    <li><strong>Error Recovery:</strong> Automatic retry for failed migrations</li>
+                    <li><strong>Zero Downtime:</strong> Migration happens in background</li>
+                </ul>
+            </div>
+
+            <h3>⚙️ AWS Infrastructure for Migration</h3>
+
+            <div class="card">
+                <h4>Infrastructure Components</h4>
+                <ul>
+                    <li><strong>Lambda Function:</strong> Orchestrate migration process</li>
+                    <li><strong>SQS Queue:</strong> Queue migration tasks</li>
+                    <li><strong>RDS PostgreSQL:</strong> Source (Beehive) & destination (Live) database</li>
+                    <li><strong>S3:</strong> Backup Beehive data before migration</li>
+                    <li><strong>SNS:</strong> Notify stakeholders of migration status</li>
+                    <li><strong>CloudWatch:</strong> Monitor migration progress & errors</li>
+                </ul>
+            </div>
+
+            <div class="see-also">
+                <h3>🔗 See Also</h3>
+                <p>
+                    <a href="#frame5">→ Frame 5: Go Live Transition Process</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- FRAME 5: GO LIVE TRANSITION -->
+        <div id="frame5" class="frame">
+            <h2>🚀 FRAME 5: Go Live Transition Process</h2>
+
+            <h3>✅ Readiness Checklist</h3>
+
+            <div class="card">
+                <h4>Required Steps (Must Complete)</h4>
+                <ul>
+                    <li>✅ Select subscription plan</li>
+                    <li>✅ Configure Beezora AI assistant</li>
+                    <li>✅ Connect at least 1 channel (WhatsApp, Email, or Social)</li>
+                    <li>✅ Add payment method (credit card)</li>
+                    <li>✅ Accept Terms of Service & Privacy Policy</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h4>Recommended Steps (Highly Suggested)</h4>
+                <ul>
+                    <li>⚠️ Complete brand kit customization</li>
+                    <li>⚠️ Create at least 3 message templates</li>
+                    <li>⚠️ Activate at least 1 automation</li>
+                    <li>⚠️ Import initial contacts</li>
+                    <li>⚠️ Invite team members</li>
+                    <li>⚠️ Test web chat widget</li>
+                </ul>
+            </div>
+
+            <h3>📊 Readiness Score Calculation</h3>
+
+            <div class="code-block">// Readiness Score Algorithm
+function calculateReadinessScore(beehiveAccount) {
+  let score = 0;
+
+  // Required steps (60% weight)
+  if (beehiveAccount.planSelected) score += 15;
+  if (beehiveAccount.beezoraCon figured) score += 15;
+  if (beehiveAccount.channelsConnected >= 1) score += 15;
+  if (beehiveAccount.paymentMethodAdded) score += 10;
+  if (beehiveAccount.termsAccepted) score += 5;
+
+  // Recommended steps (40% weight)
+  if (beehiveAccount.brandKitComplete) score += 10;
+  if (beehiveAccount.templatesCreated >= 3) score += 10;
+  if (beehiveAccount.automationsActive >= 1) score += 10;
+  if (beehiveAccount.contactsImported >= 10) score += 5;
+  if (beehiveAccount.teamMembersInvited >= 1) score += 3;
+  if (beehiveAccount.webChatTested) score += 2;
+
+  return Math.min(score, 100); // Cap at 100%
+}
+
+// Can go live if score >= 80%
+const canGoLive = score >= 80;</div>
+
+            <h3>🎉 Post-Go-Live Experience</h3>
+
+            <div class="card">
+                <h4>What Happens After Going Live</h4>
+                <ol>
+                    <li><strong>Immediate Access:</strong> Redirected to Live Dashboard</li>
+                    <li><strong>Welcome Email:</strong> Confirmation with quick start guide</li>
+                    <li><strong>Onboarding Tour:</strong> Interactive guide in Live Dashboard</li>
+                    <li><strong>Support Monitoring:</strong> 72-hour proactive support monitoring</li>
+                    <li><strong>First Invoice:</strong> Prorated first month billing</li>
+                    <li><strong>Success Check-in:</strong> Support call within 7 days</li>
+                </ol>
+            </div>
+
+            <h3>⚙️ AWS Infrastructure (Beehive)</h3>
+
+            <div class="card">
+                <h4>Beehive Infrastructure Components</h4>
+                <ul>
+                    <li><strong>RDS PostgreSQL:</strong> Separate database schema for Beehive (beehive_*)</li>
+                    <li><strong>ECS Fargate:</strong> Same application, environment flag for Beehive mode</li>
+                    <li><strong>Lambda:</strong> Scheduled job to check expired Beehive accounts</li>
+                    <li><strong>SNS:</strong> Reminders at 7 days, 3 days, 1 day before expiry</li>
+                    <li><strong>CloudWatch Events:</strong> Daily readiness score recalculation</li>
+                    <li><strong>S3:</strong> Backup Beehive data before archival</li>
+                </ul>
+            </div>
+
+            <h3>📡 API Endpoints Summary</h3>
+
+            <div class="card">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>Endpoint</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/beehive/go-live</code></td>
+                            <td>Initiate go-live migration</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/beehive/migration-status</code></td>
+                            <td>Check migration progress</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/beehive/rollback</code></td>
+                            <td>Rollback to Beehive (within 7 days)</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/beehive/comparison</code></td>
+                            <td>Compare Beehive vs Live data</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="see-also">
+                <h3>🔗 See Also</h3>
+                <p>
+                    <a href="complete-architecture-map.html">→ Complete Architecture Map</a> |
+                    <a href="live-dashboard-overview.html">→ Live Dashboard Overview</a> |
+                    <a href="index.html">→ Back to Home</a>
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- BACK TO TOP -->
+    <a href="#" class="back-to-top">↑</a>
+
+    <!-- NAVIGATION SCRIPT -->
+    <script src="assets/navigation.js"></script>
+</body>
+</html>

@@ -1,0 +1,1849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Dashboard Architecture Overview - UnifiedBeez</title>
+    <link rel="stylesheet" href="assets/styles.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #2C3E50;
+            background: #FFFBF5;
+            margin: 0;
+            padding: 0;
+        }
+
+        .main-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, #1A4D2E 0%, #2D6A4F 50%, #52B788 100%);
+            color: white;
+            padding: 60px 40px;
+            border-radius: 16px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .hero-section h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+        }
+
+        .hero-section p {
+            font-size: 1.3rem;
+            opacity: 0.95;
+        }
+
+        .frame {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border: 3px solid #E8F5E9;
+        }
+
+        .frame h2 {
+            color: #1A4D2E;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #52B788;
+        }
+
+        .frame h3 {
+            color: #2D6A4F;
+            font-size: 1.5rem;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        .frame h4 {
+            color: #1A4D2E;
+            font-size: 1.2rem;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .info-box {
+            background: #E8F5E9;
+            border-left: 4px solid #2D6A4F;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 6px;
+        }
+
+        .warning-box {
+            background: #FFF9E6;
+            border-left: 4px solid #FB9C1D;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 6px;
+        }
+
+        .code-block {
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        table th {
+            background: #1A4D2E;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        table tr:hover {
+            background: #F9F9F9;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .card {
+            background: white;
+            border: 2px solid #E8F5E9;
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .card h4 {
+            color: #1A4D2E;
+            margin-top: 0;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-right: 8px;
+        }
+
+        .badge-green {
+            background: #E8F5E9;
+            color: #1A4D2E;
+        }
+
+        .badge-blue {
+            background: #E8F5E9;
+            color: #1A4D2E;
+        }
+
+        .badge-orange {
+            background: #FFF9E6;
+            color: #FB9C1D;
+        }
+
+        ul, ol {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+
+        li {
+            margin: 8px 0;
+        }
+
+        .see-also {
+            background: #E8F5E9;
+            border-left: 4px solid #1A4D2E;
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 6px;
+        }
+
+        .see-also h3 {
+            color: #1A4D2E;
+            margin-top: 0;
+        }
+
+        .see-also a {
+            color: #1A4D2E;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .see-also a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .grid-2, .grid-3 {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVIGATION BAR -->
+    <nav class="architecture-nav">
+        <a href="index.html">🏠 Home</a>
+        <a href="manual-onboarding.html">📝 Manual Onboarding</a>
+        <a href="beezaro-copilot.html">🤖 Beezaro Copilot</a>
+        <a href="side-by-side-comparison.html">⚡ Onboarding Comparison</a>
+        <a href="live-dashboard-overview.html" class="active">📊 Live Dashboard</a>
+        <a href="complete-architecture-map.html">🗺️ Complete Map</a>
+    </nav>
+
+    <!-- BREADCRUMB -->
+    <div class="breadcrumb">
+        <a href="index.html">🏠 Home</a> <span>/</span> <span>📊 Live Dashboard Overview</span>
+    </div>
+
+    <!-- HERO SECTION -->
+    <div class="hero-section">
+        <h1>📊 Live Dashboard Architecture Overview</h1>
+        <p>Complete Post-Onboarding Application Architecture</p>
+        <p style="font-size: 1rem; margin-top: 15px; opacity: 0.9;">
+            The production environment where users manage conversations, contacts, automations, and business operations
+        </p>
+    </div>
+
+    <div class="main-content">
+
+        <!-- FRAME 1: OVERVIEW -->
+        <div id="frame1" class="frame">
+            <h2>📋 FRAME 1: Live Dashboard Architecture Overview</h2>
+
+            <h3>🎯 What is the Live Dashboard?</h3>
+            <p>The <strong>Live Dashboard</strong> is the primary production application users interact with after completing onboarding (Manual or Beezaro). It provides a comprehensive business management platform with multi-channel communication, CRM, automation, and industry-specific operational tools.</p>
+
+            <div style="background: linear-gradient(135deg, #E8F5E9 0%, #B7E4C7 100%); border: 3px solid #2D6A4F; border-radius: 12px; padding: 25px; margin: 25px 0;">
+                <h4 style="color: #1A4D2E; font-size: 1.3rem; margin-bottom: 20px; text-align: center; border-bottom: 2px solid #2D6A4F; padding-bottom: 10px;">
+                    📌 User Journey to Live Dashboard
+                </h4>
+
+                <div style="display: grid; gap: 12px;">
+                    <div style="background: white; padding: 15px; border-radius: 8px; border-left: 4px solid #2D6A4F;">
+                        <strong style="color: #1A4D2E;">1.</strong> Sign Up (Email/OAuth)
+                    </div>
+                    <div style="background: white; padding: 15px; border-radius: 8px; border-left: 4px solid #2D6A4F;">
+                        <strong style="color: #1A4D2E;">2.</strong> Email Verification
+                    </div>
+                    <div style="background: white; padding: 15px; border-radius: 8px; border-left: 4px solid #2D6A4F;">
+                        <strong style="color: #1A4D2E;">3.</strong> Plan Selection
+                    </div>
+                    <div style="background: white; padding: 20px; border-radius: 8px; border-left: 4px solid #2D6A4F;">
+                        <strong style="color: #1A4D2E;">4.</strong> Onboarding (Manual OR Beezaro)
+                        <div style="margin-left: 25px; margin-top: 10px; display: grid; gap: 8px;">
+                            <div style="background: #F5FFF5; padding: 10px; border-radius: 6px;">• Business Identity</div>
+                            <div style="background: #F5FFF5; padding: 10px; border-radius: 6px;">• Team Members</div>
+                            <div style="background: #F5FFF5; padding: 10px; border-radius: 6px;">• Channels</div>
+                            <div style="background: #F5FFF5; padding: 10px; border-radius: 6px;">• AI Assistant</div>
+                            <div style="background: #F5FFF5; padding: 10px; border-radius: 6px;">• Escalation Rules</div>
+                            <div style="background: #F5FFF5; padding: 10px; border-radius: 6px;">• Automation</div>
+                        </div>
+                    </div>
+                    <div style="background: white; padding: 15px; border-radius: 8px; border-left: 4px solid #FB9C1D;">
+                        <strong style="color: #FB9C1D;">5.</strong> [OPTIONAL] Beehive Dashboard (29-day testing environment)
+                    </div>
+                    <div style="background: #1A4D2E; color: white; padding: 20px; border-radius: 8px; text-align: center; font-weight: bold; font-size: 1.1rem;">
+                        ✅ 6. LIVE DASHBOARD (Production Application)
+                    </div>
+                </div>
+            </div>
+
+            <h3>🎨 Live Dashboard vs Beehive Dashboard</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Aspect</th>
+                        <th>Beehive Dashboard</th>
+                        <th>Live Dashboard</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Purpose</strong></td>
+                        <td>Testing/Sandbox environment</td>
+                        <td>Production application</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Data</strong></td>
+                        <td>Test data only (29-day limit)</td>
+                        <td>Real business data</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Channels</strong></td>
+                        <td>Test channel connections</td>
+                        <td>Live channel connections (WhatsApp, Email, etc.)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Access</strong></td>
+                        <td>Available during setup period</td>
+                        <td>Persistent (as long as account active)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Billing</strong></td>
+                        <td>No charges during 29 days</td>
+                        <td>Active billing based on plan + add-ons</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Migration</strong></td>
+                        <td>Data can be migrated to Live</td>
+                        <td>N/A - already live</td>
+                    </tr>
+                    <tr>
+                        <td><strong>UI Indicator</strong></td>
+                        <td>Banner: "Setup mode - X days left"</td>
+                        <td>No banner, full access</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>🗂️ Core Modules</h3>
+            <div class="grid-3">
+                <div class="card">
+                    <h4>📥 Inbox Module</h4>
+                    <p>Multi-channel unified inbox for conversations across WhatsApp, Email, Instagram, Telegram, Facebook Messenger, and more.</p>
+                    <p><span class="badge badge-green">General Inbox</span> <span class="badge badge-blue">Team Inbox</span></p>
+                    <p><a href="live-dashboard-inbox.html">→ View Inbox Architecture</a></p>
+                </div>
+
+                <div class="card">
+                    <h4>🤖 Automations Module</h4>
+                    <p>Create, manage, and monitor automated workflows for sales, support, retention, and re-engagement.</p>
+                    <p><span class="badge badge-green">Template Library</span> <span class="badge badge-blue">Beezora AI</span></p>
+                    <p><a href="live-dashboard-automations.html">→ View Automations Architecture</a></p>
+                </div>
+
+                <div class="card">
+                    <h4>👥 CRM Module</h4>
+                    <p>Complete contact relationship management with lists, tags, custom fields, communication history, tasks, and documents.</p>
+                    <p><span class="badge badge-green">360° Contact View</span> <span class="badge badge-blue">Advanced Filters</span></p>
+                    <p><a href="live-dashboard-crm.html">→ View CRM Architecture</a></p>
+                </div>
+
+                <div class="card">
+                    <h4>📊 Main Dashboard</h4>
+                    <p>Central hub with insights, KPIs, settings, brand kit customization, plan management, and team administration.</p>
+                    <p><span class="badge badge-green">Insights</span> <span class="badge badge-blue">Brand Kit</span></p>
+                    <p><a href="live-dashboard-main.html">→ View Dashboard Architecture</a></p>
+                </div>
+
+                <div class="card">
+                    <h4>⚙️ Operations & Admin</h4>
+                    <p>Internal operations management with tasks, leads, reports, templates, and industry-specific modules.</p>
+                    <p><span class="badge badge-green">10+ Industries</span> <span class="badge badge-blue">Advanced Reports</span></p>
+                    <p><a href="live-dashboard-operations.html">→ View Operations Architecture</a></p>
+                </div>
+
+                <div class="card">
+                    <h4>🧪 Beehive Dashboard</h4>
+                    <p>Safe testing environment (29-day sandbox) to experiment with features before going live with real data.</p>
+                    <p><span class="badge badge-orange">Testing Mode</span> <span class="badge badge-blue">Data Migration</span></p>
+                    <p><a href="beehive-dashboard.html">→ View Beehive Architecture</a></p>
+                </div>
+            </div>
+
+            <div class="see-also">
+                <h3>🔗 See Also</h3>
+                <p>
+                    <a href="complete-architecture-map.html">→ Complete Architecture Map</a> |
+                    <a href="manual-onboarding.html">→ Manual Onboarding</a> |
+                    <a href="beezaro-copilot.html">→ Beezaro Copilot Onboarding</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- FRAME 2: NAVIGATION ARCHITECTURE -->
+        <div id="frame2" class="frame">
+            <h2>🧭 FRAME 2: Navigation Architecture</h2>
+
+            <h3>🎨 Application Layout Structure</h3>
+
+            <div style="background: white; border: 3px solid #2D6A4F; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(26, 77, 46, 0.15); margin: 25px 0;">
+
+                <!-- TOP BAR -->
+                <div style="background: linear-gradient(135deg, #1A4D2E 0%, #2D6A4F 100%); color: white; padding: 15px; display: grid; grid-template-columns: auto 1fr auto; gap: 20px; align-items: center; border-bottom: 2px solid #FB9C1D;">
+                    <div style="font-weight: 700; font-size: 1.1rem; display: flex; align-items: center; gap: 10px;">
+                        <span style="font-size: 1.5rem;">🐝</span> UnifiedBeez
+                    </div>
+                    <div style="background: rgba(255, 255, 255, 0.2); padding: 10px 15px; border-radius: 8px; display: flex; align-items: center; gap: 10px;">
+                        <span>🔍</span> <span style="opacity: 0.8;">Global Search</span>
+                    </div>
+                    <div style="display: flex; gap: 15px; font-size: 1.3rem;">
+                        <span>🔔</span>
+                        <span>⚙️</span>
+                        <span>👤</span>
+                    </div>
+                </div>
+
+                <!-- MAIN LAYOUT: SIDEBAR + CONTENT AREA -->
+                <div style="display: grid; grid-template-columns: 250px 1fr; min-height: 400px;">
+
+                    <!-- LEFT SIDEBAR -->
+                    <div style="background: #F5F5F5; border-right: 2px solid #E0E0E0; padding: 20px 0; display: flex; flex-direction: column;">
+
+                        <!-- Main Navigation -->
+                        <div style="flex: 1;">
+                            <div style="padding: 12px 20px; margin: 5px 10px; background: white; border-radius: 8px; border-left: 4px solid #1A4D2E; font-weight: 600; color: #1A4D2E; cursor: pointer;">
+                                📊 Dashboard
+                            </div>
+                            <div style="padding: 12px 20px; margin: 5px 10px; background: white; border-radius: 8px; border-left: 4px solid #E0E0E0; color: #2C3E50; cursor: pointer;">
+                                📥 Inbox
+                            </div>
+                            <div style="padding: 12px 20px; margin: 5px 10px; background: white; border-radius: 8px; border-left: 4px solid #E0E0E0; color: #2C3E50; cursor: pointer;">
+                                🤖 Automations
+                            </div>
+                            <div style="padding: 12px 20px; margin: 5px 10px; background: white; border-radius: 8px; border-left: 4px solid #E0E0E0; color: #2C3E50; cursor: pointer;">
+                                👥 CRM
+                            </div>
+                            <div style="padding: 12px 20px; margin: 5px 10px; background: white; border-radius: 8px; border-left: 4px solid #E0E0E0; color: #2C3E50; cursor: pointer;">
+                                🏢 Operations
+                            </div>
+                        </div>
+
+                        <!-- Bottom Navigation -->
+                        <div style="border-top: 1px solid #E0E0E0; padding-top: 15px; margin-top: 15px;">
+                            <div style="padding: 12px 20px; margin: 5px 10px; background: white; border-radius: 8px; border-left: 4px solid #E0E0E0; color: #2C3E50; cursor: pointer;">
+                                ⚙️ Settings
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- MAIN CONTENT AREA -->
+                    <div style="background: #FAFAFA; padding: 30px; display: flex; align-items: center; justify-content: center;">
+                        <div style="text-align: center; color: #666;">
+                            <div style="font-size: 3rem; margin-bottom: 15px; opacity: 0.3;">📊</div>
+                            <div style="font-size: 1.2rem; font-weight: 600; color: #2C3E50; margin-bottom: 10px;">
+                                Main Content Area
+                            </div>
+                            <div style="background: white; border: 2px dashed #E0E0E0; border-radius: 8px; padding: 20px; max-width: 400px; margin: 0 auto;">
+                                <p style="color: #666; margin: 0; font-size: 0.95rem;">
+                                    Dynamic content based on selected module
+                                </p>
+                                <div style="margin-top: 15px; display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;">
+                                    <span style="background: #E8F5E9; color: #1A4D2E; padding: 5px 12px; border-radius: 5px; font-size: 0.85rem;">Dashboard Widgets</span>
+                                    <span style="background: #E8F5E9; color: #1A4D2E; padding: 5px 12px; border-radius: 5px; font-size: 0.85rem;">Inbox Messages</span>
+                                    <span style="background: #FFF9E6; color: #FB9C1D; padding: 5px 12px; border-radius: 5px; font-size: 0.85rem;">CRM Contacts</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <p style="text-align: center; color: #666; font-size: 0.9rem; margin-top: 10px;">
+                <em>Visual representation of the Live Dashboard application layout with top navigation bar, left sidebar menu, and dynamic main content area</em>
+            </p>
+
+            <h3>🗂️ Left Sidebar Navigation</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Menu Item</th>
+                        <th>Icon</th>
+                        <th>Description</th>
+                        <th>Sub-items</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Dashboard</strong></td>
+                        <td>📊</td>
+                        <td>Home screen with insights and KPIs</td>
+                        <td>None (single view)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Inbox</strong></td>
+                        <td>📥</td>
+                        <td>Unified multi-channel conversations</td>
+                        <td>General Inbox, Team Inbox, Inbox Settings</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Automations</strong></td>
+                        <td>🤖</td>
+                        <td>Workflow automation library</td>
+                        <td>Automation Library, Active Automations, Create New</td>
+                    </tr>
+                    <tr>
+                        <td><strong>CRM</strong></td>
+                        <td>👥</td>
+                        <td>Contact relationship management</td>
+                        <td>Contacts, Lists, Tags, Merge Fields</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Operations & Admin</strong></td>
+                        <td>⚙️</td>
+                        <td>Internal ops and industry modules</td>
+                        <td>Tasks, Leads, Reports, Templates, Industry Modules</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Settings</strong></td>
+                        <td>⚙️</td>
+                        <td>Account configuration (bottom of sidebar)</td>
+                        <td>Profile, Preferences, Security, Team, Channels, Billing</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>🔝 Top Bar Components</h3>
+            <div class="grid-2">
+                <div class="card">
+                    <h4>🔍 Global Search</h4>
+                    <p><strong>Search Across:</strong></p>
+                    <ul>
+                        <li>Contacts (name, email, phone)</li>
+                        <li>Conversations (message content)</li>
+                        <li>Tasks (title, description)</li>
+                        <li>Automations (name)</li>
+                        <li>Templates (name, content)</li>
+                    </ul>
+                    <p><strong>Keyboard Shortcut:</strong> Ctrl+K / Cmd+K</p>
+                </div>
+
+                <div class="card">
+                    <h4>🔔 Notifications</h4>
+                    <p><strong>Notification Types:</strong></p>
+                    <ul>
+                        <li>New messages (Inbox)</li>
+                        <li>Automation triggers/completions</li>
+                        <li>Task assignments/due dates</li>
+                        <li>Team activity</li>
+                        <li>System alerts</li>
+                    </ul>
+                    <p><strong>Badge:</strong> Red counter for unread count</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h4>👤 User Profile Menu</h4>
+                <p><strong>Dropdown Items:</strong></p>
+                <ul>
+                    <li><strong>Profile</strong> - View/edit personal information</li>
+                    <li><strong>Settings</strong> - Quick access to settings</li>
+                    <li><strong>Switch to Beehive</strong> - Go to testing environment (if available)</li>
+                    <li><strong>Help & Documentation</strong> - Support resources</li>
+                    <li><strong>Log Out</strong> - Sign out of account</li>
+                </ul>
+            </div>
+
+            <h3>📑 Settings Navigation Hierarchy</h3>
+            <div style="background: linear-gradient(135deg, #E8F5E9 0%, #B7E4C7 100%); border: 3px solid #2D6A4F; border-radius: 12px; padding: 30px; margin: 25px 0;">
+                <h4 style="color: #1A4D2E; text-align: center; margin-bottom: 25px; font-size: 1.3rem;">
+                    ⚙️ Settings Navigation - Complete Hierarchy
+                </h4>
+
+                <div style="display: grid; gap: 15px;">
+                    <!-- Profile -->
+                    <div style="background: white; border-left: 5px solid #52B788; border-radius: 8px; padding: 18px; box-shadow: 0 2px 8px rgba(45, 106, 79, 0.15);">
+                        <div style="color: #1A4D2E; font-weight: bold; font-size: 1.1rem; margin-bottom: 10px;">
+                            👤 Profile
+                        </div>
+                        <div style="padding-left: 25px; color: #546E7A; font-size: 0.95rem; line-height: 1.8;">
+                            • Personal Information (Name, Email)<br>
+                            • Profile Picture<br>
+                            • Business Role
+                        </div>
+                    </div>
+
+                    <!-- Preferences -->
+                    <div style="background: white; border-left: 5px solid #52B788; border-radius: 8px; padding: 18px; box-shadow: 0 2px 8px rgba(45, 106, 79, 0.15);">
+                        <div style="color: #1A4D2E; font-weight: bold; font-size: 1.1rem; margin-bottom: 10px;">
+                            🎨 Preferences
+                        </div>
+                        <div style="padding-left: 25px; color: #546E7A; font-size: 0.95rem; line-height: 1.8;">
+                            • Language<br>
+                            • Timezone<br>
+                            • Theme (Light/Dark)<br>
+                            • Display Preferences
+                        </div>
+                    </div>
+
+                    <!-- Notifications -->
+                    <div style="background: white; border-left: 5px solid #52B788; border-radius: 8px; padding: 18px; box-shadow: 0 2px 8px rgba(45, 106, 79, 0.15);">
+                        <div style="color: #1A4D2E; font-weight: bold; font-size: 1.1rem; margin-bottom: 10px;">
+                            🔔 Notifications
+                        </div>
+                        <div style="padding-left: 25px; color: #546E7A; font-size: 0.95rem; line-height: 1.8;">
+                            • Email Notifications<br>
+                            • In-app Alerts<br>
+                            • SMS Notifications<br>
+                            • Frequency Settings
+                        </div>
+                    </div>
+
+                    <!-- Security -->
+                    <div style="background: white; border-left: 5px solid #52B788; border-radius: 8px; padding: 18px; box-shadow: 0 2px 8px rgba(45, 106, 79, 0.15);">
+                        <div style="color: #1A4D2E; font-weight: bold; font-size: 1.1rem; margin-bottom: 10px;">
+                            🔒 Security
+                        </div>
+                        <div style="padding-left: 25px; color: #546E7A; font-size: 0.95rem; line-height: 1.8;">
+                            • Change Password<br>
+                            • Two-Factor Authentication<br>
+                            • API Keys<br>
+                            • Session Management
+                        </div>
+                    </div>
+
+                    <!-- Channels -->
+                    <div style="background: white; border-left: 5px solid #52B788; border-radius: 8px; padding: 18px; box-shadow: 0 2px 8px rgba(45, 106, 79, 0.15);">
+                        <div style="color: #1A4D2E; font-weight: bold; font-size: 1.1rem; margin-bottom: 10px;">
+                            📱 Channels
+                        </div>
+                        <div style="padding-left: 25px; color: #546E7A; font-size: 0.95rem; line-height: 1.8;">
+                            • WhatsApp<br>
+                            • Email<br>
+                            • Instagram<br>
+                            • Telegram<br>
+                            • Other Integrations
+                        </div>
+                    </div>
+
+                    <!-- Team -->
+                    <div style="background: white; border-left: 5px solid #52B788; border-radius: 8px; padding: 18px; box-shadow: 0 2px 8px rgba(45, 106, 79, 0.15);">
+                        <div style="color: #1A4D2E; font-weight: bold; font-size: 1.1rem; margin-bottom: 10px;">
+                            👥 Team
+                        </div>
+                        <div style="padding-left: 25px; color: #546E7A; font-size: 0.95rem; line-height: 1.8;">
+                            • Team Members List<br>
+                            • Invite Members<br>
+                            • Role Management<br>
+                            • Permissions
+                        </div>
+                    </div>
+
+                    <!-- Billing & Plan -->
+                    <div style="background: white; border-left: 5px solid #52B788; border-radius: 8px; padding: 18px; box-shadow: 0 2px 8px rgba(45, 106, 79, 0.15);">
+                        <div style="color: #1A4D2E; font-weight: bold; font-size: 1.1rem; margin-bottom: 10px;">
+                            💳 Billing & Plan
+                        </div>
+                        <div style="padding-left: 25px; color: #546E7A; font-size: 0.95rem; line-height: 1.8;">
+                            • Current Plan<br>
+                            • Usage & Metrics<br>
+                            • Add-ons<br>
+                            • Payment Method<br>
+                            • Invoices
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3>🎭 Modal Patterns</h3>
+            <p>Consistent modal usage across all modules:</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Modal Type</th>
+                        <th>Purpose</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Create Modal</strong></td>
+                        <td>Add new entity</td>
+                        <td>Create Contact, Create Task, Create Automation</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Edit Modal</strong></td>
+                        <td>Modify existing entity</td>
+                        <td>Edit Contact Details, Edit Template</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Detail Modal</strong></td>
+                        <td>View full information</td>
+                        <td>View Automation Details, View Report</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Confirmation Modal</strong></td>
+                        <td>Confirm destructive action</td>
+                        <td>Delete Contact, Archive Conversation</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Filter Modal</strong></td>
+                        <td>Apply advanced filters</td>
+                        <td>Filter Contacts by Tags/Status, Filter Tasks by Priority</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="see-also">
+                <h3>🔗 See Also</h3>
+                <p>
+                    <a href="#frame6">→ Frame 6: State Management Patterns</a> |
+                    <a href="live-dashboard-main.html#settings">→ Settings Architecture Deep-Dive</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- FRAME 3: DATA MODEL OVERVIEW -->
+        <div id="frame3" class="frame">
+            <h2>🗄️ FRAME 3: Data Model Overview</h2>
+
+            <h3>🎯 Core Entities</h3>
+            <p>The Live Dashboard data model is built around these primary entities:</p>
+
+            <div class="grid-2">
+                <div class="card">
+                    <h4>👤 Contact</h4>
+                    <p><strong>Central entity</strong> - All activities link to contacts</p>
+                    <p><strong>Key Fields:</strong></p>
+                    <ul>
+                        <li>First Name, Last Name</li>
+                        <li>Email, Phone</li>
+                        <li>Status (Active, Unconfirmed, Unsubscribed, Bounced)</li>
+                        <li>Created Date, Last Activity</li>
+                        <li>Custom Merge Fields</li>
+                    </ul>
+                    <p><strong>Relationships:</strong></p>
+                    <ul>
+                        <li>Has many Conversations</li>
+                        <li>Has many Tasks</li>
+                        <li>Belongs to many Lists</li>
+                        <li>Has many Tags</li>
+                        <li>Has many Communications</li>
+                        <li>Has many Documents</li>
+                        <li>Has many Activities</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>💬 Conversation</h4>
+                    <p><strong>Multi-channel message threads</strong></p>
+                    <p><strong>Key Fields:</strong></p>
+                    <ul>
+                        <li>Channel Type (WhatsApp, Email, etc.)</li>
+                        <li>Status (Active, Resolved, Closed)</li>
+                        <li>Assigned To (Team/Individual)</li>
+                        <li>Labels/Tags</li>
+                        <li>Last Message Timestamp</li>
+                        <li>Unread Count</li>
+                    </ul>
+                    <p><strong>Relationships:</strong></p>
+                    <ul>
+                        <li>Belongs to Contact</li>
+                        <li>Has many Messages</li>
+                        <li>Assigned to Team/User</li>
+                        <li>Has many Attributes</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>✅ Task</h4>
+                    <p><strong>Action items for contacts/operations</strong></p>
+                    <p><strong>Key Fields:</strong></p>
+                    <ul>
+                        <li>Title, Description</li>
+                        <li>Status (Active, Completed, Overdue)</li>
+                        <li>Priority (Low, Medium, High)</li>
+                        <li>Due Date</li>
+                        <li>Assigned To</li>
+                        <li>Category</li>
+                    </ul>
+                    <p><strong>Relationships:</strong></p>
+                    <ul>
+                        <li>Linked to Contact (optional)</li>
+                        <li>Assigned to User</li>
+                        <li>Has Owner</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>🤖 Automation</h4>
+                    <p><strong>Automated workflow instances</strong></p>
+                    <p><strong>Key Fields:</strong></p>
+                    <ul>
+                        <li>Name, Description</li>
+                        <li>Status (Active/Inactive)</li>
+                        <li>Trigger Conditions</li>
+                        <li>Actions Sequence</li>
+                        <li>Owner</li>
+                        <li>Execution History</li>
+                    </ul>
+                    <p><strong>Relationships:</strong></p>
+                    <ul>
+                        <li>Based on Template</li>
+                        <li>Has many Executions</li>
+                        <li>Acts on Contacts/Conversations</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>📋 List</h4>
+                    <p><strong>Contact segmentation groups</strong></p>
+                    <p><strong>Key Fields:</strong></p>
+                    <ul>
+                        <li>List Name</li>
+                        <li>Contact Count</li>
+                        <li>Created Date</li>
+                        <li>Last Updated</li>
+                    </ul>
+                    <p><strong>Relationships:</strong></p>
+                    <ul>
+                        <li>Has many Contacts (many-to-many)</li>
+                        <li>Used in Automations (filters)</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>🏷️ Tag</h4>
+                    <p><strong>Contact/conversation labels</strong></p>
+                    <p><strong>Key Fields:</strong></p>
+                    <ul>
+                        <li>Tag Name</li>
+                        <li>Color</li>
+                        <li>Usage Count</li>
+                    </ul>
+                    <p><strong>Relationships:</strong></p>
+                    <ul>
+                        <li>Applied to many Contacts</li>
+                        <li>Applied to many Conversations</li>
+                        <li>Used in Filters/Reports</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>📝 Template</h4>
+                    <p><strong>Reusable message/workflow templates</strong></p>
+                    <p><strong>Types:</strong></p>
+                    <ul>
+                        <li>WhatsApp Templates (approval status)</li>
+                        <li>General Templates</li>
+                        <li>Preset Templates</li>
+                        <li>Automation Templates</li>
+                        <li>Task Templates</li>
+                    </ul>
+                    <p><strong>Relationships:</strong></p>
+                    <ul>
+                        <li>Used in Conversations</li>
+                        <li>Used in Automations</li>
+                        <li>Has Owner/Creator</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>📊 Report</h4>
+                    <p><strong>Analytics and insights</strong></p>
+                    <p><strong>Types:</strong></p>
+                    <ul>
+                        <li>Campaign Reports</li>
+                        <li>Automation Reports</li>
+                        <li>Contact Reports</li>
+                        <li>WhatsApp Reports</li>
+                        <li>Sales Engagement Reports</li>
+                    </ul>
+                    <p><strong>Relationships:</strong></p>
+                    <ul>
+                        <li>Aggregates Contact data</li>
+                        <li>Aggregates Conversation data</li>
+                        <li>Aggregates Automation executions</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>🔗 Entity Relationship Diagram (Simplified)</h3>
+            <div style="background: linear-gradient(135deg, #E8F5E9 0%, #E8F5E9 100%); border: 3px solid #FF9800; border-radius: 12px; padding: 30px; margin: 25px 0;">
+                <h4 style="color: #1A4D2E; text-align: center; margin-bottom: 30px; font-size: 1.3rem;">
+                    🔗 Simplified Entity Relationships - System Overview
+                </h4>
+
+                <!-- Central Contact Entity -->
+                <div style="background: white; border: 4px solid #FF9800; border-radius: 12px; padding: 25px; margin-bottom: 25px; box-shadow: 0 4px 15px rgba(255, 111, 0, 0.3);">
+                    <div style="color: #1A4D2E; font-weight: bold; font-size: 1.4rem; text-align: center; margin-bottom: 20px; background: #FFF3E0; padding: 15px; border-radius: 8px;">
+                        👤 CONTACT (Central Entity)
+                    </div>
+
+                    <div style="display: grid; gap: 12px;">
+                        <div style="background: #E8F5E9; border-left: 4px solid #2D6A4F; padding: 12px; border-radius: 6px;">
+                            <strong style="color: #1A4D2E;">💬 has many →</strong> <span style="color: #546E7A;">CONVERSATIONS → has many → MESSAGES</span>
+                        </div>
+
+                        <div style="background: #E8F5E9; border-left: 4px solid #2D6A4F; padding: 12px; border-radius: 6px;">
+                            <strong style="color: #1A4D2E;">✅ has many →</strong> <span style="color: #546E7A;">TASKS</span>
+                        </div>
+
+                        <div style="background: #E8F5E9; border-left: 4px solid #52B788; padding: 12px; border-radius: 6px;">
+                            <strong style="color: #2D6A4F;">📞 has many →</strong> <span style="color: #546E7A;">COMMUNICATIONS (calls, emails, etc.)</span>
+                        </div>
+
+                        <div style="background: #FFF3E0; border-left: 4px solid #FF9800; padding: 12px; border-radius: 6px;">
+                            <strong style="color: #1A4D2E;">📄 has many →</strong> <span style="color: #546E7A;">DOCUMENTS</span>
+                        </div>
+
+                        <div style="background: #E8F5E9; border-left: 4px solid #2D6A4F; padding: 12px; border-radius: 6px;">
+                            <strong style="color: #1A4D2E;">📊 has many →</strong> <span style="color: #546E7A;">ACTIVITIES (audit log)</span>
+                        </div>
+
+                        <div style="background: #E8F5E9; border-left: 4px solid #52B788; padding: 12px; border-radius: 6px;">
+                            <strong style="color: #2D6A4F;">📋 belongs to many →</strong> <span style="color: #546E7A;">LISTS</span>
+                        </div>
+
+                        <div style="background: #E8F5E9; border-left: 4px solid #2D6A4F; padding: 12px; border-radius: 6px;">
+                            <strong style="color: #1A4D2E;">🏷️ has many →</strong> <span style="color: #546E7A;">TAGS</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Automations & Templates -->
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-bottom: 20px;">
+                    <!-- Automations -->
+                    <div style="background: white; border: 3px solid #1A4D2E; border-radius: 10px; padding: 20px; box-shadow: 0 3px 10px rgba(26, 77, 46, 0.2);">
+                        <div style="color: #1A4D2E; font-weight: bold; font-size: 1.2rem; margin-bottom: 15px; padding: 10px; background: #E8F5E9; border-radius: 6px; text-align: center;">
+                            ⚡ AUTOMATIONS
+                        </div>
+                        <div style="color: #546E7A; font-size: 0.95rem; line-height: 1.8;">
+                            • acts on → Contacts<br>
+                            • acts on → Conversations<br>
+                            • has → Execution History
+                        </div>
+                    </div>
+
+                    <!-- Templates -->
+                    <div style="background: white; border: 3px solid #2D6A4F; border-radius: 10px; padding: 20px; box-shadow: 0 3px 10px rgba(45, 106, 79, 0.2);">
+                        <div style="color: #1A4D2E; font-weight: bold; font-size: 1.2rem; margin-bottom: 15px; padding: 10px; background: #E8F5E9; border-radius: 6px; text-align: center;">
+                            📝 TEMPLATES
+                        </div>
+                        <div style="color: #546E7A; font-size: 0.95rem; line-height: 1.8;">
+                            • used in → Messages<br>
+                            • used in → Automations<br>
+                            • has → Owner
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reports -->
+                <div style="background: white; border: 3px solid #2D6A4F; border-radius: 10px; padding: 20px; box-shadow: 0 3px 10px rgba(45, 106, 79, 0.2);">
+                    <div style="color: #1A4D2E; font-weight: bold; font-size: 1.2rem; margin-bottom: 15px; padding: 10px; background: #E8F5E9; border-radius: 6px; text-align: center;">
+                        📊 REPORTS
+                    </div>
+                    <div style="color: #546E7A; font-size: 0.95rem; line-height: 1.8;">
+                        • aggregates → Contact data<br>
+                        • aggregates → Conversation metrics<br>
+                        • aggregates → Automation performance
+                    </div>
+                </div>
+            </div>
+
+            <h3>📦 Shared Data Across Modules</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Entity</th>
+                        <th>Used in Inbox</th>
+                        <th>Used in CRM</th>
+                        <th>Used in Automations</th>
+                        <th>Used in Operations</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Contact</strong></td>
+                        <td>✅ Conversation participants</td>
+                        <td>✅ Primary entity</td>
+                        <td>✅ Automation targets</td>
+                        <td>✅ Task assignments</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Tags</strong></td>
+                        <td>✅ Conversation labels</td>
+                        <td>✅ Contact categorization</td>
+                        <td>✅ Trigger conditions</td>
+                        <td>✅ Report filters</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Templates</strong></td>
+                        <td>✅ Quick replies</td>
+                        <td>✅ Email templates</td>
+                        <td>✅ Automation actions</td>
+                        <td>✅ Task templates</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Team Members</strong></td>
+                        <td>✅ Conversation assignment</td>
+                        <td>✅ Contact ownership</td>
+                        <td>✅ Automation owners</td>
+                        <td>✅ Task assignment</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="see-also">
+                <h3>🔗 See Also</h3>
+                <p>
+                    <a href="live-dashboard-crm.html#database">→ Complete CRM Database Schema</a> |
+                    <a href="live-dashboard-inbox.html#database">→ Inbox Database Schema</a> |
+                    <a href="live-dashboard-automations.html#database">→ Automations Database Schema</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- FRAME 4: MULTI-TENANCY & PERMISSIONS -->
+        <div id="frame4" class="frame">
+            <h2>🔐 FRAME 4: Multi-Tenancy & Permissions</h2>
+
+            <h3>👥 User Role Model</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Role</th>
+                        <th>Description</th>
+                        <th>Permissions</th>
+                        <th>Use Case</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Account Owner</strong></td>
+                        <td>Creator of the account</td>
+                        <td>
+                            ✅ Full access to all features<br>
+                            ✅ Billing & plan management<br>
+                            ✅ Add/remove team members<br>
+                            ✅ Delete account
+                        </td>
+                        <td>Business owner, Primary admin</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Admin</strong></td>
+                        <td>Secondary administrator</td>
+                        <td>
+                            ✅ Manage contacts, automations, settings<br>
+                            ✅ Invite team members<br>
+                            ✅ View reports<br>
+                            ❌ Cannot delete account<br>
+                            ❌ Limited billing access
+                        </td>
+                        <td>Operations manager, Team lead</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Member</strong></td>
+                        <td>Regular team member</td>
+                        <td>
+                            ✅ Access inbox conversations<br>
+                            ✅ Manage assigned contacts<br>
+                            ✅ Create tasks<br>
+                            ✅ View automations<br>
+                            ❌ Cannot manage team<br>
+                            ❌ Cannot change billing
+                        </td>
+                        <td>Sales rep, Support agent</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Viewer</strong></td>
+                        <td>Read-only access</td>
+                        <td>
+                            ✅ View contacts<br>
+                            ✅ View reports<br>
+                            ✅ View conversations (assigned)<br>
+                            ❌ Cannot create/edit/delete<br>
+                            ❌ Cannot send messages
+                        </td>
+                        <td>Auditor, Stakeholder</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>🏢 Account Types & Multi-Tenancy</h3>
+            <div class="grid-2">
+                <div class="card">
+                    <h4>Individual Account</h4>
+                    <p><strong>Plan:</strong> Personal</p>
+                    <p><strong>Structure:</strong></p>
+                    <ul>
+                        <li>Single user (Account Owner)</li>
+                        <li>No team collaboration features</li>
+                        <li>All data owned by single user</li>
+                        <li>Simplified permissions</li>
+                    </ul>
+                    <p><strong>Database Isolation:</strong></p>
+                    <ul>
+                        <li>organizationId = userId</li>
+                        <li>No team_members table entries</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>Team Account</h4>
+                    <p><strong>Plans:</strong> Business, Premium, Organisation</p>
+                    <p><strong>Structure:</strong></p>
+                    <ul>
+                        <li>Multiple users (Owner + Admins + Members + Viewers)</li>
+                        <li>Team collaboration (Team Inbox, shared contacts)</li>
+                        <li>Data owned by organization</li>
+                        <li>Role-based permissions</li>
+                    </ul>
+                    <p><strong>Database Isolation:</strong></p>
+                    <ul>
+                        <li>organizationId (shared across team)</li>
+                        <li>team_members table tracks users</li>
+                        <li>Row-level security by organizationId</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>🔒 Feature Access by Plan</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Personal</th>
+                        <th>Business</th>
+                        <th>Premium</th>
+                        <th>Organisation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Inbox (Channels)</strong></td>
+                        <td>✅ 1 WhatsApp</td>
+                        <td>✅ 3 WhatsApps</td>
+                        <td>✅ 5 WhatsApps</td>
+                        <td>✅ Unlimited</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Team Members</strong></td>
+                        <td>❌ 1 user only</td>
+                        <td>✅ Up to 5</td>
+                        <td>✅ Up to 15</td>
+                        <td>✅ Unlimited</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Contacts</strong></td>
+                        <td>✅ 500</td>
+                        <td>✅ 5,000</td>
+                        <td>✅ 25,000</td>
+                        <td>✅ Unlimited</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Automations</strong></td>
+                        <td>✅ 5 active</td>
+                        <td>✅ 20 active</td>
+                        <td>✅ 50 active</td>
+                        <td>✅ Unlimited</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Beezora AI</strong></td>
+                        <td>❌ Not included</td>
+                        <td>✅ Add-on (£20/mo)</td>
+                        <td>✅ Included</td>
+                        <td>✅ Included</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Industry Modules</strong></td>
+                        <td>❌ Not available</td>
+                        <td>✅ 1 module</td>
+                        <td>✅ 3 modules</td>
+                        <td>✅ All modules</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Brand Kit</strong></td>
+                        <td>❌ Not available</td>
+                        <td>✅ Basic</td>
+                        <td>✅ Full</td>
+                        <td>✅ Full + White-label</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Reports</strong></td>
+                        <td>✅ Basic</td>
+                        <td>✅ Standard</td>
+                        <td>✅ Advanced</td>
+                        <td>✅ Enterprise</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>🎛️ Permission Matrix by Module</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Module</th>
+                        <th>Owner</th>
+                        <th>Admin</th>
+                        <th>Member</th>
+                        <th>Viewer</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Inbox - Send Messages</strong></td>
+                        <td>✅</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                        <td>❌</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Inbox - View All Conversations</strong></td>
+                        <td>✅</td>
+                        <td>✅</td>
+                        <td>⚠️ Assigned only</td>
+                        <td>⚠️ Assigned only</td>
+                    </tr>
+                    <tr>
+                        <td><strong>CRM - Create Contacts</strong></td>
+                        <td>✅</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                        <td>❌</td>
+                    </tr>
+                    <tr>
+                        <td><strong>CRM - Delete Contacts</strong></td>
+                        <td>✅</td>
+                        <td>✅</td>
+                        <td>❌</td>
+                        <td>❌</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Automations - Create</strong></td>
+                        <td>✅</td>
+                        <td>✅</td>
+                        <td>⚠️ With approval</td>
+                        <td>❌</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Automations - Enable/Disable</strong></td>
+                        <td>✅</td>
+                        <td>✅</td>
+                        <td>❌</td>
+                        <td>❌</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Settings - Billing</strong></td>
+                        <td>✅</td>
+                        <td>⚠️ View only</td>
+                        <td>❌</td>
+                        <td>❌</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Settings - Team Management</strong></td>
+                        <td>✅</td>
+                        <td>✅</td>
+                        <td>❌</td>
+                        <td>❌</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Reports - View</strong></td>
+                        <td>✅</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Reports - Export</strong></td>
+                        <td>✅</td>
+                        <td>✅</td>
+                        <td>⚠️ Assigned data only</td>
+                        <td>❌</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="info-box">
+                <h4>🔒 Database-Level Security</h4>
+                <p><strong>Row-Level Security (RLS) Implementation:</strong></p>
+                <ul>
+                    <li>Every table has <code>organizationId</code> column</li>
+                    <li>PostgreSQL RLS policies filter by <code>organizationId</code></li>
+                    <li>Additional user-level filtering based on role</li>
+                    <li>API endpoints validate permissions before database access</li>
+                </ul>
+                <p><strong>Example RLS Policy:</strong></p>
+                <div class="code-block">CREATE POLICY organization_isolation ON contacts
+FOR ALL
+USING (organizationId = current_setting('app.current_organization_id')::uuid);
+
+CREATE POLICY user_role_filter ON conversations
+FOR SELECT
+USING (
+  organizationId = current_setting('app.current_organization_id')::uuid
+  AND (
+    current_setting('app.current_user_role') IN ('owner', 'admin')
+    OR assignedTo = current_setting('app.current_user_id')::uuid
+  )
+);</div>
+            </div>
+
+            <div class="see-also">
+                <h3>🔗 See Also</h3>
+                <p>
+                    <a href="live-dashboard-main.html#team">→ Team Management Architecture</a> |
+                    <a href="#frame15">→ Frame 15: Security & Compliance</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- FRAME 5: INTEGRATION ARCHITECTURE -->
+        <div id="frame5" class="frame">
+            <h2>🔌 FRAME 5: Integration Architecture</h2>
+
+            <h3>📡 External Channel Integrations</h3>
+            <div class="grid-3">
+                <div class="card">
+                    <h4>💬 WhatsApp Business</h4>
+                    <p><strong>Integration Type:</strong> WhatsApp Business API</p>
+                    <p><strong>Features:</strong></p>
+                    <ul>
+                        <li>Send/receive messages</li>
+                        <li>Template messages (approval required)</li>
+                        <li>Media support (images, documents, audio)</li>
+                        <li>Read receipts & typing indicators</li>
+                        <li>Group messaging</li>
+                    </ul>
+                    <p><strong>Configuration:</strong></p>
+                    <ul>
+                        <li>WhatsApp Business Account ID</li>
+                        <li>Phone Number ID</li>
+                        <li>Access Token</li>
+                        <li>Webhook URL for callbacks</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>📧 Email</h4>
+                    <p><strong>Integration Type:</strong> SMTP/IMAP + Gmail/Outlook OAuth</p>
+                    <p><strong>Features:</strong></p>
+                    <ul>
+                        <li>Send/receive emails</li>
+                        <li>Thread conversation tracking</li>
+                        <li>Attachment support</li>
+                        <li>Email templates</li>
+                        <li>Scheduling</li>
+                    </ul>
+                    <p><strong>Configuration:</strong></p>
+                    <ul>
+                        <li>SMTP settings (host, port, credentials)</li>
+                        <li>IMAP settings for receiving</li>
+                        <li>OAuth for Gmail/Outlook</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>📷 Instagram</h4>
+                    <p><strong>Integration Type:</strong> Instagram Graph API</p>
+                    <p><strong>Features:</strong></p>
+                    <ul>
+                        <li>Direct message management</li>
+                        <li>Comment replies</li>
+                        <li>Story mentions</li>
+                        <li>Media sharing</li>
+                    </ul>
+                    <p><strong>Configuration:</strong></p>
+                    <ul>
+                        <li>Facebook Page connection</li>
+                        <li>Instagram Business Account</li>
+                        <li>Access Token</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>✈️ Telegram</h4>
+                    <p><strong>Integration Type:</strong> Telegram Bot API</p>
+                    <p><strong>Features:</strong></p>
+                    <ul>
+                        <li>Bot messaging</li>
+                        <li>Group chat support</li>
+                        <li>File transfers</li>
+                        <li>Inline keyboards</li>
+                    </ul>
+                    <p><strong>Configuration:</strong></p>
+                    <ul>
+                        <li>Bot Token (from BotFather)</li>
+                        <li>Webhook URL</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>💙 Facebook Messenger</h4>
+                    <p><strong>Integration Type:</strong> Messenger Platform API</p>
+                    <p><strong>Features:</strong></p>
+                    <ul>
+                        <li>Send/receive messages</li>
+                        <li>Quick replies</li>
+                        <li>Postback buttons</li>
+                        <li>Media attachments</li>
+                    </ul>
+                    <p><strong>Configuration:</strong></p>
+                    <ul>
+                        <li>Facebook Page</li>
+                        <li>App ID & Secret</li>
+                        <li>Page Access Token</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>📱 SMS (Twilio)</h4>
+                    <p><strong>Integration Type:</strong> Twilio API</p>
+                    <p><strong>Features:</strong></p>
+                    <ul>
+                        <li>Send/receive SMS</li>
+                        <li>Phone number provisioning</li>
+                        <li>Delivery status tracking</li>
+                        <li>MMS support</li>
+                    </ul>
+                    <p><strong>Configuration:</strong></p>
+                    <ul>
+                        <li>Account SID</li>
+                        <li>Auth Token</li>
+                        <li>Phone Numbers</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>🔗 Third-Party Integrations</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Integration</th>
+                        <th>Type</th>
+                        <th>Purpose</th>
+                        <th>Authentication</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Shopify</strong></td>
+                        <td>E-commerce</td>
+                        <td>Order sync, customer data, inventory</td>
+                        <td>OAuth 2.0</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Stripe</strong></td>
+                        <td>Payment</td>
+                        <td>Payment processing, subscription billing</td>
+                        <td>API Key</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Google Calendar</strong></td>
+                        <td>Calendar</td>
+                        <td>Appointment scheduling, reminders</td>
+                        <td>OAuth 2.0</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Zapier</strong></td>
+                        <td>Automation</td>
+                        <td>Connect with 3,000+ apps</td>
+                        <td>API Key + OAuth</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Google Sheets</strong></td>
+                        <td>Data Export</td>
+                        <td>Export contacts, reports to sheets</td>
+                        <td>OAuth 2.0</td>
+                    </tr>
+                    <tr>
+                        <td><strong>OpenAI</strong></td>
+                        <td>AI</td>
+                        <td>Beezora AI, content generation</td>
+                        <td>API Key</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>🌐 API Architecture</h3>
+            <div class="info-box">
+                <h4>📍 API Base URL</h4>
+                <p><code>https://api.unifiedbeez.com/v1</code></p>
+                <p><strong>Authentication:</strong> Bearer Token (JWT)</p>
+                <p><strong>Rate Limiting:</strong> 1000 requests/hour per organization</p>
+            </div>
+
+            <div class="code-block">API Endpoint Structure:
+
+GET    /api/v1/{module}/{entity}           - List entities
+GET    /api/v1/{module}/{entity}/{id}      - Get single entity
+POST   /api/v1/{module}/{entity}           - Create entity
+PUT    /api/v1/{module}/{entity}/{id}      - Update entity
+PATCH  /api/v1/{module}/{entity}/{id}      - Partial update
+DELETE /api/v1/{module}/{entity}/{id}      - Delete entity
+
+Examples:
+GET    /api/v1/crm/contacts
+GET    /api/v1/inbox/conversations
+POST   /api/v1/automations/execute
+PUT    /api/v1/settings/profile/{userId}</div>
+
+            <h3>🪝 Webhook System</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Event Type</th>
+                        <th>Payload</th>
+                        <th>Webhook URL Format</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>message.received</strong></td>
+                        <td>{conversationId, message, sender, channel}</td>
+                        <td>/webhooks/inbox/message</td>
+                    </tr>
+                    <tr>
+                        <td><strong>contact.created</strong></td>
+                        <td>{contactId, contactData, source}</td>
+                        <td>/webhooks/crm/contact-created</td>
+                    </tr>
+                    <tr>
+                        <td><strong>automation.completed</strong></td>
+                        <td>{automationId, contactId, result}</td>
+                        <td>/webhooks/automations/completed</td>
+                    </tr>
+                    <tr>
+                        <td><strong>task.due</strong></td>
+                        <td>{taskId, assignedTo, dueDate}</td>
+                        <td>/webhooks/tasks/due</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="see-also">
+                <h3>🔗 See Also</h3>
+                <p>
+                    <a href="live-dashboard-inbox.html#integrations">→ Inbox Channel Integration Details</a> |
+                    <a href="live-dashboard-main.html#channels">→ Channel Configuration</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- FRAME 6-15 SUMMARY (Due to length, providing overview) -->
+        <div id="frames-summary" class="frame">
+            <h2>📚 FRAMES 6-15: Additional Architecture Components</h2>
+
+            <div class="warning-box">
+                <h4>📝 Documentation Structure</h4>
+                <p>The remaining frames (6-15) cover specialized architectural topics. For complete details on each topic, please refer to the specific module documentation pages.</p>
+            </div>
+
+            <h3>📋 Frame 6: State Management Patterns</h3>
+            <p><strong>Coverage:</strong> Modal states, Table/List states, Form states, Real-time updates (WebSocket)</p>
+            <p><a href="live-dashboard-inbox.html#websocket">→ See WebSocket Implementation in Inbox Module</a></p>
+
+            <h3>🔍 Frame 7: Filter & Search Architecture</h3>
+            <p><strong>Coverage:</strong> Global search, Section-specific filters, Bulk action patterns, Advanced query builder</p>
+            <p><a href="live-dashboard-crm.html#filters">→ See CRM Filter Architecture</a></p>
+
+            <h3>📊 Frame 8: Reporting & Analytics System</h3>
+            <p><strong>Coverage:</strong> Report types (Campaigns, Automations, Contacts, WhatsApp, Sales), Metrics tracking, Export capabilities, Scheduled reports</p>
+            <p><a href="live-dashboard-operations.html#reports">→ See Complete Reporting Architecture</a></p>
+
+            <h3>🏭 Frame 9: Industry Module Framework</h3>
+            <p><strong>Coverage:</strong> Extensibility model, Template-based approach, Industry-specific fields (Healthcare, Restaurant, Real Estate, etc.), Workflow customization</p>
+            <p><a href="live-dashboard-operations.html#industry-modules">→ See Industry Modules Documentation</a></p>
+
+            <h3>🤖 Frame 10: AI Integration (Beezora)</h3>
+            <p><strong>Coverage:</strong> Personality configuration, Knowledge base, Natural language processing, Automation suggestions, OpenAI GPT-4 integration</p>
+            <p><a href="live-dashboard-automations.html#beezora">→ See Beezora AI Architecture</a></p>
+
+            <h3>💳 Frame 11: Billing & Feature Tiering</h3>
+            <p><strong>Coverage:</strong> Plans structure (Personal, Business, Premium, Organisation), Add-ons system (Seats, AI Assistant, Twilio, etc.), Usage tracking, Payment integration (Stripe)</p>
+            <p><a href="live-dashboard-main.html#billing">→ See Billing Architecture</a></p>
+
+            <h3>🎨 Frame 12: Brand Customization System</h3>
+            <p><strong>Coverage:</strong> Brand Kit (Logo, Colors, Fonts, Social media), Template theming, Email branding, White-label capabilities</p>
+            <p><a href="live-dashboard-main.html#brand-kit">→ See Brand Kit Architecture</a></p>
+
+            <h3>🔔 Frame 13: Notification System</h3>
+            <p><strong>Coverage:</strong> Notification types (Messages, Automations, Tasks, System), Delivery channels (Email, In-app, SMS, Push), User preferences, Real-time alerts</p>
+            <p><a href="live-dashboard-main.html#notifications">→ See Notification Architecture</a></p>
+
+            <h3>☁️ Frame 14: AWS Infrastructure (Live Dashboard)</h3>
+            <p><strong>Coverage:</strong> Additional AWS services beyond onboarding, Scaling considerations, Cost optimization, Performance monitoring</p>
+
+            <div class="info-box">
+                <h4>🏗️ AWS Services Used</h4>
+                <div class="grid-2">
+                    <div>
+                        <p><strong>Compute:</strong></p>
+                        <ul>
+                            <li>ECS Fargate (containerized services)</li>
+                            <li>Lambda (serverless functions)</li>
+                        </ul>
+                        <p><strong>Database:</strong></p>
+                        <ul>
+                            <li>RDS PostgreSQL (primary database)</li>
+                            <li>ElastiCache Redis (caching & sessions)</li>
+                        </ul>
+                        <p><strong>Storage:</strong></p>
+                        <ul>
+                            <li>S3 (media files, documents, backups)</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <p><strong>Networking:</strong></p>
+                        <ul>
+                            <li>API Gateway (API management)</li>
+                            <li>CloudFront (CDN)</li>
+                            <li>Route 53 (DNS)</li>
+                        </ul>
+                        <p><strong>Monitoring:</strong></p>
+                        <ul>
+                            <li>CloudWatch (logs & metrics)</li>
+                            <li>X-Ray (tracing)</li>
+                        </ul>
+                        <p><strong>Security:</strong></p>
+                        <ul>
+                            <li>Secrets Manager (API keys, credentials)</li>
+                            <li>WAF (firewall)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <h3>🛡️ Frame 15: Security & Compliance</h3>
+            <p><strong>Coverage:</strong> GDPR compliance (extends from onboarding), Data retention policies, Audit logging, API security, Encryption at rest & in transit</p>
+
+            <div class="info-box">
+                <h4>🔐 Security Measures</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Security Layer</th>
+                            <th>Implementation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Authentication</strong></td>
+                            <td>JWT tokens, OAuth 2.0, 2FA support</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Authorization</strong></td>
+                            <td>Role-based access control (RBAC), Row-level security (RLS)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Data Encryption</strong></td>
+                            <td>
+                                <strong>At Rest:</strong> AES-256 (RDS, S3)<br>
+                                <strong>In Transit:</strong> TLS 1.3
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>API Security</strong></td>
+                            <td>Rate limiting, Input validation, CORS policies, API key rotation</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Audit Logging</strong></td>
+                            <td>All user actions logged with timestamp, user ID, IP address</td>
+                        </tr>
+                        <tr>
+                            <td><strong>GDPR Compliance</strong></td>
+                            <td>
+                                Right to Access (GET /api/data-export)<br>
+                                Right to Erasure (DELETE /api/account-deletion)<br>
+                                Data Portability (CSV/JSON export)<br>
+                                Consent Management (tracked in database)
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="warning-box">
+                <h4>⚠️ Data Retention Policy</h4>
+                <ul>
+                    <li><strong>Conversations:</strong> Retained for 90 days after resolution</li>
+                    <li><strong>Contacts:</strong> Retained until manually deleted or account closure</li>
+                    <li><strong>Tasks:</strong> Archived 30 days after completion</li>
+                    <li><strong>Automation Logs:</strong> Retained for 180 days</li>
+                    <li><strong>Audit Logs:</strong> Retained for 2 years (compliance)</li>
+                    <li><strong>Deleted Data:</strong> Soft-deleted for 30 days, then permanently removed</li>
+                </ul>
+            </div>
+
+            <div class="see-also">
+                <h3>🔗 See Also</h3>
+                <p>
+                    <a href="manual-onboarding.html#gdpr">→ GDPR Compliance (Onboarding)</a> |
+                    <a href="beezaro-copilot.html#gdpr">→ GDPR Compliance (Beezaro)</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- FINAL SUMMARY & NEXT STEPS -->
+        <div id="next-steps" class="frame">
+            <h2>🚀 Next Steps & Related Documentation</h2>
+
+            <h3>📖 Module-Specific Documentation</h3>
+            <div class="grid-2">
+                <div class="card">
+                    <h4>📥 Inbox Module</h4>
+                    <p>Complete architecture for multi-channel conversations</p>
+                    <ul>
+                        <li>12 Frames covering all inbox features</li>
+                        <li>30+ API endpoints documented</li>
+                        <li>5 Database tables with schemas</li>
+                        <li>WhatsApp, Email, Instagram integration details</li>
+                    </ul>
+                    <p><a href="live-dashboard-inbox.html" style="color: #1A4D2E; font-weight: 600;">→ View Inbox Architecture</a></p>
+                </div>
+
+                <div class="card">
+                    <h4>🤖 Automations Module</h4>
+                    <p>Complete automation engine architecture</p>
+                    <ul>
+                        <li>10 Frames covering automation system</li>
+                        <li>20+ API endpoints documented</li>
+                        <li>4 Database tables with schemas</li>
+                        <li>Beezora AI integration for automation creation</li>
+                    </ul>
+                    <p><a href="live-dashboard-automations.html" style="color: #1A4D2E; font-weight: 600;">→ View Automations Architecture</a></p>
+                </div>
+
+                <div class="card">
+                    <h4>👥 CRM Module</h4>
+                    <p>Complete contact relationship management architecture</p>
+                    <ul>
+                        <li>14 Frames covering CRM features</li>
+                        <li>40+ API endpoints documented</li>
+                        <li>8 Database tables with schemas</li>
+                        <li>Lists, Tags, Merge Fields, Communications, Tasks</li>
+                    </ul>
+                    <p><a href="live-dashboard-crm.html" style="color: #1A4D2E; font-weight: 600;">→ View CRM Architecture</a></p>
+                </div>
+
+                <div class="card">
+                    <h4>📊 Main Dashboard</h4>
+                    <p>Dashboard, Settings, Brand Kit, Billing architecture</p>
+                    <ul>
+                        <li>13 Frames covering main dashboard</li>
+                        <li>35+ API endpoints documented</li>
+                        <li>7 Database tables with schemas</li>
+                        <li>Insights, Brand Kit, Plan management, Team</li>
+                    </ul>
+                    <p><a href="live-dashboard-main.html" style="color: #1A4D2E; font-weight: 600;">→ View Dashboard Architecture</a></p>
+                </div>
+
+                <div class="card">
+                    <h4>⚙️ Operations & Admin</h4>
+                    <p>Internal operations and industry modules architecture</p>
+                    <ul>
+                        <li>18 Frames covering operations features</li>
+                        <li>60+ API endpoints documented</li>
+                        <li>15+ Database tables with schemas</li>
+                        <li>10+ Industry-specific modules documented</li>
+                    </ul>
+                    <p><a href="live-dashboard-operations.html" style="color: #1A4D2E; font-weight: 600;">→ View Operations Architecture</a></p>
+                </div>
+
+                <div class="card">
+                    <h4>🧪 Beehive Dashboard</h4>
+                    <p>Testing environment architecture</p>
+                    <ul>
+                        <li>8 Frames covering Beehive features</li>
+                        <li>15 API endpoints documented</li>
+                        <li>3 Database tables with schemas</li>
+                        <li>Data migration and "Go Live" process</li>
+                    </ul>
+                    <p><a href="beehive-dashboard.html" style="color: #1A4D2E; font-weight: 600;">→ View Beehive Architecture</a></p>
+                </div>
+            </div>
+
+            <h3>🗺️ Complete System Map</h3>
+            <div class="info-box">
+                <h4>🌐 Navigate the Entire UnifiedBeez Architecture</h4>
+                <p>For a comprehensive view of the entire system including onboarding, testing, and production environments:</p>
+                <p style="margin-top: 15px;">
+                    <a href="complete-architecture-map.html" style="background: #1A4D2E; color: white; padding: 12px 24px; border-radius: 6px; text-decoration: none; display: inline-block; font-weight: 600;">
+                        🗺️ View Complete Architecture Map
+                    </a>
+                </p>
+            </div>
+
+            <h3>📊 Architecture Statistics</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Component</th>
+                        <th>Count</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Total HTML Pages</strong></td>
+                        <td>13</td>
+                        <td><span class="badge badge-green">Complete</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Total Documentation Frames</strong></td>
+                        <td>105</td>
+                        <td><span class="badge badge-blue">In Progress</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Backend Services</strong></td>
+                        <td>45+</td>
+                        <td><span class="badge badge-green">Documented</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Database Tables</strong></td>
+                        <td>70+</td>
+                        <td><span class="badge badge-green">Documented</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>API Endpoints</strong></td>
+                        <td>300+</td>
+                        <td><span class="badge badge-green">Documented</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Channel Integrations</strong></td>
+                        <td>15+</td>
+                        <td><span class="badge badge-green">Documented</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Industry Modules</strong></td>
+                        <td>10+</td>
+                        <td><span class="badge badge-green">Documented</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>UI Screens Analyzed</strong></td>
+                        <td>600+</td>
+                        <td><span class="badge badge-green">Complete</span></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="warning-box" style="margin-top: 30px;">
+                <h4>📝 Documentation Status</h4>
+                <p><strong>Last Updated:</strong> October 23, 2025</p>
+                <p><strong>Version:</strong> 1.0</p>
+                <p><strong>Prepared By:</strong> Claude (Architecture Documentation Agent)</p>
+                <p><strong>Total Lines:</strong> 15,000+ lines of comprehensive documentation</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- BACK TO TOP -->
+    <a href="#" class="back-to-top">↑</a>
+
+    <!-- NAVIGATION SCRIPT -->
+    <script src="assets/navigation.js"></script>
+</body>
+</html>
