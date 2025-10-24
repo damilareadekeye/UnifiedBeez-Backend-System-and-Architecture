@@ -32,6 +32,7 @@
             <a href="#frame6" class="nav-item">Frame 6: Lists & Segmentation</a>
             <a href="#frame7" class="nav-item">Frame 7: Tags & Merge Fields</a>
             <a href="#frame8" class="nav-item">Frame 8: Communication History</a>
+            <a href="#frame9" class="nav-item">Frame 9: Diary Alerts</a>
         </div>
     </div>
 
@@ -2640,6 +2641,357 @@ WHERE c.lifecycle_stage = 'customer'
                     <a href="#frame5">→ Frame 5: Contact Management</a> |
                     <a href="live-dashboard-inbox.html">→ Inbox Module (conversation management)</a> |
                     <a href="live-dashboard-automations.html">→ Automations Module (communication triggers)</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- FRAME 9: DIARY ALERTS & REMINDERS -->
+        <div id="frame9" class="frame">
+            <h2>📅 FRAME 9: Diary Alerts & Reminders</h2>
+
+            <h3>🎯 Purpose</h3>
+            <p>
+                The Diary Alerts system provides proactive reminders and notifications for tasks, appointments,
+                follow-ups, and important contact interactions. It ensures sales teams, support agents, and
+                relationship managers never miss critical customer touchpoints, helping maintain engagement and
+                driving conversions.
+            </p>
+
+            <h3>✨ Core Features</h3>
+
+            <div class="grid-3">
+                <div class="card">
+                    <h4>📌 Alert Types</h4>
+                    <ul>
+                        <li><strong>Task Reminders:</strong> Upcoming task due dates, overdue tasks</li>
+                        <li><strong>Appointment Alerts:</strong> Meeting reminders (15 min, 1 hour, 1 day before)</li>
+                        <li><strong>Follow-Up Notifications:</strong> Contact follow-up schedules</li>
+                        <li><strong>Deal Stage Changes:</strong> Alerts when deals move between stages</li>
+                        <li><strong>Activity Deadlines:</strong> Time-sensitive actions requiring attention</li>
+                        <li><strong>Custom Alerts:</strong> User-defined reminder rules</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>📨 Delivery Channels</h4>
+                    <ul>
+                        <li><strong>In-App Notifications:</strong> Real-time browser notifications</li>
+                        <li><strong>Email Alerts:</strong> Digest emails (daily/weekly summaries)</li>
+                        <li><strong>SMS Notifications:</strong> Critical reminders via Twilio</li>
+                        <li><strong>Push Notifications:</strong> Mobile app alerts (future)</li>
+                        <li><strong>Slack Integration:</strong> Team channel notifications (optional)</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>⚙️ Customization Options</h4>
+                    <ul>
+                        <li><strong>Alert Timing:</strong> Configure reminder intervals (5 min to 7 days)</li>
+                        <li><strong>Frequency Control:</strong> One-time vs. recurring reminders</li>
+                        <li><strong>Priority Levels:</strong> Low, Medium, High, Urgent</li>
+                        <li><strong>Snooze Functionality:</strong> Postpone alerts (15 min, 1 hour, 1 day)</li>
+                        <li><strong>Do Not Disturb:</strong> Quiet hours configuration</li>
+                        <li><strong>Notification Preferences:</strong> Per-alert-type channel selection</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>🔧 Backend Services</h3>
+
+            <div class="grid-2">
+                <div class="card">
+                    <h4>DiaryAlertsService</h4>
+                    <p><strong>Responsibilities:</strong></p>
+                    <ul>
+                        <li>Create, update, delete diary alerts</li>
+                        <li>Schedule alert delivery via Bull Queue</li>
+                        <li>Process snooze and dismiss actions</li>
+                        <li>Track alert status (pending, sent, read, snoozed, dismissed)</li>
+                        <li>Generate alert history and analytics</li>
+                    </ul>
+                    <p><strong>Key Methods:</strong></p>
+                    <ul>
+                        <li><code>createAlert(userId, contactId, type, dueDate, message)</code></li>
+                        <li><code>scheduleReminder(alertId, interval)</code></li>
+                        <li><code>snoozeAlert(alertId, snoozeDuration)</code></li>
+                        <li><code>dismissAlert(alertId)</code></li>
+                        <li><code>getUpcomingAlerts(userId, dateRange)</code></li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>NotificationDeliveryService</h4>
+                    <p><strong>Responsibilities:</strong></p>
+                    <ul>
+                        <li>Send notifications via multiple channels (email, SMS, in-app)</li>
+                        <li>Manage notification preferences per user</li>
+                        <li>Handle delivery failures and retries</li>
+                        <li>Track delivery status and read receipts</li>
+                        <li>Generate notification analytics</li>
+                    </ul>
+                    <p><strong>Key Methods:</strong></p>
+                    <li><code>sendEmailAlert(userId, alertData)</code></li>
+                    <li><code>sendSMSAlert(userId, alertData)</code></li>
+                    <li><code>sendInAppNotification(userId, alertData)</code></li>
+                    <li><code>updateNotificationPreferences(userId, preferences)</code></li>
+                    <li><code>getDeliveryStatus(notificationId)</code></li>
+                </div>
+
+                <div class="card">
+                    <h4>AlertSchedulerService</h4>
+                    <p><strong>Responsibilities:</strong></p>
+                    <ul>
+                        <li>Calculate reminder trigger times based on due dates</li>
+                        <li>Queue alerts for future delivery</li>
+                        <li>Handle recurring reminders (daily, weekly, monthly)</li>
+                        <li>Manage alert priorities and delivery order</li>
+                        <li>Process bulk alert creation for campaigns</li>
+                    </ul>
+                    <p><strong>Key Methods:</strong></p>
+                    <ul>
+                        <li><code>calculateReminderTime(dueDate, interval)</code></li>
+                        <li><code>queueAlert(alertId, scheduledTime)</code></li>
+                        <li><code>processRecurringAlerts()</code></li>
+                        <li><code>bulkCreateAlerts(contactIds, alertTemplate)</code></li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>AlertAnalyticsService</h4>
+                    <p><strong>Responsibilities:</strong></p>
+                    <ul>
+                        <li>Track alert engagement metrics (open rate, dismiss rate)</li>
+                        <li>Generate alert effectiveness reports</li>
+                        <li>Identify alert fatigue patterns</li>
+                        <li>Provide optimization recommendations</li>
+                    </ul>
+                    <p><strong>Key Methods:</strong></p>
+                    <ul>
+                        <li><code>trackAlertEngagement(alertId, action)</code></li>
+                        <li><code>generateEffectivenessReport(userId, dateRange)</code></li>
+                        <li><code>detectAlertFatigue(userId)</code></li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>🔌 API Endpoints</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Endpoint</th>
+                        <th>Method</th>
+                        <th>Description</th>
+                        <th>Request Body</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>/api/crm/alerts</code></td>
+                        <td>GET</td>
+                        <td>Get all alerts for current user (with filters: status, type, dateRange)</td>
+                        <td>Query params</td>
+                    </tr>
+                    <tr>
+                        <td><code>/api/crm/alerts</code></td>
+                        <td>POST</td>
+                        <td>Create a new diary alert</td>
+                        <td><code>{ contactId, type, dueDate, message, priority, reminderIntervals }</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>/api/crm/alerts/:id</code></td>
+                        <td>PUT</td>
+                        <td>Update an existing alert</td>
+                        <td><code>{ dueDate, message, priority, reminderIntervals }</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>/api/crm/alerts/:id</code></td>
+                        <td>DELETE</td>
+                        <td>Delete an alert</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td><code>/api/crm/alerts/:id/snooze</code></td>
+                        <td>POST</td>
+                        <td>Snooze an alert for a specified duration</td>
+                        <td><code>{ snoozeDuration: '15min' | '1hour' | '1day' }</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>/api/crm/alerts/:id/dismiss</code></td>
+                        <td>POST</td>
+                        <td>Dismiss an alert (mark as read/completed)</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td><code>/api/crm/alerts/upcoming</code></td>
+                        <td>GET</td>
+                        <td>Get upcoming alerts (next 7 days by default)</td>
+                        <td>Query params: days</td>
+                    </tr>
+                    <tr>
+                        <td><code>/api/crm/alerts/overdue</code></td>
+                        <td>GET</td>
+                        <td>Get all overdue alerts</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td><code>/api/crm/alerts/preferences</code></td>
+                        <td>GET</td>
+                        <td>Get user notification preferences</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td><code>/api/crm/alerts/preferences</code></td>
+                        <td>PUT</td>
+                        <td>Update notification preferences (channels, quiet hours, frequency)</td>
+                        <td><code>{ emailEnabled, smsEnabled, quietHoursStart, quietHoursEnd }</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>/api/crm/alerts/analytics</code></td>
+                        <td>GET</td>
+                        <td>Get alert effectiveness analytics</td>
+                        <td>Query params: userId, dateRange</td>
+                    </tr>
+                    <tr>
+                        <td><code>/api/crm/alerts/bulk</code></td>
+                        <td>POST</td>
+                        <td>Create bulk alerts for multiple contacts</td>
+                        <td><code>{ contactIds: [], alertTemplate: {...} }</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>🗄️ Database Schema</h3>
+
+            <div class="code-block">
+CREATE TABLE diary_alerts (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    contact_id UUID REFERENCES contacts(id) ON DELETE CASCADE,
+    task_id UUID REFERENCES tasks(id) ON DELETE CASCADE,
+    deal_id UUID REFERENCES deals(id) ON DELETE SET NULL,
+
+    -- Alert details
+    type VARCHAR(50) NOT NULL, -- 'task', 'appointment', 'follow_up', 'deal_stage', 'custom'
+    title VARCHAR(255) NOT NULL,
+    message TEXT,
+    priority VARCHAR(20) DEFAULT 'medium', -- 'low', 'medium', 'high', 'urgent'
+
+    -- Scheduling
+    due_date TIMESTAMP WITH TIME ZONE NOT NULL,
+    reminder_intervals INTEGER[] DEFAULT '{15, 60, 1440}', -- minutes before (15min, 1hr, 1day)
+    is_recurring BOOLEAN DEFAULT false,
+    recurrence_rule VARCHAR(100), -- 'daily', 'weekly', 'monthly', 'custom'
+
+    -- Status tracking
+    status VARCHAR(20) DEFAULT 'pending', -- 'pending', 'sent', 'read', 'snoozed', 'dismissed', 'completed'
+    snoozed_until TIMESTAMP WITH TIME ZONE,
+    dismissed_at TIMESTAMP WITH TIME ZONE,
+    completed_at TIMESTAMP WITH TIME ZONE,
+
+    -- Delivery tracking
+    last_sent_at TIMESTAMP WITH TIME ZONE,
+    delivery_channel VARCHAR(50), -- 'email', 'sms', 'in_app', 'slack'
+    delivery_status VARCHAR(20), -- 'queued', 'sent', 'delivered', 'failed'
+    read_at TIMESTAMP WITH TIME ZONE,
+
+    -- Metadata
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+    created_by UUID REFERENCES users(id),
+
+    -- Indexes
+    INDEX idx_diary_alerts_user_id (user_id),
+    INDEX idx_diary_alerts_contact_id (contact_id),
+    INDEX idx_diary_alerts_due_date (due_date),
+    INDEX idx_diary_alerts_status (status),
+    INDEX idx_diary_alerts_type (type)
+);
+
+CREATE TABLE alert_notification_preferences (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE UNIQUE,
+
+    -- Channel preferences
+    email_enabled BOOLEAN DEFAULT true,
+    sms_enabled BOOLEAN DEFAULT false,
+    in_app_enabled BOOLEAN DEFAULT true,
+    slack_enabled BOOLEAN DEFAULT false,
+
+    -- Alert type preferences
+    task_alerts_enabled BOOLEAN DEFAULT true,
+    appointment_alerts_enabled BOOLEAN DEFAULT true,
+    follow_up_alerts_enabled BOOLEAN DEFAULT true,
+    deal_alerts_enabled BOOLEAN DEFAULT true,
+
+    -- Timing preferences
+    quiet_hours_start TIME,
+    quiet_hours_end TIME,
+    digest_frequency VARCHAR(20) DEFAULT 'daily', -- 'realtime', 'hourly', 'daily', 'weekly'
+
+    -- Metadata
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+CREATE TABLE alert_delivery_log (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    alert_id UUID NOT NULL REFERENCES diary_alerts(id) ON DELETE CASCADE,
+    user_id UUID NOT NULL REFERENCES users(id),
+
+    -- Delivery details
+    channel VARCHAR(50) NOT NULL, -- 'email', 'sms', 'in_app', 'slack'
+    status VARCHAR(20) NOT NULL, -- 'queued', 'sent', 'delivered', 'failed', 'bounced'
+    sent_at TIMESTAMP WITH TIME ZONE,
+    delivered_at TIMESTAMP WITH TIME ZONE,
+    read_at TIMESTAMP WITH TIME ZONE,
+
+    -- Error tracking
+    error_message TEXT,
+    retry_count INTEGER DEFAULT 0,
+
+    -- Metadata
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+
+    INDEX idx_alert_delivery_log_alert_id (alert_id),
+    INDEX idx_alert_delivery_log_status (status)
+);
+            </div>
+
+            <h3>🖼️ UI Screenshots Reference</h3>
+            <p><strong>Location:</strong> <code>c:\Users\Aorus15\Desktop\Tech\UnifiedBeez\UnifiedBeez_UI_UX\Live Dashboard UI - CRM\</code></p>
+
+            <ul>
+                <li><code>Enhance UI for Diary Alerts.png</code> - Main diary alerts dashboard view</li>
+                <li><code>Enhance UI for Diary Alerts-1.png</code> - Alert creation modal</li>
+                <li><code>Enhance UI for Diary Alerts-2.png</code> - Alert notification preview</li>
+                <li><code>Enhance UI for Diary Alerts-3.png</code> - Upcoming alerts list view</li>
+                <li><code>Enhance UI for Diary Alerts-4.png</code> - Alert preferences/settings</li>
+                <li><code>Enhance UI for Diary Alerts-5.png</code> - Alert analytics dashboard</li>
+            </ul>
+
+            <h3>🔒 GDPR Compliance</h3>
+
+            <div class="card" style="background: #E8F5E9; border-left: 6px solid #2D6A4F;">
+                <h4>Data Protection Measures</h4>
+                <ul>
+                    <li><strong>Data Minimization:</strong> Alerts store only essential information (title, due date, contact reference)</li>
+                    <li><strong>Retention Policy:</strong> Dismissed alerts retained for 90 days, then auto-deleted</li>
+                    <li><strong>Right to Access:</strong> Users can export all their alerts via API endpoint <code>/api/crm/alerts/export</code></li>
+                    <li><strong>Right to Erasure:</strong> Deleting a contact cascades to delete all associated alerts</li>
+                    <li><strong>Data Portability:</strong> Alert export available in JSON and CSV formats</li>
+                    <li><strong>Consent for Notifications:</strong> Users must opt-in for SMS and email alerts; in-app is default</li>
+                    <li><strong>Audit Trail:</strong> All alert actions logged in <code>alert_delivery_log</code> table</li>
+                </ul>
+            </div>
+
+            <div class="see-also">
+                <h3>See Also</h3>
+                <p>
+                    <a href="#frame5">→ Frame 5: Contact Management</a> |
+                    <a href="#frame7">→ Frame 7: Tags & Merge Fields</a> |
+                    <a href="live-dashboard-operations.html#frame2">→ Tasks & Lead Management (Operations Module)</a> |
+                    <a href="live-dashboard-inbox.html">→ Inbox Module (Real-time notifications)</a>
                 </p>
             </div>
         </div>
