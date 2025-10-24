@@ -26,7 +26,6 @@
             top: 0;
             z-index: 1000;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            position: relative;
         }
 
         .header-bar h1 {
@@ -41,8 +40,8 @@
         }
 
         .back-to-index-btn {
-            position: absolute;
-            top: 20px;
+            position: fixed;
+            top: 25px;
             right: 30px;
             padding: 10px 20px;
             background: rgba(255, 255, 255, 0.2);
@@ -53,6 +52,7 @@
             font-size: 0.95rem;
             transition: all 0.3s ease;
             border: 2px solid white;
+            z-index: 1001;
         }
 
         .back-to-index-btn:hover {
@@ -543,21 +543,21 @@
 <body>
     <!-- NAVIGATION BAR -->
     <nav class="architecture-nav">
-        <a href="index.html">🏠 Home</a>
-        <a href="manual-onboarding.html">📝 Manual Onboarding</a>
-        <a href="beezaro-copilot.html">🤖 Beezaro Copilot</a>
-        <a href="live-dashboard-overview.html">📊 Live Dashboard</a>
-        <a href="automation-library-builders.html" class="active">🛠️ Automation Builders</a>
-        <a href="complete-architecture-map.html">🗺️ Complete Map</a>
+        <a href="index.html">Home</a>
+        <a href="manual-onboarding.html">Manual Onboarding</a>
+        <a href="beezaro-copilot.html">Beezaro Copilot</a>
+        <a href="live-dashboard-overview.html">Live Dashboard</a>
+        <a href="automation-library-builders.html" class="active">Automation Builders</a>
+        <a href="complete-architecture-map.html">Complete Map</a>
     </nav>
 
     <!-- BREADCRUMB -->
     <div class="breadcrumb">
-        <a href="index.html">🏠 Home</a> <span>/</span> <span>⚡ Automation Library + Builders</span>
+        <a href="index.html">Home</a> <span>/</span> <span>Automation Library + Builders</span>
     </div>
 
     <div class="header-bar">
-        <h1>⚡ UnifiedBeez Automation Library + Builders - Backend Architecture</h1>
+        <h1>UnifiedBeez Automation Library + Builders - Backend Architecture</h1>
         <p>Email Builder | Form Builder | Campaign Automation | Retention & Nurture | Sales & Lead Gen | Support & Escalation</p>
         <a href="index.html" class="back-to-index-btn">← Back to Index</a>
     </div>

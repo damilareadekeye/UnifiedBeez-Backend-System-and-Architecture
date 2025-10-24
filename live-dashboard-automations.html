@@ -600,8 +600,1882 @@
             </div>
         </div>
 
-        <!-- FRAME 3-6: Remaining frames for Templates, Triggers, Beezora AI, and Analytics -->
-        <!-- Follow similar comprehensive pattern -->
+        <!-- FRAME 3: TEMPLATES LIBRARY -->
+        <div id="frame3" class="frame">
+            <h2>📚 FRAME 3: Templates Library</h2>
+
+            <h3>🎯 Purpose</h3>
+            <p>
+                The Templates Library provides 200+ pre-built automation templates across multiple categories
+                (Sales, Support, E-commerce, Marketing, Retention, Operations). Users can browse, preview, and
+                activate templates with one click, then customize them to their specific business needs. Templates
+                accelerate time-to-value by providing proven automation workflows that can be deployed in minutes
+                rather than hours.
+            </p>
+
+            <h3>📊 Template Categories Overview</h3>
+
+            <div class="grid-3">
+                <div class="card">
+                    <h4>🎯 Sales & Lead Generation (45 templates)</h4>
+                    <ul>
+                        <li>Lead scoring and qualification</li>
+                        <li>Abandoned cart recovery sequences</li>
+                        <li>Follow-up automation after demo/trial</li>
+                        <li>Meeting scheduling workflows</li>
+                        <li>Proposal follow-up sequences</li>
+                        <li>Lead assignment and routing</li>
+                        <li>Sales pipeline notifications</li>
+                        <li>Opportunity stage transitions</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>💬 Support & Escalation (38 templates)</h4>
+                    <ul>
+                        <li>Auto-response for common questions</li>
+                        <li>Ticket routing by priority/category</li>
+                        <li>Escalation workflows for urgent issues</li>
+                        <li>CSAT survey automation</li>
+                        <li>Follow-up after ticket resolution</li>
+                        <li>SLA breach notifications</li>
+                        <li>Knowledge base article suggestions</li>
+                        <li>After-hours support routing</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>🛍️ E-commerce (32 templates)</h4>
+                    <ul>
+                        <li>Order confirmation sequences</li>
+                        <li>Shipping notifications</li>
+                        <li>Post-purchase follow-up</li>
+                        <li>Review request automation</li>
+                        <li>Upsell/cross-sell campaigns</li>
+                        <li>Inventory alerts</li>
+                        <li>Loyalty program automation</li>
+                        <li>Referral program workflows</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>🎉 Retention & Nurture (41 templates)</h4>
+                    <ul>
+                        <li>Welcome series (3, 5, 7-day sequences)</li>
+                        <li>Onboarding workflows</li>
+                        <li>Birthday/anniversary campaigns</li>
+                        <li>Renewal reminders</li>
+                        <li>Re-engagement sequences</li>
+                        <li>Win-back campaigns for churned users</li>
+                        <li>Milestone celebrations</li>
+                        <li>Educational drip campaigns</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>📧 Marketing Campaigns (28 templates)</h4>
+                    <ul>
+                        <li>Newsletter automation</li>
+                        <li>Event promotion sequences</li>
+                        <li>Webinar registration workflows</li>
+                        <li>Content download follow-up</li>
+                        <li>Lead magnet delivery</li>
+                        <li>Product launch campaigns</li>
+                        <li>Seasonal promotions</li>
+                        <li>Behavior-triggered campaigns</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>⚙️ Operations & Admin (16 templates)</h4>
+                    <ul>
+                        <li>Data enrichment workflows</li>
+                        <li>List cleanup and hygiene</li>
+                        <li>Reporting automation</li>
+                        <li>Team notifications and alerts</li>
+                        <li>Compliance workflows (GDPR consent)</li>
+                        <li>Internal task automation</li>
+                        <li>Data backup and archival</li>
+                        <li>Performance monitoring</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>🔹 Backend Services</h3>
+
+            <div class="card">
+                <h4>1. TemplateLibraryService</h4>
+                <p><strong>Responsibility:</strong> Manage template catalog and browsing</p>
+                <p><strong>Key Methods:</strong></p>
+                <ul>
+                    <li><code>getTemplates(filters)</code> - Browse templates by category, industry, use case</li>
+                    <li><code>getTemplateById(id)</code> - Fetch single template with full configuration</li>
+                    <li><code>searchTemplates(query)</code> - Full-text search across template names and descriptions</li>
+                    <li><code>getFeaturedTemplates()</code> - Get curated/popular templates for homepage</li>
+                    <li><code>getTemplatsByCategory(category)</code> - Filter by specific category</li>
+                    <li><code>trackTemplateView(templateId)</code> - Analytics on template popularity</li>
+                    <li><code>rateTemplate(templateId, rating)</code> - User rating system (1-5 stars)</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h4>2. AutomationTemplateService</h4>
+                <p><strong>Responsibility:</strong> Create user automations from templates</p>
+                <p><strong>Key Methods:</strong></p>
+                <ul>
+                    <li><code>createFromTemplate(templateId, customization)</code> - Instantiate automation from template</li>
+                    <li><code>previewTemplate(templateId, sampleData)</code> - Preview with user's actual data</li>
+                    <li><code>validateTemplateConfig(config)</code> - Ensure template is compatible with org setup</li>
+                    <li><code>customizeTemplate(templateId, overrides)</code> - Apply user-specific customizations</li>
+                    <li><code>cloneTemplate(automationId)</code> - Save user automation as personal template</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h4>3. TemplateRecommendationService (AI-Powered)</h4>
+                <p><strong>Responsibility:</strong> Suggest relevant templates based on user behavior</p>
+                <p><strong>Key Methods:</strong></p>
+                <ul>
+                    <li><code>getRecommendations(organizationId)</code> - ML-based template suggestions</li>
+                    <li><code>getSimilarTemplates(templateId)</code> - Find related templates</li>
+                    <li><code>getIndustryTemplates(industry)</code> - Industry-specific recommendations</li>
+                </ul>
+            </div>
+
+            <h3>📡 API Endpoints (12 endpoints)</h3>
+
+            <div class="card">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>Endpoint</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/automations/templates</code></td>
+                            <td>Get all templates with filters (category, industry, popularity)</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/automations/templates/:id</code></td>
+                            <td>Get single template with full configuration</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/automations/templates/featured</code></td>
+                            <td>Get featured/popular templates</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/automations/templates/categories</code></td>
+                            <td>Get all template categories with counts</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/automations/templates/search</code></td>
+                            <td>Full-text search across templates</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/automations/templates/:id/preview</code></td>
+                            <td>Preview template with user's sample data</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/automations/templates/:id/activate</code></td>
+                            <td>Create automation from template (one-click)</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/automations/templates/:id/customize</code></td>
+                            <td>Create automation with customizations</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/automations/templates/:id/rate</code></td>
+                            <td>Rate template (1-5 stars)</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/automations/templates/:id/similar</code></td>
+                            <td>Get similar/related templates</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/automations/templates/recommendations</code></td>
+                            <td>AI-powered template recommendations</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/automations/:id/save-as-template</code></td>
+                            <td>Save user automation as personal template</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>💾 Database Schema</h3>
+
+            <div class="card">
+                <h4>automation_templates</h4>
+                <div class="code-block">CREATE TABLE automation_templates (
+  id BIGSERIAL PRIMARY KEY,
+
+  -- Template info
+  name VARCHAR(255) NOT NULL,
+  description TEXT,
+  category VARCHAR(100) NOT NULL,
+  -- 'sales', 'support', 'ecommerce', 'marketing', 'retention', 'operations'
+
+  subcategory VARCHAR(100),
+  industry VARCHAR(100), -- 'saas', 'retail', 'healthcare', 'finance', 'general'
+
+  -- Template configuration
+  config JSONB NOT NULL,
+  -- {
+  --   trigger: { type, event, filters },
+  --   conditions: [{ field, operator, value }],
+  --   actions: [{ type, config, delay }],
+  --   settings: { runOnce, maxExecutions }
+  -- }
+
+  -- Customization points
+  customizable_fields JSONB DEFAULT '[]',
+  -- [{ field: 'actions[0].config.emailTemplate', label: 'Welcome Email', type: 'text' }]
+
+  -- Metadata
+  is_featured BOOLEAN DEFAULT FALSE,
+  is_premium BOOLEAN DEFAULT FALSE,
+  difficulty_level VARCHAR(20) DEFAULT 'beginner',
+  -- 'beginner', 'intermediate', 'advanced'
+
+  estimated_setup_time INT, -- minutes
+
+  -- Analytics
+  usage_count INT DEFAULT 0,
+  view_count INT DEFAULT 0,
+  rating DECIMAL(3,2) DEFAULT 0,
+  rating_count INT DEFAULT 0,
+
+  -- Tags for search
+  tags TEXT[], -- ['welcome', 'onboarding', 'email']
+
+  -- Preview
+  preview_image_url VARCHAR(500),
+  demo_video_url VARCHAR(500),
+
+  created_by BIGINT REFERENCES users(id),
+  created_at TIMESTAMP DEFAULT NOW(),
+  updated_at TIMESTAMP DEFAULT NOW(),
+
+  INDEX idx_templates_category (category),
+  INDEX idx_templates_industry (industry),
+  INDEX idx_templates_featured (is_featured),
+  INDEX idx_templates_rating (rating DESC),
+  INDEX idx_templates_usage (usage_count DESC),
+  INDEX idx_templates_tags USING GIN (tags)
+);</div>
+            </div>
+
+            <div class="card">
+                <h4>template_categories</h4>
+                <div class="code-block">CREATE TABLE template_categories (
+  id BIGSERIAL PRIMARY KEY,
+
+  name VARCHAR(100) NOT NULL,
+  slug VARCHAR(100) NOT NULL UNIQUE,
+  description TEXT,
+  icon VARCHAR(50), -- Icon identifier for UI
+
+  parent_category_id BIGINT REFERENCES template_categories(id),
+
+  display_order INT DEFAULT 0,
+  is_active BOOLEAN DEFAULT TRUE,
+
+  template_count INT DEFAULT 0,
+
+  created_at TIMESTAMP DEFAULT NOW(),
+  updated_at TIMESTAMP DEFAULT NOW(),
+
+  INDEX idx_template_categories_parent (parent_category_id),
+  INDEX idx_template_categories_order (display_order)
+);</div>
+            </div>
+
+            <div class="card">
+                <h4>template_ratings</h4>
+                <div class="code-block">CREATE TABLE template_ratings (
+  id BIGSERIAL PRIMARY KEY,
+  template_id BIGINT NOT NULL REFERENCES automation_templates(id),
+  organization_id BIGINT NOT NULL REFERENCES organizations(id),
+  user_id BIGINT NOT NULL REFERENCES users(id),
+
+  rating INT NOT NULL CHECK (rating BETWEEN 1 AND 5),
+  review TEXT,
+
+  created_at TIMESTAMP DEFAULT NOW(),
+
+  UNIQUE INDEX idx_template_ratings_unique (template_id, organization_id),
+  INDEX idx_template_ratings_template (template_id)
+);</div>
+            </div>
+
+            <h3>🖼️ UI Screenshots Reference</h3>
+            <div class="card">
+                <h4>Automation Templates UI Components</h4>
+                <ul>
+                    <li><strong>Live Dashboard - Automations Library.png</strong> - Main template library view with category filters</li>
+                    <li><strong>Live Dashboard - CRM - Automation Library.png</strong> - CRM-specific automation templates</li>
+                    <li><strong>Live Dashboard - Automations Library-1.png</strong> - Template cards with descriptions and ratings</li>
+                    <li><strong>Live Dashboard - CRM - Automation Video Preview.png</strong> - Template preview modal with video walkthrough</li>
+                    <li><strong>Live Dashboard - CRM - Automation Video Preview-1.png</strong> - Template configuration preview</li>
+                    <li><strong>Live Dashboard - CRM - Automation Video Preview-2.png</strong> - Template customization options</li>
+                    <li><strong>Live Dashboard - CRM - Automation Video Preview-3.png</strong> - One-click activation flow</li>
+                </ul>
+            </div>
+
+            <h3>🔐 GDPR Compliance</h3>
+
+            <div class="card">
+                <h4>Data Protection Considerations</h4>
+                <ul>
+                    <li><strong>Template Analytics:</strong> Usage tracking anonymized at organization level, no PII stored</li>
+                    <li><strong>User Ratings:</strong> Associated with organization, not individual users (privacy-first)</li>
+                    <li><strong>Preview Data:</strong> Sample data used for previews is never stored, only used in-memory</li>
+                    <li><strong>Custom Templates:</strong> User-created templates stored with organization_id, can be deleted on request</li>
+                    <li><strong>Data Retention:</strong> Template view history retained for 90 days for recommendations, then aggregated</li>
+                </ul>
+            </div>
+
+            <div class="see-also">
+                <h3>🔗 See Also</h3>
+                <p>
+                    <a href="#frame2">→ Frame 2: Automation Engine</a> |
+                    <a href="#frame4">→ Frame 4: Triggers & Actions</a> |
+                    <a href="#frame5">→ Frame 5: Beezora AI Integration</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- FRAME 4: TRIGGERS & ACTIONS -->
+        <div id="frame4" class="frame">
+            <h2>⚡ FRAME 4: Triggers & Actions</h2>
+
+            <h3>🎯 Purpose</h3>
+            <p>
+                The Triggers & Actions system is the core event-driven automation engine that powers UnifiedBeez workflows.
+                It provides 50+ trigger types (time-based, event-based, condition-based) and 100+ action types across
+                communication, CRM, integrations, and internal operations. The system uses Bull Queue with Redis for
+                reliable asynchronous processing, supports complex conditional logic, and enables sophisticated multi-step
+                workflows with branching paths.
+            </p>
+
+            <h3>🔔 Trigger Types (50+ triggers)</h3>
+
+            <div class="grid-2">
+                <div class="card">
+                    <h4>📅 Time-Based Triggers (12 types)</h4>
+                    <ul>
+                        <li><strong>Schedule:</strong> Daily, weekly, monthly at specific time</li>
+                        <li><strong>Delay:</strong> X minutes/hours/days after event</li>
+                        <li><strong>Relative Date:</strong> X days before/after contact field date</li>
+                        <li><strong>Anniversary:</strong> Yearly recurring date (birthday, signup date)</li>
+                        <li><strong>Specific Date:</strong> One-time trigger on exact date</li>
+                        <li><strong>Time Window:</strong> Trigger between specific hours (9am-5pm)</li>
+                        <li><strong>Timezone-Aware:</strong> Respect contact's timezone</li>
+                        <li><strong>Business Hours:</strong> Only during business days/hours</li>
+                        <li><strong>Countdown:</strong> X days until contract renewal</li>
+                        <li><strong>Inactivity:</strong> No action for X days</li>
+                        <li><strong>Recurring Interval:</strong> Every X hours/days</li>
+                        <li><strong>Cron Expression:</strong> Advanced scheduling with cron syntax</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>🎯 Event-Based Triggers (22 types)</h4>
+                    <ul>
+                        <li><strong>Contact Created:</strong> New contact added</li>
+                        <li><strong>Contact Updated:</strong> Specific field changed</li>
+                        <li><strong>Tag Added/Removed:</strong> Contact tagged/untagged</li>
+                        <li><strong>List Joined/Left:</strong> Added/removed from list</li>
+                        <li><strong>Email Sent/Opened/Clicked:</strong> Email engagement</li>
+                        <li><strong>WhatsApp Received:</strong> Incoming WhatsApp message</li>
+                        <li><strong>SMS Received:</strong> Incoming SMS</li>
+                        <li><strong>Form Submitted:</strong> Web form submission</li>
+                        <li><strong>Purchase Made:</strong> E-commerce transaction</li>
+                        <li><strong>Cart Abandoned:</strong> No checkout within X hours</li>
+                        <li><strong>Conversation Assigned:</strong> Inbox conversation assigned to agent</li>
+                        <li><strong>Conversation Closed:</strong> Support ticket resolved</li>
+                        <li><strong>Score Changed:</strong> Contact score crossed threshold</li>
+                        <li><strong>Lifecycle Stage Changed:</strong> Lead → Customer transition</li>
+                        <li><strong>Subscription Status Changed:</strong> Subscribed/unsubscribed</li>
+                        <li><strong>API Webhook Received:</strong> External system event</li>
+                        <li><strong>File Uploaded:</strong> Document attached to contact</li>
+                        <li><strong>Task Created/Completed:</strong> CRM task events</li>
+                        <li><strong>Meeting Scheduled:</strong> Calendar event created</li>
+                        <li><strong>Payment Received:</strong> Invoice paid</li>
+                        <li><strong>Campaign Sent:</strong> Bulk campaign delivered</li>
+                        <li><strong>Automation Completed:</strong> Another automation finished</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>🔍 Condition-Based Triggers (16 types)</h4>
+                    <ul>
+                        <li><strong>Field Value Match:</strong> Contact field equals/contains value</li>
+                        <li><strong>Score Threshold:</strong> Score > X or < X</li>
+                        <li><strong>List Membership:</strong> Contact in specific list(s)</li>
+                        <li><strong>Tag Combination:</strong> Has all/any/none of specific tags</li>
+                        <li><strong>Engagement Level:</strong> High/medium/low engagement</li>
+                        <li><strong>Behavior Pattern:</strong> Visited page X times, opened Y emails</li>
+                        <li><strong>RFM Segment:</strong> Recency, Frequency, Monetary analysis</li>
+                        <li><strong>Geolocation:</strong> Contact in specific country/region</li>
+                        <li><strong>Device Type:</strong> Mobile/desktop activity</li>
+                        <li><strong>Channel Preference:</strong> Preferred communication channel</li>
+                        <li><strong>Custom Field Logic:</strong> Boolean expressions on custom fields</li>
+                        <li><strong>Date Range:</strong> Field date within range</li>
+                        <li><strong>Null/Empty Check:</strong> Field has no value</li>
+                        <li><strong>Regex Match:</strong> Field matches pattern</li>
+                        <li><strong>Mathematical:</strong> Field > average, percentile calculations</li>
+                        <li><strong>Sentiment:</strong> Message sentiment positive/negative (AI-powered)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>⚙️ Action Types (100+ actions)</h3>
+
+            <div class="grid-3">
+                <div class="card">
+                    <h4>📧 Communication Actions (18 actions)</h4>
+                    <ul>
+                        <li>Send Email (template or custom)</li>
+                        <li>Send WhatsApp Message</li>
+                        <li>Send SMS</li>
+                        <li>Send Internal Notification</li>
+                        <li>Send Slack Message</li>
+                        <li>Send Push Notification</li>
+                        <li>Schedule Email Send</li>
+                        <li>Cancel Scheduled Message</li>
+                        <li>Send Personalized Video</li>
+                        <li>Send Survey/Poll</li>
+                        <li>Create Email Draft</li>
+                        <li>Forward Email to Team</li>
+                        <li>Reply to Conversation</li>
+                        <li>Close Conversation</li>
+                        <li>Reopen Conversation</li>
+                        <li>Add Conversation Note</li>
+                        <li>Assign Conversation to Agent</li>
+                        <li>Transfer to Another Inbox</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>👤 CRM Actions (24 actions)</h4>
+                    <ul>
+                        <li>Create Contact</li>
+                        <li>Update Contact Field</li>
+                        <li>Delete Contact</li>
+                        <li>Merge Duplicate Contacts</li>
+                        <li>Add to List</li>
+                        <li>Remove from List</li>
+                        <li>Add Tag</li>
+                        <li>Remove Tag</li>
+                        <li>Update Lifecycle Stage</li>
+                        <li>Update Contact Score (add/subtract points)</li>
+                        <li>Calculate Lead Score</li>
+                        <li>Update Custom Field</li>
+                        <li>Copy Field Value</li>
+                        <li>Append to Field (e.g., notes)</li>
+                        <li>Enrich Contact Data (external API)</li>
+                        <li>Subscribe to Newsletter</li>
+                        <li>Unsubscribe from Communications</li>
+                        <li>Update Consent Preferences</li>
+                        <li>Set Do Not Contact</li>
+                        <li>Create Contact Relationship</li>
+                        <li>Log Activity</li>
+                        <li>Upload Document to Contact</li>
+                        <li>Export Contact Data</li>
+                        <li>Request GDPR Data Deletion</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>✅ Task & Activity Actions (12 actions)</h4>
+                    <ul>
+                        <li>Create Task</li>
+                        <li>Assign Task to User</li>
+                        <li>Set Task Due Date</li>
+                        <li>Complete Task</li>
+                        <li>Create Calendar Event</li>
+                        <li>Send Task Reminder</li>
+                        <li>Update Task Priority</li>
+                        <li>Add Task Comment</li>
+                        <li>Create Follow-up Sequence</li>
+                        <li>Log Phone Call</li>
+                        <li>Log Meeting Notes</li>
+                        <li>Schedule Meeting</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>🔗 Integration Actions (16 actions)</h4>
+                    <ul>
+                        <li>Trigger Webhook (HTTP POST)</li>
+                        <li>Call External API (GET/POST/PUT)</li>
+                        <li>Create Shopify Order</li>
+                        <li>Update Stripe Subscription</li>
+                        <li>Add to Google Sheets Row</li>
+                        <li>Create Salesforce Lead</li>
+                        <li>Update HubSpot Contact</li>
+                        <li>Send to Zapier Webhook</li>
+                        <li>Create Jira Ticket</li>
+                        <li>Post to Social Media (Buffer)</li>
+                        <li>Add to Mailchimp List</li>
+                        <li>Update Intercom User</li>
+                        <li>Sync to CRM (Pipedrive, Close)</li>
+                        <li>Create Asana Task</li>
+                        <li>Update Monday.com Board</li>
+                        <li>Send to Make.com (Integromat)</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>📊 Analytics & Reporting (8 actions)</h4>
+                    <ul>
+                        <li>Track Custom Event</li>
+                        <li>Update Metric/Counter</li>
+                        <li>Generate Report</li>
+                        <li>Send Analytics Summary</li>
+                        <li>Create Dashboard Snapshot</li>
+                        <li>Log Conversion Event</li>
+                        <li>Update A/B Test Results</li>
+                        <li>Export Data to CSV</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>🔧 Automation Control (14 actions)</h4>
+                    <ul>
+                        <li>Wait/Delay (seconds to months)</li>
+                        <li>Wait Until Condition Met</li>
+                        <li>Wait for Event</li>
+                        <li>Stop This Automation</li>
+                        <li>Trigger Another Automation</li>
+                        <li>Cancel Pending Actions</li>
+                        <li>Branch (If/Else)</li>
+                        <li>Switch (Multiple Conditions)</li>
+                        <li>Loop (Repeat Actions)</li>
+                        <li>Random Path (A/B Testing)</li>
+                        <li>Set Variable</li>
+                        <li>Calculate Value (math expressions)</li>
+                        <li>Send Error Alert to Admin</li>
+                        <li>Retry Failed Action</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>🎨 AI-Powered Actions (8 actions)</h4>
+                    <ul>
+                        <li>Generate Email with AI (Beezora)</li>
+                        <li>Analyze Sentiment</li>
+                        <li>Classify Intent</li>
+                        <li>Extract Entities (name, date, etc.)</li>
+                        <li>Suggest Next Best Action</li>
+                        <li>Generate Summary</li>
+                        <li>Translate Message</li>
+                        <li>Detect Language</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>🔹 Backend Services</h3>
+
+            <div class="card">
+                <h4>1. TriggerEngine</h4>
+                <p><strong>Responsibility:</strong> Monitor events and match against automation triggers</p>
+                <p><strong>Key Methods:</strong></p>
+                <ul>
+                    <li><code>registerTrigger(automationId, triggerConfig)</code> - Register new trigger</li>
+                    <li><code>matchTriggers(event)</code> - Find automations matching event</li>
+                    <li><code>evaluateTriggerConditions(trigger, context)</code> - Check if conditions met</li>
+                    <li><code>queueAutomationExecution(automationId, context)</code> - Add to Bull queue</li>
+                    <li><code>scheduleTimedTrigger(trigger, executeAt)</code> - Schedule future execution</li>
+                    <li><code>cancelScheduledTrigger(triggerId)</code> - Cancel pending scheduled trigger</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h4>2. ActionExecutor</h4>
+                <p><strong>Responsibility:</strong> Execute automation actions in sequence</p>
+                <p><strong>Key Methods:</strong></p>
+                <ul>
+                    <li><code>executeAction(action, context)</code> - Execute single action</li>
+                    <li><code>executeActionSequence(actions, context)</code> - Execute multiple actions in order</li>
+                    <li><code>executeParallelActions(actions, context)</code> - Execute actions concurrently</li>
+                    <li><code>handleActionError(error, action, context)</code> - Retry logic and error handling</li>
+                    <li><code>validateActionConfig(action)</code> - Validate action configuration before execution</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h4>3. EventBus</h4>
+                <p><strong>Responsibility:</strong> Centralized event publishing and subscription</p>
+                <p><strong>Key Methods:</strong></p>
+                <ul>
+                    <li><code>publish(eventType, payload)</code> - Publish event to all subscribers</li>
+                    <li><code>subscribe(eventType, handler)</code> - Subscribe to specific event type</li>
+                    <li><code>unsubscribe(eventType, handler)</code> - Unsubscribe from event</li>
+                    <li><code>getEventHistory(filters)</code> - Retrieve past events for debugging</li>
+                </ul>
+            </div>
+
+            <h3>📡 API Endpoints (18 endpoints)</h3>
+
+            <div class="card">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>Endpoint</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/automations/triggers</code></td>
+                            <td>Get all available trigger types with metadata</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/automations/triggers/categories</code></td>
+                            <td>Get trigger categories (time, event, condition)</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/automations/triggers/:type/schema</code></td>
+                            <td>Get JSON schema for specific trigger type</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/automations/triggers/validate</code></td>
+                            <td>Validate trigger configuration</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/automations/triggers/test</code></td>
+                            <td>Test trigger with sample data</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/automations/actions</code></td>
+                            <td>Get all available action types</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/automations/actions/categories</code></td>
+                            <td>Get action categories (communication, CRM, etc.)</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/automations/actions/:type/schema</code></td>
+                            <td>Get JSON schema for specific action type</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/automations/actions/validate</code></td>
+                            <td>Validate action configuration</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/automations/actions/test</code></td>
+                            <td>Test action with sample data (safe mode)</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/automations/events</code></td>
+                            <td>Get event history for debugging</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/automations/events/publish</code></td>
+                            <td>Manually publish custom event</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/automations/scheduled</code></td>
+                            <td>Get all scheduled automation executions</td>
+                        </tr>
+                        <tr>
+                            <td>DELETE</td>
+                            <td><code>/api/automations/scheduled/:id</code></td>
+                            <td>Cancel scheduled execution</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/automations/conditions/operators</code></td>
+                            <td>Get available condition operators (equals, contains, etc.)</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/automations/conditions/evaluate</code></td>
+                            <td>Evaluate condition logic with test data</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/automations/fields</code></td>
+                            <td>Get available fields for conditions (contact fields, system fields)</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/automations/builder/validate</code></td>
+                            <td>Validate entire automation workflow</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>💾 Database Schema</h3>
+
+            <div class="card">
+                <h4>automation_triggers</h4>
+                <div class="code-block">CREATE TABLE automation_triggers (
+  id BIGSERIAL PRIMARY KEY,
+  automation_id BIGINT NOT NULL REFERENCES user_automations(id) ON DELETE CASCADE,
+
+  -- Trigger type
+  type VARCHAR(100) NOT NULL,
+  -- 'contact_created', 'tag_added', 'schedule', 'field_changed', etc.
+
+  -- Trigger configuration
+  config JSONB NOT NULL,
+  -- {
+  --   event: 'contact.created',
+  --   filters: { lifecycle_stage: 'lead' },
+  --   schedule: '0 9 * * 1-5', // cron
+  --   delay: { value: 2, unit: 'days' }
+  -- }
+
+  -- Conditions (AND/OR logic)
+  conditions JSONB DEFAULT '[]',
+  -- [{ field: 'score', operator: '>', value: 50, logic: 'AND' }]
+
+  is_active BOOLEAN DEFAULT TRUE,
+
+  created_at TIMESTAMP DEFAULT NOW(),
+  updated_at TIMESTAMP DEFAULT NOW(),
+
+  INDEX idx_automation_triggers_automation (automation_id),
+  INDEX idx_automation_triggers_type (type),
+  INDEX idx_automation_triggers_active (is_active)
+);</div>
+            </div>
+
+            <div class="card">
+                <h4>automation_actions</h4>
+                <div class="code-block">CREATE TABLE automation_actions (
+  id BIGSERIAL PRIMARY KEY,
+  automation_id BIGINT NOT NULL REFERENCES user_automations(id) ON DELETE CASCADE,
+
+  -- Action type
+  type VARCHAR(100) NOT NULL,
+  -- 'send_email', 'add_tag', 'update_field', 'wait', 'webhook', etc.
+
+  -- Action configuration
+  config JSONB NOT NULL,
+  -- {
+  --   emailTemplate: 'welcome',
+  --   subject: 'Welcome {{first_name}}!',
+  --   to: '{{email}}',
+  --   from: 'team@unifiedbeez.com'
+  -- }
+
+  -- Execution order
+  step_order INT NOT NULL,
+  parent_step_id BIGINT REFERENCES automation_actions(id),
+  -- For branching (if/else), points to parent decision step
+
+  -- Delay before execution
+  delay JSONB,
+  -- { value: 1, unit: 'hours' }
+
+  -- Conditional execution
+  execute_if JSONB,
+  -- { field: 'score', operator: '>', value: 80 }
+
+  is_active BOOLEAN DEFAULT TRUE,
+
+  created_at TIMESTAMP DEFAULT NOW(),
+  updated_at TIMESTAMP DEFAULT NOW(),
+
+  INDEX idx_automation_actions_automation (automation_id, step_order),
+  INDEX idx_automation_actions_type (type),
+  INDEX idx_automation_actions_parent (parent_step_id)
+);</div>
+            </div>
+
+            <div class="card">
+                <h4>automation_conditions</h4>
+                <div class="code-block">CREATE TABLE automation_conditions (
+  id BIGSERIAL PRIMARY KEY,
+  automation_id BIGINT REFERENCES user_automations(id) ON DELETE CASCADE,
+  action_id BIGINT REFERENCES automation_actions(id) ON DELETE CASCADE,
+
+  -- Condition definition
+  field VARCHAR(255) NOT NULL, -- 'contact.score', 'contact.tags', 'contact.custom_fields.tier'
+  operator VARCHAR(50) NOT NULL, -- 'equals', 'contains', 'greater_than', 'in_list'
+  value JSONB, -- Flexible value storage (string, number, array, object)
+
+  -- Logical operators
+  logic VARCHAR(10) DEFAULT 'AND', -- 'AND', 'OR', 'NOT'
+  group_id INT, -- For grouping conditions (parentheses)
+
+  created_at TIMESTAMP DEFAULT NOW(),
+
+  INDEX idx_automation_conditions_automation (automation_id),
+  INDEX idx_automation_conditions_action (action_id)
+);</div>
+            </div>
+
+            <h3>⚙️ Bull Queue + Redis Implementation</h3>
+
+            <div class="card">
+                <h4>Queue Architecture</h4>
+                <p><strong>Queue Name:</strong> <code>automation-execution-queue</code></p>
+                <p><strong>Redis Configuration:</strong></p>
+                <ul>
+                    <li><strong>Host:</strong> ElastiCache Redis Cluster Mode (Multi-AZ)</li>
+                    <li><strong>Concurrency:</strong> 10 concurrent jobs per worker</li>
+                    <li><strong>Retry Strategy:</strong> Exponential backoff (3 attempts: 1m, 5m, 15m)</li>
+                    <li><strong>Job Timeout:</strong> 5 minutes per action</li>
+                    <li><strong>Priority Levels:</strong> High (urgent), Normal (default), Low (batch)</li>
+                </ul>
+
+                <p><strong>Job Structure:</strong></p>
+                <div class="code-block">{
+  "jobId": "auto_exec_12345",
+  "automationId": 567,
+  "triggerId": 890,
+  "context": {
+    "contactId": 123,
+    "organizationId": 45,
+    "triggerEvent": { "type": "contact.created", "data": {...} }
+  },
+  "actions": [
+    { "type": "send_email", "config": {...}, "delay": null },
+    { "type": "wait", "config": { "value": 1, "unit": "hours" } },
+    { "type": "add_tag", "config": { "tagId": 99 } }
+  ],
+  "currentStep": 0,
+  "priority": "normal",
+  "attempts": 0,
+  "maxAttempts": 3
+}</div>
+
+                <p><strong>Queue Monitoring:</strong></p>
+                <ul>
+                    <li><strong>Bull Dashboard:</strong> Real-time queue monitoring UI</li>
+                    <li><strong>Metrics Tracked:</strong> Queue depth, processing rate, failed jobs, average duration</li>
+                    <li><strong>Alerts:</strong> Queue depth > 1000, failed job rate > 5%, processing time > 10 minutes</li>
+                </ul>
+            </div>
+
+            <h3>🖼️ UI Screenshots Reference</h3>
+            <div class="card">
+                <h4>Triggers & Actions UI Components</h4>
+                <ul>
+                    <li><strong>Live Dashboard - Automations Library.png</strong> - Pre-built trigger and action combinations</li>
+                    <li><strong>Live Dashboard - CRM - Automation Video Preview.png</strong> - Visual workflow builder showing triggers and actions</li>
+                </ul>
+                <p><em>Note: Main automation builder UI is part of the visual canvas, showing drag-and-drop trigger and action configuration</em></p>
+            </div>
+
+            <h3>🔐 GDPR Compliance</h3>
+
+            <div class="card">
+                <h4>Data Protection in Automation Processing</h4>
+                <ul>
+                    <li><strong>Execution Logs:</strong> Redact PII in execution logs (email addresses masked as e***@domain.com)</li>
+                    <li><strong>Data Retention:</strong> Execution history retained for 90 days, then summarized (no contact data)</li>
+                    <li><strong>Right to Erasure:</strong> When contact deleted, cancel all pending automation jobs for that contact</li>
+                    <li><strong>Consent Tracking:</strong> Automations check consent before communication actions (email, SMS, WhatsApp)</li>
+                    <li><strong>Audit Trail:</strong> All automation actions logged with timestamp, user, and contact ID for compliance audits</li>
+                    <li><strong>Data Minimization:</strong> Only pass necessary contact fields to action executors, not full contact object</li>
+                </ul>
+            </div>
+
+            <div class="see-also">
+                <h3>🔗 See Also</h3>
+                <p>
+                    <a href="#frame2">→ Frame 2: Automation Engine</a> |
+                    <a href="#frame3">→ Frame 3: Templates Library</a> |
+                    <a href="#frame6">→ Frame 6: Execution & Analytics</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- FRAME 5: BEEZORA AI INTEGRATION -->
+        <div id="frame5" class="frame">
+            <h2>🤖 FRAME 5: Beezora AI Integration</h2>
+
+            <h3>🎯 Purpose</h3>
+            <p>
+                Beezora is UnifiedBeez's AI-powered assistant that helps users create, optimize, and manage automations
+                through natural language. Powered by OpenAI GPT-4, Beezora understands user intent, suggests automation
+                workflows, generates email content, optimizes performance, and provides intelligent recommendations.
+                Users can simply describe what they want to automate (e.g., "Send a welcome email to new VIP customers"),
+                and Beezora builds the complete automation workflow automatically.
+            </p>
+
+            <h3>✨ Core AI Features</h3>
+
+            <div class="grid-3">
+                <div class="card">
+                    <h4>💬 Natural Language Automation Creation</h4>
+                    <ul>
+                        <li>Describe automation in plain English</li>
+                        <li>AI interprets intent and builds workflow</li>
+                        <li>Suggests triggers, conditions, and actions</li>
+                        <li>Handles complex multi-step sequences</li>
+                        <li>Supports follow-up questions for refinement</li>
+                        <li>Conversational interface (chat-style)</li>
+                    </ul>
+                    <p><strong>Example:</strong></p>
+                    <p><em>"When someone abandons their cart, wait 2 hours, then send them a 10% discount code via email and WhatsApp"</em></p>
+                    <p>→ Beezora creates: Trigger (cart abandoned) + Delay (2 hours) + Email action + WhatsApp action</p>
+                </div>
+
+                <div class="card">
+                    <h4>💡 Smart Suggestions</h4>
+                    <ul>
+                        <li>Analyze existing automations and suggest improvements</li>
+                        <li>Recommend missing workflows based on industry best practices</li>
+                        <li>Suggest A/B test variations</li>
+                        <li>Identify automation gaps (e.g., "No re-engagement workflow detected")</li>
+                        <li>Recommend optimal send times based on engagement data</li>
+                        <li>Suggest personalization opportunities</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>📈 Performance Optimization</h4>
+                    <ul>
+                        <li>Analyze automation performance metrics</li>
+                        <li>Suggest changes to improve conversion rates</li>
+                        <li>Recommend better timing/delays</li>
+                        <li>Identify underperforming actions</li>
+                        <li>A/B test recommendation based on results</li>
+                        <li>Predict automation effectiveness before launch</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>✍️ AI Content Generation</h4>
+                    <ul>
+                        <li>Generate email subject lines</li>
+                        <li>Write email body copy</li>
+                        <li>Create WhatsApp message templates</li>
+                        <li>Generate SMS copy (160 char optimized)</li>
+                        <li>Personalization suggestions</li>
+                        <li>Tone adjustment (professional, casual, friendly)</li>
+                        <li>Multi-language support (translate content)</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>🔍 Intent Recognition</h4>
+                    <ul>
+                        <li>Detect user goals from description</li>
+                        <li>Map to appropriate automation templates</li>
+                        <li>Identify trigger types from context</li>
+                        <li>Suggest relevant actions</li>
+                        <li>Handle ambiguous requests with clarifying questions</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>🎓 Automation Learning</h4>
+                    <ul>
+                        <li>Learn from successful automations in your org</li>
+                        <li>Adapt suggestions to your industry</li>
+                        <li>Personalize recommendations over time</li>
+                        <li>Track what works best for your audience</li>
+                        <li>Continuous improvement based on feedback</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>🔹 Backend Services</h3>
+
+            <div class="card">
+                <h4>1. BeezoraAIService</h4>
+                <p><strong>Responsibility:</strong> Core AI orchestration and OpenAI integration</p>
+                <p><strong>Key Methods:</strong></p>
+                <ul>
+                    <li><code>processNaturalLanguageRequest(prompt, context)</code> - Parse user request and generate automation</li>
+                    <li><code>generateAutomationFromIntent(intent, parameters)</code> - Build automation config from parsed intent</li>
+                    <li><code>refineAutomation(automationId, refinementRequest)</code> - Iteratively improve automation</li>
+                    <li><code>explainAutomation(automationConfig)</code> - Generate human-readable explanation</li>
+                    <li><code>validateAIGeneratedConfig(config)</code> - Ensure AI output is valid and safe</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h4>2. OpenAI GPT-4 Integration</h4>
+                <p><strong>Model:</strong> gpt-4-turbo (128k context window)</p>
+                <p><strong>Configuration:</strong></p>
+                <ul>
+                    <li><strong>Temperature:</strong> 0.3 (more deterministic for config generation)</li>
+                    <li><strong>Max Tokens:</strong> 4000 (enough for complex automations)</li>
+                    <li><strong>System Prompt:</strong> UnifiedBeez automation expert persona with knowledge of all triggers/actions</li>
+                    <li><strong>Function Calling:</strong> Structured output for automation configs (JSON schema enforcement)</li>
+                    <li><strong>Context Injection:</strong> User's org data, existing automations, contact fields, available integrations</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h4>3. AutomationOptimizer</h4>
+                <p><strong>Responsibility:</strong> Analyze and improve automation performance</p>
+                <p><strong>Key Methods:</strong></p>
+                <ul>
+                    <li><code>analyzeAutomationPerformance(automationId)</code> - Deep analysis of metrics</li>
+                    <li><code>suggestOptimizations(automationId)</code> - AI-powered improvement recommendations</li>
+                    <li><code>predictPerformance(automationConfig)</code> - Estimate likely success rate before launch</li>
+                    <li><code>generateABTestVariants(automationId)</code> - Create test variations</li>
+                    <li><code>analyzeABTestResults(testId)</code> - Determine winning variation with statistical significance</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h4>4. ContentGeneratorService</h4>
+                <p><strong>Responsibility:</strong> AI-powered content creation for messages</p>
+                <p><strong>Key Methods:</strong></p>
+                <ul>
+                    <li><code>generateEmailSubject(context, tone)</code> - Create compelling subject lines</li>
+                    <li><code>generateEmailBody(prompt, personalization)</code> - Write full email copy</li>
+                    <li><code>generateWhatsAppMessage(context)</code> - Create WhatsApp templates</li>
+                    <li><code>generateSMSCopy(context, maxLength)</code> - Optimize for 160 characters</li>
+                    <li><code>improveExistingCopy(originalCopy, improvements)</code> - Refine user-written content</li>
+                    <li><code>translateContent(content, targetLanguage)</code> - Multi-language support</li>
+                </ul>
+            </div>
+
+            <h3>📡 API Endpoints (14 endpoints)</h3>
+
+            <div class="card">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>Endpoint</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/beezora/chat</code></td>
+                            <td>Send message to Beezora (conversational interface)</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/beezora/suggest-automation</code></td>
+                            <td>Generate automation from natural language description</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/beezora/explain-automation/:id</code></td>
+                            <td>Get plain-English explanation of automation</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/beezora/refine-automation/:id</code></td>
+                            <td>Iteratively improve automation with AI</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/beezora/optimize/:automationId</code></td>
+                            <td>Analyze and suggest performance improvements</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/beezora/predict-performance</code></td>
+                            <td>Predict automation success rate</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/beezora/recommendations</code></td>
+                            <td>Get personalized automation recommendations</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/beezora/generate-content/email-subject</code></td>
+                            <td>Generate email subject line</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/beezora/generate-content/email-body</code></td>
+                            <td>Generate email body copy</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/beezora/generate-content/whatsapp</code></td>
+                            <td>Generate WhatsApp message</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/beezora/generate-content/sms</code></td>
+                            <td>Generate SMS copy (160 char optimized)</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/beezora/improve-copy</code></td>
+                            <td>Improve existing message copy</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/beezora/translate</code></td>
+                            <td>Translate content to target language</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/beezora/conversation-history</code></td>
+                            <td>Get past Beezora chat history</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>💾 Database Schema</h3>
+
+            <div class="card">
+                <h4>beezora_suggestions</h4>
+                <div class="code-block">CREATE TABLE beezora_suggestions (
+  id BIGSERIAL PRIMARY KEY,
+  organization_id BIGINT NOT NULL REFERENCES organizations(id),
+  user_id BIGINT REFERENCES users(id),
+
+  -- User request
+  user_prompt TEXT NOT NULL,
+  -- "Send welcome email to new VIP customers"
+
+  -- AI response
+  ai_response JSONB NOT NULL,
+  -- {
+  --   explanation: "I'll create an automation that...",
+  --   automationConfig: { trigger: {...}, actions: [...] },
+  --   confidence: 0.95
+  -- }
+
+  -- Generated automation (if accepted)
+  automation_id BIGINT REFERENCES user_automations(id),
+  was_accepted BOOLEAN DEFAULT FALSE,
+
+  -- Context provided to AI
+  context JSONB DEFAULT '{}',
+  -- { availableTriggers, availableActions, contactFields, existingAutomations }
+
+  -- AI model metadata
+  model VARCHAR(100), -- 'gpt-4-turbo'
+  tokens_used INT,
+  processing_time_ms INT,
+
+  created_at TIMESTAMP DEFAULT NOW(),
+
+  INDEX idx_beezora_suggestions_org (organization_id),
+  INDEX idx_beezora_suggestions_user (user_id),
+  INDEX idx_beezora_suggestions_accepted (was_accepted),
+  INDEX idx_beezora_suggestions_created (created_at DESC)
+);</div>
+            </div>
+
+            <div class="card">
+                <h4>ai_optimization_logs</h4>
+                <div class="code-block">CREATE TABLE ai_optimization_logs (
+  id BIGSERIAL PRIMARY KEY,
+  automation_id BIGINT NOT NULL REFERENCES user_automations(id),
+  organization_id BIGINT NOT NULL REFERENCES organizations(id),
+
+  -- Optimization type
+  optimization_type VARCHAR(100),
+  -- 'performance_analysis', 'ab_test_suggestion', 'content_improvement'
+
+  -- AI analysis
+  analysis JSONB NOT NULL,
+  -- {
+  --   currentMetrics: { openRate: 0.22, clickRate: 0.05 },
+  --   issues: ["Low open rate", "Suboptimal send time"],
+  --   suggestions: [
+  --     { type: "subject_line", current: "...", suggested: "...", expectedLift: 0.15 },
+  --     { type: "send_time", current: "10am", suggested: "2pm", expectedLift: 0.08 }
+  --   ]
+  -- }
+
+  -- Implementation status
+  was_implemented BOOLEAN DEFAULT FALSE,
+  implemented_at TIMESTAMP,
+
+  -- Results tracking (if implemented)
+  results JSONB,
+  -- { actualLift: 0.12, metricImproved: 'openRate' }
+
+  created_at TIMESTAMP DEFAULT NOW(),
+
+  INDEX idx_ai_optimization_automation (automation_id),
+  INDEX idx_ai_optimization_org (organization_id),
+  INDEX idx_ai_optimization_type (optimization_type),
+  INDEX idx_ai_optimization_implemented (was_implemented)
+);</div>
+            </div>
+
+            <div class="card">
+                <h4>beezora_conversations</h4>
+                <div class="code-block">CREATE TABLE beezora_conversations (
+  id BIGSERIAL PRIMARY KEY,
+  organization_id BIGINT NOT NULL REFERENCES organizations(id),
+  user_id BIGINT NOT NULL REFERENCES users(id),
+
+  -- Conversation metadata
+  title VARCHAR(500), -- Auto-generated from first message
+  context_type VARCHAR(100), -- 'automation_creation', 'optimization', 'general_help'
+
+  -- Message history
+  messages JSONB DEFAULT '[]',
+  -- [
+  --   { role: 'user', content: 'Create welcome automation', timestamp: '...' },
+  --   { role: 'assistant', content: 'I can help with that...', timestamp: '...' }
+  -- ]
+
+  -- Related entities
+  related_automation_id BIGINT REFERENCES user_automations(id),
+
+  -- Status
+  status VARCHAR(50) DEFAULT 'active',
+  -- 'active', 'completed', 'abandoned'
+
+  last_message_at TIMESTAMP DEFAULT NOW(),
+  created_at TIMESTAMP DEFAULT NOW(),
+
+  INDEX idx_beezora_conversations_org (organization_id),
+  INDEX idx_beezora_conversations_user (user_id),
+  INDEX idx_beezora_conversations_status (status),
+  INDEX idx_beezora_conversations_last_message (last_message_at DESC)
+);</div>
+            </div>
+
+            <h3>🔧 OpenAI API Integration Details</h3>
+
+            <div class="card">
+                <h4>API Configuration</h4>
+                <ul>
+                    <li><strong>API Key Storage:</strong> AWS Secrets Manager (rotated every 90 days)</li>
+                    <li><strong>Rate Limiting:</strong> 100 requests/minute per organization, 1000/minute global</li>
+                    <li><strong>Timeout:</strong> 30 seconds per request</li>
+                    <li><strong>Retry Logic:</strong> 3 attempts with exponential backoff (1s, 2s, 4s)</li>
+                    <li><strong>Fallback:</strong> If OpenAI unavailable, show cached suggestions from similar past requests</li>
+                    <li><strong>Cost Tracking:</strong> Log tokens used per request, alert if daily budget exceeded</li>
+                    <li><strong>Caching:</strong> Cache identical requests for 24 hours to reduce API calls</li>
+                </ul>
+
+                <h4>System Prompt Template</h4>
+                <div class="code-block">You are Beezora, an AI assistant for UnifiedBeez automation platform.
+
+Your role:
+- Help users create marketing automations using natural language
+- Suggest optimizations for existing automations
+- Generate email/WhatsApp/SMS content
+- Explain complex automation workflows in simple terms
+
+Available triggers: [contact_created, tag_added, email_opened, ...]
+Available actions: [send_email, add_tag, update_field, wait, ...]
+
+Organization context:
+- Industry: {{organization.industry}}
+- Contact fields: {{organization.contactFields}}
+- Existing automations: {{organization.automationCount}}
+- Integrations: {{organization.activeIntegrations}}
+
+Guidelines:
+- Always suggest practical, proven automation patterns
+- Explain your reasoning
+- Ask clarifying questions if request is ambiguous
+- Generate valid JSON configs that match our schema
+- Be concise but helpful
+
+Response format: JSON with 'explanation' and 'automationConfig' fields</div>
+            </div>
+
+            <h3>🖼️ UI Screenshots Reference</h3>
+            <div class="card">
+                <h4>Beezora AI Interface</h4>
+                <ul>
+                    <li><strong>Live Dashboard - Automations Library.png</strong> - Beezora chat widget for natural language automation creation</li>
+                    <li><strong>Live Dashboard - CRM - Automation Video Preview.png</strong> - AI-suggested automation templates</li>
+                </ul>
+                <p><em>Note: Main Beezora interface shows chat-style interaction with "Create anything with a simple sentence" input field</em></p>
+            </div>
+
+            <h3>🔐 GDPR Compliance</h3>
+
+            <div class="card">
+                <h4>AI Data Privacy</h4>
+                <ul>
+                    <li><strong>Data Sent to OpenAI:</strong> Only automation configs, field names, and anonymized metrics (NO contact PII)</li>
+                    <li><strong>Data Retention:</strong> OpenAI API set to zero retention (data not used for training)</li>
+                    <li><strong>Conversation History:</strong> Stored encrypted, user can delete anytime</li>
+                    <li><strong>Generated Content:</strong> User owns all AI-generated content, no OpenAI claims</li>
+                    <li><strong>Audit Logging:</strong> All AI requests logged with user_id, timestamp, and prompt (for compliance audits)</li>
+                    <li><strong>Opt-Out:</strong> Users can disable AI features entirely in settings</li>
+                    <li><strong>Transparency:</strong> Clear labeling of AI-generated content vs user-created</li>
+                </ul>
+            </div>
+
+            <div class="see-also">
+                <h3>🔗 See Also</h3>
+                <p>
+                    <a href="#frame3">→ Frame 3: Templates Library</a> |
+                    <a href="#frame4">→ Frame 4: Triggers & Actions</a> |
+                    <a href="#frame6">→ Frame 6: Execution & Analytics</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- FRAME 6: EXECUTION & ANALYTICS -->
+        <div id="frame6" class="frame">
+            <h2>📊 FRAME 6: Execution & Analytics</h2>
+
+            <h3>🎯 Purpose</h3>
+            <p>
+                The Execution & Analytics system provides real-time monitoring, comprehensive metrics, and performance
+                insights for all automation workflows. It tracks every execution from trigger to completion, logs detailed
+                action results, captures errors with full context, and generates actionable analytics. This system enables
+                users to understand automation performance, identify bottlenecks, optimize conversion rates, and ensure
+                reliable execution at scale using Bull Queue for asynchronous processing.
+            </p>
+
+            <h3>📈 Core Analytics Features</h3>
+
+            <div class="grid-3">
+                <div class="card">
+                    <h4>⚡ Real-Time Execution Tracking</h4>
+                    <ul>
+                        <li>Live execution status dashboard</li>
+                        <li>Active automation count</li>
+                        <li>Pending/running/completed jobs</li>
+                        <li>Queue depth monitoring</li>
+                        <li>Processing rate (executions/minute)</li>
+                        <li>Average execution time</li>
+                        <li>Current bottlenecks</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>✅ Success & Failure Metrics</h4>
+                    <ul>
+                        <li>Overall success rate (percentage)</li>
+                        <li>Failed executions with error details</li>
+                        <li>Action-level success breakdown</li>
+                        <li>Most common failure reasons</li>
+                        <li>Error categorization (transient vs permanent)</li>
+                        <li>Retry success rate</li>
+                        <li>Time-to-resolution for errors</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>📊 Performance Analytics</h4>
+                    <ul>
+                        <li>Execution time distribution (p50, p95, p99)</li>
+                        <li>Action execution duration</li>
+                        <li>Queue wait time</li>
+                        <li>Throughput trends over time</li>
+                        <li>Resource usage (CPU, memory)</li>
+                        <li>API call latency</li>
+                        <li>Database query performance</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>🎯 Conversion & Engagement Metrics</h4>
+                    <ul>
+                        <li>Email open rates</li>
+                        <li>Click-through rates</li>
+                        <li>WhatsApp delivery/read rates</li>
+                        <li>SMS delivery rates</li>
+                        <li>Goal completion tracking</li>
+                        <li>Revenue attribution</li>
+                        <li>Conversion funnel analysis</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>📉 Trend Analysis</h4>
+                    <ul>
+                        <li>Performance over time (hourly, daily, weekly)</li>
+                        <li>Seasonal patterns</li>
+                        <li>Day-of-week analysis</li>
+                        <li>Time-of-day optimization</li>
+                        <li>Cohort analysis</li>
+                        <li>Comparative analysis (automation A vs B)</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>🔍 Advanced Analytics</h4>
+                    <ul>
+                        <li>Contact journey visualization</li>
+                        <li>Drop-off analysis</li>
+                        <li>A/B test results</li>
+                        <li>Attribution modeling</li>
+                        <li>Predicted performance (ML)</li>
+                        <li>Anomaly detection</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>🔹 Backend Services</h3>
+
+            <div class="card">
+                <h4>1. ExecutionEngine</h4>
+                <p><strong>Responsibility:</strong> Process automation executions from Bull Queue</p>
+                <p><strong>Key Methods:</strong></p>
+                <ul>
+                    <li><code>processExecution(job)</code> - Main execution handler (Bull Queue consumer)</li>
+                    <li><code>executeAutomationStep(step, context)</code> - Execute single action</li>
+                    <li><code>handleConditionalBranching(condition, context)</code> - Evaluate if/else logic</li>
+                    <li><code>processDelayedAction(action, delay)</code> - Schedule future action</li>
+                    <li><code>handleExecutionError(error, execution)</code> - Error recovery and retry</li>
+                    <li><code>finalizeExecution(executionId, status)</code> - Mark execution complete and log results</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h4>2. AnalyticsService</h4>
+                <p><strong>Responsibility:</strong> Aggregate and analyze automation performance data</p>
+                <p><strong>Key Methods:</strong></p>
+                <ul>
+                    <li><code>getAutomationMetrics(automationId, dateRange)</code> - Comprehensive metrics for single automation</li>
+                    <li><code>getOrganizationMetrics(organizationId, dateRange)</code> - Org-wide automation performance</li>
+                    <li><code>calculateSuccessRate(automationId)</code> - Success percentage over time</li>
+                    <li><code>getExecutionTimeTrends(automationId)</code> - Performance trends (latency, throughput)</li>
+                    <li><code>getFailureAnalysis(automationId)</code> - Error categorization and common failure modes</li>
+                    <li><code>getConversionFunnel(automationId)</code> - Step-by-step conversion rates</li>
+                    <li><code>compareAutomations(automationIds)</code> - Side-by-side comparison</li>
+                    <li><code>exportAnalytics(automationId, format)</code> - Export to CSV/PDF</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h4>3. PerformanceMonitor</h4>
+                <p><strong>Responsibility:</strong> Real-time performance monitoring and alerting</p>
+                <p><strong>Key Methods:</strong></p>
+                <ul>
+                    <li><code>getQueueMetrics()</code> - Queue depth, processing rate, wait time</li>
+                    <li><code>getActiveExecutions()</code> - Currently running automations</li>
+                    <li><code>getPendingExecutions()</code> - Queued automations waiting to run</li>
+                    <li><code>getExecutionRate()</code> - Executions per minute/hour</li>
+                    <li><code>checkPerformanceThresholds()</code> - Alert if metrics exceed limits</li>
+                    <li><code>getBottlenecks()</code> - Identify slow actions or congested queues</li>
+                    <li><code>getResourceUsage()</code> - CPU, memory, network utilization</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h4>4. ExecutionLogService</h4>
+                <p><strong>Responsibility:</strong> Store and retrieve detailed execution logs</p>
+                <p><strong>Key Methods:</strong></p>
+                <ul>
+                    <li><code>logExecution(executionId, status, details)</code> - Record execution result</li>
+                    <li><code>logActionResult(executionId, actionId, result)</code> - Record individual action outcome</li>
+                    <li><code>getExecutionHistory(automationId, pagination)</code> - Retrieve past executions</li>
+                    <li><code>getExecutionDetails(executionId)</code> - Full execution log with all steps</li>
+                    <li><code>searchExecutionLogs(query, filters)</code> - Search logs by contact, status, date</li>
+                    <li><code>purgeOldLogs(retentionDays)</code> - Cleanup logs older than retention period</li>
+                </ul>
+            </div>
+
+            <h3>📡 API Endpoints (22 endpoints)</h3>
+
+            <div class="card">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>Endpoint</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/automations/:id/executions</code></td>
+                            <td>Get execution history for automation (paginated)</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/automations/:id/executions/:executionId</code></td>
+                            <td>Get single execution with full step-by-step log</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/automations/:id/analytics</code></td>
+                            <td>Get comprehensive analytics for automation</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/automations/:id/analytics/success-rate</code></td>
+                            <td>Get success rate over time (daily breakdown)</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/automations/:id/analytics/performance</code></td>
+                            <td>Get execution time metrics (p50, p95, p99)</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/automations/:id/analytics/errors</code></td>
+                            <td>Get error analysis and failure breakdown</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/automations/:id/analytics/funnel</code></td>
+                            <td>Get conversion funnel (step-by-step drop-off)</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/automations/:id/analytics/trends</code></td>
+                            <td>Get trend data (hourly/daily/weekly)</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/automations/analytics/compare</code></td>
+                            <td>Compare multiple automations side-by-side</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/automations/analytics/overview</code></td>
+                            <td>Org-wide automation analytics dashboard</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/automations/executions/active</code></td>
+                            <td>Get currently running executions</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/automations/executions/pending</code></td>
+                            <td>Get queued executions waiting to run</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/automations/executions/failed</code></td>
+                            <td>Get recent failed executions</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/automations/executions/:id/retry</code></td>
+                            <td>Manually retry failed execution</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/automations/executions/:id/cancel</code></td>
+                            <td>Cancel pending/running execution</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/automations/queue/metrics</code></td>
+                            <td>Get Bull Queue metrics (depth, rate, wait time)</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/automations/performance/bottlenecks</code></td>
+                            <td>Identify slow actions or performance issues</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/automations/:id/analytics/export</code></td>
+                            <td>Export analytics to CSV/PDF</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/automations/:id/executions/search</code></td>
+                            <td>Search execution logs by contact, status, date</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/contacts/:id/automation-history</code></td>
+                            <td>Get all automation executions for specific contact</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/automations/analytics/anomalies</code></td>
+                            <td>Detect performance anomalies (ML-powered)</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/automations/analytics/custom-report</code></td>
+                            <td>Generate custom analytics report with filters</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>💾 Database Schema</h3>
+
+            <div class="card">
+                <h4>automation_executions</h4>
+                <div class="code-block">CREATE TABLE automation_executions (
+  id BIGSERIAL PRIMARY KEY,
+  automation_id BIGINT NOT NULL REFERENCES user_automations(id),
+  organization_id BIGINT NOT NULL REFERENCES organizations(id),
+
+  -- Trigger context
+  trigger_event JSONB,
+  -- { type: 'contact.created', data: { contactId: 123 }, timestamp: '...' }
+
+  -- Contact context
+  contact_id BIGINT REFERENCES contacts(id),
+
+  -- Execution status
+  status VARCHAR(50) DEFAULT 'pending',
+  -- 'pending', 'queued', 'running', 'completed', 'failed', 'cancelled'
+
+  -- Progress tracking
+  total_actions INT,
+  completed_actions INT DEFAULT 0,
+  current_step INT DEFAULT 0,
+
+  -- Results
+  success_count INT DEFAULT 0,
+  failure_count INT DEFAULT 0,
+  skipped_count INT DEFAULT 0,
+
+  -- Error details
+  error_message TEXT,
+  error_details JSONB,
+  -- { errorCode, stackTrace, failedAction, retriesAttempted }
+
+  -- Performance metrics
+  started_at TIMESTAMP,
+  completed_at TIMESTAMP,
+  duration_ms INT,
+  queue_wait_time_ms INT,
+
+  -- Execution log (detailed step-by-step)
+  execution_log JSONB DEFAULT '[]',
+  -- [
+  --   { step: 1, action: 'send_email', status: 'success', duration_ms: 245, result: {...} },
+  --   { step: 2, action: 'wait', status: 'pending', scheduledFor: '...' }
+  -- ]
+
+  -- Retry tracking
+  retry_count INT DEFAULT 0,
+  max_retries INT DEFAULT 3,
+  parent_execution_id BIGINT REFERENCES automation_executions(id),
+  -- If this is a retry, points to original execution
+
+  created_at TIMESTAMP DEFAULT NOW(),
+  updated_at TIMESTAMP DEFAULT NOW(),
+
+  INDEX idx_executions_automation (automation_id, created_at DESC),
+  INDEX idx_executions_org (organization_id),
+  INDEX idx_executions_contact (contact_id),
+  INDEX idx_executions_status (status),
+  INDEX idx_executions_started (started_at),
+  INDEX idx_executions_completed (completed_at)
+);</div>
+            </div>
+
+            <div class="card">
+                <h4>execution_logs</h4>
+                <div class="code-block">CREATE TABLE execution_logs (
+  id BIGSERIAL PRIMARY KEY,
+  execution_id BIGINT NOT NULL REFERENCES automation_executions(id) ON DELETE CASCADE,
+  automation_id BIGINT NOT NULL REFERENCES user_automations(id),
+
+  -- Step details
+  step_number INT NOT NULL,
+  action_type VARCHAR(100) NOT NULL,
+  action_config JSONB,
+
+  -- Execution result
+  status VARCHAR(50) NOT NULL,
+  -- 'success', 'failed', 'skipped', 'pending'
+
+  result JSONB,
+  -- Action-specific result data (e.g., email sent, message ID)
+
+  error_message TEXT,
+  error_code VARCHAR(100),
+
+  -- Performance
+  started_at TIMESTAMP,
+  completed_at TIMESTAMP,
+  duration_ms INT,
+
+  created_at TIMESTAMP DEFAULT NOW(),
+
+  INDEX idx_execution_logs_execution (execution_id, step_number),
+  INDEX idx_execution_logs_automation (automation_id),
+  INDEX idx_execution_logs_status (status)
+);</div>
+            </div>
+
+            <div class="card">
+                <h4>automation_metrics</h4>
+                <div class="code-block">CREATE TABLE automation_metrics (
+  id BIGSERIAL PRIMARY KEY,
+  automation_id BIGINT NOT NULL REFERENCES user_automations(id),
+  organization_id BIGINT NOT NULL REFERENCES organizations(id),
+
+  -- Time period
+  date DATE NOT NULL,
+  hour INT, -- NULL for daily aggregates, 0-23 for hourly
+
+  -- Execution counts
+  total_executions INT DEFAULT 0,
+  successful_executions INT DEFAULT 0,
+  failed_executions INT DEFAULT 0,
+  cancelled_executions INT DEFAULT 0,
+
+  -- Performance metrics
+  avg_duration_ms INT,
+  p50_duration_ms INT,
+  p95_duration_ms INT,
+  p99_duration_ms INT,
+
+  avg_queue_wait_ms INT,
+
+  -- Action-level metrics
+  action_success_counts JSONB,
+  -- { 'send_email': { success: 45, failed: 2 }, 'add_tag': { success: 47 } }
+
+  action_avg_duration JSONB,
+  -- { 'send_email': 234, 'add_tag': 12 }
+
+  -- Error breakdown
+  error_types JSONB,
+  -- { 'EmailDeliveryError': 3, 'TimeoutError': 1 }
+
+  -- Engagement metrics (for communication actions)
+  emails_sent INT DEFAULT 0,
+  emails_opened INT DEFAULT 0,
+  emails_clicked INT DEFAULT 0,
+  whatsapp_sent INT DEFAULT 0,
+  whatsapp_delivered INT DEFAULT 0,
+  sms_sent INT DEFAULT 0,
+  sms_delivered INT DEFAULT 0,
+
+  -- Conversion tracking
+  goals_completed INT DEFAULT 0,
+  revenue_generated DECIMAL(12,2) DEFAULT 0,
+
+  created_at TIMESTAMP DEFAULT NOW(),
+  updated_at TIMESTAMP DEFAULT NOW(),
+
+  UNIQUE INDEX idx_metrics_automation_date_hour (automation_id, date, hour),
+  INDEX idx_metrics_automation_date (automation_id, date DESC),
+  INDEX idx_metrics_org (organization_id)
+);</div>
+            </div>
+
+            <h3>⚙️ Bull Queue Processing Details</h3>
+
+            <div class="card">
+                <h4>Queue Configuration</h4>
+                <p><strong>Queue Name:</strong> <code>automation-execution-queue</code></p>
+                <p><strong>Redis Backend:</strong> ElastiCache Redis Cluster Mode (Multi-AZ for high availability)</p>
+
+                <h4>Processing Parameters</h4>
+                <ul>
+                    <li><strong>Concurrency:</strong> 10 concurrent jobs per worker instance</li>
+                    <li><strong>Worker Scaling:</strong> Auto-scale from 2 to 10 workers based on queue depth</li>
+                    <li><strong>Job Timeout:</strong> 5 minutes per execution (configurable per automation)</li>
+                    <li><strong>Retry Strategy:</strong>
+                        <ul>
+                            <li>Attempt 1: Immediate</li>
+                            <li>Attempt 2: After 1 minute (exponential backoff)</li>
+                            <li>Attempt 3: After 5 minutes</li>
+                            <li>Attempt 4: After 15 minutes (final attempt)</li>
+                        </ul>
+                    </li>
+                    <li><strong>Priority Levels:</strong>
+                        <ul>
+                            <li>Critical (1): User-triggered test executions, manual retries</li>
+                            <li>High (5): Time-sensitive triggers (abandoned cart within 1 hour)</li>
+                            <li>Normal (10): Standard event-based automations</li>
+                            <li>Low (15): Batch operations, scheduled daily reports</li>
+                        </ul>
+                    </li>
+                    <li><strong>Delayed Jobs:</strong> Support for scheduling executions up to 1 year in advance</li>
+                </ul>
+
+                <h4>Queue Monitoring</h4>
+                <ul>
+                    <li><strong>Bull Dashboard:</strong> Web UI for real-time queue visualization</li>
+                    <li><strong>Metrics Tracked:</strong>
+                        <ul>
+                            <li>Queue depth (pending jobs)</li>
+                            <li>Processing rate (jobs/minute)</li>
+                            <li>Failed job count</li>
+                            <li>Average wait time</li>
+                            <li>Average processing time</li>
+                            <li>Worker utilization</li>
+                        </ul>
+                    </li>
+                    <li><strong>Alerts:</strong>
+                        <ul>
+                            <li>Queue depth > 1000 jobs (scale up workers)</li>
+                            <li>Failed job rate > 5% (investigate errors)</li>
+                            <li>Average wait time > 5 minutes (capacity issue)</li>
+                            <li>Processing time > 10 minutes (timeout risk)</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h4>Error Handling</h4>
+                <ul>
+                    <li><strong>Transient Errors:</strong> Automatically retried (network timeouts, rate limits)</li>
+                    <li><strong>Permanent Errors:</strong> Failed immediately (invalid config, missing required fields)</li>
+                    <li><strong>Dead Letter Queue:</strong> Failed jobs after max retries moved to DLQ for manual review</li>
+                    <li><strong>Error Categorization:</strong> Automatic classification for analytics (EmailError, WebhookError, etc.)</li>
+                </ul>
+            </div>
+
+            <h3>🖼️ UI Screenshots Reference</h3>
+            <div class="card">
+                <h4>Analytics & Execution UI</h4>
+                <p><em>Analytics dashboards show execution history, success rates, performance charts, and error logs. Real-time monitoring displays active executions and queue status.</em></p>
+            </div>
+
+            <h3>🔐 GDPR Compliance</h3>
+
+            <div class="card">
+                <h4>Data Protection in Execution Logs</h4>
+                <ul>
+                    <li><strong>PII Redaction:</strong> Contact email/phone masked in logs (e***@example.com, +234****6789)</li>
+                    <li><strong>Data Retention:</strong> Execution logs retained for 90 days, then aggregated into metrics (no contact data)</li>
+                    <li><strong>Right to Access:</strong> Provide full execution history for specific contact on request</li>
+                    <li><strong>Right to Erasure:</strong> When contact deleted, purge all execution logs mentioning that contact</li>
+                    <li><strong>Audit Trail:</strong> All executions logged with timestamp, automation ID, and anonymized contact reference</li>
+                    <li><strong>Data Minimization:</strong> Logs contain only necessary fields for debugging (no full contact objects)</li>
+                    <li><strong>Encryption:</strong> Execution logs encrypted at rest in PostgreSQL, encrypted in transit via TLS 1.3</li>
+                </ul>
+            </div>
+
+            <div class="see-also">
+                <h3>🔗 See Also</h3>
+                <p>
+                    <a href="#frame2">→ Frame 2: Automation Engine</a> |
+                    <a href="#frame4">→ Frame 4: Triggers & Actions</a> |
+                    <a href="#frame5">→ Frame 5: Beezora AI Integration</a>
+                </p>
+            </div>
+        </div>
 
     </div>
 

@@ -445,6 +445,46 @@
             color: #2C3E50;
         }
 
+        /* FRAME NAVIGATION */
+        .frame-navigation {
+            background: white;
+            padding: 15px 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 160px;
+            z-index: 999;
+            overflow-x: auto;
+        }
+
+        .frame-nav-scroll {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .frame-nav-btn {
+            padding: 10px 20px;
+            background: #E8F5E9;
+            color: #1A4D2E;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            white-space: nowrap;
+        }
+
+        .frame-nav-btn:hover {
+            background: #1A4D2E;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(26, 77, 46, 0.3);
+        }
+
         @media print {
             .header-bar, .controls-bar {
                 position: static;
@@ -456,19 +496,19 @@
 <body>
     <!-- NAVIGATION BAR -->
     <nav class="architecture-nav">
-        <a href="index.html">🏠 Home</a>
-        <a href="manual-onboarding.html" class="active">📝 Manual Onboarding</a>
-        <a href="beezaro-copilot.html">🤖 Beezaro Copilot</a>
-        <a href="side-by-side-comparison.html">⚡ Side-by-Side</a>
+        <a href="index.html">Home</a>
+        <a href="manual-onboarding.html" class="active">Manual Onboarding</a>
+        <a href="beezaro-copilot.html">Beezaro Copilot</a>
+        <a href="side-by-side-comparison.html">Side-by-Side</a>
     </nav>
 
     <!-- BREADCRUMB -->
     <div class="breadcrumb">
-        <a href="index.html">🏠 Home</a> <span>/</span> <span>📝 Manual Onboarding</span>
+        <a href="index.html">Home</a> <span>/</span> <span>Manual Onboarding</span>
     </div>
 
     <div class="header-bar">
-        <h1>🏗️ UnifiedBeez Backend Architecture - Visual Diagrams</h1>
+        <h1>UnifiedBeez Backend Architecture - Visual Diagrams</h1>
         <p>Screenshot-Ready Miro Board Diagrams | Zoom & Pan Enabled</p>
     </div>
 
@@ -478,6 +518,21 @@
         <button class="control-btn" onclick="resetZoom()">↺ Reset</button>
         <span class="zoom-level" id="zoomLevel">100%</span>
         <button class="control-btn" onclick="exportScreenshot()">📸 Prepare Screenshot</button>
+    </div>
+
+    <!-- FRAME NAVIGATION -->
+    <div class="frame-navigation">
+        <div class="frame-nav-scroll">
+            <a href="#frame1" class="frame-nav-btn">Step 0: User Journey</a>
+            <a href="#frame2" class="frame-nav-btn">Step 1: Plan Selection</a>
+            <a href="#frame3" class="frame-nav-btn">Step 2: Business Info</a>
+            <a href="#frame4" class="frame-nav-btn">Step 3: Team Setup</a>
+            <a href="#frame5" class="frame-nav-btn">Step 4: AI Assistant</a>
+            <a href="#frame6" class="frame-nav-btn">Step 5: Channel Integration</a>
+            <a href="#frame7" class="frame-nav-btn">Step 6: Channel Config</a>
+            <a href="#frame8" class="frame-nav-btn">Step 7: Web Chat</a>
+            <a href="#frame9" class="frame-nav-btn">Step 8: Automation Templates</a>
+        </div>
     </div>
 
     <div class="diagram-container" id="diagramContainer">

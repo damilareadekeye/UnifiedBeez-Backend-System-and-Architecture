@@ -1632,13 +1632,2169 @@ validateWebhook(payload: any, signature: string): boolean {
             </div>
         </div>
 
-        <!-- FRAME 6-12: Continue with remaining frames in the same comprehensive pattern -->
-        <!-- Due to file size, remaining frames (6-12) covering Template Management, Contact Attributes, -->
-        <!-- Team Inbox, Labels, Settings, WebSocket, and Multi-Channel Routing will follow the same -->
-        <!-- detailed documentation pattern established in Frames 1-5 -->
+        <!-- FRAME 6: TEMPLATE MANAGEMENT -->
+        <div id="frame6" class="frame">
+            <h2>📝 FRAME 6: Template Management System</h2>
 
-        <!-- Summary: live-dashboard-inbox.html now contains comprehensive documentation for -->
-        <!-- Frames 1-5 with full API endpoints, database schema, and WhatsApp integration details -->
+            <h3>🎯 Purpose</h3>
+            <p>
+                The Template Management system enables organizations to create, manage, and deploy reusable
+                message templates across all communication channels. This includes WhatsApp Business API
+                templates (requiring Meta approval), general canned responses for quick replies, and preset
+                templates for common use cases. Templates support variable placeholders, multi-language
+                content, and usage analytics to optimize agent productivity and message consistency.
+            </p>
+
+            <h3>📋 Template Types</h3>
+
+            <div style="background: linear-gradient(135deg, #FFF9E6 0%, #FFE4B3 100%); border: 3px solid #FF9800; border-radius: 12px; padding: 30px; margin: 25px 0;">
+                <h4 style="color: #1A4D2E; text-align: center; margin-bottom: 30px; font-size: 1.3rem;">
+                    Three Template Categories in UnifiedBeez
+                </h4>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+                    <!-- WhatsApp Templates -->
+                    <div style="background: white; border: 3px solid #25D366; border-radius: 10px; padding: 20px;">
+                        <h5 style="color: #128C7E; margin-bottom: 15px; font-size: 1.1rem;">📱 WhatsApp Templates</h5>
+                        <p style="color: #666; font-size: 0.9rem; line-height: 1.6; margin-bottom: 10px;">
+                            Pre-approved templates by Meta for messages outside 24-hour window
+                        </p>
+                        <ul style="color: #2C3E50; font-size: 0.9rem; line-height: 1.8; margin: 0; padding-left: 20px;">
+                            <li>Require Meta approval (24-48h)</li>
+                            <li>Support rich media (images, videos)</li>
+                            <li>Variable placeholders: {{1}}, {{2}}</li>
+                            <li>Call-to-action buttons</li>
+                            <li>Usage limited by messaging tier</li>
+                        </ul>
+                    </div>
+
+                    <!-- General Templates -->
+                    <div style="background: white; border: 3px solid #52B788; border-radius: 10px; padding: 20px;">
+                        <h5 style="color: #2D6A4F; margin-bottom: 15px; font-size: 1.1rem;">💬 General Templates</h5>
+                        <p style="color: #666; font-size: 0.9rem; line-height: 1.6; margin-bottom: 10px;">
+                            Quick replies for agents across all channels
+                        </p>
+                        <ul style="color: #2C3E50; font-size: 0.9rem; line-height: 1.8; margin: 0; padding-left: 20px;">
+                            <li>Instant approval (no waiting)</li>
+                            <li>Use in any channel</li>
+                            <li>Custom variables: {contactName}, {companyName}</li>
+                            <li>Keyboard shortcuts (/greeting)</li>
+                            <li>Unlimited usage</li>
+                        </ul>
+                    </div>
+
+                    <!-- Preset Templates -->
+                    <div style="background: white; border: 3px solid #64B5F6; border-radius: 10px; padding: 20px;">
+                        <h5 style="color: #0277BD; margin-bottom: 15px; font-size: 1.1rem;">⚡ Preset Templates</h5>
+                        <p style="color: #666; font-size: 0.9rem; line-height: 1.6; margin-bottom: 10px;">
+                            Industry-specific templates provided by UnifiedBeez
+                        </p>
+                        <ul style="color: #2C3E50; font-size: 0.9rem; line-height: 1.8; margin: 0; padding-left: 20px;">
+                            <li>Pre-built by UnifiedBeez</li>
+                            <li>E-commerce, Healthcare, Finance, etc.</li>
+                            <li>Customizable after import</li>
+                            <li>Best practices included</li>
+                            <li>Multi-language support</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <h3>🔧 Backend Services</h3>
+
+            <div class="card">
+                <h4>1. TemplateService</h4>
+                <p><strong>Responsibility:</strong> Manage template lifecycle and validation</p>
+                <p><strong>Key Methods:</strong></p>
+                <ul>
+                    <li><code>createTemplate(organizationId, templateData)</code> - Create new template</li>
+                    <li><code>updateTemplate(templateId, updates)</code> - Modify existing template</li>
+                    <li><code>deleteTemplate(templateId)</code> - Remove template</li>
+                    <li><code>getTemplates(organizationId, filters)</code> - List templates with filtering</li>
+                    <li><code>searchTemplates(query)</code> - Full-text search across template content</li>
+                    <li><code>validateVariables(content, variables)</code> - Ensure placeholders are valid</li>
+                    <li><code>trackUsage(templateId, messageId)</code> - Log template usage for analytics</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h4>2. WhatsAppTemplateService</h4>
+                <p><strong>Responsibility:</strong> Handle WhatsApp-specific template operations with Meta API</p>
+                <p><strong>Key Methods:</strong></p>
+                <ul>
+                    <li><code>submitToMeta(templateData)</code> - Submit template for approval</li>
+                    <li><code>checkApprovalStatus(templateId)</code> - Poll Meta API for status updates</li>
+                    <li><code>syncTemplatesFromMeta(wabaId)</code> - Import approved templates from Meta</li>
+                    <li><code>deleteMetaTemplate(templateId)</code> - Remove from Meta and local DB</li>
+                    <li><code>handleWebhook(payload)</code> - Process template status webhooks from Meta</li>
+                </ul>
+            </div>
+
+            <h3>🔌 API Endpoints</h3>
+
+            <div class="card">
+                <h4>Template Management Endpoints (12 total)</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>Endpoint</th>
+                            <th>Description</th>
+                            <th>Request Body</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/templates</code></td>
+                            <td>Get all templates</td>
+                            <td>Query: type (general, whatsapp, preset), category</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/templates/:id</code></td>
+                            <td>Get single template details</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/templates</code></td>
+                            <td>Create new template</td>
+                            <td>{ name, content, type, category, variables }</td>
+                        </tr>
+                        <tr>
+                            <td>PUT</td>
+                            <td><code>/api/templates/:id</code></td>
+                            <td>Update template</td>
+                            <td>{ name, content, variables }</td>
+                        </tr>
+                        <tr>
+                            <td>DELETE</td>
+                            <td><code>/api/templates/:id</code></td>
+                            <td>Delete template</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/templates/whatsapp/submit</code></td>
+                            <td>Submit WhatsApp template to Meta</td>
+                            <td>{ name, category, language, components }</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/templates/whatsapp/:id/status</code></td>
+                            <td>Check Meta approval status</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/templates/whatsapp/sync</code></td>
+                            <td>Sync approved templates from Meta</td>
+                            <td>{ wabaId }</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/templates/preset</code></td>
+                            <td>Get preset template library</td>
+                            <td>Query: industry, category</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/templates/preset/:id/import</code></td>
+                            <td>Import preset template to org</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/templates/search</code></td>
+                            <td>Search templates by content</td>
+                            <td>Query: q, type</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/templates/:id/analytics</code></td>
+                            <td>Get template usage analytics</td>
+                            <td>Query: startDate, endDate</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>💾 Database Schema</h3>
+
+            <div class="card">
+                <h4>message_templates Table</h4>
+                <div class="code-block">CREATE TABLE message_templates (
+  id BIGSERIAL PRIMARY KEY,
+  organization_id BIGINT NOT NULL REFERENCES organizations(id),
+
+  -- Template info
+  name VARCHAR(255) NOT NULL,
+  content TEXT NOT NULL,
+  type VARCHAR(50) NOT NULL, -- 'general', 'whatsapp', 'preset'
+  category VARCHAR(100), -- 'greeting', 'support', 'sales', 'appointment', etc.
+
+  -- WhatsApp-specific fields
+  whatsapp_template_id VARCHAR(255), -- Meta template ID
+  whatsapp_status VARCHAR(50), -- 'pending', 'approved', 'rejected'
+  whatsapp_language VARCHAR(10), -- 'en', 'es', 'fr', etc.
+  whatsapp_components JSONB, -- Template structure for Meta API
+  -- Example: [{ type: 'HEADER', format: 'IMAGE', ... }, { type: 'BODY', text: '...' }]
+
+  -- Variables/placeholders
+  variables JSONB DEFAULT '[]',
+  -- [{ name: 'customerName', type: 'text', example: 'John' }]
+
+  -- Usage tracking
+  usage_count INT DEFAULT 0,
+  last_used_at TIMESTAMP,
+
+  -- Keyboard shortcuts (for general templates)
+  shortcut VARCHAR(50), -- '/greeting', '/thankyou'
+
+  -- Metadata
+  created_by BIGINT REFERENCES users(id),
+  is_active BOOLEAN DEFAULT TRUE,
+  is_preset BOOLEAN DEFAULT FALSE, -- True for UnifiedBeez presets
+
+  created_at TIMESTAMP DEFAULT NOW(),
+  updated_at TIMESTAMP DEFAULT NOW(),
+
+  -- Indexes
+  INDEX idx_templates_org (organization_id),
+  INDEX idx_templates_type (type),
+  INDEX idx_templates_category (category),
+  INDEX idx_templates_whatsapp_id (whatsapp_template_id),
+  INDEX idx_templates_whatsapp_status (whatsapp_status),
+  INDEX idx_templates_shortcut (shortcut),
+
+  -- Full-text search
+  INDEX idx_templates_content_fts USING GIN (to_tsvector('english', content))
+);</div>
+            </div>
+
+            <h3>🖼️ UI Screenshots Reference</h3>
+            <div class="card">
+                <h4>Template Management Interface (8 screenshots)</h4>
+                <ul>
+                    <li><strong>Inbox Settings - General Templates:</strong> <code>UnifiedBeez_UI_UX/Live Dashboard UI - Inbox/Inbox Settings - General Templates.png</code></li>
+                    <li><strong>Inbox Settings - WhatsApp Templates:</strong> <code>UnifiedBeez_UI_UX/Live Dashboard UI - Inbox/Inbox Settings - Whatsapp Templates.png</code></li>
+                    <li><strong>Inbox Settings - Preset Templates:</strong> <code>UnifiedBeez_UI_UX/Live Dashboard UI - Inbox/Inbox Settings - Preset Templates.png</code></li>
+                    <li><strong>Create New WhatsApp Template:</strong> <code>UnifiedBeez_UI_UX/Live Dashboard UI - Inbox/Inbox Settings - Create new Whatsapp Templates.png</code></li>
+                    <li><strong>WhatsApp Template Builder (Step 1):</strong> <code>UnifiedBeez_UI_UX/Live Dashboard UI - Inbox/Inbox Settings - Create new Whatsapp Templates-1.png</code></li>
+                    <li><strong>WhatsApp Template Builder (Step 2):</strong> <code>UnifiedBeez_UI_UX/Live Dashboard UI - Inbox/Inbox Settings - Create new Whatsapp Templates-2.png</code></li>
+                    <li><strong>WhatsApp Template Builder (Step 3):</strong> <code>UnifiedBeez_UI_UX/Live Dashboard UI - Inbox/Inbox Settings - Create new Whatsapp Templates-3.png</code></li>
+                    <li><strong>Templates Library:</strong> <code>UnifiedBeez_UI_UX/Live Dashboard UI - Internal Operations and Admin/Internal Operations & Admin - Templates Libraries.png</code></li>
+                </ul>
+            </div>
+
+            <h3>🔐 GDPR Compliance</h3>
+            <div class="card">
+                <h4>Data Protection Measures</h4>
+                <ul>
+                    <li><strong>Variable Data Handling:</strong> Template variables may contain PII (customer names, emails) - encrypted at rest</li>
+                    <li><strong>Usage Analytics:</strong> Track which templates are used, but anonymize customer identifiers in analytics</li>
+                    <li><strong>Data Retention:</strong> Deleted templates permanently removed after 30 days (soft delete with grace period)</li>
+                    <li><strong>Meta API Compliance:</strong> WhatsApp template submissions follow Meta's data handling policies</li>
+                    <li><strong>Right to Access:</strong> Templates are exportable via API for GDPR subject access requests</li>
+                </ul>
+            </div>
+
+            <div class="see-also">
+                <h3>🔗 See Also</h3>
+                <p>
+                    <a href="#frame5">→ Frame 5: WhatsApp Integration (Template Submission)</a> |
+                    <a href="#frame3">→ Frame 3: API Endpoints</a> |
+                    <a href="live-dashboard-automations.html">→ Automations Module (Template Usage)</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- FRAME 7: CONTACT ATTRIBUTES -->
+        <div id="frame7" class="frame">
+            <h2>👤 FRAME 7: Contact Attributes System</h2>
+
+            <h3>🎯 Purpose</h3>
+            <p>
+                The Contact Attributes system enables organizations to define custom fields for storing additional
+                information about contacts and conversations. This flexible schema system supports 10+ field types
+                (text, number, date, boolean, select, multiselect, email, phone, URL, file) with validation rules,
+                default values, and conditional visibility. Attributes power segmentation, personalization, and
+                automation workflows across the entire UnifiedBeez platform.
+            </p>
+
+            <h3>📊 Attribute Types</h3>
+
+            <div style="background: linear-gradient(135deg, #E8F5E9 0%, #B7E4C7 100%); border: 3px solid #2D6A4F; border-radius: 12px; padding: 30px; margin: 25px 0;">
+                <h4 style="color: #1A4D2E; text-align: center; margin-bottom: 30px; font-size: 1.3rem;">
+                    10+ Supported Attribute Field Types
+                </h4>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
+                    <div style="background: white; border-left: 4px solid #52B788; padding: 15px; border-radius: 6px;">
+                        <h5 style="color: #2D6A4F; margin: 0 0 8px 0; font-size: 1rem;">📝 Text</h5>
+                        <p style="color: #666; font-size: 0.85rem; margin: 0;">Single-line text input (max 255 chars)</p>
+                    </div>
+                    <div style="background: white; border-left: 4px solid #52B788; padding: 15px; border-radius: 6px;">
+                        <h5 style="color: #2D6A4F; margin: 0 0 8px 0; font-size: 1rem;">📄 Textarea</h5>
+                        <p style="color: #666; font-size: 0.85rem; margin: 0;">Multi-line text (unlimited length)</p>
+                    </div>
+                    <div style="background: white; border-left: 4px solid #52B788; padding: 15px; border-radius: 6px;">
+                        <h5 style="color: #2D6A4F; margin: 0 0 8px 0; font-size: 1rem;">🔢 Number</h5>
+                        <p style="color: #666; font-size: 0.85rem; margin: 0;">Integer or decimal with min/max validation</p>
+                    </div>
+                    <div style="background: white; border-left: 4px solid #52B788; padding: 15px; border-radius: 6px;">
+                        <h5 style="color: #2D6A4F; margin: 0 0 8px 0; font-size: 1rem;">📅 Date</h5>
+                        <p style="color: #666; font-size: 0.85rem; margin: 0;">Date picker (YYYY-MM-DD format)</p>
+                    </div>
+                    <div style="background: white; border-left: 4px solid #52B788; padding: 15px; border-radius: 6px;">
+                        <h5 style="color: #2D6A4F; margin: 0 0 8px 0; font-size: 1rem;">🕐 DateTime</h5>
+                        <p style="color: #666; font-size: 0.85rem; margin: 0;">Date + time picker with timezone</p>
+                    </div>
+                    <div style="background: white; border-left: 4px solid #52B788; padding: 15px; border-radius: 6px;">
+                        <h5 style="color: #2D6A4F; margin: 0 0 8px 0; font-size: 1rem;">✅ Boolean</h5>
+                        <p style="color: #666; font-size: 0.85rem; margin: 0;">Checkbox (true/false)</p>
+                    </div>
+                    <div style="background: white; border-left: 4px solid #52B788; padding: 15px; border-radius: 6px;">
+                        <h5 style="color: #2D6A4F; margin: 0 0 8px 0; font-size: 1rem;">📋 Select</h5>
+                        <p style="color: #666; font-size: 0.85rem; margin: 0;">Dropdown (single choice)</p>
+                    </div>
+                    <div style="background: white; border-left: 4px solid #52B788; padding: 15px; border-radius: 6px;">
+                        <h5 style="color: #2D6A4F; margin: 0 0 8px 0; font-size: 1rem;">☑️ Multiselect</h5>
+                        <p style="color: #666; font-size: 0.85rem; margin: 0;">Multiple checkboxes</p>
+                    </div>
+                    <div style="background: white; border-left: 4px solid #52B788; padding: 15px; border-radius: 6px;">
+                        <h5 style="color: #2D6A4F; margin: 0 0 8px 0; font-size: 1rem;">📧 Email</h5>
+                        <p style="color: #666; font-size: 0.85rem; margin: 0;">Email validation</p>
+                    </div>
+                    <div style="background: white; border-left: 4px solid #52B788; padding: 15px; border-radius: 6px;">
+                        <h5 style="color: #2D6A4F; margin: 0 0 8px 0; font-size: 1rem;">📞 Phone</h5>
+                        <p style="color: #666; font-size: 0.85rem; margin: 0;">Phone number with country code</p>
+                    </div>
+                    <div style="background: white; border-left: 4px solid #52B788; padding: 15px; border-radius: 6px;">
+                        <h5 style="color: #2D6A4F; margin: 0 0 8px 0; font-size: 1rem;">🔗 URL</h5>
+                        <p style="color: #666; font-size: 0.85rem; margin: 0;">URL validation (http/https)</p>
+                    </div>
+                    <div style="background: white; border-left: 4px solid #52B788; padding: 15px; border-radius: 6px;">
+                        <h5 style="color: #2D6A4F; margin: 0 0 8px 0; font-size: 1rem;">📎 File</h5>
+                        <p style="color: #666; font-size: 0.85rem; margin: 0;">File upload (S3 storage)</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3>🔧 Backend Services</h3>
+
+            <div class="card">
+                <h4>1. AttributeService</h4>
+                <p><strong>Responsibility:</strong> Manage attribute schema and values</p>
+                <p><strong>Key Methods:</strong></p>
+                <ul>
+                    <li><code>createAttribute(organizationId, attributeData)</code> - Define new custom attribute</li>
+                    <li><code>updateAttribute(attributeId, updates)</code> - Modify attribute schema</li>
+                    <li><code>deleteAttribute(attributeId)</code> - Remove attribute (cascade delete values)</li>
+                    <li><code>getAttributes(organizationId, scope)</code> - List attributes by scope (contact/conversation)</li>
+                    <li><code>validateValue(attributeId, value)</code> - Validate against validation rules</li>
+                    <li><code>setAttributeValue(entityId, attributeId, value)</code> - Store attribute value</li>
+                    <li><code>getAttributeValues(entityId)</code> - Retrieve all attribute values for entity</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h4>2. ContactManagementService</h4>
+                <p><strong>Responsibility:</strong> Integrate attributes with contact operations</p>
+                <p><strong>Key Methods:</strong></p>
+                <ul>
+                    <li><code>enrichContactWithAttributes(contactId)</code> - Fetch contact with all custom attributes</li>
+                    <li><code>updateContactAttributes(contactId, attributes)</code> - Bulk update attribute values</li>
+                    <li><code>segmentContacts(attributeFilters)</code> - Filter contacts by attribute values</li>
+                    <li><code>exportContactsWithAttributes(filters)</code> - CSV export with custom fields</li>
+                </ul>
+            </div>
+
+            <h3>🔌 API Endpoints</h3>
+
+            <div class="card">
+                <h4>Attribute Management Endpoints (10 total)</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>Endpoint</th>
+                            <th>Description</th>
+                            <th>Request Body</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/attributes</code></td>
+                            <td>Get all attribute schemas</td>
+                            <td>Query: scope (contact, conversation)</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/attributes/:id</code></td>
+                            <td>Get single attribute schema</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/attributes</code></td>
+                            <td>Create new attribute</td>
+                            <td>{ key, label, dataType, validationRules, scope }</td>
+                        </tr>
+                        <tr>
+                            <td>PUT</td>
+                            <td><code>/api/attributes/:id</code></td>
+                            <td>Update attribute schema</td>
+                            <td>{ label, validationRules, defaultValue }</td>
+                        </tr>
+                        <tr>
+                            <td>DELETE</td>
+                            <td><code>/api/attributes/:id</code></td>
+                            <td>Delete attribute</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/contacts/:id/attributes</code></td>
+                            <td>Get contact attribute values</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>PUT</td>
+                            <td><code>/api/contacts/:id/attributes</code></td>
+                            <td>Update contact attributes</td>
+                            <td>{ attributes: { customer_tier: 'gold', ... } }</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/conversations/:id/attributes</code></td>
+                            <td>Get conversation attribute values</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>PUT</td>
+                            <td><code>/api/conversations/:id/attributes</code></td>
+                            <td>Update conversation attributes</td>
+                            <td>{ attributes: { priority: 'high', ... } }</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/attributes/validate</code></td>
+                            <td>Validate attribute value</td>
+                            <td>{ attributeId, value }</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>💾 Database Schema</h3>
+
+            <div class="card">
+                <h4>contact_attributes_schema Table</h4>
+                <div class="code-block">CREATE TABLE contact_attributes_schema (
+  id BIGSERIAL PRIMARY KEY,
+  organization_id BIGINT NOT NULL REFERENCES organizations(id),
+
+  attribute_key VARCHAR(100) NOT NULL, -- Internal key: 'customer_tier'
+  label VARCHAR(255) NOT NULL, -- Display label: 'Customer Tier'
+
+  -- Data type
+  data_type VARCHAR(50) NOT NULL,
+  -- 'text', 'textarea', 'number', 'date', 'datetime', 'boolean',
+  -- 'select', 'multiselect', 'email', 'phone', 'url', 'file'
+
+  -- Validation
+  is_required BOOLEAN DEFAULT FALSE,
+  validation_rules JSONB DEFAULT '{}',
+  -- { min: 0, max: 100, pattern: '^[A-Z]', options: ['gold', 'silver', 'bronze'] }
+
+  -- Display
+  default_value TEXT,
+  placeholder VARCHAR(255),
+  help_text TEXT,
+  display_order INT DEFAULT 0,
+
+  -- Usage scope
+  scope VARCHAR(50) DEFAULT 'contact', -- 'contact', 'conversation'
+
+  -- Metadata
+  is_system BOOLEAN DEFAULT FALSE, -- True for UnifiedBeez system fields
+  created_at TIMESTAMP DEFAULT NOW(),
+  updated_at TIMESTAMP DEFAULT NOW(),
+
+  INDEX idx_contact_attributes_org (organization_id),
+  UNIQUE INDEX idx_contact_attributes_org_key (organization_id, attribute_key)
+);</div>
+            </div>
+
+            <div class="card">
+                <h4>contact_attribute_values Table</h4>
+                <div class="code-block">CREATE TABLE contact_attribute_values (
+  id BIGSERIAL PRIMARY KEY,
+  organization_id BIGINT NOT NULL REFERENCES organizations(id),
+  attribute_id BIGINT NOT NULL REFERENCES contact_attributes_schema(id) ON DELETE CASCADE,
+
+  -- Entity reference (polymorphic)
+  entity_type VARCHAR(50) NOT NULL, -- 'contact', 'conversation'
+  entity_id BIGINT NOT NULL,
+
+  -- Value storage
+  value_text TEXT, -- For text, textarea, email, phone, url
+  value_number DECIMAL(20, 4), -- For number
+  value_boolean BOOLEAN, -- For boolean
+  value_date DATE, -- For date
+  value_datetime TIMESTAMP, -- For datetime
+  value_json JSONB, -- For select, multiselect, file (structured data)
+
+  created_at TIMESTAMP DEFAULT NOW(),
+  updated_at TIMESTAMP DEFAULT NOW(),
+
+  -- Indexes
+  INDEX idx_attribute_values_org (organization_id),
+  INDEX idx_attribute_values_attribute (attribute_id),
+  INDEX idx_attribute_values_entity (entity_type, entity_id),
+  UNIQUE INDEX idx_attribute_values_unique (attribute_id, entity_type, entity_id)
+);</div>
+            </div>
+
+            <h3>🖼️ UI Screenshots Reference</h3>
+            <div class="card">
+                <h4>Attribute Management Interface (6 screenshots)</h4>
+                <ul>
+                    <li><strong>Attributes List:</strong> <code>UnifiedBeez_UI_UX/Live Dashboard UI - Inbox/Attributes.png</code></li>
+                    <li><strong>Contact Attributes View:</strong> <code>UnifiedBeez_UI_UX/Live Dashboard UI - Inbox/General Inbox - Attributes Contacts.png</code></li>
+                    <li><strong>Attributes Modal:</strong> <code>UnifiedBeez_UI_UX/Live Dashboard UI - Inbox/Attributes modal.png</code></li>
+                    <li><strong>Inbox Settings - Contact Attributes:</strong> <code>UnifiedBeez_UI_UX/Live Dashboard UI - Inbox/Inbox Settings - Contacts attributes.png</code></li>
+                    <li><strong>Create New Attribute:</strong> <code>UnifiedBeez_UI_UX/Live Dashboard UI - Inbox/Inbox Settings - Create new attributes.png</code></li>
+                    <li><strong>Attribute Preview (Contacts):</strong> <code>UnifiedBeez_UI_UX/Live Dashboard UI - Internal Operations and Admin/Internal Operations & Admin - Inbox Attributes Preview ( Contacts ).png</code></li>
+                </ul>
+            </div>
+
+            <h3>🔐 GDPR Compliance</h3>
+            <div class="card">
+                <h4>Data Protection Measures</h4>
+                <ul>
+                    <li><strong>PII Storage:</strong> Attribute values may contain sensitive PII - encrypted at rest using AES-256</li>
+                    <li><strong>Right to Access:</strong> Export all attribute values via API for GDPR subject access requests</li>
+                    <li><strong>Right to Erasure:</strong> Cascade delete attribute values when contact is deleted</li>
+                    <li><strong>Data Minimization:</strong> Only store necessary custom fields, avoid redundant data collection</li>
+                    <li><strong>Audit Logging:</strong> Track who created/modified attribute schemas and values (change history)</li>
+                    <li><strong>Data Retention:</strong> Attribute values follow contact retention policies (configurable)</li>
+                </ul>
+            </div>
+
+            <div class="see-also">
+                <h3>🔗 See Also</h3>
+                <p>
+                    <a href="#frame4">→ Frame 4: Database Schema (contact_attributes_schema)</a> |
+                    <a href="live-dashboard-crm.html">→ CRM Module (Contact Management)</a> |
+                    <a href="live-dashboard-automations.html">→ Automations Module (Attribute-based Triggers)</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- FRAME 8: TEAM INBOX FEATURES -->
+        <div id="frame8" class="frame">
+            <h2>👥 FRAME 8: Team Inbox Features</h2>
+
+            <h3>🎯 Purpose</h3>
+            <p>
+                The Team Inbox enables collaborative conversation management with shared visibility, intelligent
+                assignment, collision detection, private notes, and workload balancing. Multiple agents can work
+                together on conversations while avoiding duplicate responses, tracking accountability, and maintaining
+                context through @mentions and internal notes. The system supports both manual and automated assignment
+                strategies (round-robin, load-balanced, skill-based) with real-time updates via WebSocket.
+            </p>
+
+            <h3>✨ Core Team Features</h3>
+
+            <div style="background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%); border: 3px solid #1976D2; border-radius: 12px; padding: 30px; margin: 25px 0;">
+                <h4 style="color: #0D47A1; text-align: center; margin-bottom: 30px; font-size: 1.3rem;">
+                    7 Essential Team Collaboration Capabilities
+                </h4>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+                    <!-- Shared Visibility -->
+                    <div style="background: white; border-left: 5px solid #2196F3; border-radius: 8px; padding: 20px;">
+                        <h5 style="color: #0D47A1; margin-bottom: 10px; font-size: 1.1rem;">👀 Shared Visibility</h5>
+                        <p style="color: #666; font-size: 0.9rem; line-height: 1.6;">
+                            All team members see unassigned conversations and can claim them. Filter by team, assignee, or status.
+                        </p>
+                    </div>
+
+                    <!-- Assignment Engine -->
+                    <div style="background: white; border-left: 5px solid #1976D2; border-radius: 8px; padding: 20px;">
+                        <h5 style="color: #0D47A1; margin-bottom: 10px; font-size: 1.1rem;">🎯 Assignment Engine</h5>
+                        <p style="color: #666; font-size: 0.9rem; line-height: 1.6;">
+                            Auto-assign via round-robin, load-balanced (least busy), or skill-based routing. Manual assignment supported.
+                        </p>
+                    </div>
+
+                    <!-- Collision Detection -->
+                    <div style="background: white; border-left: 5px solid #0D47A1; border-radius: 8px; padding: 20px;">
+                        <h5 style="color: #0D47A1; margin-bottom: 10px; font-size: 1.1rem;">⚠️ Collision Detection</h5>
+                        <p style="color: #666; font-size: 0.9rem; line-height: 1.6;">
+                            Real-time typing indicators show when another agent is composing. Prevents duplicate responses.
+                        </p>
+                    </div>
+
+                    <!-- Private Notes -->
+                    <div style="background: white; border-left: 5px solid #42A5F5; border-radius: 8px; padding: 20px;">
+                        <h5 style="color: #0D47A1; margin-bottom: 10px; font-size: 1.1rem;">📝 Private Notes</h5>
+                        <p style="color: #666; font-size: 0.9rem; line-height: 1.6;">
+                            Internal notes visible only to team. @mention colleagues to notify them of important context.
+                        </p>
+                    </div>
+
+                    <!-- Mentions -->
+                    <div style="background: white; border-left: 5px solid #64B5F6; border-radius: 8px; padding: 20px;">
+                        <h5 style="color: #0D47A1; margin-bottom: 10px; font-size: 1.1rem;">@ Mentions</h5>
+                        <p style="color: #666; font-size: 0.9rem; line-height: 1.6;">
+                            Tag team members with @username to notify them. Mentions tracked in notifications panel.
+                        </p>
+                    </div>
+
+                    <!-- Workload Management -->
+                    <div style="background: white; border-left: 5px solid #90CAF9; border-radius: 8px; padding: 20px;">
+                        <h5 style="color: #0D47A1; margin-bottom: 10px; font-size: 1.1rem;">📊 Workload Management</h5>
+                        <p style="color: #666; font-size: 0.9rem; line-height: 1.6;">
+                            Set max conversations per agent. Auto-assignment pauses when agent reaches capacity.
+                        </p>
+                    </div>
+
+                    <!-- Away Status -->
+                    <div style="background: white; border-left: 5px solid #BBDEFB; border-radius: 8px; padding: 20px;">
+                        <h5 style="color: #0D47A1; margin-bottom: 10px; font-size: 1.1rem;">🚪 Away Status</h5>
+                        <p style="color: #666; font-size: 0.9rem; line-height: 1.6;">
+                            Agents mark themselves as away/offline. System auto-reassigns their conversations to available teammates.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <h3>🔧 Backend Services</h3>
+
+            <div class="card">
+                <h4>1. TeamInboxService</h4>
+                <p><strong>Responsibility:</strong> Orchestrate team inbox operations</p>
+                <p><strong>Key Methods:</strong></p>
+                <ul>
+                    <li><code>getTeamInboxView(teamId, filters)</code> - Retrieve team conversations with filters</li>
+                    <li><code>claimConversation(conversationId, userId)</code> - Agent claims unassigned conversation</li>
+                    <li><code>transferConversation(conversationId, fromUserId, toUserId)</code> - Transfer between agents</li>
+                    <li><code>getTeamWorkload(teamId)</code> - View active conversations per agent</li>
+                    <li><code>broadcastTypingIndicator(conversationId, userId, isTyping)</code> - Collision prevention</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h4>2. AssignmentEngine</h4>
+                <p><strong>Responsibility:</strong> Intelligent conversation routing</p>
+                <p><strong>Assignment Strategies:</strong></p>
+                <ul>
+                    <li><code>roundRobinAssignment(teamId)</code> - Distribute evenly in rotation</li>
+                    <li><code>loadBalancedAssignment(teamId)</code> - Assign to agent with fewest active conversations</li>
+                    <li><code>skillBasedAssignment(conversationId, requiredSkills)</code> - Match agent expertise</li>
+                    <li><code>priorityAssignment(conversationId, priority)</code> - Route high-priority to senior agents</li>
+                    <li><code>checkAgentAvailability(userId)</code> - Verify agent is online and under capacity</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h4>3. PresenceService</h4>
+                <p><strong>Responsibility:</strong> Track agent online/offline status</p>
+                <p><strong>Key Methods:</strong></p>
+                <ul>
+                    <li><code>setUserStatus(userId, status)</code> - Update status (online, away, busy, offline)</li>
+                    <li><code>getUserStatus(userId)</code> - Check if agent is available</li>
+                    <li><code>handleStatusChange(userId, newStatus)</code> - Trigger reassignment if away</li>
+                    <li><code>broadcastPresenceUpdate(userId)</code> - Notify team via WebSocket</li>
+                </ul>
+            </div>
+
+            <h3>🔌 API Endpoints</h3>
+
+            <div class="card">
+                <h4>Team Inbox Endpoints (15 total)</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>Endpoint</th>
+                            <th>Description</th>
+                            <th>Request Body</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/inbox/team/:teamId</code></td>
+                            <td>Get team inbox conversations</td>
+                            <td>Query: status, assignee, priority</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/inbox/assign</code></td>
+                            <td>Manually assign conversation</td>
+                            <td>{ conversationId, assignToUserId }</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/inbox/claim</code></td>
+                            <td>Agent claims unassigned conversation</td>
+                            <td>{ conversationId }</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/inbox/transfer</code></td>
+                            <td>Transfer conversation to another agent</td>
+                            <td>{ conversationId, toUserId, reason }</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/inbox/auto-assign</code></td>
+                            <td>Auto-assign via strategy</td>
+                            <td>{ conversationId, strategy: 'round_robin'|'load_balanced' }</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/inbox/team/:teamId/workload</code></td>
+                            <td>View team workload distribution</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/inbox/notes</code></td>
+                            <td>Add private note to conversation</td>
+                            <td>{ conversationId, content, mentions: [userId1] }</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/inbox/conversations/:id/notes</code></td>
+                            <td>Get all notes for conversation</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>DELETE</td>
+                            <td><code>/api/inbox/notes/:id</code></td>
+                            <td>Delete private note</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/inbox/typing</code></td>
+                            <td>Send typing indicator</td>
+                            <td>{ conversationId, isTyping: true|false }</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/inbox/conversations/:id/viewers</code></td>
+                            <td>See who's currently viewing conversation</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>PUT</td>
+                            <td><code>/api/users/:id/status</code></td>
+                            <td>Update agent status</td>
+                            <td>{ status: 'online'|'away'|'busy'|'offline' }</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/inbox/team/:teamId/presence</code></td>
+                            <td>Get team presence status</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/inbox/reassign-bulk</code></td>
+                            <td>Bulk reassign conversations</td>
+                            <td>{ fromUserId, toUserId, conversationIds: [] }</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/inbox/mentions</code></td>
+                            <td>Get user's @mentions notifications</td>
+                            <td>Query: unreadOnly</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>💾 Database Schema</h3>
+
+            <div class="card">
+                <h4>teams Table</h4>
+                <div class="code-block">CREATE TABLE teams (
+  id BIGSERIAL PRIMARY KEY,
+  organization_id BIGINT NOT NULL REFERENCES organizations(id),
+
+  name VARCHAR(255) NOT NULL,
+  description TEXT,
+
+  -- Assignment settings
+  auto_assignment_enabled BOOLEAN DEFAULT FALSE,
+  assignment_strategy VARCHAR(50) DEFAULT 'round_robin',
+  -- 'round_robin', 'load_balanced', 'skill_based'
+
+  max_conversations_per_agent INT DEFAULT 50, -- Workload limit
+
+  created_at TIMESTAMP DEFAULT NOW(),
+  updated_at TIMESTAMP DEFAULT NOW(),
+
+  INDEX idx_teams_org (organization_id)
+);</div>
+            </div>
+
+            <div class="card">
+                <h4>team_members Table</h4>
+                <div class="code-block">CREATE TABLE team_members (
+  id BIGSERIAL PRIMARY KEY,
+  team_id BIGINT NOT NULL REFERENCES teams(id) ON DELETE CASCADE,
+  user_id BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+
+  role VARCHAR(50) DEFAULT 'agent', -- 'lead', 'agent'
+
+  -- Availability
+  is_active BOOLEAN DEFAULT TRUE,
+  current_status VARCHAR(50) DEFAULT 'offline', -- 'online', 'away', 'busy', 'offline'
+  last_active_at TIMESTAMP,
+
+  joined_at TIMESTAMP DEFAULT NOW(),
+
+  UNIQUE INDEX idx_team_members_unique (team_id, user_id),
+  INDEX idx_team_members_user (user_id)
+);</div>
+            </div>
+
+            <div class="card">
+                <h4>conversation_assignments Table</h4>
+                <div class="code-block">CREATE TABLE conversation_assignments (
+  id BIGSERIAL PRIMARY KEY,
+  conversation_id BIGINT NOT NULL REFERENCES conversations(id) ON DELETE CASCADE,
+
+  assigned_to_user_id BIGINT REFERENCES users(id),
+  assigned_to_team_id BIGINT REFERENCES teams(id),
+
+  assigned_by BIGINT REFERENCES users(id), -- Who assigned (null if auto-assigned)
+  assignment_method VARCHAR(50), -- 'manual', 'auto_round_robin', 'auto_load_balanced', 'claimed'
+
+  assigned_at TIMESTAMP DEFAULT NOW(),
+
+  INDEX idx_conversation_assignments_conversation (conversation_id),
+  INDEX idx_conversation_assignments_user (assigned_to_user_id),
+  INDEX idx_conversation_assignments_team (assigned_to_team_id)
+);</div>
+            </div>
+
+            <div class="card">
+                <h4>conversation_notes Table (Private Notes)</h4>
+                <div class="code-block">CREATE TABLE conversation_notes (
+  id BIGSERIAL PRIMARY KEY,
+  conversation_id BIGINT NOT NULL REFERENCES conversations(id) ON DELETE CASCADE,
+  organization_id BIGINT NOT NULL REFERENCES organizations(id),
+
+  content TEXT NOT NULL,
+
+  -- Author
+  created_by BIGINT NOT NULL REFERENCES users(id),
+
+  -- Mentions
+  mentioned_users BIGINT[] DEFAULT '{}', -- Array of user IDs
+
+  created_at TIMESTAMP DEFAULT NOW(),
+  updated_at TIMESTAMP DEFAULT NOW(),
+
+  INDEX idx_conversation_notes_conversation (conversation_id),
+  INDEX idx_conversation_notes_created_by (created_by),
+  INDEX idx_conversation_notes_mentions USING GIN (mentioned_users)
+);</div>
+            </div>
+
+            <h3>🖼️ UI Screenshots Reference</h3>
+            <div class="card">
+                <h4>Team Inbox Interface (12 screenshots)</h4>
+                <ul>
+                    <li><strong>Team Inbox Overview:</strong> <code>UnifiedBeez_UI_UX/Live Dashboard UI - Inbox/Team Inbox.png</code></li>
+                    <li><strong>Team Inbox Collapsed:</strong> <code>UnifiedBeez_UI_UX/Live Dashboard UI - Inbox/Team Inbox - Collapsed.png</code></li>
+                    <li><strong>Team Inbox Info Panel Open:</strong> <code>UnifiedBeez_UI_UX/Live Dashboard UI - Inbox/Team Inbox - Info Open.png</code></li>
+                    <li><strong>Team Inbox Dropdown:</strong> <code>UnifiedBeez_UI_UX/Live Dashboard UI - Inbox/Team Inbox - Info Open - Dropdown.png</code></li>
+                    <li><strong>Team Attributes View:</strong> <code>UnifiedBeez_UI_UX/Live Dashboard UI - Inbox/Team inbox - Team attrributes.png</code></li>
+                    <li><strong>Team Inbox - See All Channels:</strong> <code>UnifiedBeez_UI_UX/Live Dashboard UI - Inbox/Team Inbox - See all channels.png</code></li>
+                    <li><strong>Settings - Team:</strong> <code>UnifiedBeez_UI_UX/Live Dashboard UI - Dashboard/Settings - Team.png</code></li>
+                    <li><strong>Live Dashboard - Team Members:</strong> <code>UnifiedBeez_UI_UX/Live Dashboard UI - Dashboard/Live Dashboard - Team Members.png</code></li>
+                    <li><strong>Insights - Team Members:</strong> <code>UnifiedBeez_UI_UX/Live Dashboard UI - Dashboard/Live Dashboard - Insights - Team Members.png</code></li>
+                    <li><strong>Add Team Member:</strong> <code>UnifiedBeez_UI_UX/Beehive Dashboard UI/Add team member.png</code></li>
+                    <li><strong>Team Directory:</strong> <code>UnifiedBeez_UI_UX/Live Dashboard UI - Internal Operations and Admin/Internal Operations & Admin - Core ( Team Directory ).png</code></li>
+                    <li><strong>Attribute Preview (Teams):</strong> <code>UnifiedBeez_UI_UX/Live Dashboard UI - Internal Operations and Admin/Internal Operations & Admin - Inbox Attributes Preview (Teams).png</code></li>
+                </ul>
+            </div>
+
+            <h3>🔐 GDPR Compliance</h3>
+            <div class="card">
+                <h4>Data Protection Measures</h4>
+                <ul>
+                    <li><strong>Private Notes Storage:</strong> Notes encrypted at rest, only accessible to team members</li>
+                    <li><strong>Assignment History:</strong> Track who assigned conversations for accountability and auditing</li>
+                    <li><strong>Mention Notifications:</strong> Pseudonymized user mentions in analytics (no PII exposure)</li>
+                    <li><strong>Presence Data:</strong> Online/offline status stored in Redis (ephemeral, auto-expires after 24h)</li>
+                    <li><strong>Right to Access:</strong> Export team notes and assignment history for GDPR requests</li>
+                    <li><strong>Data Retention:</strong> Notes follow conversation retention policy (90 days after closure)</li>
+                </ul>
+            </div>
+
+            <div class="see-also">
+                <h3>🔗 See Also</h3>
+                <p>
+                    <a href="#frame2">→ Frame 2: Backend Services (TeamInboxService)</a> |
+                    <a href="#frame11">→ Frame 11: Real-Time WebSocket (Typing Indicators, Presence)</a> |
+                    <a href="live-dashboard-settings.html">→ Settings Module (Team Management)</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- FRAME 9: LABELS & CATEGORIZATION -->
+        <div id="frame9" class="frame">
+            <h2>🏷️ FRAME 9: Labels & Categorization System</h2>
+
+            <h3>🎯 Purpose</h3>
+            <p>
+                The Labels system provides flexible, color-coded categorization for conversations, enabling
+                organizations to organize and filter conversations by topic, priority, sentiment, or any custom
+                dimension. Labels support multi-label assignments (one conversation can have multiple labels),
+                hierarchical structures (parent-child relationships), auto-labeling via automation rules, and
+                bulk operations. Labels are used extensively in inbox filtering, reporting, and automation workflows.
+            </p>
+
+            <h3>✨ Label Features</h3>
+
+            <div style="background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%); border: 3px solid #FF9800; border-radius: 12px; padding: 30px; margin: 25px 0;">
+                <h4 style="color: #E65100; text-align: center; margin-bottom: 30px; font-size: 1.3rem;">
+                    5 Core Label Capabilities
+                </h4>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                    <!-- Color-Coded Labels -->
+                    <div style="background: white; border-left: 5px solid #FF5722; border-radius: 8px; padding: 20px;">
+                        <h5 style="color: #D84315; margin-bottom: 10px; font-size: 1.1rem;">🎨 Color-Coded</h5>
+                        <p style="color: #666; font-size: 0.9rem; line-height: 1.6;">
+                            Assign hex colors to labels for visual identification. Support for 16+ standard colors.
+                        </p>
+                    </div>
+
+                    <!-- Multi-Label Support -->
+                    <div style="background: white; border-left: 5px solid #FF9800; border-radius: 8px; padding: 20px;">
+                        <h5 style="color: #E65100; margin-bottom: 10px; font-size: 1.1rem;">☑️ Multi-Label Support</h5>
+                        <p style="color: #666; font-size: 0.9rem; line-height: 1.6;">
+                            Apply multiple labels per conversation (e.g., "Sales", "Urgent", "VIP Customer").
+                        </p>
+                    </div>
+
+                    <!-- Hierarchies -->
+                    <div style="background: white; border-left: 5px solid #FFA726; border-radius: 8px; padding: 20px;">
+                        <h5 style="color: #EF6C00; margin-bottom: 10px; font-size: 1.1rem;">🌳 Hierarchies</h5>
+                        <p style="color: #666; font-size: 0.9rem; line-height: 1.6;">
+                            Nested labels (e.g., "Support" > "Technical Issue" > "Billing Error").
+                        </p>
+                    </div>
+
+                    <!-- Auto-Labeling -->
+                    <div style="background: white; border-left: 5px solid #FFB74D; border-radius: 8px; padding: 20px;">
+                        <h5 style="color: #F57C00; margin-bottom: 10px; font-size: 1.1rem;">⚡ Auto-Labeling</h5>
+                        <p style="color: #666; font-size: 0.9rem; line-height: 1.6;">
+                            Automation rules auto-apply labels based on keywords, sentiment, or channel.
+                        </p>
+                    </div>
+
+                    <!-- Filter & Search -->
+                    <div style="background: white; border-left: 5px solid #FFCC80; border-radius: 8px; padding: 20px;">
+                        <h5 style="color: #FB8C00; margin-bottom: 10px; font-size: 1.1rem;">🔍 Filter & Search</h5>
+                        <p style="color: #666; font-size: 0.9rem; line-height: 1.6;">
+                            Filter inbox by single or multiple labels. Search conversations by label name.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <h3>🔧 Backend Services</h3>
+
+            <div class="card">
+                <h4>1. LabelService</h4>
+                <p><strong>Responsibility:</strong> Manage label definitions and assignments</p>
+                <p><strong>Key Methods:</strong></p>
+                <ul>
+                    <li><code>createLabel(organizationId, labelData)</code> - Create new label</li>
+                    <li><code>updateLabel(labelId, updates)</code> - Modify label (name, color, description)</li>
+                    <li><code>deleteLabel(labelId)</code> - Remove label (cascade remove from conversations)</li>
+                    <li><code>getLabels(organizationId, filters)</code> - List all labels with hierarchy</li>
+                    <li><code>applyLabel(conversationId, labelId, userId)</code> - Add label to conversation</li>
+                    <li><code>removeLabel(conversationId, labelId)</code> - Remove label from conversation</li>
+                    <li><code>bulkApplyLabels(conversationIds, labelIds)</code> - Bulk label assignment</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h4>2. CategoryManagement</h4>
+                <p><strong>Responsibility:</strong> Handle hierarchical label structures</p>
+                <p><strong>Key Methods:</strong></p>
+                <ul>
+                    <li><code>createHierarchy(parentLabelId, childLabelData)</code> - Create nested label</li>
+                    <li><code>getLabelTree(organizationId)</code> - Retrieve full label hierarchy</li>
+                    <li><code>moveLabelToParent(labelId, newParentId)</code> - Reorganize hierarchy</li>
+                    <li><code>getConversationsByLabelPath(labelPath)</code> - Query by full path (e.g., "Support/Billing")</li>
+                </ul>
+            </div>
+
+            <h3>🔌 API Endpoints</h3>
+
+            <div class="card">
+                <h4>Label Management Endpoints (10 total)</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>Endpoint</th>
+                            <th>Description</th>
+                            <th>Request Body</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/labels</code></td>
+                            <td>Get all labels</td>
+                            <td>Query: includeHierarchy</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/labels/:id</code></td>
+                            <td>Get single label details</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/labels</code></td>
+                            <td>Create new label</td>
+                            <td>{ name, color, description, parentLabelId }</td>
+                        </tr>
+                        <tr>
+                            <td>PUT</td>
+                            <td><code>/api/labels/:id</code></td>
+                            <td>Update label</td>
+                            <td>{ name, color, description }</td>
+                        </tr>
+                        <tr>
+                            <td>DELETE</td>
+                            <td><code>/api/labels/:id</code></td>
+                            <td>Delete label</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/conversations/:id/labels</code></td>
+                            <td>Apply labels to conversation</td>
+                            <td>{ labelIds: [1, 2, 3] }</td>
+                        </tr>
+                        <tr>
+                            <td>DELETE</td>
+                            <td><code>/api/conversations/:id/labels/:labelId</code></td>
+                            <td>Remove label from conversation</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/labels/bulk-apply</code></td>
+                            <td>Bulk apply labels</td>
+                            <td>{ conversationIds: [], labelIds: [] }</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/labels/:id/conversations</code></td>
+                            <td>Get all conversations with label</td>
+                            <td>Query: page, limit</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/labels/analytics</code></td>
+                            <td>Label usage analytics</td>
+                            <td>Query: startDate, endDate</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>💾 Database Schema</h3>
+
+            <div class="card">
+                <h4>labels Table</h4>
+                <div class="code-block">CREATE TABLE labels (
+  id BIGSERIAL PRIMARY KEY,
+  organization_id BIGINT NOT NULL REFERENCES organizations(id),
+
+  name VARCHAR(100) NOT NULL,
+  color VARCHAR(7), -- Hex color code: #FF5733
+  description TEXT,
+
+  -- Hierarchy
+  parent_label_id BIGINT REFERENCES labels(id) ON DELETE CASCADE,
+
+  -- Usage stats
+  conversation_count INT DEFAULT 0, -- Cached count for performance
+
+  created_at TIMESTAMP DEFAULT NOW(),
+  updated_at TIMESTAMP DEFAULT NOW(),
+
+  INDEX idx_labels_org (organization_id),
+  INDEX idx_labels_parent (parent_label_id),
+  UNIQUE INDEX idx_labels_org_name (organization_id, name)
+);</div>
+            </div>
+
+            <div class="card">
+                <h4>conversation_labels Table (Many-to-Many)</h4>
+                <div class="code-block">CREATE TABLE conversation_labels (
+  id BIGSERIAL PRIMARY KEY,
+  conversation_id BIGINT NOT NULL REFERENCES conversations(id) ON DELETE CASCADE,
+  label_id BIGINT NOT NULL REFERENCES labels(id) ON DELETE CASCADE,
+
+  applied_by BIGINT REFERENCES users(id), -- Who applied the label (null if auto-applied)
+  applied_via VARCHAR(50), -- 'manual', 'automation', 'api'
+  applied_at TIMESTAMP DEFAULT NOW(),
+
+  UNIQUE INDEX idx_conversation_labels_unique (conversation_id, label_id),
+  INDEX idx_conversation_labels_conversation (conversation_id),
+  INDEX idx_conversation_labels_label (label_id)
+);</div>
+            </div>
+
+            <h3>🖼️ UI Screenshots Reference</h3>
+            <div class="card">
+                <h4>Labels Interface (5 screenshots)</h4>
+                <ul>
+                    <li><strong>Labels List:</strong> <code>UnifiedBeez_UI_UX/Live Dashboard UI - Inbox/Labels.png</code></li>
+                    <li><strong>General Inbox - Labels View:</strong> <code>UnifiedBeez_UI_UX/Live Dashboard UI - Inbox/General Inbox - Labels.png</code></li>
+                    <li><strong>Labels Management (Beehive):</strong> <code>UnifiedBeez_UI_UX/Beehive Dashboard UI/Labels.png</code></li>
+                    <li><strong>General Inbox - Labels (Beehive):</strong> <code>UnifiedBeez_UI_UX/Beehive Dashboard UI/General Inbox - Labels.png</code></li>
+                    <li><strong>Input with Label:</strong> <code>UnifiedBeez_UI_UX/Automations Library + Builders - Support and Escalation/Input with label.png</code></li>
+                </ul>
+            </div>
+
+            <h3>🔐 GDPR Compliance</h3>
+            <div class="card">
+                <h4>Data Protection Measures</h4>
+                <ul>
+                    <li><strong>Label Metadata:</strong> Label names and descriptions do not contain PII (organizational categorization only)</li>
+                    <li><strong>Applied By Tracking:</strong> Track which user applied labels for audit purposes</li>
+                    <li><strong>Right to Access:</strong> Export label assignments as part of conversation data export</li>
+                    <li><strong>Data Retention:</strong> Label assignments deleted when conversation is deleted (cascade)</li>
+                    <li><strong>Analytics Anonymization:</strong> Label usage stats do not expose individual customer identifiers</li>
+                </ul>
+            </div>
+
+            <div class="see-also">
+                <h3>🔗 See Also</h3>
+                <p>
+                    <a href="#frame4">→ Frame 4: Database Schema (labels, conversation_labels)</a> |
+                    <a href="#frame3">→ Frame 3: API Endpoints</a> |
+                    <a href="live-dashboard-automations.html">→ Automations Module (Auto-Labeling Rules)</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- FRAME 10: INBOX SETTINGS -->
+        <div id="frame10" class="frame">
+            <h2>⚙️ FRAME 10: Inbox Settings & Configuration</h2>
+
+            <h3>🎯 Purpose</h3>
+            <p>
+                The Inbox Settings module provides comprehensive configuration options for customizing inbox
+                behavior, appearance, notifications, and preferences at both organizational and individual user levels.
+                Settings include working hours, auto-assignment rules, notification preferences, signature management,
+                away messages, and channel-specific configurations. Settings are validated and persisted in PostgreSQL
+                with real-time updates via WebSocket.
+            </p>
+
+            <h3>⚙️ Settings Categories</h3>
+
+            <div style="background: linear-gradient(135deg, #F3E5F5 0%, #E1BEE7 100%); border: 3px solid #9C27B0; border-radius: 12px; padding: 30px; margin: 25px 0;">
+                <h4 style="color: #6A1B9A; text-align: center; margin-bottom: 30px; font-size: 1.3rem;">
+                    6 Settings Sections in Inbox Module
+                </h4>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                    <!-- General Settings -->
+                    <div style="background: white; border-left: 5px solid #9C27B0; border-radius: 8px; padding: 20px;">
+                        <h5 style="color: #6A1B9A; margin-bottom: 10px; font-size: 1.1rem;">🏢 General Settings</h5>
+                        <ul style="color: #666; font-size: 0.85rem; line-height: 1.6; margin: 0; padding-left: 20px;">
+                            <li>Working hours & timezone</li>
+                            <li>Auto-away status</li>
+                            <li>Default conversation view</li>
+                            <li>Message retention policy</li>
+                        </ul>
+                    </div>
+
+                    <!-- Notifications -->
+                    <div style="background: white; border-left: 5px solid #AB47BC; border-radius: 8px; padding: 20px;">
+                        <h5 style="color: #7B1FA2; margin-bottom: 10px; font-size: 1.1rem;">🔔 Notifications</h5>
+                        <ul style="color: #666; font-size: 0.85rem; line-height: 1.6; margin: 0; padding-left: 20px;">
+                            <li>Email notifications</li>
+                            <li>Browser push notifications</li>
+                            <li>Desktop notifications</li>
+                            <li>Mention alerts</li>
+                        </ul>
+                    </div>
+
+                    <!-- Assignment Rules -->
+                    <div style="background: white; border-left: 5px solid #BA68C8; border-radius: 8px; padding: 20px;">
+                        <h5 style="color: #8E24AA; margin-bottom: 10px; font-size: 1.1rem;">🎯 Assignment Rules</h5>
+                        <ul style="color: #666; font-size: 0.85rem; line-height: 1.6; margin: 0; padding-left: 20px;">
+                            <li>Auto-assignment strategy</li>
+                            <li>Max conversations per agent</li>
+                            <li>Skill-based routing</li>
+                            <li>Priority handling</li>
+                        </ul>
+                    </div>
+
+                    <!-- Templates & Responses -->
+                    <div style="background: white; border-left: 5px solid #CE93D8; border-radius: 8px; padding: 20px;">
+                        <h5 style="color: #9C27B0; margin-bottom: 10px; font-size: 1.1rem;">📝 Templates</h5>
+                        <ul style="color: #666; font-size: 0.85rem; line-height: 1.6; margin: 0; padding-left: 20px;">
+                            <li>Manage templates (see Frame 6)</li>
+                            <li>Email signatures</li>
+                            <li>Away messages</li>
+                            <li>Quick replies shortcuts</li>
+                        </ul>
+                    </div>
+
+                    <!-- Attributes & Labels -->
+                    <div style="background: white; border-left: 5px solid #E1BEE7; border-radius: 8px; padding: 20px;">
+                        <h5 style="color: #AB47BC; margin-bottom: 10px; font-size: 1.1rem;">🏷️ Attributes & Labels</h5>
+                        <ul style="color: #666; font-size: 0.85rem; line-height: 1.6; margin: 0; padding-left: 20px;">
+                            <li>Custom attributes (see Frame 7)</li>
+                            <li>Label management (see Frame 9)</li>
+                            <li>Contact fields configuration</li>
+                        </ul>
+                    </div>
+
+                    <!-- Channel Settings -->
+                    <div style="background: white; border-left: 5px solid #F3E5F5; border-radius: 8px; padding: 20px;">
+                        <h5 style="color: #BA68C8; margin-bottom: 10px; font-size: 1.1rem;">📡 Channel Settings</h5>
+                        <ul style="color: #666; font-size: 0.85rem; line-height: 1.6; margin: 0; padding-left: 20px;">
+                            <li>WhatsApp configuration</li>
+                            <li>Email SMTP/IMAP</li>
+                            <li>Social media connections</li>
+                            <li>Channel-specific rules</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <h3>🔧 Backend Services</h3>
+
+            <div class="card">
+                <h4>1. SettingsService</h4>
+                <p><strong>Responsibility:</strong> Manage inbox settings and preferences</p>
+                <p><strong>Key Methods:</strong></p>
+                <ul>
+                    <li><code>getSettings(organizationId, scope)</code> - Retrieve settings by scope (org, team, user)</li>
+                    <li><code>updateSettings(scope, settingsData)</code> - Update settings (with validation)</li>
+                    <li><code>getDefaultSettings()</code> - Return default settings for new organizations</li>
+                    <li><code>validateSettings(settingsData)</code> - Validate settings before saving</li>
+                    <li><code>exportSettings(organizationId)</code> - Export settings as JSON</li>
+                    <li><code>importSettings(organizationId, settingsJson)</code> - Bulk import settings</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h4>2. ConfigurationManagement</h4>
+                <p><strong>Responsibility:</strong> Handle multi-level settings hierarchy</p>
+                <p><strong>Key Methods:</strong></p>
+                <ul>
+                    <li><code>resolveSettings(userId)</code> - Merge org, team, and user settings (inheritance)</li>
+                    <li><code>getEffectiveSettings(userId, key)</code> - Get final setting value (user override > team > org)</li>
+                    <li><code>resetToDefaults(scope, settingKey)</code> - Reset specific setting to default</li>
+                </ul>
+            </div>
+
+            <h3>🔌 API Endpoints</h3>
+
+            <div class="card">
+                <h4>Settings Management Endpoints (8 total)</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>Endpoint</th>
+                            <th>Description</th>
+                            <th>Request Body</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/inbox/settings</code></td>
+                            <td>Get current user's inbox settings</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>PUT</td>
+                            <td><code>/api/inbox/settings</code></td>
+                            <td>Update user inbox settings</td>
+                            <td>{ notifications, workingHours, preferences }</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/inbox/settings/organization</code></td>
+                            <td>Get organization-level settings</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>PUT</td>
+                            <td><code>/api/inbox/settings/organization</code></td>
+                            <td>Update organization settings (admin only)</td>
+                            <td>{ autoAssignment, retentionPolicy, ... }</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/inbox/settings/team/:teamId</code></td>
+                            <td>Get team-level settings</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>PUT</td>
+                            <td><code>/api/inbox/settings/team/:teamId</code></td>
+                            <td>Update team settings</td>
+                            <td>{ maxConversationsPerAgent, workingHours }</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/inbox/settings/reset</code></td>
+                            <td>Reset settings to defaults</td>
+                            <td>{ scope: 'user'|'team'|'organization', keys: [] }</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/inbox/settings/export</code></td>
+                            <td>Export settings as JSON</td>
+                            <td>Query: scope</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>💾 Database Schema</h3>
+
+            <div class="card">
+                <h4>inbox_settings Table</h4>
+                <div class="code-block">CREATE TABLE inbox_settings (
+  id BIGSERIAL PRIMARY KEY,
+  organization_id BIGINT NOT NULL REFERENCES organizations(id),
+
+  -- Scope
+  scope VARCHAR(50) NOT NULL, -- 'organization', 'team', 'user'
+  scope_id BIGINT, -- team_id or user_id (null for organization scope)
+
+  -- Settings (JSONB for flexibility)
+  settings JSONB NOT NULL DEFAULT '{}',
+  -- Example structure:
+  -- {
+  --   "general": { "workingHours": "9-17", "timezone": "America/New_York" },
+  --   "notifications": { "email": true, "push": false, "mentions": true },
+  --   "autoAssignment": { "enabled": true, "strategy": "round_robin" },
+  --   "preferences": { "defaultView": "mine", "soundEnabled": true }
+  -- }
+
+  created_at TIMESTAMP DEFAULT NOW(),
+  updated_at TIMESTAMP DEFAULT NOW(),
+
+  INDEX idx_inbox_settings_org (organization_id),
+  INDEX idx_inbox_settings_scope (scope, scope_id),
+  UNIQUE INDEX idx_inbox_settings_unique (organization_id, scope, scope_id)
+);</div>
+            </div>
+
+            <div class="card">
+                <h4>user_preferences Table (User-Specific Settings)</h4>
+                <div class="code-block">CREATE TABLE user_preferences (
+  id BIGSERIAL PRIMARY KEY,
+  user_id BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+
+  -- Preferences
+  preferences JSONB NOT NULL DEFAULT '{}',
+  -- {
+  --   "inbox": { "defaultFilter": "unassigned", "compactView": false },
+  --   "notifications": { "email": true, "desktop": true, "sound": false },
+  --   "workingHours": { "monday": "9-17", "tuesday": "9-17", ... },
+  --   "signature": "Best regards,\nJohn Doe",
+  --   "awayMessage": "I'm currently unavailable. I'll respond shortly."
+  -- }
+
+  created_at TIMESTAMP DEFAULT NOW(),
+  updated_at TIMESTAMP DEFAULT NOW(),
+
+  UNIQUE INDEX idx_user_preferences_user (user_id)
+);</div>
+            </div>
+
+            <h3>🖼️ UI Screenshots Reference</h3>
+            <div class="card">
+                <h4>Settings Interface (4 screenshots)</h4>
+                <ul>
+                    <li><strong>Settings Overview:</strong> <code>UnifiedBeez_UI_UX/Live Dashboard UI - Dashboard/Settings.png</code></li>
+                    <li><strong>Settings - Notifications:</strong> <code>UnifiedBeez_UI_UX/Live Dashboard UI - Dashboard/Settings - Notifications.png</code></li>
+                    <li><strong>Settings - Preference:</strong> <code>UnifiedBeez_UI_UX/Live Dashboard UI - Dashboard/Settings - Preference.png</code></li>
+                    <li><strong>Inbox Settings - General Templates:</strong> <code>UnifiedBeez_UI_UX/Live Dashboard UI - Inbox/Inbox Settings - General Templates.png</code></li>
+                </ul>
+            </div>
+
+            <h3>🔐 GDPR Compliance</h3>
+            <div class="card">
+                <h4>Data Protection Measures</h4>
+                <ul>
+                    <li><strong>Settings Storage:</strong> User preferences (working hours, signatures) do not contain customer PII</li>
+                    <li><strong>Away Messages:</strong> Away messages encrypted at rest (may contain personal contact info)</li>
+                    <li><strong>Right to Access:</strong> Export user preferences as part of GDPR data export</li>
+                    <li><strong>Data Retention:</strong> Settings deleted when user account is deleted (cascade)</li>
+                    <li><strong>Audit Logging:</strong> Track who changed organization-level settings for compliance</li>
+                </ul>
+            </div>
+
+            <div class="see-also">
+                <h3>🔗 See Also</h3>
+                <p>
+                    <a href="#frame6">→ Frame 6: Template Management</a> |
+                    <a href="#frame7">→ Frame 7: Contact Attributes</a> |
+                    <a href="#frame9">→ Frame 9: Labels & Categorization</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- FRAME 11: REAL-TIME (WEBSOCKET) -->
+        <div id="frame11" class="frame">
+            <h2>⚡ FRAME 11: Real-Time Communication (WebSocket)</h2>
+
+            <h3>🎯 Purpose</h3>
+            <p>
+                The Real-Time Communication layer enables instant bidirectional message delivery between the UnifiedBeez
+                backend and connected clients (agents, customers) using Socket.IO and WebSocket protocol. This system
+                powers live message delivery, typing indicators, presence status, collision detection, and real-time
+                UI updates across the entire platform. The architecture uses Redis pub/sub for multi-instance synchronization,
+                JWT authentication for secure connections, and AWS ECS Fargate with sticky sessions for scalable WebSocket hosting.
+            </p>
+
+            <h3>🔌 Socket.IO Architecture</h3>
+
+            <div style="background: linear-gradient(135deg, #E0F7FA 0%, #B2EBF2 100%); border: 3px solid #00ACC1; border-radius: 12px; padding: 30px; margin: 25px 0;">
+                <h4 style="color: #006064; text-align: center; margin-bottom: 30px; font-size: 1.3rem;">
+                    Socket.IO + Redis + ECS Fargate Architecture
+                </h4>
+
+                <!-- Client Layer -->
+                <div style="background: white; border: 3px solid #00ACC1; border-radius: 10px; padding: 20px; margin-bottom: 20px; text-align: center;">
+                    <div style="font-size: 2.5rem; margin-bottom: 10px;">💻📱</div>
+                    <h5 style="color: #006064; margin: 0; font-size: 1.1rem;">Clients (Web, Mobile)</h5>
+                    <p style="color: #666; font-size: 0.9rem; margin: 5px 0 0 0;">Socket.IO Client Library (v4.8.1)</p>
+                </div>
+
+                <div style="text-align: center; font-size: 2rem; color: #00ACC1; margin: 15px 0;">↕️</div>
+
+                <!-- ALB -->
+                <div style="background: white; border: 3px solid #0097A7; border-radius: 10px; padding: 20px; margin-bottom: 20px; text-align: center;">
+                    <div style="font-size: 2.5rem; margin-bottom: 10px;">⚖️</div>
+                    <h5 style="color: #006064; margin: 0; font-size: 1.1rem;">Application Load Balancer</h5>
+                    <p style="color: #666; font-size: 0.9rem; margin: 5px 0 0 0;">Sticky sessions enabled (AWSALB cookie)</p>
+                </div>
+
+                <div style="text-align: center; font-size: 2rem; color: #00ACC1; margin: 15px 0;">↕️</div>
+
+                <!-- ECS Tasks -->
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 20px;">
+                    <div style="background: white; border: 3px solid #26C6DA; border-radius: 10px; padding: 15px; text-align: center;">
+                        <div style="font-size: 2rem; margin-bottom: 5px;">🐳</div>
+                        <h5 style="color: #0097A7; margin: 0; font-size: 0.95rem;">ECS Task 1</h5>
+                        <p style="color: #666; font-size: 0.8rem; margin: 5px 0 0 0;">Socket.IO Server</p>
+                    </div>
+                    <div style="background: white; border: 3px solid #26C6DA; border-radius: 10px; padding: 15px; text-align: center;">
+                        <div style="font-size: 2rem; margin-bottom: 5px;">🐳</div>
+                        <h5 style="color: #0097A7; margin: 0; font-size: 0.95rem;">ECS Task 2</h5>
+                        <p style="color: #666; font-size: 0.8rem; margin: 5px 0 0 0;">Socket.IO Server</p>
+                    </div>
+                    <div style="background: white; border: 3px solid #26C6DA; border-radius: 10px; padding: 15px; text-align: center;">
+                        <div style="font-size: 2rem; margin-bottom: 5px;">🐳</div>
+                        <h5 style="color: #0097A7; margin: 0; font-size: 0.95rem;">ECS Task N</h5>
+                        <p style="color: #666; font-size: 0.8rem; margin: 5px 0 0 0;">Socket.IO Server</p>
+                    </div>
+                </div>
+
+                <div style="text-align: center; font-size: 2rem; color: #00ACC1; margin: 15px 0;">↕️</div>
+
+                <!-- Redis Pub/Sub -->
+                <div style="background: white; border: 3px solid #D32F2F; border-radius: 10px; padding: 20px; text-align: center;">
+                    <div style="font-size: 2.5rem; margin-bottom: 10px;">🔄</div>
+                    <h5 style="color: #B71C1C; margin: 0; font-size: 1.1rem;">ElastiCache Redis (Pub/Sub)</h5>
+                    <p style="color: #666; font-size: 0.9rem; margin: 5px 0 0 0;">Synchronize events across all Socket.IO instances</p>
+                </div>
+            </div>
+
+            <h3>🔧 Backend Services</h3>
+
+            <div class="card">
+                <h4>1. WebSocketGateway (NestJS Gateway)</h4>
+                <p><strong>Responsibility:</strong> Handle WebSocket connections and events</p>
+                <p><strong>Implementation:</strong></p>
+                <div class="code-block">@WebSocketGateway({
+  cors: { origin: process.env.FRONTEND_URL, credentials: true },
+  transports: ['websocket', 'polling'],
+  namespace: '/messages'
+})
+export class MessagesGateway {
+  @WebSocketServer() server: Server;
+
+  constructor(
+    private readonly socketService: SocketService,
+    private readonly redisAdapter: RedisAdapter
+  ) {}
+
+  // Connection lifecycle
+  async handleConnection(client: Socket) {
+    // Authenticate client via JWT
+    const user = await this.validateToken(client.handshake.auth.token);
+    if (!user) return client.disconnect();
+
+    // Join user-specific room
+    client.join(`user:${user.id}`);
+    client.join(`org:${user.organizationId}`);
+
+    // Update presence status
+    await this.socketService.setUserOnline(user.id);
+  }
+
+  async handleDisconnect(client: Socket) {
+    const userId = client.data.userId;
+    await this.socketService.setUserOffline(userId);
+  }
+
+  // Event handlers
+  @SubscribeMessage('message:send')
+  async handleSendMessage(client: Socket, payload: any) { ... }
+
+  @SubscribeMessage('typing:start')
+  async handleTypingStart(client: Socket, payload: any) { ... }
+
+  @SubscribeMessage('typing:stop')
+  async handleTypingStop(client: Socket, payload: any) { ... }
+}</div>
+            </div>
+
+            <div class="card">
+                <h4>2. SocketService</h4>
+                <p><strong>Responsibility:</strong> Manage socket connections and room broadcasting</p>
+                <p><strong>Key Methods:</strong></p>
+                <ul>
+                    <li><code>emitToUser(userId, event, data)</code> - Send event to specific user (all devices)</li>
+                    <li><code>emitToOrganization(orgId, event, data)</code> - Broadcast to all org members</li>
+                    <li><code>emitToConversation(conversationId, event, data)</code> - Send to conversation participants</li>
+                    <li><code>emitToRoom(roomId, event, data)</code> - Generic room broadcast</li>
+                    <li><code>setUserOnline(userId)</code> - Mark user as online in Redis</li>
+                    <li><code>setUserOffline(userId)</code> - Mark user as offline in Redis</li>
+                    <li><code>getUsersInRoom(roomId)</code> - Get list of connected users in room</li>
+                </ul>
+            </div>
+
+            <h3>📡 WebSocket Events</h3>
+
+            <div class="card">
+                <h4>Real-Time Events (20+ events)</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Event Name</th>
+                            <th>Direction</th>
+                            <th>Payload</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>conversation:new</code></td>
+                            <td>Server → Client</td>
+                            <td>{ conversation, contact }</td>
+                            <td>New conversation created</td>
+                        </tr>
+                        <tr>
+                            <td><code>message:received</code></td>
+                            <td>Server → Client</td>
+                            <td>{ message, conversationId }</td>
+                            <td>New message received</td>
+                        </tr>
+                        <tr>
+                            <td><code>message:sent</code></td>
+                            <td>Server → Client</td>
+                            <td>{ message, conversationId }</td>
+                            <td>Message sent successfully</td>
+                        </tr>
+                        <tr>
+                            <td><code>message:status</code></td>
+                            <td>Server → Client</td>
+                            <td>{ messageId, status }</td>
+                            <td>Message status update (delivered, read)</td>
+                        </tr>
+                        <tr>
+                            <td><code>typing:start</code></td>
+                            <td>Client → Server</td>
+                            <td>{ conversationId }</td>
+                            <td>User started typing</td>
+                        </tr>
+                        <tr>
+                            <td><code>typing:stop</code></td>
+                            <td>Client → Server</td>
+                            <td>{ conversationId }</td>
+                            <td>User stopped typing</td>
+                        </tr>
+                        <tr>
+                            <td><code>typing:indicator</code></td>
+                            <td>Server → Client</td>
+                            <td>{ conversationId, userId, isTyping }</td>
+                            <td>Broadcast typing status to other users</td>
+                        </tr>
+                        <tr>
+                            <td><code>presence:update</code></td>
+                            <td>Server → Client</td>
+                            <td>{ userId, status }</td>
+                            <td>User presence changed (online, away, offline)</td>
+                        </tr>
+                        <tr>
+                            <td><code>conversation:assigned</code></td>
+                            <td>Server → Client</td>
+                            <td>{ conversationId, assignedTo }</td>
+                            <td>Conversation assigned to user/team</td>
+                        </tr>
+                        <tr>
+                            <td><code>conversation:status</code></td>
+                            <td>Server → Client</td>
+                            <td>{ conversationId, status }</td>
+                            <td>Conversation status changed</td>
+                        </tr>
+                        <tr>
+                            <td><code>label:applied</code></td>
+                            <td>Server → Client</td>
+                            <td>{ conversationId, label }</td>
+                            <td>Label added to conversation</td>
+                        </tr>
+                        <tr>
+                            <td><code>note:added</code></td>
+                            <td>Server → Client</td>
+                            <td>{ conversationId, note, mentionedUsers }</td>
+                            <td>Private note added with @mentions</td>
+                        </tr>
+                        <tr>
+                            <td><code>contact:updated</code></td>
+                            <td>Server → Client</td>
+                            <td>{ contactId, updates }</td>
+                            <td>Contact attributes updated</td>
+                        </tr>
+                        <tr>
+                            <td><code>conversation:viewing</code></td>
+                            <td>Client → Server</td>
+                            <td>{ conversationId }</td>
+                            <td>User opened conversation (collision detection)</td>
+                        </tr>
+                        <tr>
+                            <td><code>conversation:viewers</code></td>
+                            <td>Server → Client</td>
+                            <td>{ conversationId, viewers: [] }</td>
+                            <td>List of users currently viewing conversation</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>🔐 JWT Authentication</h3>
+
+            <div class="card">
+                <h4>WebSocket Connection Authentication</h4>
+                <div class="code-block">// Client-side (React/Next.js)
+import { io } from 'socket.io-client';
+
+const socket = io('wss://api.unifiedbeez.com/messages', {
+  transports: ['websocket', 'polling'],
+  auth: {
+    token: localStorage.getItem('accessToken') // JWT from login
+  }
+});
+
+socket.on('connect', () => {
+  console.log('Connected to Socket.IO server');
+});
+
+socket.on('message:received', (data) => {
+  // Handle incoming message
+  addMessageToUI(data.message);
+});
+
+// Server-side (NestJS)
+@UseGuards(WsJwtAuthGuard) // Validate JWT on connection
+async handleConnection(client: Socket) {
+  const token = client.handshake.auth.token;
+
+  try {
+    const decoded = this.jwtService.verify(token);
+    client.data.userId = decoded.sub;
+    client.data.organizationId = decoded.organizationId;
+
+    // Join rooms
+    client.join(`user:${decoded.sub}`);
+    client.join(`org:${decoded.organizationId}`);
+  } catch (error) {
+    client.disconnect();
+  }
+}</div>
+            </div>
+
+            <h3>💾 Database Schema</h3>
+
+            <div class="card">
+                <h4>redis_sessions Table (Presence Storage)</h4>
+                <p><strong>Note:</strong> Presence data stored in Redis (ephemeral), not PostgreSQL</p>
+                <div class="code-block">// Redis Key Structure (TTL: 5 minutes)
+
+// User presence
+Key: presence:user:{userId}
+Value: { status: 'online', lastSeen: 1729681800, socketIds: ['abc123', 'def456'] }
+TTL: 300 seconds (auto-expire after 5 minutes of inactivity)
+
+// Typing indicators
+Key: typing:conversation:{conversationId}
+Value: Set of userIds currently typing
+TTL: 10 seconds (auto-expire after 10 seconds)</div>
+            </div>
+
+            <div class="card">
+                <h4>active_connections Table (Connection Tracking)</h4>
+                <div class="code-block">CREATE TABLE active_connections (
+  id BIGSERIAL PRIMARY KEY,
+  user_id BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+
+  socket_id VARCHAR(255) NOT NULL, -- Socket.IO connection ID
+  connected_at TIMESTAMP DEFAULT NOW(),
+  last_heartbeat TIMESTAMP DEFAULT NOW(),
+
+  -- Client metadata
+  user_agent TEXT,
+  ip_address VARCHAR(45),
+  device_type VARCHAR(50), -- 'web', 'mobile', 'desktop'
+
+  INDEX idx_active_connections_user (user_id),
+  INDEX idx_active_connections_socket (socket_id)
+);</div>
+            </div>
+
+            <h3>🖼️ UI Screenshots Reference</h3>
+            <div class="card">
+                <h4>Real-Time Chat Interface (7 screenshots)</h4>
+                <ul>
+                    <li><strong>General Inbox - WhatsApp Chat:</strong> <code>UnifiedBeez_UI_UX/Live Dashboard UI - Inbox/General Inbox - Whatsapp Chat.png</code></li>
+                    <li><strong>Create New Chat:</strong> <code>UnifiedBeez_UI_UX/Live Dashboard UI - Inbox/Create new chat.png</code></li>
+                    <li><strong>Team Inbox (Real-Time):</strong> <code>UnifiedBeez_UI_UX/Live Dashboard UI - Inbox/Team Inbox.png</code></li>
+                    <li><strong>Team Inbox Info Open:</strong> <code>UnifiedBeez_UI_UX/Live Dashboard UI - Inbox/Team Inbox - Info Open.png</code></li>
+                    <li><strong>Chatbox (Beezaro):</strong> <code>UnifiedBeez_UI_UX/Automations Library + Email Builder _All pictures/Chatbox.png</code></li>
+                    <li><strong>Settings - Live Preview Chatbox:</strong> <code>UnifiedBeez_UI_UX/Onboarding & Manual Setup/Onboarding & Manual Setup - Onboarding Flow Step 4 - AI Assistant Creation/Onboarding Flow - Step 4_ Settings, Live Preview Chatbox.png</code></li>
+                    <li><strong>Webchat Connection:</strong> <code>UnifiedBeez_UI_UX/Onboarding & Manual Setup/Onboarding & Manual Setup - Webchat Connection/Manual Setup Step 7_ Webchat Connection.png</code></li>
+                </ul>
+            </div>
+
+            <h3>🔐 GDPR Compliance</h3>
+            <div class="card">
+                <h4>Data Protection Measures</h4>
+                <ul>
+                    <li><strong>Ephemeral Data:</strong> Presence status and typing indicators stored in Redis with TTL (auto-expire, not permanently stored)</li>
+                    <li><strong>Connection Logs:</strong> Active connections table tracks IP addresses - anonymized after 30 days</li>
+                    <li><strong>Message Content:</strong> WebSocket events do not store message content (only references)</li>
+                    <li><strong>TLS Encryption:</strong> All WebSocket connections encrypted via WSS (TLS 1.3)</li>
+                    <li><strong>Right to Access:</strong> Connection history exportable for GDPR requests (last 30 days)</li>
+                    <li><strong>Data Retention:</strong> Connection records purged after 90 days automatically</li>
+                </ul>
+            </div>
+
+            <div class="see-also">
+                <h3>🔗 See Also</h3>
+                <p>
+                    <a href="#frame2">→ Frame 2: Backend Services (WebSocketGateway)</a> |
+                    <a href="#frame8">→ Frame 8: Team Inbox Features (Collision Detection)</a> |
+                    <a href="live-dashboard-main.html">→ Architecture Decisions (Decision #7: Real-Time Messaging)</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- FRAME 12: MULTI-CHANNEL ROUTING -->
+        <div id="frame12" class="frame">
+            <h2>📡 FRAME 12: Multi-Channel Message Routing</h2>
+
+            <h3>🎯 Purpose</h3>
+            <p>
+                The Multi-Channel Routing system provides a unified abstraction layer for sending and receiving messages
+                across 6+ communication channels (WhatsApp, Email, Instagram, Facebook Messenger, Telegram, SMS).
+                Each channel has a dedicated adapter that normalizes incoming messages to a common format, handles
+                channel-specific constraints (24-hour windows, rate limits), and routes messages to the appropriate
+                external API. This architecture enables UnifiedBeez to add new channels without modifying core business logic.
+            </p>
+
+            <h3>📡 Supported Channels</h3>
+
+            <div style="background: linear-gradient(135deg, #E8EAF6 0%, #C5CAE9 100%); border: 3px solid #3F51B5; border-radius: 12px; padding: 30px; margin: 25px 0;">
+                <h4 style="color: #1A237E; text-align: center; margin-bottom: 30px; font-size: 1.3rem;">
+                    6 Channel Adapters in UnifiedBeez
+                </h4>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                    <!-- WhatsApp -->
+                    <div style="background: white; border-left: 5px solid #25D366; border-radius: 8px; padding: 20px;">
+                        <div style="font-size: 2rem; margin-bottom: 10px;">💬</div>
+                        <h5 style="color: #128C7E; margin-bottom: 10px; font-size: 1.1rem;">WhatsApp Business API</h5>
+                        <ul style="color: #666; font-size: 0.85rem; line-height: 1.6; margin: 0; padding-left: 20px;">
+                            <li>Meta Cloud API</li>
+                            <li>24-hour messaging window</li>
+                            <li>Template messages</li>
+                            <li>Media support (images, videos, docs)</li>
+                        </ul>
+                    </div>
+
+                    <!-- Email -->
+                    <div style="background: white; border-left: 5px solid #EA4335; border-radius: 8px; padding: 20px;">
+                        <div style="font-size: 2rem; margin-bottom: 10px;">📧</div>
+                        <h5 style="color: #C5221F; margin-bottom: 10px; font-size: 1.1rem;">Email (SMTP/IMAP)</h5>
+                        <ul style="color: #666; font-size: 0.85rem; line-height: 1.6; margin: 0; padding-left: 20px;">
+                            <li>SMTP sending (AWS SES)</li>
+                            <li>IMAP polling for inbound</li>
+                            <li>HTML/Plain text support</li>
+                            <li>Attachments via S3</li>
+                        </ul>
+                    </div>
+
+                    <!-- Instagram -->
+                    <div style="background: white; border-left: 5px solid #E4405F; border-radius: 8px; padding: 20px;">
+                        <div style="font-size: 2rem; margin-bottom: 10px;">📷</div>
+                        <h5 style="color: #C13584; margin-bottom: 10px; font-size: 1.1rem;">Instagram Direct</h5>
+                        <ul style="color: #666; font-size: 0.85rem; line-height: 1.6; margin: 0; padding-left: 20px;">
+                            <li>Instagram Graph API</li>
+                            <li>7-day response window</li>
+                            <li>Story replies</li>
+                            <li>Media sharing</li>
+                        </ul>
+                    </div>
+
+                    <!-- Messenger -->
+                    <div style="background: white; border-left: 5px solid #0084FF; border-radius: 8px; padding: 20px;">
+                        <div style="font-size: 2rem; margin-bottom: 10px;">💬</div>
+                        <h5 style="color: #006AFF; margin-bottom: 10px; font-size: 1.1rem;">Facebook Messenger</h5>
+                        <ul style="color: #666; font-size: 0.85rem; line-height: 1.6; margin: 0; padding-left: 20px;">
+                            <li>Messenger Platform API</li>
+                            <li>7-day response window</li>
+                            <li>Quick replies, buttons</li>
+                            <li>Rich templates</li>
+                        </ul>
+                    </div>
+
+                    <!-- Telegram -->
+                    <div style="background: white; border-left: 5px solid #0088CC; border-radius: 8px; padding: 20px;">
+                        <div style="font-size: 2rem; margin-bottom: 10px;">✈️</div>
+                        <h5 style="color: #0088CC; margin-bottom: 10px; font-size: 1.1rem;">Telegram</h5>
+                        <ul style="color: #666; font-size: 0.85rem; line-height: 1.6; margin: 0; padding-left: 20px;">
+                            <li>Telegram Bot API</li>
+                            <li>No messaging window</li>
+                            <li>Inline keyboards</li>
+                            <li>Media, stickers, polls</li>
+                        </ul>
+                    </div>
+
+                    <!-- SMS -->
+                    <div style="background: white; border-left: 5px solid #00B4D8; border-radius: 8px; padding: 20px;">
+                        <div style="font-size: 2rem; margin-bottom: 10px;">💬</div>
+                        <h5 style="color: #0077B6; margin-bottom: 10px; font-size: 1.1rem;">SMS (Twilio)</h5>
+                        <ul style="color: #666; font-size: 0.85rem; line-height: 1.6; margin: 0; padding-left: 20px;">
+                            <li>Twilio Messaging API</li>
+                            <li>No messaging window</li>
+                            <li>Text only (160 chars)</li>
+                            <li>International support</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <h3>🔧 Backend Services</h3>
+
+            <div class="card">
+                <h4>1. ChannelIntegrationService</h4>
+                <p><strong>Responsibility:</strong> Orchestrate channel adapters and message routing</p>
+                <p><strong>Key Methods:</strong></p>
+                <ul>
+                    <li><code>sendMessage(channel, to, content, options)</code> - Route outbound message to appropriate adapter</li>
+                    <li><code>receiveMessage(channel, rawPayload)</code> - Process inbound message from webhook</li>
+                    <li><code>getChannelStatus(channelId)</code> - Check channel connection health</li>
+                    <li><code>retryFailedMessage(messageId)</code> - Retry failed message delivery</li>
+                    <li><code>handleWebhook(channel, payload, signature)</code> - Verify and process webhooks</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h4>2. MessageRouter</h4>
+                <p><strong>Responsibility:</strong> Normalize and route messages</p>
+                <p><strong>Key Methods:</strong></p>
+                <ul>
+                    <li><code>normalizeIncoming(channel, rawMessage)</code> - Convert to UnifiedBeez message format</li>
+                    <li><code>normalizeOutgoing(channel, unifiedMessage)</code> - Convert to channel-specific format</li>
+                    <li><code>validateChannelConstraints(channel, message)</code> - Check 24-hour window, rate limits, etc.</li>
+                    <li><code>selectAdapter(channel)</code> - Return appropriate adapter instance</li>
+                </ul>
+            </div>
+
+            <h3>🔌 Channel Adapters</h3>
+
+            <div class="card">
+                <h4>Adapter Pattern (All Channels)</h4>
+                <p>Each channel adapter implements a common interface:</p>
+                <div class="code-block">// Base Adapter Interface
+interface IChannelAdapter {
+  // Send message
+  sendMessage(to: string, content: any, options?: any): Promise<SendResult>;
+
+  // Normalize incoming webhook
+  normalizeIncoming(payload: any): UnifiedMessage;
+
+  // Validate webhook signature
+  validateWebhook(payload: any, signature: string): boolean;
+
+  // Check connection health
+  checkHealth(): Promise<HealthStatus>;
+
+  // Get channel capabilities
+  getCapabilities(): ChannelCapabilities;
+}
+
+// WhatsApp Adapter Implementation
+@Injectable()
+export class WhatsAppAdapter implements IChannelAdapter {
+  constructor(
+    private readonly httpService: HttpService,
+    private readonly configService: ConfigService
+  ) {}
+
+  async sendMessage(to: string, content: any, options?: any): Promise<SendResult> {
+    const phoneNumberId = options.phoneNumberId;
+    const accessToken = options.accessToken;
+
+    const response = await this.httpService.post(
+      `https://graph.facebook.com/v18.0/${phoneNumberId}/messages`,
+      {
+        messaging_product: 'whatsapp',
+        to: to,
+        type: content.type, // 'text', 'image', 'template'
+        ...content.payload
+      },
+      {
+        headers: { 'Authorization': `Bearer ${accessToken}` }
+      }
+    );
+
+    return { success: true, messageId: response.data.messages[0].id };
+  }
+
+  normalizeIncoming(payload: any): UnifiedMessage {
+    const message = payload.entry[0]?.changes[0]?.value?.messages[0];
+
+    return {
+      channel: 'whatsapp',
+      channelMessageId: message.id,
+      from: message.from,
+      content: message.text?.body || message.caption,
+      contentType: message.type, // 'text', 'image', 'video'
+      timestamp: new Date(parseInt(message.timestamp) * 1000),
+      attachments: this.extractAttachments(message)
+    };
+  }
+
+  validateWebhook(payload: any, signature: string): boolean {
+    const secret = this.configService.get('WHATSAPP_WEBHOOK_SECRET');
+    const hash = crypto.createHmac('sha256', secret)
+      .update(JSON.stringify(payload))
+      .digest('hex');
+    return signature === `sha256=${hash}`;
+  }
+}</div>
+            </div>
+
+            <h3>🔌 API Endpoints</h3>
+
+            <div class="card">
+                <h4>Channel Integration Endpoints (10 total)</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>Endpoint</th>
+                            <th>Description</th>
+                            <th>Request Body</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/channels</code></td>
+                            <td>Get all connected channels</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/channels/whatsapp</code></td>
+                            <td>Connect WhatsApp Business API</td>
+                            <td>{ phoneNumberId, accessToken, wabaId }</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/channels/email</code></td>
+                            <td>Connect email (SMTP/IMAP)</td>
+                            <td>{ email, smtpHost, imapHost, credentials }</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/channels/social</code></td>
+                            <td>Connect Instagram/Facebook Messenger</td>
+                            <td>{ platform, pageId, accessToken }</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/channels/telegram</code></td>
+                            <td>Connect Telegram bot</td>
+                            <td>{ botToken }</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/channels/sms</code></td>
+                            <td>Connect Twilio SMS</td>
+                            <td>{ accountSid, authToken, phoneNumber }</td>
+                        </tr>
+                        <tr>
+                            <td>DELETE</td>
+                            <td><code>/api/channels/:id</code></td>
+                            <td>Disconnect channel</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/webhooks/whatsapp</code></td>
+                            <td>WhatsApp webhook receiver</td>
+                            <td>Meta webhook payload</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/webhooks/instagram</code></td>
+                            <td>Instagram webhook receiver</td>
+                            <td>Instagram Graph API payload</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/channels/:id/health</code></td>
+                            <td>Check channel connection health</td>
+                            <td>-</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>💾 Database Schema</h3>
+
+            <div class="card">
+                <h4>channel_connections Table</h4>
+                <div class="code-block">CREATE TABLE channel_connections (
+  id BIGSERIAL PRIMARY KEY,
+  organization_id BIGINT NOT NULL REFERENCES organizations(id),
+
+  -- Channel info
+  channel VARCHAR(50) NOT NULL, -- 'whatsapp', 'email', 'instagram', etc.
+  name VARCHAR(255) NOT NULL, -- User-friendly name
+
+  -- Connection status
+  status VARCHAR(50) DEFAULT 'active', -- 'active', 'disconnected', 'error'
+  is_primary BOOLEAN DEFAULT FALSE, -- Primary channel for this type
+
+  -- Credentials (encrypted)
+  credentials JSONB NOT NULL, -- { apiKey, accessToken, etc. }
+
+  -- Channel-specific config
+  config JSONB DEFAULT '{}',
+  -- WhatsApp: { phoneNumberId, wabaId, businessAccountId }
+  -- Email: { smtpHost, smtpPort, imapHost, imapPort }
+  -- Social: { pageId, accountId }
+
+  -- Health monitoring
+  last_health_check_at TIMESTAMP,
+  last_message_received_at TIMESTAMP,
+  error_count INT DEFAULT 0,
+  last_error TEXT,
+  last_error_at TIMESTAMP,
+
+  created_at TIMESTAMP DEFAULT NOW(),
+  updated_at TIMESTAMP DEFAULT NOW(),
+
+  -- Indexes
+  INDEX idx_channel_connections_org (organization_id),
+  INDEX idx_channel_connections_channel (channel),
+  UNIQUE INDEX idx_channel_connections_org_channel_primary (organization_id, channel, is_primary)
+    WHERE is_primary = TRUE
+);</div>
+            </div>
+
+            <div class="card">
+                <h4>channel_adapters Table (Configuration)</h4>
+                <div class="code-block">CREATE TABLE channel_adapters (
+  id BIGSERIAL PRIMARY KEY,
+
+  channel VARCHAR(50) NOT NULL UNIQUE, -- 'whatsapp', 'email', etc.
+  adapter_class VARCHAR(255) NOT NULL, -- 'WhatsAppAdapter'
+
+  -- Capabilities
+  capabilities JSONB DEFAULT '{}',
+  -- {
+  --   supportsMedia: true,
+  --   supportsTemplates: true,
+  --   supportsButtons: false,
+  --   messagingWindow: 24,
+  --   rateLimit: { max: 1000, per: 'hour' }
+  -- }
+
+  -- Configuration
+  default_config JSONB DEFAULT '{}',
+
+  is_enabled BOOLEAN DEFAULT TRUE,
+
+  created_at TIMESTAMP DEFAULT NOW(),
+  updated_at TIMESTAMP DEFAULT NOW()
+);</div>
+            </div>
+
+            <h3>🔐 GDPR Compliance</h3>
+            <div class="card">
+                <h4>Data Protection Measures</h4>
+                <ul>
+                    <li><strong>Credentials Storage:</strong> Channel API keys and tokens encrypted at rest using AWS KMS</li>
+                    <li><strong>Webhook Payloads:</strong> Incoming message payloads normalized and original payload discarded (no raw PII storage)</li>
+                    <li><strong>Message Content:</strong> Only normalized message content stored (see messages table in Frame 4)</li>
+                    <li><strong>Channel Health Logs:</strong> Connection errors do not log customer message content</li>
+                    <li><strong>Right to Access:</strong> Export channel connection metadata (no API credentials exposed)</li>
+                    <li><strong>Data Retention:</strong> Disconnected channels purged after 90 days (credentials deleted immediately)</li>
+                </ul>
+            </div>
+
+            <div class="see-also">
+                <h3>🔗 See Also</h3>
+                <p>
+                    <a href="#frame5">→ Frame 5: WhatsApp Integration (WhatsAppAdapter)</a> |
+                    <a href="#frame2">→ Frame 2: Backend Services (ChannelIntegrationService)</a> |
+                    <a href="#frame4">→ Frame 4: Database Schema (channel_connections)</a>
+                </p>
+            </div>
+        </div>
 
     </div>
 

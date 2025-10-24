@@ -971,8 +971,1678 @@
             </div>
         </div>
 
-        <!-- Continue with remaining frames in similar detail... -->
-        <!-- Frames 5-8 would cover Contact Management, Lists, Tags, and Communication History -->
+        <!-- FRAME 5: CONTACT MANAGEMENT -->
+        <div id="frame5" class="frame">
+            <h2>👤 FRAME 5: Contact Management</h2>
+
+            <h3>🎯 Purpose</h3>
+            <p>
+                Contact Management provides a comprehensive 360-degree view of every customer in UnifiedBeez. It enables
+                organizations to store, enrich, segment, and manage contact data with features including duplicate detection,
+                contact merging, bulk import/export, custom attributes via merge fields, relationship mapping, and full
+                GDPR compliance. This module serves as the central repository for all customer information, integrated
+                seamlessly with Inbox, Automations, and Campaign modules.
+            </p>
+
+            <h3>✨ Core Contact Management Features</h3>
+
+            <div class="grid-3">
+                <div class="card">
+                    <h4>📇 Contact CRUD Operations</h4>
+                    <ul>
+                        <li>Create contacts manually or via API</li>
+                        <li>Update contact information (basic + custom fields)</li>
+                        <li>Delete contacts (soft delete for GDPR compliance)</li>
+                        <li>Bulk operations (create, update, delete multiple contacts)</li>
+                        <li>Contact versioning (track changes over time)</li>
+                        <li>Restore deleted contacts (30-day recovery window)</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>🔍 Duplicate Detection & Merge</h4>
+                    <ul>
+                        <li>Auto-detect duplicates on creation (email, phone matching)</li>
+                        <li>Fuzzy name matching (e.g., "John Smith" vs "Jon Smithe")</li>
+                        <li>Manual duplicate search</li>
+                        <li>Contact merge workflow (choose master record)</li>
+                        <li>Merge history tracking</li>
+                        <li>Conflict resolution UI</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>📊 Contact Enrichment</h4>
+                    <ul>
+                        <li>Auto-enrich from external APIs (Clearbit, FullContact)</li>
+                        <li>Social profile matching</li>
+                        <li>Company data enrichment</li>
+                        <li>Firmographic data (industry, size, revenue)</li>
+                        <li>Geocoding (coordinates from address)</li>
+                        <li>Email validation and verification</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>📥 Import & Export</h4>
+                    <ul>
+                        <li>CSV import with field mapping</li>
+                        <li>Excel (XLSX) import</li>
+                        <li>Validate data before import (email format, phone format)</li>
+                        <li>Duplicate handling options (skip, update, merge)</li>
+                        <li>Bulk export to CSV/Excel</li>
+                        <li>Filtered export (export specific segments)</li>
+                        <li>Import history and rollback</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>🔗 Contact Relationships</h4>
+                    <ul>
+                        <li>Link contacts to organizations/companies</li>
+                        <li>Parent-child relationships (household members)</li>
+                        <li>Referral tracking (who referred whom)</li>
+                        <li>Team member assignments</li>
+                        <li>Relationship types (spouse, colleague, manager)</li>
+                        <li>Network visualization</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>📌 Custom Attributes</h4>
+                    <ul>
+                        <li>Unlimited custom fields via merge fields</li>
+                        <li>10+ field types (text, number, date, boolean, select, etc.)</li>
+                        <li>Validation rules (regex, min/max, required)</li>
+                        <li>Conditional field visibility</li>
+                        <li>Field groups for organization</li>
+                        <li>Use in automations and campaigns</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>🔹 Backend Services</h3>
+
+            <div class="card">
+                <h4>1. ContactService</h4>
+                <p><strong>Responsibility:</strong> Core contact CRUD and data management</p>
+                <p><strong>Key Methods:</strong></p>
+                <ul>
+                    <li><code>createContact(data)</code> - Create new contact with duplicate detection</li>
+                    <li><code>updateContact(id, data)</code> - Update contact information</li>
+                    <li><code>findContactById(id)</code> - Retrieve contact with full 360° view (includes lists, tags, timeline)</li>
+                    <li><code>searchContacts(query, filters)</code> - Full-text search with advanced filters</li>
+                    <li><code>deleteContact(id, permanent)</code> - Soft delete (GDPR compliant) or hard delete</li>
+                    <li><code>restoreContact(id)</code> - Restore soft-deleted contact within 30 days</li>
+                    <li><code>bulkCreateContacts(contacts[])</code> - Batch create multiple contacts</li>
+                    <li><code>bulkUpdateContacts(updates[])</code> - Batch update multiple contacts</li>
+                    <li><code>getContactTimeline(id)</code> - Retrieve activity history</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h4>2. ContactEnrichmentService</h4>
+                <p><strong>Responsibility:</strong> Auto-enrich contact data from external sources</p>
+                <p><strong>Key Methods:</strong></p>
+                <ul>
+                    <li><code>enrichContact(contactId)</code> - Enrich single contact from APIs (Clearbit, FullContact)</li>
+                    <li><code>enrichBulk(contactIds[])</code> - Batch enrichment</li>
+                    <li><code>validateEmail(email)</code> - Email verification via external API</li>
+                    <li><code>geocodeAddress(address)</code> - Convert address to lat/long coordinates</li>
+                    <li><code>fetchSocialProfiles(email)</code> - Find LinkedIn, Twitter, Facebook profiles</li>
+                    <li><code>getCompanyData(domain)</code> - Fetch company firmographics</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h4>3. MergeService</h4>
+                <p><strong>Responsibility:</strong> Duplicate detection and contact merging</p>
+                <p><strong>Key Methods:</strong></p>
+                <ul>
+                    <li><code>findDuplicates(contactId)</code> - Find potential duplicates using email, phone, name fuzzy matching</li>
+                    <li><code>findAllDuplicates(organizationId)</code> - Scan all contacts for duplicates</li>
+                    <li><code>mergeContacts(primaryId, duplicateIds[], mergeStrategy)</code> - Merge contacts into single record</li>
+                    <li><code>getMergeHistory(contactId)</code> - View merge audit trail</li>
+                    <li><code>previewMerge(primaryId, duplicateIds[])</code> - Simulate merge to show conflicts</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h4>4. ImportExportService</h4>
+                <p><strong>Responsibility:</strong> Bulk import and export operations</p>
+                <p><strong>Key Methods:</strong></p>
+                <ul>
+                    <li><code>importCSV(file, mappings, options)</code> - Import contacts from CSV with field mapping</li>
+                    <li><code>validateImport(file, mappings)</code> - Pre-validate import data (check formats, duplicates)</li>
+                    <li><code>exportContacts(filters, format)</code> - Export contacts to CSV/Excel based on filters</li>
+                    <li><code>getImportHistory()</code> - View past import jobs with stats</li>
+                    <li><code>rollbackImport(importId)</code> - Undo import (delete imported contacts)</li>
+                </ul>
+            </div>
+
+            <h3>📡 API Endpoints (15 endpoints)</h3>
+
+            <div class="card">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>Endpoint</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/crm/contacts</code></td>
+                            <td>Get all contacts with pagination & filters</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/crm/contacts/:id</code></td>
+                            <td>Get single contact with 360° view (lists, tags, timeline)</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/crm/contacts</code></td>
+                            <td>Create new contact (auto duplicate detection)</td>
+                        </tr>
+                        <tr>
+                            <td>PUT</td>
+                            <td><code>/api/crm/contacts/:id</code></td>
+                            <td>Update contact information</td>
+                        </tr>
+                        <tr>
+                            <td>DELETE</td>
+                            <td><code>/api/crm/contacts/:id</code></td>
+                            <td>Soft delete contact (GDPR compliant, 30-day recovery)</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/crm/contacts/:id/restore</code></td>
+                            <td>Restore soft-deleted contact</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/crm/contacts/search</code></td>
+                            <td>Full-text search across contacts (name, email, phone, custom fields)</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/crm/contacts/merge</code></td>
+                            <td>Merge duplicate contacts into single master record</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/crm/contacts/:id/duplicates</code></td>
+                            <td>Find potential duplicates for specific contact</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/crm/contacts/:id/enrich</code></td>
+                            <td>Enrich contact data from external APIs</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/crm/contacts/import</code></td>
+                            <td>Bulk import from CSV/Excel with field mapping</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/crm/contacts/export</code></td>
+                            <td>Export contacts to CSV/Excel (with filters)</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/crm/contacts/bulk-update</code></td>
+                            <td>Bulk update multiple contacts at once</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/crm/contacts/bulk-delete</code></td>
+                            <td>Bulk delete multiple contacts</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/crm/contacts/:id/timeline</code></td>
+                            <td>Get contact activity timeline (all interactions)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>💾 Database Schema</h3>
+
+            <div class="card">
+                <h4>contacts (Enhanced)</h4>
+                <div class="code-block">CREATE TABLE contacts (
+  id BIGSERIAL PRIMARY KEY,
+  organization_id BIGINT NOT NULL REFERENCES organizations(id),
+
+  -- Basic info
+  first_name VARCHAR(255),
+  last_name VARCHAR(255),
+  email VARCHAR(255),
+  phone VARCHAR(50),
+  mobile VARCHAR(50),
+
+  -- Additional fields
+  company VARCHAR(255),
+  job_title VARCHAR(255),
+  website VARCHAR(500),
+
+  -- Address
+  address_line1 VARCHAR(255),
+  address_line2 VARCHAR(255),
+  city VARCHAR(100),
+  state VARCHAR(100),
+  postal_code VARCHAR(20),
+  country VARCHAR(100),
+  timezone VARCHAR(100),
+
+  -- Geolocation (from enrichment)
+  latitude DECIMAL(10, 7),
+  longitude DECIMAL(10, 7),
+
+  -- Lifecycle
+  lifecycle_stage VARCHAR(50) DEFAULT 'lead',
+  -- 'lead', 'prospect', 'customer', 'loyal', 'churned'
+
+  -- Scoring
+  score INT DEFAULT 0,
+  last_score_update TIMESTAMP,
+
+  -- Source tracking
+  source VARCHAR(100), -- 'website', 'referral', 'import', etc.
+  source_details JSONB DEFAULT '{}',
+
+  -- Custom fields (merge field values)
+  custom_fields JSONB DEFAULT '{}',
+  -- { 'customer_tier': 'gold', 'purchase_count': 5, 'ltv': 1250.50 }
+
+  -- Enrichment
+  enrichment_data JSONB DEFAULT '{}',
+  -- { 'socialProfiles': [...], 'companyData': {...}, 'verified': true }
+  enriched_at TIMESTAMP,
+
+  -- Engagement tracking
+  last_email_opened_at TIMESTAMP,
+  last_email_clicked_at TIMESTAMP,
+  last_whatsapp_at TIMESTAMP,
+  last_activity_at TIMESTAMP,
+
+  -- Metadata
+  metadata JSONB DEFAULT '{}',
+
+  -- Owner
+  owner_id BIGINT REFERENCES users(id),
+
+  -- Timestamps
+  first_contact_at TIMESTAMP,
+  created_at TIMESTAMP DEFAULT NOW(),
+  updated_at TIMESTAMP DEFAULT NOW(),
+  deleted_at TIMESTAMP, -- Soft delete
+
+  -- Indexes
+  INDEX idx_contacts_org (organization_id),
+  INDEX idx_contacts_email (email),
+  INDEX idx_contacts_phone (phone),
+  INDEX idx_contacts_lifecycle (lifecycle_stage),
+  INDEX idx_contacts_score (score DESC),
+  INDEX idx_contacts_owner (owner_id),
+  INDEX idx_contacts_deleted (deleted_at),
+  INDEX idx_contacts_last_activity (last_activity_at DESC),
+
+  -- Full-text search
+  INDEX idx_contacts_search_fts USING GIN (
+    to_tsvector('english',
+      COALESCE(first_name, '') || ' ' ||
+      COALESCE(last_name, '') || ' ' ||
+      COALESCE(email, '') || ' ' ||
+      COALESCE(company, '') || ' ' ||
+      COALESCE(phone, '')
+    )
+  ),
+
+  -- JSONB indexes for custom fields
+  INDEX idx_contacts_custom_fields USING GIN (custom_fields)
+);</div>
+            </div>
+
+            <div class="card">
+                <h4>contact_timeline</h4>
+                <div class="code-block">CREATE TABLE contact_timeline (
+  id BIGSERIAL PRIMARY KEY,
+  organization_id BIGINT NOT NULL REFERENCES organizations(id),
+  contact_id BIGINT NOT NULL REFERENCES contacts(id) ON DELETE CASCADE,
+
+  -- Event type
+  event_type VARCHAR(100) NOT NULL,
+  -- 'created', 'updated', 'email_sent', 'email_opened', 'tag_added',
+  -- 'list_joined', 'task_created', 'note_added', 'call_logged', etc.
+
+  -- Event details
+  event_data JSONB NOT NULL,
+  -- {
+  --   field: 'lifecycle_stage',
+  --   oldValue: 'lead',
+  --   newValue: 'customer',
+  --   changedBy: 'userId'
+  -- }
+
+  -- Related entities
+  related_user_id BIGINT REFERENCES users(id),
+  related_automation_id BIGINT REFERENCES user_automations(id),
+  related_conversation_id BIGINT REFERENCES conversations(id),
+
+  created_at TIMESTAMP DEFAULT NOW(),
+
+  INDEX idx_timeline_contact (contact_id, created_at DESC),
+  INDEX idx_timeline_org (organization_id),
+  INDEX idx_timeline_type (event_type)
+);</div>
+            </div>
+
+            <div class="card">
+                <h4>contact_relationships</h4>
+                <div class="code-block">CREATE TABLE contact_relationships (
+  id BIGSERIAL PRIMARY KEY,
+  organization_id BIGINT NOT NULL REFERENCES organizations(id),
+
+  contact_id BIGINT NOT NULL REFERENCES contacts(id) ON DELETE CASCADE,
+  related_contact_id BIGINT NOT NULL REFERENCES contacts(id) ON DELETE CASCADE,
+
+  relationship_type VARCHAR(100) NOT NULL,
+  -- 'spouse', 'colleague', 'manager', 'referral', 'household_member', etc.
+
+  notes TEXT,
+
+  created_at TIMESTAMP DEFAULT NOW(),
+  updated_at TIMESTAMP DEFAULT NOW(),
+
+  UNIQUE INDEX idx_contact_relationships_unique (contact_id, related_contact_id, relationship_type),
+  INDEX idx_contact_relationships_contact (contact_id),
+  INDEX idx_contact_relationships_related (related_contact_id)
+);</div>
+            </div>
+
+            <div class="card">
+                <h4>contact_merge_history</h4>
+                <div class="code-block">CREATE TABLE contact_merge_history (
+  id BIGSERIAL PRIMARY KEY,
+  organization_id BIGINT NOT NULL REFERENCES organizations(id),
+
+  primary_contact_id BIGINT NOT NULL REFERENCES contacts(id),
+  merged_contact_ids BIGINT[] NOT NULL, -- Array of merged contact IDs
+
+  merge_strategy JSONB,
+  -- { fieldResolution: { email: 'primary', phone: 'duplicate1' } }
+
+  merged_data JSONB,
+  -- Backup of merged contacts data for audit
+
+  merged_by BIGINT REFERENCES users(id),
+  merged_at TIMESTAMP DEFAULT NOW(),
+
+  INDEX idx_merge_history_primary (primary_contact_id),
+  INDEX idx_merge_history_org (organization_id)
+);</div>
+            </div>
+
+            <h3>🖼️ UI Screenshots Reference</h3>
+            <div class="card">
+                <h4>Contact Management UI Components</h4>
+                <ul>
+                    <li><strong>Live Dashboard - CRM - Contacts.png</strong> - Main contacts table view with filters</li>
+                    <li><strong>Live Dashboard - CRM - Contacts-1.png</strong> - Contact list with status indicators</li>
+                    <li><strong>Live Dashboard - CRM - Contacts-2.png</strong> - Alternate contact view layout</li>
+                    <li><strong>Live Dashboard - CRM - CreatebContacts.png</strong> - Create new contact form</li>
+                    <li><strong>Live Dashboard - CRM - Contacts Details (Email).png</strong> - Contact detail view showing email information</li>
+                    <li><strong>Live Dashboard - CRM Contacts Details (Activity).png</strong> - Contact activity timeline</li>
+                    <li><strong>Live Dashboard - CRM Contacts Details (Activity details).png</strong> - Detailed activity breakdown</li>
+                    <li><strong>Live Dashboard - CRM Contacts Details (Communications).png</strong> - Communication history view</li>
+                    <li><strong>Live Dashboard - CRM Contacts Details (Communications)-1.png</strong> - Alternate communications view</li>
+                    <li><strong>Live Dashboard - CRM Contacts Details (Documents).png</strong> - Attached documents</li>
+                    <li><strong>Live Dashboard - CRM Contacts Details (Documents)-1.png</strong> - Document management interface</li>
+                    <li><strong>Live Dashboard - CRM Contacts Details (Tasks).png</strong> - Contact-related tasks</li>
+                    <li><strong>Live Dashboard - CRM Contacts Details (Tasks)-1.png</strong> - Task management view</li>
+                    <li><strong>Live Dashboard - CRM Contacts Details (Send Email).png</strong> - Send email to contact</li>
+                    <li><strong>Filter - List.png, Filter - List-1.png, Filter - List-2.png, Filter - List-3.png, Filter - List-4.png</strong> - List filtering options</li>
+                    <li><strong>Filter - Tag.png, Filter - Tags.png</strong> - Tag filtering interface</li>
+                    <li><strong>Filter - Status.png, Filter - Status-1.png</strong> - Status filtering</li>
+                </ul>
+            </div>
+
+            <h3>🔐 GDPR Compliance</h3>
+
+            <div class="card">
+                <h4>Data Protection in Contact Management</h4>
+                <ul>
+                    <li><strong>Right to Access:</strong> Contacts can request full data export (all fields, timeline, communications) via <code>/api/gdpr/data-export/:contactId</code></li>
+                    <li><strong>Right to Erasure:</strong> Soft delete with 30-day recovery window, then permanent deletion with cascading deletes across all related tables</li>
+                    <li><strong>Data Portability:</strong> Export contact data in machine-readable format (JSON, CSV) via API</li>
+                    <li><strong>Consent Tracking:</strong> Track consent status for email, SMS, WhatsApp in <code>consent_preferences</code> field</li>
+                    <li><strong>Data Minimization:</strong> Only collect necessary fields, optional fields clearly marked</li>
+                    <li><strong>Audit Trail:</strong> All contact modifications logged in <code>contact_timeline</code> with user attribution</li>
+                    <li><strong>Encryption:</strong> PII encrypted at rest in PostgreSQL, encrypted in transit via TLS 1.3</li>
+                    <li><strong>Retention Policy:</strong> Deleted contacts permanently purged after 30 days (configurable per organization)</li>
+                    <li><strong>Data Breach Notification:</strong> Alert mechanisms if contact data accessed abnormally</li>
+                </ul>
+            </div>
+
+            <div class="see-also">
+                <h3>🔗 See Also</h3>
+                <p>
+                    <a href="#frame2">→ Frame 2: Backend Services</a> |
+                    <a href="#frame6">→ Frame 6: Lists & Segmentation</a> |
+                    <a href="#frame8">→ Frame 8: Communication History</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- FRAME 6: LISTS & SEGMENTATION -->
+        <div id="frame6" class="frame">
+            <h2>📋 FRAME 6: Lists & Segmentation</h2>
+
+            <h3>🎯 Purpose</h3>
+            <p>
+                Lists & Segmentation provides powerful tools to organize contacts into static lists and dynamic segments
+                for targeted marketing campaigns, automations, and analytics. Static lists are manually managed collections,
+                while dynamic segments auto-refresh based on real-time conditions (e.g., "Customers who purchased in last 30 days").
+                The system supports complex Boolean logic (AND/OR/NOT), nested conditions, and integration with automations
+                for triggered workflows based on list membership changes.
+            </p>
+
+            <h3>✨ Core List & Segmentation Features</h3>
+
+            <div class="grid-2">
+                <div class="card">
+                    <h4>📌 Static Lists</h4>
+                    <ul>
+                        <li>Manual contact addition/removal</li>
+                        <li>Bulk import contacts to list</li>
+                        <li>CSV-based list population</li>
+                        <li>List membership persists until manually changed</li>
+                        <li>Ideal for: Campaign recipients, VIP customers, event attendees</li>
+                        <li>Supports list cloning and archiving</li>
+                        <li>List-level permissions (who can edit)</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>🎯 Dynamic Segments</h4>
+                    <ul>
+                        <li>Auto-refresh based on conditions</li>
+                        <li>Real-time membership updates</li>
+                        <li>Complex Boolean logic (AND/OR/NOT)</li>
+                        <li>Nested condition groups</li>
+                        <li>Scheduled re-evaluation (hourly, daily)</li>
+                        <li>Ideal for: Active customers, High-value leads, At-risk users</li>
+                        <li>Performance-optimized SQL queries</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>🔍 Advanced Filtering</h4>
+                    <ul>
+                        <li>Filter by contact fields (name, email, lifecycle, score)</li>
+                        <li>Filter by tags (has all, has any, has none)</li>
+                        <li>Filter by list membership</li>
+                        <li>Filter by custom fields (10+ operators)</li>
+                        <li>Filter by engagement (email opens, clicks, last activity)</li>
+                        <li>Filter by date ranges</li>
+                        <li>Save filters as reusable segment templates</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>📊 Segment Analytics</h4>
+                    <ul>
+                        <li>Real-time member count</li>
+                        <li>Growth trends over time</li>
+                        <li>Segment overlap analysis (Venn diagrams)</li>
+                        <li>Demographic breakdowns</li>
+                        <li>Engagement metrics per segment</li>
+                        <li>Revenue attribution by segment</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>🔄 Segment Types</h4>
+                    <ul>
+                        <li><strong>Behavioral:</strong> Based on actions (purchased, opened email)</li>
+                        <li><strong>Demographic:</strong> Age, location, job title</li>
+                        <li><strong>Firmographic:</strong> Company size, industry, revenue</li>
+                        <li><strong>RFM:</strong> Recency, Frequency, Monetary analysis</li>
+                        <li><strong>Engagement:</strong> Active, inactive, dormant users</li>
+                        <li><strong>Lifecycle:</strong> Lead, prospect, customer, churned</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>⚙️ Automation Integration</h4>
+                    <ul>
+                        <li>Trigger automation when contact joins list</li>
+                        <li>Trigger when contact leaves list</li>
+                        <li>Conditional actions based on list membership</li>
+                        <li>Auto-add contacts to lists based on behavior</li>
+                        <li>List-based campaign targeting</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>🔹 Backend Services</h3>
+
+            <div class="card">
+                <h4>1. ListService</h4>
+                <p><strong>Responsibility:</strong> Manage static and dynamic lists</p>
+                <p><strong>Key Methods:</strong></p>
+                <ul>
+                    <li><code>createList(name, type, rules)</code> - Create static or dynamic list</li>
+                    <li><code>addContactToList(listId, contactIds[])</code> - Add contacts to static list</li>
+                    <li><code>removeContactFromList(listId, contactIds[])</code> - Remove contacts from list</li>
+                    <li><code>getListMembers(listId, pagination)</code> - Retrieve contacts in list</li>
+                    <li><code>cloneList(listId)</code> - Duplicate list with members</li>
+                    <li><code>deleteList(listId)</code> - Delete list (contacts remain, only membership removed)</li>
+                    <li><code>getListAnalytics(listId)</code> - Get member count, growth trends</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h4>2. SegmentationEngine</h4>
+                <p><strong>Responsibility:</strong> Evaluate and refresh dynamic segments</p>
+                <p><strong>Key Methods:</strong></p>
+                <ul>
+                    <li><code>evaluateDynamicList(listId)</code> - Re-evaluate segment rules and update membership</li>
+                    <li><code>previewSegment(rules)</code> - Preview member count before saving</li>
+                    <li><code>buildSegmentQuery(rules)</code> - Convert rules to optimized SQL</li>
+                    <li><code>scheduleRefresh(listId, interval)</code> - Schedule auto-refresh (hourly, daily)</li>
+                    <li><code>getSegmentChanges(listId)</code> - Get contacts who joined/left since last refresh</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h4>3. FilterBuilder</h4>
+                <p><strong>Responsibility:</strong> Build complex filter queries</p>
+                <p><strong>Key Methods:</strong></p>
+                <ul>
+                    <li><code>parseFilterRules(rules)</code> - Parse JSON filter rules into SQL WHERE clause</li>
+                    <li><code>validateRules(rules)</code> - Validate filter syntax before execution</li>
+                    <li><code>optimizeQuery(query)</code> - Optimize SQL for performance (add indexes hints)</li>
+                    <li><code>getSupportedOperators()</code> - Get available operators (equals, contains, greater_than, etc.)</li>
+                </ul>
+            </div>
+
+            <h3>📡 API Endpoints (10 endpoints)</h3>
+
+            <div class="card">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>Endpoint</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/crm/lists</code></td>
+                            <td>Get all lists (static and dynamic) with member counts</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/crm/lists</code></td>
+                            <td>Create new list (static or dynamic with rules)</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/crm/lists/:id</code></td>
+                            <td>Get list details with member count and rules</td>
+                        </tr>
+                        <tr>
+                            <td>PUT</td>
+                            <td><code>/api/crm/lists/:id</code></td>
+                            <td>Update list settings/rules</td>
+                        </tr>
+                        <tr>
+                            <td>DELETE</td>
+                            <td><code>/api/crm/lists/:id</code></td>
+                            <td>Delete list (contacts remain, only membership removed)</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/crm/lists/:id/contacts</code></td>
+                            <td>Get list members with pagination</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/crm/lists/:id/contacts</code></td>
+                            <td>Add contacts to static list (bulk operation)</td>
+                        </tr>
+                        <tr>
+                            <td>DELETE</td>
+                            <td><code>/api/crm/lists/:id/contacts</code></td>
+                            <td>Remove contacts from list (bulk operation)</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/crm/lists/:id/evaluate</code></td>
+                            <td>Re-evaluate dynamic list rules and refresh membership</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/crm/lists/:id/clone</code></td>
+                            <td>Duplicate list with members</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>💾 Database Schema</h3>
+
+            <div class="card">
+                <h4>contact_lists (Enhanced)</h4>
+                <div class="code-block">CREATE TABLE contact_lists (
+  id BIGSERIAL PRIMARY KEY,
+  organization_id BIGINT NOT NULL REFERENCES organizations(id),
+
+  name VARCHAR(255) NOT NULL,
+  description TEXT,
+
+  -- List type
+  type VARCHAR(50) NOT NULL, -- 'static', 'dynamic'
+
+  -- Dynamic list rules (for auto-segmentation)
+  segmentation_rules JSONB DEFAULT '{}',
+  -- {
+  --   operator: 'AND', // Root operator
+  --   conditions: [
+  --     { field: 'lifecycle_stage', operator: 'equals', value: 'customer' },
+  --     {
+  --       operator: 'OR',
+  --       conditions: [
+  --         { field: 'score', operator: 'greater_than', value: 50 },
+  --         { field: 'tags', operator: 'contains', value: 'vip' }
+  --       ]
+  --     }
+  --   ]
+  -- }
+
+  -- Auto-refresh settings
+  auto_refresh BOOLEAN DEFAULT FALSE,
+  refresh_interval VARCHAR(50), -- 'hourly', 'daily', 'weekly'
+  last_refreshed_at TIMESTAMP,
+
+  -- Stats
+  contact_count INT DEFAULT 0,
+  growth_rate DECIMAL(5,2), -- % change since last week
+
+  -- Access control
+  is_public BOOLEAN DEFAULT TRUE,
+  created_by BIGINT REFERENCES users(id),
+
+  created_at TIMESTAMP DEFAULT NOW(),
+  updated_at TIMESTAMP DEFAULT NOW(),
+
+  INDEX idx_contact_lists_org (organization_id),
+  INDEX idx_contact_lists_type (type),
+  INDEX idx_contact_lists_refresh (auto_refresh, last_refreshed_at)
+);</div>
+            </div>
+
+            <div class="card">
+                <h4>contact_list_members (Enhanced)</h4>
+                <div class="code-block">CREATE TABLE contact_list_members (
+  id BIGSERIAL PRIMARY KEY,
+  list_id BIGINT NOT NULL REFERENCES contact_lists(id) ON DELETE CASCADE,
+  contact_id BIGINT NOT NULL REFERENCES contacts(id) ON DELETE CASCADE,
+
+  -- Membership source
+  added_method VARCHAR(50), -- 'manual', 'automation', 'import', 'segment_evaluation'
+  added_by BIGINT REFERENCES users(id),
+  added_at TIMESTAMP DEFAULT NOW(),
+
+  -- For dynamic lists: track when added by auto-evaluation
+  auto_added BOOLEAN DEFAULT FALSE,
+
+  UNIQUE INDEX idx_list_members_unique (list_id, contact_id),
+  INDEX idx_list_members_list (list_id),
+  INDEX idx_list_members_contact (contact_id),
+  INDEX idx_list_members_auto (auto_added)
+);</div>
+            </div>
+
+            <div class="card">
+                <h4>segments (Predefined segment templates)</h4>
+                <div class="code-block">CREATE TABLE segments (
+  id BIGSERIAL PRIMARY KEY,
+  organization_id BIGINT NOT NULL REFERENCES organizations(id),
+
+  name VARCHAR(255) NOT NULL,
+  description TEXT,
+  segment_type VARCHAR(100),
+  -- 'behavioral', 'demographic', 'rfm', 'engagement', 'lifecycle'
+
+  -- Segment definition
+  conditions JSONB NOT NULL,
+
+  -- Usage tracking
+  usage_count INT DEFAULT 0,
+  is_template BOOLEAN DEFAULT FALSE,
+
+  created_by BIGINT REFERENCES users(id),
+  created_at TIMESTAMP DEFAULT NOW(),
+
+  INDEX idx_segments_org (organization_id),
+  INDEX idx_segments_type (segment_type)
+);</div>
+            </div>
+
+            <div class="card">
+                <h4>segment_conditions (Granular condition tracking)</h4>
+                <div class="code-block">CREATE TABLE segment_conditions (
+  id BIGSERIAL PRIMARY KEY,
+  segment_id BIGINT NOT NULL REFERENCES segments(id) ON DELETE CASCADE,
+
+  -- Condition definition
+  field VARCHAR(255) NOT NULL, -- 'contact.score', 'contact.lifecycle_stage', 'contact.custom_fields.tier'
+  operator VARCHAR(50) NOT NULL, -- 'equals', 'not_equals', 'contains', 'greater_than', 'in_list', 'between'
+  value JSONB, -- Flexible value (string, number, array, object)
+
+  -- Logical grouping
+  logic VARCHAR(10) DEFAULT 'AND', -- 'AND', 'OR', 'NOT'
+  group_id INT, -- For grouping conditions with parentheses
+  parent_group_id INT, -- For nested groups
+
+  created_at TIMESTAMP DEFAULT NOW(),
+
+  INDEX idx_segment_conditions_segment (segment_id),
+  INDEX idx_segment_conditions_field (field)
+);</div>
+            </div>
+
+            <h3>🎨 Segment Query Examples</h3>
+
+            <div class="card">
+                <h4>Example 1: Active High-Value Customers</h4>
+                <div class="code-block">-- Segment Rule (JSON):
+{
+  "operator": "AND",
+  "conditions": [
+    { "field": "lifecycle_stage", "operator": "equals", "value": "customer" },
+    { "field": "score", "operator": "greater_than", "value": 80 },
+    { "field": "last_activity_at", "operator": "greater_than", "value": "30_days_ago" }
+  ]
+}
+
+-- Generated SQL:
+SELECT c.*
+FROM contacts c
+WHERE c.lifecycle_stage = 'customer'
+  AND c.score > 80
+  AND c.last_activity_at > (NOW() - INTERVAL '30 days')
+  AND c.deleted_at IS NULL;</div>
+            </div>
+
+            <div class="card">
+                <h4>Example 2: At-Risk Customers (Complex Boolean)</h4>
+                <div class="code-block">-- Segment Rule (JSON):
+{
+  "operator": "AND",
+  "conditions": [
+    { "field": "lifecycle_stage", "operator": "equals", "value": "customer" },
+    {
+      "operator": "OR",
+      "conditions": [
+        { "field": "last_activity_at", "operator": "less_than", "value": "90_days_ago" },
+        { "field": "score", "operator": "less_than", "value": 30 }
+      ]
+    },
+    { "field": "tags", "operator": "not_contains", "value": "churned" }
+  ]
+}
+
+-- Generated SQL:
+SELECT c.*
+FROM contacts c
+LEFT JOIN contact_tags ct ON c.id = ct.contact_id
+LEFT JOIN tags t ON ct.tag_id = t.id
+WHERE c.lifecycle_stage = 'customer'
+  AND (
+    c.last_activity_at < (NOW() - INTERVAL '90 days')
+    OR c.score < 30
+  )
+  AND (t.name IS NULL OR t.name != 'churned')
+  AND c.deleted_at IS NULL;</div>
+            </div>
+
+            <h3>🖼️ UI Screenshots Reference</h3>
+            <div class="card">
+                <h4>Lists & Segmentation UI Components</h4>
+                <ul>
+                    <li><strong>Live Dashboard - CRM - Lists.png</strong> - Main lists management view</li>
+                    <li><strong>Live Dashboard - CRM - Lists-1.png</strong> - List detail view with members</li>
+                    <li><strong>Live Dashboard - CRM - Lists-2.png</strong> - Dynamic segment builder interface</li>
+                    <li><strong>Filter - List.png through Filter - List-4.png</strong> - Advanced list filtering UI showing Boolean logic builder</li>
+                </ul>
+            </div>
+
+            <h3>🔐 GDPR Compliance</h3>
+
+            <div class="card">
+                <h4>Data Protection in Lists & Segmentation</h4>
+                <ul>
+                    <li><strong>Right to Access:</strong> Contacts can view which lists they belong to via data export</li>
+                    <li><strong>Right to Erasure:</strong> When contact deleted, list memberships automatically removed (cascading delete)</li>
+                    <li><strong>Consent Tracking:</strong> Segments can filter by consent status (e.g., "Contacts who consented to marketing emails")</li>
+                    <li><strong>Data Retention:</strong> List membership history retained for 90 days for audit, then purged</li>
+                    <li><strong>Audit Trail:</strong> All list operations logged (who added/removed contacts, when)</li>
+                </ul>
+            </div>
+
+            <div class="see-also">
+                <h3>🔗 See Also</h3>
+                <p>
+                    <a href="#frame5">→ Frame 5: Contact Management</a> |
+                    <a href="#frame7">→ Frame 7: Tags & Merge Fields</a> |
+                    <a href="live-dashboard-automations.html#frame4">→ Automations: Triggers & Actions (list-based triggers)</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- FRAME 7: TAGS & MERGE FIELDS -->
+        <div id="frame7" class="frame">
+            <h2>🏷️ FRAME 7: Tags & Merge Fields</h2>
+
+            <h3>🎯 Purpose</h3>
+            <p>
+                Tags & Merge Fields provide flexible mechanisms for organizing contacts and personalizing communications.
+                Tags are simple labels for categorization (e.g., "VIP", "Newsletter Subscriber"), while Merge Fields are
+                custom contact attributes with data types, validation, and deep integration across UnifiedBeez. Together,
+                they enable sophisticated segmentation, personalization in emails/WhatsApp, conditional content, and automation
+                triggers based on tag or field changes.
+            </p>
+
+            <h3>✨ Core Features</h3>
+
+            <div class="grid-2">
+                <div class="card">
+                    <h4>🏷️ Tags</h4>
+                    <ul>
+                        <li>Multi-tag support (contacts can have unlimited tags)</li>
+                        <li>Tag hierarchies (parent-child relationships)</li>
+                        <li>Color-coded tags for visual organization</li>
+                        <li>Auto-tagging rules (tag contacts based on behavior)</li>
+                        <li>Tag-based filtering and segmentation</li>
+                        <li>Tag analytics (usage counts, trending tags)</li>
+                        <li>Bulk tagging operations</li>
+                        <li>Tag suggestions (AI-powered)</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>📝 Merge Fields</h4>
+                    <ul>
+                        <li>10+ field types (text, number, date, boolean, select, multiselect, email, phone, URL, currency)</li>
+                        <li>Validation rules (regex patterns, min/max, required)</li>
+                        <li>Default values and placeholders</li>
+                        <li>Conditional field visibility</li>
+                        <li>Field groups for organization</li>
+                        <li>Use in email templates ({{first_name}}, {{custom_tier}})</li>
+                        <li>Use in automations for conditions and actions</li>
+                        <li>Calculations (e.g., LTV = sum of purchases)</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>🎨 Personalization Engine</h4>
+                    <ul>
+                        <li>Dynamic content in emails based on merge fields</li>
+                        <li>Conditional blocks (show/hide based on field values)</li>
+                        <li>Fallback values (if field empty, show default)</li>
+                        <li>Date formatting ({{signup_date | date:'MM/DD/YYYY'}})</li>
+                        <li>Number formatting ({{revenue | currency:'USD'}})</li>
+                        <li>String transformations (uppercase, lowercase, capitalize)</li>
+                        <li>Logical operations (if/else in templates)</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>⚙️ Auto-Tagging Rules</h4>
+                    <ul>
+                        <li>Tag contacts who open email</li>
+                        <li>Tag contacts who click specific link</li>
+                        <li>Tag based on purchase amount (e.g., "High-Spender")</li>
+                        <li>Tag based on form submissions</li>
+                        <li>Tag based on page visits</li>
+                        <li>Remove tags after period of inactivity</li>
+                        <li>Rule priority and conflict resolution</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>📊 Field Types & Use Cases</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Field Type</th>
+                        <th>Description</th>
+                        <th>Example Use Case</th>
+                        <th>Validation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Text</strong></td>
+                        <td>Single-line text input</td>
+                        <td>Middle name, nickname, department</td>
+                        <td>Max length, regex pattern</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Number</strong></td>
+                        <td>Integer or decimal</td>
+                        <td>Age, purchase count, credit limit</td>
+                        <td>Min/max value, decimal places</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Date</strong></td>
+                        <td>Date or datetime</td>
+                        <td>Birthday, contract renewal date</td>
+                        <td>Date range, must be future/past</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Boolean</strong></td>
+                        <td>Yes/No or True/False</td>
+                        <td>Newsletter subscriber, has account</td>
+                        <td>N/A</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Select</strong></td>
+                        <td>Single choice dropdown</td>
+                        <td>Customer tier (Bronze/Silver/Gold)</td>
+                        <td>Must be from predefined options</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Multiselect</strong></td>
+                        <td>Multiple choice dropdown</td>
+                        <td>Interests (Sports, Music, Tech)</td>
+                        <td>Must be from predefined options</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Email</strong></td>
+                        <td>Email address (with validation)</td>
+                        <td>Secondary email, work email</td>
+                        <td>Email format validation</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Phone</strong></td>
+                        <td>Phone number (with formatting)</td>
+                        <td>Alternate phone, office phone</td>
+                        <td>Phone format validation</td>
+                    </tr>
+                    <tr>
+                        <td><strong>URL</strong></td>
+                        <td>Web address</td>
+                        <td>LinkedIn profile, portfolio</td>
+                        <td>URL format validation</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Currency</strong></td>
+                        <td>Monetary value</td>
+                        <td>Lifetime value, credit balance</td>
+                        <td>Currency code, min/max</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>🔹 Backend Services</h3>
+
+            <div class="card">
+                <h4>1. TagService</h4>
+                <p><strong>Responsibility:</strong> Manage tags and tagging operations</p>
+                <p><strong>Key Methods:</strong></p>
+                <ul>
+                    <li><code>createTag(name, color, parentId)</code> - Create tag with optional hierarchy</li>
+                    <li><code>assignTags(contactId, tagIds[])</code> - Add multiple tags to contact</li>
+                    <li><code>removeTags(contactId, tagIds[])</code> - Remove tags from contact</li>
+                    <li><code>getTagAnalytics(tagId)</code> - Get contact count, growth trends</li>
+                    <li><code>bulkTagContacts(contactIds[], tagIds[])</code> - Tag multiple contacts at once</li>
+                    <li><code>getTagHierarchy()</code> - Get full tag tree structure</li>
+                    <li><code>mergeTag(sourceTagId, targetTagId)</code> - Merge two tags (move all contacts to target)</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h4>2. MergeFieldService</h4>
+                <p><strong>Responsibility:</strong> Manage custom field schema and values</p>
+                <p><strong>Key Methods:</strong></p>
+                <ul>
+                    <li><code>createMergeField(schema)</code> - Define new custom field with type and validation</li>
+                    <li><code>updateMergeField(fieldId, schema)</code> - Update field definition</li>
+                    <li><code>validateFieldValue(fieldId, value)</code> - Validate value against field rules</li>
+                    <li><code>setContactFieldValue(contactId, fieldId, value)</code> - Set value for contact</li>
+                    <li><code>getContactFieldValues(contactId)</code> - Get all custom field values for contact</li>
+                    <li><code>deleteMergeField(fieldId)</code> - Delete field (optionally preserve data)</li>
+                    <li><code>getMergeFields(scope)</code> - Get all fields for organization</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h4>3. PersonalizationEngine</h4>
+                <p><strong>Responsibility:</strong> Render personalized content using merge fields</p>
+                <p><strong>Key Methods:</strong></p>
+                <ul>
+                    <li><code>renderTemplate(template, contactId)</code> - Replace merge tags with contact data</li>
+                    <li><code>evaluateConditional(expression, contactId)</code> - Evaluate if/else logic</li>
+                    <li><code>formatValue(value, type, format)</code> - Format dates, numbers, currencies</li>
+                    <li><code>getFallbackValue(field, defaultValue)</code> - Return default if field empty</li>
+                    <li><code>previewTemplate(template, sampleContact)</code> - Preview with sample data</li>
+                </ul>
+            </div>
+
+            <h3>📡 API Endpoints (12 endpoints)</h3>
+
+            <div class="card">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>Endpoint</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/crm/tags</code></td>
+                            <td>Get all tags with hierarchy and usage counts</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/crm/tags</code></td>
+                            <td>Create new tag</td>
+                        </tr>
+                        <tr>
+                            <td>PUT</td>
+                            <td><code>/api/crm/tags/:id</code></td>
+                            <td>Update tag (name, color, parent)</td>
+                        </tr>
+                        <tr>
+                            <td>DELETE</td>
+                            <td><code>/api/crm/tags/:id</code></td>
+                            <td>Delete tag (remove from all contacts)</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/crm/tags/:id/analytics</code></td>
+                            <td>Get tag usage analytics (contact count, trends)</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/crm/tags/bulk-assign</code></td>
+                            <td>Bulk tag assignment to multiple contacts</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/crm/merge-fields</code></td>
+                            <td>Get all custom fields for organization</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/crm/merge-fields</code></td>
+                            <td>Create custom field with type and validation</td>
+                        </tr>
+                        <tr>
+                            <td>PUT</td>
+                            <td><code>/api/crm/merge-fields/:id</code></td>
+                            <td>Update field schema</td>
+                        </tr>
+                        <tr>
+                            <td>DELETE</td>
+                            <td><code>/api/crm/merge-fields/:id</code></td>
+                            <td>Delete custom field</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/crm/merge-fields/:id/validate</code></td>
+                            <td>Validate field value against rules</td>
+                        </tr>
+                        <tr>
+                            <td>PUT</td>
+                            <td><code>/api/crm/contacts/:id/fields/:fieldId</code></td>
+                            <td>Set contact field value</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>💾 Database Schema</h3>
+
+            <div class="card">
+                <h4>tags (Enhanced)</h4>
+                <div class="code-block">CREATE TABLE tags (
+  id BIGSERIAL PRIMARY KEY,
+  organization_id BIGINT NOT NULL REFERENCES organizations(id),
+
+  name VARCHAR(100) NOT NULL,
+  slug VARCHAR(100), -- URL-friendly version
+  color VARCHAR(7), -- Hex color (#FF5733)
+  description TEXT,
+
+  -- Hierarchy support
+  parent_tag_id BIGINT REFERENCES tags(id),
+  hierarchy_path VARCHAR(500), -- e.g., "1.5.12" for nested tags
+
+  -- Usage stats
+  contact_count INT DEFAULT 0,
+
+  -- Auto-tagging rules
+  auto_tag_rules JSONB DEFAULT '[]',
+  -- [{ event: 'email_opened', campaignId: 123, action: 'add' }]
+
+  is_system_tag BOOLEAN DEFAULT FALSE, -- System tags can't be deleted
+
+  created_at TIMESTAMP DEFAULT NOW(),
+  updated_at TIMESTAMP DEFAULT NOW(),
+
+  INDEX idx_tags_org (organization_id),
+  INDEX idx_tags_parent (parent_tag_id),
+  UNIQUE INDEX idx_tags_org_name (organization_id, name)
+);</div>
+            </div>
+
+            <div class="card">
+                <h4>contact_tags (Enhanced)</h4>
+                <div class="code-block">CREATE TABLE contact_tags (
+  id BIGSERIAL PRIMARY KEY,
+  contact_id BIGINT NOT NULL REFERENCES contacts(id) ON DELETE CASCADE,
+  tag_id BIGINT NOT NULL REFERENCES tags(id) ON DELETE CASCADE,
+
+  -- Tag source
+  tagged_method VARCHAR(50), -- 'manual', 'automation', 'auto_rule'
+  tagged_by BIGINT REFERENCES users(id),
+  tagged_at TIMESTAMP DEFAULT NOW(),
+
+  -- Auto-removal
+  auto_remove_at TIMESTAMP, -- For temporary tags
+
+  UNIQUE INDEX idx_contact_tags_unique (contact_id, tag_id),
+  INDEX idx_contact_tags_contact (contact_id),
+  INDEX idx_contact_tags_tag (tag_id)
+);</div>
+            </div>
+
+            <div class="card">
+                <h4>merge_fields (Custom Field Schema)</h4>
+                <div class="code-block">CREATE TABLE merge_fields (
+  id BIGSERIAL PRIMARY KEY,
+  organization_id BIGINT NOT NULL REFERENCES organizations(id),
+
+  field_key VARCHAR(100) NOT NULL, -- 'customer_tier', 'purchase_count', 'ltv'
+  label VARCHAR(255) NOT NULL, -- Display name "Customer Tier"
+
+  -- Data type
+  data_type VARCHAR(50) NOT NULL,
+  -- 'text', 'number', 'date', 'boolean', 'select', 'multiselect',
+  -- 'email', 'phone', 'url', 'currency'
+
+  -- Validation
+  is_required BOOLEAN DEFAULT FALSE,
+  validation_rules JSONB DEFAULT '{}',
+  -- {
+  --   min: 0,
+  --   max: 100,
+  --   pattern: '^[A-Za-z]+$',
+  --   options: ['Bronze', 'Silver', 'Gold', 'Platinum'],
+  --   currency: 'USD'
+  -- }
+
+  -- Display
+  default_value TEXT,
+  placeholder VARCHAR(255),
+  help_text TEXT,
+  display_order INT DEFAULT 0,
+
+  -- Field group (for organizing in UI)
+  field_group VARCHAR(100), -- 'Contact Info', 'Company', 'Custom'
+
+  -- Visibility
+  is_system_field BOOLEAN DEFAULT FALSE,
+  is_visible BOOLEAN DEFAULT TRUE,
+
+  -- Calculation (for computed fields)
+  calculation_formula TEXT,
+  -- e.g., "SUM(purchases.amount)" for LTV
+
+  created_at TIMESTAMP DEFAULT NOW(),
+  updated_at TIMESTAMP DEFAULT NOW(),
+
+  INDEX idx_merge_fields_org (organization_id),
+  UNIQUE INDEX idx_merge_fields_org_key (organization_id, field_key)
+);</div>
+            </div>
+
+            <h3>🖼️ UI Screenshots Reference</h3>
+            <div class="card">
+                <h4>Tags & Merge Fields UI Components</h4>
+                <ul>
+                    <li><strong>Live Dashboard - CRM - Tags.png</strong> - Main tags management interface</li>
+                    <li><strong>Live Dashboard - CRM - Tags-1.png</strong> - Tag details and analytics</li>
+                    <li><strong>Live Dashboard - CRM - Tags-2.png</strong> - Tag hierarchy view</li>
+                    <li><strong>Live Dashboard - CRM - Merge Fields.png</strong> - Merge fields management</li>
+                    <li><strong>Live Dashboard - CRM - Merge Fields-1.png</strong> - Create/edit merge field</li>
+                    <li><strong>Live Dashboard - CRM - Merge Fields-2.png</strong> - Field validation settings</li>
+                    <li><strong>Tags Dropdown.png</strong> - Tag selector dropdown in UI</li>
+                    <li><strong>Filter - Tag.png, Filter - Tags.png</strong> - Tag-based filtering interface</li>
+                </ul>
+            </div>
+
+            <h3>🔐 GDPR Compliance</h3>
+
+            <div class="card">
+                <h4>Data Protection for Tags & Merge Fields</h4>
+                <ul>
+                    <li><strong>Right to Access:</strong> Contacts can view tags and custom field values in data export</li>
+                    <li><strong>Right to Erasure:</strong> Tags removed when contact deleted; custom field values deleted with contact</li>
+                    <li><strong>Sensitive Data:</strong> Option to mark merge fields as "sensitive" (encrypted storage, restricted access)</li>
+                    <li><strong>Audit Trail:</strong> All tag assignments and field updates logged with timestamp and user</li>
+                    <li><strong>Data Minimization:</strong> Only create necessary custom fields, avoid collecting excessive data</li>
+                </ul>
+            </div>
+
+            <div class="see-also">
+                <h3>🔗 See Also</h3>
+                <p>
+                    <a href="#frame5">→ Frame 5: Contact Management</a> |
+                    <a href="#frame6">→ Frame 6: Lists & Segmentation (tag-based segments)</a> |
+                    <a href="live-dashboard-automations.html#frame4">→ Automations: Triggers & Actions (tag triggers)</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- FRAME 8: COMMUNICATION HISTORY -->
+        <div id="frame8" class="frame">
+            <h2>📞 FRAME 8: Communication History</h2>
+
+            <h3>🎯 Purpose</h3>
+            <p>
+                Communication History provides a complete, unified timeline of all interactions with each contact across
+                multiple channels (email, WhatsApp, SMS, web chat, social media, phone calls, meetings). This 360-degree
+                communication view enables agents to understand the full context of customer relationships, track engagement
+                patterns, analyze conversation sentiment, and ensure continuity across team members. All communications are
+                logged automatically and linked to the Inbox module for seamless workflow integration.
+            </p>
+
+            <h3>✨ Core Communication Features</h3>
+
+            <div class="grid-3">
+                <div class="card">
+                    <h4>📊 Multi-Channel History</h4>
+                    <ul>
+                        <li>Email (sent, received, opened, clicked)</li>
+                        <li>WhatsApp (messages, media, status updates)</li>
+                        <li>SMS (sent, received, delivery status)</li>
+                        <li>Web Chat (live chat transcripts)</li>
+                        <li>Phone Calls (call logs, recordings, duration)</li>
+                        <li>Social Media (Facebook, Instagram DMs)</li>
+                        <li>Meetings (notes, attendees, outcomes)</li>
+                        <li>Internal Notes (private team comments)</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>🕐 Timeline View</h4>
+                    <ul>
+                        <li>Chronological activity stream</li>
+                        <li>Filter by channel or date range</li>
+                        <li>Group by conversation thread</li>
+                        <li>Show only outbound or inbound</li>
+                        <li>Highlight important interactions</li>
+                        <li>Search within history</li>
+                        <li>Export history to PDF/CSV</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>📈 Interaction Analytics</h4>
+                    <ul>
+                        <li>Total interaction count</li>
+                        <li>Channel breakdown (% email vs WhatsApp)</li>
+                        <li>Response time averages</li>
+                        <li>Engagement trends over time</li>
+                        <li>Sentiment analysis (positive/negative/neutral)</li>
+                        <li>Conversation topics (AI-extracted)</li>
+                        <li>Team member activity</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>🔗 Integration with Inbox</h4>
+                    <ul>
+                        <li>Link communications to conversations</li>
+                        <li>View full conversation thread from CRM</li>
+                        <li>Reply directly from history view</li>
+                        <li>Auto-log all inbox interactions</li>
+                        <li>Sync read/unread status</li>
+                        <li>Unified notification system</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>📎 Attachments & Media</h4>
+                    <ul>
+                        <li>Track all file attachments</li>
+                        <li>Preview images, PDFs, documents</li>
+                        <li>Download history</li>
+                        <li>Link to contact documents</li>
+                        <li>File versioning</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>🔐 Privacy & Compliance</h4>
+                    <ul>
+                        <li>Redaction of sensitive info</li>
+                        <li>Data retention policies</li>
+                        <li>Right to access (export history)</li>
+                        <li>Right to erasure (delete history)</li>
+                        <li>Audit trail for all access</li>
+                        <li>Encrypted storage</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>🔹 Backend Services</h3>
+
+            <div class="card">
+                <h4>1. CommunicationHistoryService</h4>
+                <p><strong>Responsibility:</strong> Track and retrieve all contact communications</p>
+                <p><strong>Key Methods:</strong></p>
+                <ul>
+                    <li><code>logCommunication(contactId, type, data)</code> - Record interaction (email, WhatsApp, call, etc.)</li>
+                    <li><code>getCommunicationHistory(contactId, filters)</code> - Retrieve timeline with filters</li>
+                    <li><code>getConversationThread(conversationId)</code> - Get full thread of related messages</li>
+                    <li><code>searchCommunications(contactId, query)</code> - Full-text search within history</li>
+                    <li><code>exportHistory(contactId, format)</code> - Export to PDF/CSV for GDPR or legal</li>
+                    <li><code>deleteCommunication(id)</code> - Remove single interaction (with audit trail)</li>
+                    <li><code>getChannelBreakdown(contactId)</code> - Analytics by channel</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h4>2. TimelineService</h4>
+                <p><strong>Responsibility:</strong> Build comprehensive contact timeline</p>
+                <p><strong>Key Methods:</strong></p>
+                <ul>
+                    <li><code>getContactTimeline(contactId)</code> - Full activity stream (communications + CRM events)</li>
+                    <li><code>getTimelineEvents(contactId, dateRange)</code> - Filter by date</li>
+                    <li><code>groupByConversation(events)</code> - Organize into conversation threads</li>
+                    <li><code>getImportantMoments(contactId)</code> - Highlight key interactions (first contact, purchases)</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h4>3. ActivityLogger</h4>
+                <p><strong>Responsibility:</strong> Auto-log activities from other modules</p>
+                <p><strong>Key Methods:</strong></p>
+                <ul>
+                    <li><code>logEmailEvent(contactId, emailId, event)</code> - Log email sent/opened/clicked</li>
+                    <li><code>logWhatsAppMessage(contactId, messageId)</code> - Log WhatsApp interaction</li>
+                    <li><code>logPhoneCall(contactId, callData)</code> - Log call with duration, recording URL</li>
+                    <li><code>logMeetingNote(contactId, noteData)</code> - Log meeting outcome</li>
+                    <li><code>logInternalNote(contactId, userId, note)</code> - Private team note</li>
+                </ul>
+            </div>
+
+            <h3>📡 API Endpoints (8 endpoints)</h3>
+
+            <div class="card">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>Endpoint</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/crm/contacts/:id/history</code></td>
+                            <td>Get communication history for contact (all channels)</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/crm/contacts/:id/timeline</code></td>
+                            <td>Get full activity timeline (communications + CRM events)</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/crm/contacts/:id/history/search</code></td>
+                            <td>Search communication history</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/crm/contacts/:id/history/export</code></td>
+                            <td>Export communication history to PDF/CSV</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td><code>/api/crm/contacts/:id/history</code></td>
+                            <td>Manually log communication (e.g., phone call, meeting)</td>
+                        </tr>
+                        <tr>
+                            <td>DELETE</td>
+                            <td><code>/api/crm/communications/:id</code></td>
+                            <td>Delete communication record (with audit trail)</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/crm/contacts/:id/analytics/engagement</code></td>
+                            <td>Get engagement analytics (channel breakdown, trends)</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td><code>/api/crm/conversations/:conversationId/thread</code></td>
+                            <td>Get full conversation thread from inbox</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>💾 Database Schema</h3>
+
+            <div class="card">
+                <h4>communications (Enhanced)</h4>
+                <div class="code-block">CREATE TABLE communications (
+  id BIGSERIAL PRIMARY KEY,
+  organization_id BIGINT NOT NULL REFERENCES organizations(id),
+  contact_id BIGINT NOT NULL REFERENCES contacts(id) ON DELETE CASCADE,
+
+  -- Communication type
+  type VARCHAR(50) NOT NULL,
+  -- 'email', 'whatsapp', 'sms', 'call', 'meeting', 'note',
+  -- 'web_chat', 'facebook', 'instagram', 'twitter'
+
+  -- Direction
+  direction VARCHAR(20), -- 'inbound', 'outbound'
+
+  -- Content
+  subject VARCHAR(500),
+  content TEXT,
+  content_html TEXT, -- For email
+
+  -- Related entities
+  user_id BIGINT REFERENCES users(id), -- Who handled it
+  conversation_id BIGINT REFERENCES conversations(id), -- Link to inbox
+  automation_id BIGINT REFERENCES user_automations(id), -- If triggered by automation
+
+  -- Channel-specific data
+  channel_data JSONB DEFAULT '{}',
+  -- For email: { messageId, openedAt, clickedAt, bounced, spamScore }
+  -- For WhatsApp: { messageId, status, readAt }
+  -- For call: { duration, recordingUrl, outcome }
+
+  -- Attachments
+  attachments JSONB DEFAULT '[]',
+  -- [{ filename, url, size, mimeType }]
+
+  -- Sentiment (AI-powered)
+  sentiment VARCHAR(20), -- 'positive', 'negative', 'neutral'
+  sentiment_score DECIMAL(3,2), -- -1.0 to 1.0
+
+  -- Engagement tracking
+  was_opened BOOLEAN DEFAULT FALSE,
+  opened_at TIMESTAMP,
+  was_clicked BOOLEAN DEFAULT FALSE,
+  clicked_at TIMESTAMP,
+
+  -- Status
+  status VARCHAR(50), -- 'sent', 'delivered', 'read', 'failed', 'bounced'
+
+  -- Privacy
+  is_private BOOLEAN DEFAULT FALSE, -- Internal notes not visible to contact
+
+  -- Metadata
+  metadata JSONB DEFAULT '{}',
+
+  created_at TIMESTAMP DEFAULT NOW(),
+  updated_at TIMESTAMP DEFAULT NOW(),
+
+  INDEX idx_communications_contact (contact_id, created_at DESC),
+  INDEX idx_communications_org (organization_id),
+  INDEX idx_communications_type (type),
+  INDEX idx_communications_user (user_id),
+  INDEX idx_communications_conversation (conversation_id),
+
+  -- Full-text search
+  INDEX idx_communications_search_fts USING GIN (
+    to_tsvector('english',
+      COALESCE(subject, '') || ' ' ||
+      COALESCE(content, '')
+    )
+  )
+);</div>
+            </div>
+
+            <div class="card">
+                <h4>contact_interactions (Aggregated engagement metrics)</h4>
+                <div class="code-block">CREATE TABLE contact_interactions (
+  id BIGSERIAL PRIMARY KEY,
+  contact_id BIGINT NOT NULL REFERENCES contacts(id) ON DELETE CASCADE,
+  organization_id BIGINT NOT NULL REFERENCES organizations(id),
+
+  -- Time period
+  date DATE NOT NULL,
+
+  -- Interaction counts by channel
+  email_sent INT DEFAULT 0,
+  email_received INT DEFAULT 0,
+  email_opened INT DEFAULT 0,
+  email_clicked INT DEFAULT 0,
+  whatsapp_sent INT DEFAULT 0,
+  whatsapp_received INT DEFAULT 0,
+  sms_sent INT DEFAULT 0,
+  sms_received INT DEFAULT 0,
+  calls_inbound INT DEFAULT 0,
+  calls_outbound INT DEFAULT 0,
+  meetings INT DEFAULT 0,
+
+  -- Total interactions
+  total_interactions INT DEFAULT 0,
+
+  -- Response times (in minutes)
+  avg_response_time_inbound INT,
+  avg_response_time_outbound INT,
+
+  created_at TIMESTAMP DEFAULT NOW(),
+  updated_at TIMESTAMP DEFAULT NOW(),
+
+  UNIQUE INDEX idx_contact_interactions_contact_date (contact_id, date),
+  INDEX idx_contact_interactions_org (organization_id)
+);</div>
+            </div>
+
+            <div class="card">
+                <h4>activity_logs (Full audit trail)</h4>
+                <div class="code-block">CREATE TABLE activity_logs (
+  id BIGSERIAL PRIMARY KEY,
+  organization_id BIGINT NOT NULL REFERENCES organizations(id),
+  contact_id BIGINT REFERENCES contacts(id) ON DELETE CASCADE,
+
+  -- Activity type
+  activity_type VARCHAR(100) NOT NULL,
+  -- 'contact_created', 'field_updated', 'tag_added', 'list_joined',
+  -- 'email_sent', 'call_logged', 'note_added', etc.
+
+  -- Activity details
+  activity_data JSONB NOT NULL,
+  -- {
+  --   field: 'email',
+  --   oldValue: 'old@example.com',
+  --   newValue: 'new@example.com',
+  --   changedBy: 'userId'
+  -- }
+
+  -- Actor
+  user_id BIGINT REFERENCES users(id),
+
+  -- Related entities
+  related_communication_id BIGINT REFERENCES communications(id),
+  related_automation_id BIGINT REFERENCES user_automations(id),
+
+  -- IP and metadata (for security audits)
+  ip_address VARCHAR(45),
+  user_agent VARCHAR(500),
+
+  created_at TIMESTAMP DEFAULT NOW(),
+
+  INDEX idx_activity_logs_contact (contact_id, created_at DESC),
+  INDEX idx_activity_logs_org (organization_id),
+  INDEX idx_activity_logs_type (activity_type),
+  INDEX idx_activity_logs_user (user_id)
+);</div>
+            </div>
+
+            <h3>🖼️ UI Screenshots Reference</h3>
+            <div class="card">
+                <h4>Communication History UI Components</h4>
+                <ul>
+                    <li><strong>Live Dashboard - CRM Contacts Details (Activity).png</strong> - Activity timeline view</li>
+                    <li><strong>Live Dashboard - CRM Contacts Details (Activity details).png</strong> - Detailed activity breakdown</li>
+                    <li><strong>Live Dashboard - CRM Contacts Details (Communications).png</strong> - Communication history main view</li>
+                    <li><strong>Live Dashboard - CRM Contacts Details (Communications)-1.png</strong> - Alternate communications layout</li>
+                    <li><strong>Live Dashboard - CRM Contacts Details (Send Email).png</strong> - Send email from contact view</li>
+                </ul>
+            </div>
+
+            <h3>🔐 GDPR Compliance</h3>
+
+            <div class="card">
+                <h4>Data Protection in Communication History</h4>
+                <ul>
+                    <li><strong>Data Retention:</strong> Communications retained for configurable period (default 7 years for legal, 90 days for marketing)</li>
+                    <li><strong>Right to Access:</strong> Contacts can export full communication history via <code>/api/gdpr/data-export/:contactId</code></li>
+                    <li><strong>Right to Erasure:</strong> Delete all communications when contact requests deletion (cascading delete)</li>
+                    <li><strong>Redaction:</strong> Option to redact sensitive information from communications before export</li>
+                    <li><strong>Consent Tracking:</strong> Log consent for recording calls, storing chat transcripts</li>
+                    <li><strong>Audit Trail:</strong> All access to communication history logged in <code>activity_logs</code> table</li>
+                    <li><strong>Encryption:</strong> Communications encrypted at rest (PostgreSQL encryption), in transit (TLS 1.3)</li>
+                    <li><strong>Anonymization:</strong> After retention period, option to anonymize (remove PII but keep metadata for analytics)</li>
+                </ul>
+            </div>
+
+            <div class="see-also">
+                <h3>🔗 See Also</h3>
+                <p>
+                    <a href="#frame5">→ Frame 5: Contact Management</a> |
+                    <a href="live-dashboard-inbox.html">→ Inbox Module (conversation management)</a> |
+                    <a href="live-dashboard-automations.html">→ Automations Module (communication triggers)</a>
+                </p>
+            </div>
+        </div>
 
     </div>
 

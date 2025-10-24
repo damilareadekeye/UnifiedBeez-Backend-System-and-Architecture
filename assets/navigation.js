@@ -97,23 +97,23 @@ function generateBreadcrumb() {
     if (!breadcrumbContainer) return;
 
     const currentPage = window.location.pathname.split('/').pop();
-    let breadcrumbHTML = '<a href="index.html">🏠 Home</a> <span>/</span> ';
+    let breadcrumbHTML = '<a href="index.html">Home</a> <span>/</span> ';
 
     switch(currentPage) {
         case 'manual-onboarding.html':
-            breadcrumbHTML += '<span>📝 Manual Onboarding</span>';
+            breadcrumbHTML += '<span>Manual Onboarding</span>';
             break;
         case 'beezaro-copilot.html':
-            breadcrumbHTML += '<span>🤖 Beezaro Copilot</span>';
+            breadcrumbHTML += '<span>Beezaro Copilot</span>';
             break;
         case 'side-by-side-comparison.html':
-            breadcrumbHTML += '<span>⚡ Side-by-Side Comparison</span>';
+            breadcrumbHTML += '<span>Side-by-Side Comparison</span>';
             break;
         case 'documentation.html':
-            breadcrumbHTML += '<span>📚 Complete Documentation</span>';
+            breadcrumbHTML += '<span>Complete Documentation</span>';
             break;
         default:
-            breadcrumbHTML = '<span>🏠 Home</span>';
+            breadcrumbHTML = '<span>Home</span>';
     }
 
     breadcrumbContainer.innerHTML = breadcrumbHTML;

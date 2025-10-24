@@ -352,6 +352,46 @@
             font-size: 0.85rem;
         }
 
+        /* FRAME NAVIGATION */
+        .frame-navigation {
+            background: white;
+            padding: 15px 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 160px;
+            z-index: 999;
+            overflow-x: auto;
+        }
+
+        .frame-nav-scroll {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .frame-nav-btn {
+            padding: 10px 20px;
+            background: #E8F5E9;
+            color: #1A4D2E;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            white-space: nowrap;
+        }
+
+        .frame-nav-btn:hover {
+            background: #1A4D2E;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(26, 77, 46, 0.3);
+        }
+
         @media print {
             .header-bar, .controls-bar {
                 position: static;
@@ -365,20 +405,20 @@
 <body>
     <!-- NAVIGATION BAR -->
     <nav class="architecture-nav">
-        <a href="index.html">🏠 Home</a>
-        <a href="manual-onboarding.html">📝 Manual Onboarding</a>
-        <a href="beezaro-copilot.html" class="active">🤖 Beezaro Copilot</a>
-        <a href="side-by-side-comparison.html">⚡ Side-by-Side</a>
+        <a href="index.html">Home</a>
+        <a href="manual-onboarding.html">Manual Onboarding</a>
+        <a href="beezaro-copilot.html" class="active">Beezaro Copilot</a>
+        <a href="side-by-side-comparison.html">Side-by-Side</a>
     </nav>
 
     <!-- BREADCRUMB -->
     <div class="breadcrumb">
-        <a href="index.html">🏠 Home</a> <span>/</span> <span>🤖 Beezaro Copilot</span>
+        <a href="index.html">Home</a> <span>/</span> <span>Beezaro Copilot</span>
     </div>
 
     <!-- HEADER -->
     <div class="header-bar">
-        <h1>🤖 Beezaro Copilot - Conversational Onboarding Architecture</h1>
+        <h1>Beezaro Copilot - Conversational Onboarding Architecture</h1>
         <p>AI-Powered Onboarding with Fallback to Manual Setup</p>
     </div>
 
@@ -388,6 +428,18 @@
         <button class="control-btn" onclick="zoomOut()">🔍 Zoom Out</button>
         <button class="control-btn" onclick="resetZoom()">↺ Reset</button>
         <span class="zoom-level" id="zoomLevel">100%</span>
+    </div>
+
+    <!-- FRAME NAVIGATION -->
+    <div class="frame-navigation">
+        <div class="frame-nav-scroll">
+            <a href="#frame10" class="frame-nav-btn">Frame 1: Overview</a>
+            <a href="#frame11" class="frame-nav-btn">Frame 2: Backend Services</a>
+            <a href="#frame12" class="frame-nav-btn">Frame 3: Database Schema</a>
+            <a href="#frame13" class="frame-nav-btn">Frame 4: Mapping</a>
+            <a href="#frame14" class="frame-nav-btn">Frame 5: WebSocket</a>
+            <a href="#frame15" class="frame-nav-btn">Frame 6: AWS Infrastructure</a>
+        </div>
     </div>
 
     <!-- DIAGRAM CONTAINER -->
